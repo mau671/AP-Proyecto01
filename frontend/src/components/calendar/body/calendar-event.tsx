@@ -1,0 +1,204 @@
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
+import { Building2, Clock, Layers, MapPin, User, Users, X } from "lucide-react";
+import { memo } from "react";
+
+import type { CalendarEvent as CalendarEventType } from "@/lib/types";
+
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { getColorClasses, getEventColorStyle } from "@/lib/color-utils";
+import { cn } from "@/lib/utils";
+
+import { useCalendarContext } from "../calendar-context";
+
+interface EventPosition {
+  left: string;
+  width: string;
+  top: string;
+  height: string;
+}
+
+interface CalendarEventProps {
+  event: CalendarEventType;
+  position?: EventPosition;
+  month?: boolean;
+  className?: string;
+}
+
+const CalendarEvent = memo(function CalendarEvent({
+  event,
+  position,
+  month = false,
+  className,
+}: CalendarEventProps) {
+  const { onRemoveEvent, exportTheme } = useCalendarContext();
+
+  const eventColorStyle = exportTheme ? getEventColorStyle(event.color, exportTheme) : undefined;
+  const style = {
+    ...(month ? {} : (position ?? {})),
+    ...eventColorStyle,
+  };
+
+  const colorClasses = getColorClasses(event.color);
+
+  const classroomLabel = event.classroom?.trim();
+  const showClassroom = classroomLabel && !classroomLabel.toLowerCase().includes("no disponible");
+  const professorLabels = event.professors?.filter(Boolean);
+  const professorLines = professorLabels?.length ? professorLabels : ["Sin asignar"];
+  const modalityLabel = event.groupType ?? "Sin modalidad";
+  const campusLabel = event.campusName;
+  const heightValue = month ? null : position?.height ? parseFloat(position.height) : null;
+  const eventHeight = heightValue;
+  const isCompact = eventHeight !== null && eventHeight < 72;
+
+  return (
+    <Tooltip>
+      <TooltipTrigger
+        render={
+          <div
+            className={cn(
+              "group relative cursor-pointer rounded-md border px-1 py-0.5 text-left transition-all duration-200 sm:px-2 sm:py-1",
+              colorClasses.bg,
+              colorClasses.hover,
+              colorClasses.border,
+              !month && "absolute overflow-hidden",
+              className,
+            )}
+            data-schedule-event-color={event.color}
+            style={style}
+          >
+            {!month && onRemoveEvent && (
+              <button
+                type="button"
+                className={cn(
+                  "absolute top-1 right-1 cursor-pointer rounded-sm p-0.5 text-white/80 hover:text-white",
+                  "opacity-0 transition-opacity group-hover:opacity-100",
+                )}
+                onClick={(eventClick) => {
+                  eventClick.stopPropagation();
+                  onRemoveEvent(event);
+                }}
+                aria-label="Quitar grupo"
+              >
+                <X className="size-3.5" />
+              </button>
+            )}
+
+            <div className={cn("flex w-full flex-col items-start gap-0.5 text-left", colorClasses.text)}>
+              <p
+                className={cn(
+                  "line-clamp-2 w-full text-left text-[11px] leading-tight font-semibold sm:text-[13px]",
+                  isCompact && "text-[9px] sm:text-[10px]",
+                )}
+              >
+                {event.courseName}
+              </p>
+              {!isCompact && showClassroom && (
+                <div className="flex items-center gap-1.5 text-left text-[10px] opacity-90 sm:text-xs">
+                  <span className="grid size-3 shrink-0 place-items-center sm:size-4">
+                    <MapPin className="size-3 sm:size-4" />
+                  </span>
+                  <span className="leading-tight">{classroomLabel}</span>
+                </div>
+              )}
+              {!isCompact && (
+                <div className="flex items-center gap-1.5 text-left text-[10px] opacity-85 sm:text-xs">
+                  <span className="grid size-3 shrink-0 place-items-center sm:size-4">
+                    <Layers className="size-3 sm:size-4" />
+                  </span>
+                  <span className="leading-tight">{modalityLabel}</span>
+                </div>
+              )}
+              <div
+                className={cn(
+                  "flex w-full items-stretch gap-1.5 text-left text-[10px] opacity-85 sm:text-xs",
+                  isCompact && "hidden",
+                )}
+              >
+                <span className="grid w-3 shrink-0 place-items-center self-stretch sm:w-4">
+                  <User className="size-3 sm:size-4" />
+                </span>
+                <div className="flex min-w-0 flex-1 flex-col justify-center gap-0.5 text-left">
+                  {professorLines.map((professor) => (
+                    <span
+                      key={professor}
+                      className="line-clamp-2 text-left leading-tight break-words whitespace-normal"
+                    >
+                      {professor}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              {isCompact && (
+                <p className="text-left text-[9px] opacity-80 sm:text-[10px]">
+                  {format(event.start, "h:mm a", { locale: es })}
+                </p>
+              )}
+            </div>
+          </div>
+        }
+      />
+      <TooltipContent className="w-80 max-w-[calc(100vw-2rem)] items-stretch text-left">
+        <div className="min-w-0 space-y-1">
+          <p className="max-w-[220px] leading-tight font-semibold break-words">
+            {event.courseCode}: {event.courseName}
+          </p>
+          <p className="flex items-center gap-1.5 text-sm">
+            <span className="grid size-4 shrink-0 place-items-center">
+              <Users className="size-4" />
+            </span>
+            <span>GRUPO {event.groupCode}</span>
+          </p>
+          <p className="flex items-center gap-1.5 text-sm">
+            <span className="grid size-4 shrink-0 place-items-center">
+              <Clock className="size-4" />
+            </span>
+            <span>
+              {format(event.start, "h:mm a", { locale: es })} -{" "}
+              {format(event.end, "h:mm a", { locale: es })}
+            </span>
+          </p>
+          {campusLabel && (
+            <p className="flex min-w-0 items-center gap-1.5 text-sm">
+              <span className="grid size-4 shrink-0 place-items-center">
+                <Building2 className="size-4" />
+              </span>
+              <span className="block min-w-0 flex-1 truncate">{campusLabel}</span>
+            </p>
+          )}
+          {showClassroom && (
+            <p className="flex items-center gap-1.5 text-sm">
+              <span className="grid size-4 shrink-0 place-items-center">
+                <MapPin className="size-4" />
+              </span>
+              <span>{classroomLabel}</span>
+            </p>
+          )}
+          <p className="flex items-center gap-1.5 text-sm">
+            <span className="grid size-4 shrink-0 place-items-center">
+              <Layers className="size-4" />
+            </span>
+            <span>{modalityLabel}</span>
+          </p>
+          <div className="flex items-stretch gap-1.5 text-sm">
+            <span className="grid w-4 shrink-0 place-items-center self-stretch">
+              <User className="size-4" />
+            </span>
+            <div className="flex min-w-0 flex-1 flex-col justify-center gap-0.5">
+              {professorLines.map((professor) => (
+                <span
+                  key={professor}
+                  className="min-w-0 leading-tight break-words whitespace-normal"
+                >
+                  {professor}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </TooltipContent>
+    </Tooltip>
+  );
+});
+
+export default CalendarEvent;
