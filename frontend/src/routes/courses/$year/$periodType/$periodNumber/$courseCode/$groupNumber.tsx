@@ -1,7 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { Separator } from '@/components/ui/separator'
-
 import { CourseTabs } from './course-page/-course-tabs'
 import { courseTabs } from './course-page/-data'
 import { DocumentsTab } from './course-page/-documents-tab'
@@ -37,7 +35,6 @@ function CoursePage() {
           })
         }}
       />
-      <Separator />
       <div className="flex-1 overflow-y-auto">
         {tabIndex === 2 && <DocumentsTab />}
         {tabIndex === 3 && <EvaluationsTab />}
