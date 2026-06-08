@@ -1,0 +1,60 @@
+import { createFileRoute } from '@tanstack/react-router'
+
+import { DocumentTree, type FileTreeItem } from '@/components/document-tree'
+
+export const Route = createFileRoute('/profile/documents')({
+  component: ProfileDocuments,
+})
+
+function ProfileDocuments() {
+  return (
+    <div className="mx-auto w-full max-w-5xl">
+      <DocumentTree items={studentDocumentsTree} className="w-full" />
+    </div>
+  )
+}
+
+const studentDocumentsTree: FileTreeItem[] = [
+  {
+    name: 'Identificación',
+    modifiedAt: '2026-02-03T09:10:00',
+    items: [
+      { name: 'Cédula de identidad.pdf', sizeBytes: 742400, modifiedAt: '2026-02-03T09:10:00' },
+      { name: 'Fotografía institucional.jpg', sizeBytes: 384512, modifiedAt: '2026-02-03T09:12:00' },
+    ],
+  },
+  {
+    name: 'Matrícula',
+    modifiedAt: '2026-03-01T11:30:00',
+    items: [
+      { name: 'Comprobante de matrícula I Semestre 2026.pdf', sizeBytes: 512000, modifiedAt: '2026-03-01T11:30:00' },
+      { name: 'Horario matriculado I Semestre 2026.pdf', sizeBytes: 428032, modifiedAt: '2026-03-01T11:32:00' },
+      { name: 'Boleta de retiro e inclusión.pdf', sizeBytes: 236544, modifiedAt: '2026-03-04T16:05:00' },
+    ],
+  },
+  {
+    name: 'Académico',
+    modifiedAt: '2026-04-12T14:20:00',
+    items: [
+      { name: 'Constancia de estudiante regular.pdf', sizeBytes: 303104, modifiedAt: '2026-04-12T14:20:00' },
+      { name: 'Historial académico parcial.pdf', sizeBytes: 884736, modifiedAt: '2026-04-12T14:23:00' },
+      { name: 'Certificación de créditos aprobados.pdf', sizeBytes: 471040, modifiedAt: '2026-04-12T14:27:00' },
+    ],
+  },
+  {
+    name: 'Financiero',
+    modifiedAt: '2026-03-27T08:45:00',
+    items: [
+      { name: 'Estado de cuenta I Semestre 2026.pdf', sizeBytes: 366592, modifiedAt: '2026-03-27T08:45:00' },
+      { name: 'Comprobante de pago de matrícula.pdf', sizeBytes: 291840, modifiedAt: '2026-03-27T08:48:00' },
+    ],
+  },
+  {
+    name: 'Solicitudes',
+    modifiedAt: '2026-05-05T10:18:00',
+    items: [
+      { name: 'Solicitud de beca.pdf', sizeBytes: 655360, modifiedAt: '2026-05-05T10:18:00' },
+      { name: 'Formulario de actualización de datos.docx', sizeBytes: 118784, modifiedAt: '2026-05-05T10:22:00' },
+    ],
+  },
+]

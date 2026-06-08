@@ -9,13 +9,25 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as CoursiaBackupRouteImport } from './routes/coursia-backup'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProfileIndexRouteImport } from './routes/profile/index'
+import { Route as ProfileStudyPlanRouteImport } from './routes/profile/study-plan'
+import { Route as ProfilePersonalRouteImport } from './routes/profile/personal'
+import { Route as ProfileDocumentsRouteImport } from './routes/profile/documents'
+import { Route as ProfileContactRouteImport } from './routes/profile/contact'
+import { Route as ProfileAcademicRouteImport } from './routes/profile/academic'
 import { Route as CommunitiesSplatRouteImport } from './routes/communities/$'
 import { Route as AuthSignupRouteImport } from './routes/auth/signup'
 import { Route as AuthSigninRouteImport } from './routes/auth/signin'
 import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber'
 
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CoursiaBackupRoute = CoursiaBackupRouteImport.update({
   id: '/coursia-backup',
   path: '/coursia-backup',
@@ -25,6 +37,36 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileIndexRoute = ProfileIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProfileRoute,
+} as any)
+const ProfileStudyPlanRoute = ProfileStudyPlanRouteImport.update({
+  id: '/study-plan',
+  path: '/study-plan',
+  getParentRoute: () => ProfileRoute,
+} as any)
+const ProfilePersonalRoute = ProfilePersonalRouteImport.update({
+  id: '/personal',
+  path: '/personal',
+  getParentRoute: () => ProfileRoute,
+} as any)
+const ProfileDocumentsRoute = ProfileDocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => ProfileRoute,
+} as any)
+const ProfileContactRoute = ProfileContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => ProfileRoute,
+} as any)
+const ProfileAcademicRoute = ProfileAcademicRouteImport.update({
+  id: '/academic',
+  path: '/academic',
+  getParentRoute: () => ProfileRoute,
 } as any)
 const CommunitiesSplatRoute = CommunitiesSplatRouteImport.update({
   id: '/communities/$',
@@ -51,9 +93,16 @@ const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/coursia-backup': typeof CoursiaBackupRoute
+  '/profile': typeof ProfileRouteWithChildren
   '/auth/signin': typeof AuthSigninRoute
   '/auth/signup': typeof AuthSignupRoute
   '/communities/$': typeof CommunitiesSplatRoute
+  '/profile/academic': typeof ProfileAcademicRoute
+  '/profile/contact': typeof ProfileContactRoute
+  '/profile/documents': typeof ProfileDocumentsRoute
+  '/profile/personal': typeof ProfilePersonalRoute
+  '/profile/study-plan': typeof ProfileStudyPlanRoute
+  '/profile/': typeof ProfileIndexRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute
 }
 export interface FileRoutesByTo {
@@ -62,15 +111,28 @@ export interface FileRoutesByTo {
   '/auth/signin': typeof AuthSigninRoute
   '/auth/signup': typeof AuthSignupRoute
   '/communities/$': typeof CommunitiesSplatRoute
+  '/profile/academic': typeof ProfileAcademicRoute
+  '/profile/contact': typeof ProfileContactRoute
+  '/profile/documents': typeof ProfileDocumentsRoute
+  '/profile/personal': typeof ProfilePersonalRoute
+  '/profile/study-plan': typeof ProfileStudyPlanRoute
+  '/profile': typeof ProfileIndexRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/coursia-backup': typeof CoursiaBackupRoute
+  '/profile': typeof ProfileRouteWithChildren
   '/auth/signin': typeof AuthSigninRoute
   '/auth/signup': typeof AuthSignupRoute
   '/communities/$': typeof CommunitiesSplatRoute
+  '/profile/academic': typeof ProfileAcademicRoute
+  '/profile/contact': typeof ProfileContactRoute
+  '/profile/documents': typeof ProfileDocumentsRoute
+  '/profile/personal': typeof ProfilePersonalRoute
+  '/profile/study-plan': typeof ProfileStudyPlanRoute
+  '/profile/': typeof ProfileIndexRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute
 }
 export interface FileRouteTypes {
@@ -78,9 +140,16 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/coursia-backup'
+    | '/profile'
     | '/auth/signin'
     | '/auth/signup'
     | '/communities/$'
+    | '/profile/academic'
+    | '/profile/contact'
+    | '/profile/documents'
+    | '/profile/personal'
+    | '/profile/study-plan'
+    | '/profile/'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -89,20 +158,34 @@ export interface FileRouteTypes {
     | '/auth/signin'
     | '/auth/signup'
     | '/communities/$'
+    | '/profile/academic'
+    | '/profile/contact'
+    | '/profile/documents'
+    | '/profile/personal'
+    | '/profile/study-plan'
+    | '/profile'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber'
   id:
     | '__root__'
     | '/'
     | '/coursia-backup'
+    | '/profile'
     | '/auth/signin'
     | '/auth/signup'
     | '/communities/$'
+    | '/profile/academic'
+    | '/profile/contact'
+    | '/profile/documents'
+    | '/profile/personal'
+    | '/profile/study-plan'
+    | '/profile/'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CoursiaBackupRoute: typeof CoursiaBackupRoute
+  ProfileRoute: typeof ProfileRouteWithChildren
   AuthSigninRoute: typeof AuthSigninRoute
   AuthSignupRoute: typeof AuthSignupRoute
   CommunitiesSplatRoute: typeof CommunitiesSplatRoute
@@ -111,6 +194,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/coursia-backup': {
       id: '/coursia-backup'
       path: '/coursia-backup'
@@ -124,6 +214,48 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/profile/': {
+      id: '/profile/'
+      path: '/'
+      fullPath: '/profile/'
+      preLoaderRoute: typeof ProfileIndexRouteImport
+      parentRoute: typeof ProfileRoute
+    }
+    '/profile/study-plan': {
+      id: '/profile/study-plan'
+      path: '/study-plan'
+      fullPath: '/profile/study-plan'
+      preLoaderRoute: typeof ProfileStudyPlanRouteImport
+      parentRoute: typeof ProfileRoute
+    }
+    '/profile/personal': {
+      id: '/profile/personal'
+      path: '/personal'
+      fullPath: '/profile/personal'
+      preLoaderRoute: typeof ProfilePersonalRouteImport
+      parentRoute: typeof ProfileRoute
+    }
+    '/profile/documents': {
+      id: '/profile/documents'
+      path: '/documents'
+      fullPath: '/profile/documents'
+      preLoaderRoute: typeof ProfileDocumentsRouteImport
+      parentRoute: typeof ProfileRoute
+    }
+    '/profile/contact': {
+      id: '/profile/contact'
+      path: '/contact'
+      fullPath: '/profile/contact'
+      preLoaderRoute: typeof ProfileContactRouteImport
+      parentRoute: typeof ProfileRoute
+    }
+    '/profile/academic': {
+      id: '/profile/academic'
+      path: '/academic'
+      fullPath: '/profile/academic'
+      preLoaderRoute: typeof ProfileAcademicRouteImport
+      parentRoute: typeof ProfileRoute
     }
     '/communities/$': {
       id: '/communities/$'
@@ -156,9 +288,31 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface ProfileRouteChildren {
+  ProfileAcademicRoute: typeof ProfileAcademicRoute
+  ProfileContactRoute: typeof ProfileContactRoute
+  ProfileDocumentsRoute: typeof ProfileDocumentsRoute
+  ProfilePersonalRoute: typeof ProfilePersonalRoute
+  ProfileStudyPlanRoute: typeof ProfileStudyPlanRoute
+  ProfileIndexRoute: typeof ProfileIndexRoute
+}
+
+const ProfileRouteChildren: ProfileRouteChildren = {
+  ProfileAcademicRoute: ProfileAcademicRoute,
+  ProfileContactRoute: ProfileContactRoute,
+  ProfileDocumentsRoute: ProfileDocumentsRoute,
+  ProfilePersonalRoute: ProfilePersonalRoute,
+  ProfileStudyPlanRoute: ProfileStudyPlanRoute,
+  ProfileIndexRoute: ProfileIndexRoute,
+}
+
+const ProfileRouteWithChildren =
+  ProfileRoute._addFileChildren(ProfileRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CoursiaBackupRoute: CoursiaBackupRoute,
+  ProfileRoute: ProfileRouteWithChildren,
   AuthSigninRoute: AuthSigninRoute,
   AuthSignupRoute: AuthSignupRoute,
   CommunitiesSplatRoute: CommunitiesSplatRoute,

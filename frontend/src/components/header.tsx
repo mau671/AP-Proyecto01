@@ -84,6 +84,7 @@ export function Header() {
   const pathParts = location.pathname.split("/").filter(Boolean)
   const isCoursePath = pathParts[0] === "courses" && pathParts.length >= 6
   const isCommunityPath = pathParts[0] === "communities" && pathParts.length >= 2
+  const isProfilePath = pathParts[0] === "profile" && pathParts.length >= 2
 
   const courseInfo = isCoursePath
     ? getCourseByParams({
@@ -112,6 +113,25 @@ export function Header() {
           ...pathParts.slice(1).map((segment, index) => ({
             href: `/communities/${pathParts.slice(1, index + 2).join("/")}`,
             label: getCommunityLabel(segment),
+          })),
+        ]
+    : isProfilePath
+      ? [
+          { href: "/profile/personal", label: "Perfil" },
+          ...pathParts.slice(1).map((segment, index) => ({
+            href: `/profile/${pathParts.slice(1, index + 2).join("/")}`,
+            label:
+              segment === "personal"
+                ? "Datos personales"
+                : segment === "academic"
+                  ? "Datos académicos"
+                  : segment === "study-plan"
+                    ? "Plan de estudios"
+                    : segment === "contact"
+                      ? "Contacto"
+                      : segment === "documents"
+                        ? "Documentos"
+                        : segment.charAt(0).toUpperCase() + segment.slice(1),
           })),
         ]
     : pathParts.map((part, index) => {
@@ -302,7 +322,7 @@ export function Header() {
 
             <DropdownMenuGroup>
               <DropdownMenuLabel>Mi cuenta</DropdownMenuLabel>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => navigate({ to: "/profile/personal" })}>
                 <UserIcon />
                 Perfil
               </DropdownMenuItem>
