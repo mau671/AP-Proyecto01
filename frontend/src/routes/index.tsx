@@ -2,8 +2,6 @@ import { Link, createFileRoute, useNavigate } from '@tanstack/react-router'
 import { startOfWeek } from 'date-fns'
 import {
   BookOpenIcon,
-  CalendarDaysIcon,
-  LandmarkIcon,
   ListChecksIcon,
   UserRoundIcon,
 } from 'lucide-react'
@@ -52,8 +50,6 @@ export const Route = createFileRoute('/')({
 
 const quickLinks = [
   { label: 'Matrícula', description: 'Seleccionar cursos del periodo', icon: ListChecksIcon },
-  { label: 'Horarios', description: 'Ver agenda semanal', icon: CalendarDaysIcon },
-  { label: 'Estado de cuenta', description: 'Revisar pagos pendientes', icon: LandmarkIcon },
 ] as const
 
 function StudentHome() {
@@ -217,7 +213,15 @@ function StudentHome() {
                         {enrolledCourses.map((course) => (
                           <TableRow key={course.code}>
                             <TableCell className="font-mono">{course.code}</TableCell>
-                            <TableCell className="font-medium">{course.name}</TableCell>
+                            <TableCell className="font-medium">
+                              <Link
+                                to="/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber"
+                                params={getCourseRouteParams('2026', 'Semestre I', course.code, course.group)}
+                                className="underline-offset-4 hover:underline"
+                              >
+                                {course.name}
+                              </Link>
+                            </TableCell>
                             <TableCell className="text-right">{course.group}</TableCell>
                             <TableCell>{course.professor}</TableCell>
                             <TableCell className="text-right">{course.credits}</TableCell>
@@ -275,7 +279,15 @@ function StudentHome() {
                             {period.courses.map((course) => (
                               <TableRow key={`${period.period}-${course.code}-${course.group}`}>
                                 <TableCell className="font-mono">{course.code}</TableCell>
-                                <TableCell className="font-medium">{course.name}</TableCell>
+                                <TableCell className="font-medium">
+                                  <Link
+                                    to="/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber"
+                                    params={getCourseRouteParams(year.year, period.period, course.code, course.group)}
+                                    className="underline-offset-4 hover:underline"
+                                  >
+                                    {course.name}
+                                  </Link>
+                                </TableCell>
                                 <TableCell className="text-right">{course.group}</TableCell>
                                 <TableCell>{course.professor}</TableCell>
                                 <TableCell className="text-right">{course.credits}</TableCell>
@@ -384,6 +396,45 @@ function StudentHome() {
       </Tabs>
     </main>
   )
+}
+
+function getCourseRouteParams(year: string, period: string, courseCode: string, groupNumber: string) {
+  const normalizedPeriod = period.toLowerCase()
+  const periodType = normalizedPeriod.startsWith('semestre')
+    ? 'S'
+    : normalizedPeriod.startsWith('verano')
+      ? 'V'
+      : 'H'
+
+  const periodNumberMatch = period.match(/\b([IVX]+|\d+)$/)
+  const periodNumber = periodNumberMatch ? romanToNumber(periodNumberMatch[1]) : 1
+
+  return {
+    year,
+    periodType,
+    periodNumber: String(periodNumber),
+    courseCode,
+    groupNumber,
+  }
+}
+
+function romanToNumber(value: string) {
+  if (/^\d+$/.test(value)) return Number(value)
+
+  const numerals: Record<string, number> = {
+    I: 1,
+    II: 2,
+    III: 3,
+    IV: 4,
+    V: 5,
+    VI: 6,
+    VII: 7,
+    VIII: 8,
+    IX: 9,
+    X: 10,
+  }
+
+  return numerals[value] ?? 1
 }
 
 function Stat({ label, value, muted = false }: { label: string; value: string; muted?: boolean }) {
