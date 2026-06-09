@@ -1,1 +1,0 @@
-import{Wn as e}from"./index-qeLl1S2-.js";var t=e();function n(){return(0,t.jsx)(`div`,{className:`flex grow`})}export{n as component};

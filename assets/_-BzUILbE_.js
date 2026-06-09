@@ -1,0 +1,1 @@
+import{Wn as e}from"./index-SBBEQ023.js";var t=e();function n(){return(0,t.jsx)(`div`,{className:`flex grow`})}export{n as component};
