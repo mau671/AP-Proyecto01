@@ -1,0 +1,1 @@
+import{Hn as e,Wn as t}from"./index-qeLl1S2-.js";var n=t();function r(){return(0,n.jsx)(e,{to:`/profile/personal`,replace:!0})}export{r as component};
