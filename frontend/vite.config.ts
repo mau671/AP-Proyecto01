@@ -1,25 +1,26 @@
-import tailwindcss from '@tailwindcss/vite'
-import { devtools } from '@tanstack/devtools-vite'
-import { TanStackRouterVite } from '@tanstack/router-plugin/vite'
-import viteReact from '@vitejs/plugin-react'
-import { fileURLToPath } from 'node:url'
-import { defineConfig } from 'vite'
+import tailwindcss from "@tailwindcss/vite";
+import { devtools } from "@tanstack/devtools-vite";
+import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
+import viteReact from "@vitejs/plugin-react";
+import { fileURLToPath } from "node:url";
+import { defineConfig } from "vite";
 
-const srcPath = fileURLToPath(new URL('./src', import.meta.url))
+const srcPath = fileURLToPath(new URL("./src", import.meta.url));
 
 const config = defineConfig({
   resolve: {
     alias: {
-      '@': srcPath,
-      '#': srcPath,
+      "@": srcPath,
+      "#": srcPath,
     },
   },
   plugins: [
     devtools(),
-    TanStackRouterVite({ target: 'react', autoCodeSplitting: true }),
+    TanStackRouterVite({ target: "react", autoCodeSplitting: true }),
     tailwindcss(),
     viteReact(),
   ],
-})
+  base: "/AP-Proyecto01/",
+});
 
-export default config
+export default config;
