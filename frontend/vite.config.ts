@@ -20,7 +20,7 @@ const config = defineConfig({
     tailwindcss(),
     viteReact(),
   ],
-  base: "/AP-Proyecto01/",
+  base: "/",
 });
 
 export default config;
