@@ -134,11 +134,15 @@ export function Header() {
                         : segment.charAt(0).toUpperCase() + segment.slice(1),
           })),
         ]
-    : pathParts.map((part, index) => {
+        : pathParts.map((part, index) => {
         const href = "/" + pathParts.slice(0, index + 1).join("/")
         const label =
           part === "courses"
             ? "Cursos"
+            : part === "schedule"
+              ? "Horario"
+              : part === "finance"
+                ? "Financiero"
             : part.charAt(0).toUpperCase() + part.slice(1).replace(/-/g, " ")
 
         return { href, label }

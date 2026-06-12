@@ -9,10 +9,13 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ScheduleRouteImport } from './routes/schedule'
 import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as FinanceRouteImport } from './routes/finance'
 import { Route as CoursiaBackupRouteImport } from './routes/coursia-backup'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProfileIndexRouteImport } from './routes/profile/index'
+import { Route as EnrollmentIndexRouteImport } from './routes/enrollment/index'
 import { Route as ProfileStudyPlanRouteImport } from './routes/profile/study-plan'
 import { Route as ProfilePersonalRouteImport } from './routes/profile/personal'
 import { Route as ProfileDocumentsRouteImport } from './routes/profile/documents'
@@ -23,9 +26,19 @@ import { Route as AuthSignupRouteImport } from './routes/auth/signup'
 import { Route as AuthSigninRouteImport } from './routes/auth/signin'
 import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber'
 
+const ScheduleRoute = ScheduleRouteImport.update({
+  id: '/schedule',
+  path: '/schedule',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProfileRoute = ProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FinanceRoute = FinanceRouteImport.update({
+  id: '/finance',
+  path: '/finance',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CoursiaBackupRoute = CoursiaBackupRouteImport.update({
@@ -42,6 +55,11 @@ const ProfileIndexRoute = ProfileIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => ProfileRoute,
+} as any)
+const EnrollmentIndexRoute = EnrollmentIndexRouteImport.update({
+  id: '/enrollment/',
+  path: '/enrollment/',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ProfileStudyPlanRoute = ProfileStudyPlanRouteImport.update({
   id: '/study-plan',
@@ -93,7 +111,9 @@ const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/coursia-backup': typeof CoursiaBackupRoute
+  '/finance': typeof FinanceRoute
   '/profile': typeof ProfileRouteWithChildren
+  '/schedule': typeof ScheduleRoute
   '/auth/signin': typeof AuthSigninRoute
   '/auth/signup': typeof AuthSignupRoute
   '/communities/$': typeof CommunitiesSplatRoute
@@ -102,12 +122,15 @@ export interface FileRoutesByFullPath {
   '/profile/documents': typeof ProfileDocumentsRoute
   '/profile/personal': typeof ProfilePersonalRoute
   '/profile/study-plan': typeof ProfileStudyPlanRoute
+  '/enrollment/': typeof EnrollmentIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/coursia-backup': typeof CoursiaBackupRoute
+  '/finance': typeof FinanceRoute
+  '/schedule': typeof ScheduleRoute
   '/auth/signin': typeof AuthSigninRoute
   '/auth/signup': typeof AuthSignupRoute
   '/communities/$': typeof CommunitiesSplatRoute
@@ -116,6 +139,7 @@ export interface FileRoutesByTo {
   '/profile/documents': typeof ProfileDocumentsRoute
   '/profile/personal': typeof ProfilePersonalRoute
   '/profile/study-plan': typeof ProfileStudyPlanRoute
+  '/enrollment': typeof EnrollmentIndexRoute
   '/profile': typeof ProfileIndexRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute
 }
@@ -123,7 +147,9 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/coursia-backup': typeof CoursiaBackupRoute
+  '/finance': typeof FinanceRoute
   '/profile': typeof ProfileRouteWithChildren
+  '/schedule': typeof ScheduleRoute
   '/auth/signin': typeof AuthSigninRoute
   '/auth/signup': typeof AuthSignupRoute
   '/communities/$': typeof CommunitiesSplatRoute
@@ -132,6 +158,7 @@ export interface FileRoutesById {
   '/profile/documents': typeof ProfileDocumentsRoute
   '/profile/personal': typeof ProfilePersonalRoute
   '/profile/study-plan': typeof ProfileStudyPlanRoute
+  '/enrollment/': typeof EnrollmentIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute
 }
@@ -140,7 +167,9 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/coursia-backup'
+    | '/finance'
     | '/profile'
+    | '/schedule'
     | '/auth/signin'
     | '/auth/signup'
     | '/communities/$'
@@ -149,12 +178,15 @@ export interface FileRouteTypes {
     | '/profile/documents'
     | '/profile/personal'
     | '/profile/study-plan'
+    | '/enrollment/'
     | '/profile/'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/coursia-backup'
+    | '/finance'
+    | '/schedule'
     | '/auth/signin'
     | '/auth/signup'
     | '/communities/$'
@@ -163,13 +195,16 @@ export interface FileRouteTypes {
     | '/profile/documents'
     | '/profile/personal'
     | '/profile/study-plan'
+    | '/enrollment'
     | '/profile'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber'
   id:
     | '__root__'
     | '/'
     | '/coursia-backup'
+    | '/finance'
     | '/profile'
+    | '/schedule'
     | '/auth/signin'
     | '/auth/signup'
     | '/communities/$'
@@ -178,6 +213,7 @@ export interface FileRouteTypes {
     | '/profile/documents'
     | '/profile/personal'
     | '/profile/study-plan'
+    | '/enrollment/'
     | '/profile/'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber'
   fileRoutesById: FileRoutesById
@@ -185,20 +221,37 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CoursiaBackupRoute: typeof CoursiaBackupRoute
+  FinanceRoute: typeof FinanceRoute
   ProfileRoute: typeof ProfileRouteWithChildren
+  ScheduleRoute: typeof ScheduleRoute
   AuthSigninRoute: typeof AuthSigninRoute
   AuthSignupRoute: typeof AuthSignupRoute
   CommunitiesSplatRoute: typeof CommunitiesSplatRoute
+  EnrollmentIndexRoute: typeof EnrollmentIndexRoute
   CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/schedule': {
+      id: '/schedule'
+      path: '/schedule'
+      fullPath: '/schedule'
+      preLoaderRoute: typeof ScheduleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/profile': {
       id: '/profile'
       path: '/profile'
       fullPath: '/profile'
       preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/finance': {
+      id: '/finance'
+      path: '/finance'
+      fullPath: '/finance'
+      preLoaderRoute: typeof FinanceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/coursia-backup': {
@@ -221,6 +274,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/profile/'
       preLoaderRoute: typeof ProfileIndexRouteImport
       parentRoute: typeof ProfileRoute
+    }
+    '/enrollment/': {
+      id: '/enrollment/'
+      path: '/enrollment'
+      fullPath: '/enrollment/'
+      preLoaderRoute: typeof EnrollmentIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/profile/study-plan': {
       id: '/profile/study-plan'
@@ -312,10 +372,13 @@ const ProfileRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CoursiaBackupRoute: CoursiaBackupRoute,
+  FinanceRoute: FinanceRoute,
   ProfileRoute: ProfileRouteWithChildren,
+  ScheduleRoute: ScheduleRoute,
   AuthSigninRoute: AuthSigninRoute,
   AuthSignupRoute: AuthSignupRoute,
   CommunitiesSplatRoute: CommunitiesSplatRoute,
+  EnrollmentIndexRoute: EnrollmentIndexRoute,
   CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute:
     CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute,
 }
