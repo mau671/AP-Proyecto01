@@ -1,0 +1,1 @@
+import{U as e,br as t}from"./index-Cfd4U0zv.js";var n=t(`chevron-left`,[[`path`,{d:`m15 18-6-6 6-6`,key:`1wnfg3`}]]);function r(t,n,r){return e(t,n*7,r)}function i(e,t,n){return r(e,-t,n)}export{r as n,n as r,i as t};

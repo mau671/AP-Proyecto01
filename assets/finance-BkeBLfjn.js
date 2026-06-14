@@ -1,0 +1,1 @@
+import{Or as e,Tr as t}from"./index-Cfd4U0zv.js";var n=e();function r(){return(0,n.jsx)(t,{to:`/finance/account`,replace:!0})}export{r as component};
