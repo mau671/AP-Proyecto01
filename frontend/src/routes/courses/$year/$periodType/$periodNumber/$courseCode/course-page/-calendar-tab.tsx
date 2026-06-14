@@ -1,34 +1,30 @@
-import type { CSSProperties } from 'react'
-import { Link, createFileRoute, useNavigate } from '@tanstack/react-router'
-import { startOfWeek, addWeeks, subWeeks, addDays } from 'date-fns'
+import { useCallback, useMemo, useState, type CSSProperties } from 'react'
+import { addDays, addWeeks, startOfWeek, subWeeks } from 'date-fns'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { useCallback, useEffect, useMemo, useState } from 'react'
-
-import CalendarBodyDayContent from '@/components/calendar/body/day/calendar-body-day-content'
-import CalendarBodyDayMargin from '@/components/calendar/body/day/calendar-body-day-margin'
-import { START_HOUR, END_HOUR } from '@/components/calendar/body/day/calendar-body-day-margin'
-import CalendarProvider from '@/components/calendar/calendar-provider'
-import { useCalendarContext } from '@/components/calendar/calendar-context'
-import type { CalendarEvent, Mode } from '@/components/calendar/calendar-types'
-import {
-  Combobox,
-  ComboboxContent,
-  ComboboxItem,
-  ComboboxList,
-  ComboboxInput,
-} from '@/components/ui/combobox'
-import { Button } from '@/components/ui/button'
-import { TooltipProvider } from '@/components/ui/tooltip'
-import { getDemoUser, type DemoUser } from '@/lib/demo-auth'
-import { getStudentScheduleEvents, studentProfile } from '@/lib/student-data'
-
-export const Route = createFileRoute('/schedule')({
-  component: StudentSchedulePage,
-})
 
 const SEMESTER_START = new Date(2026, 1, 16)
 const SEMANA_SANTA_MONDAY = new Date(2026, 2, 30)
+
+import CalendarBodyDayContent from '@/components/calendar/body/day/calendar-body-day-content'
+import CalendarBodyDayMargin, { END_HOUR, START_HOUR } from '@/components/calendar/body/day/calendar-body-day-margin'
+import CalendarProvider from '@/components/calendar/calendar-provider'
+import { useCalendarContext } from '@/components/calendar/calendar-context'
+import type { Mode } from '@/components/calendar/calendar-types'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { TooltipProvider } from '@/components/ui/tooltip'
+import { sessionToEvent } from '@/lib/calendar-utils'
+import type { CalendarEvent } from '@/lib/types'
+
+import { courseEvalEvents, courseMeetings } from './-data'
+
 const HEADER_HEIGHT = 33
+const COURSE_CODE = 'IC4810'
+const COURSE_NAME = 'Administración de proyectos'
+const GROUP_CODE = '01'
+const PROFESSORS = ['Alicia Marcela Salazar Hernandez']
+const COLOR = 'orange'
+const CAMPUS = 'CAMPUS TECNOLOGICO CENTRAL CARTAGO'
 
 function getAcademicWeekNumber(date: Date): number {
   const monday = startOfWeek(date, { weekStartsOn: 1 })
@@ -51,7 +47,51 @@ function navigateAcademicWeeks(date: Date, delta: number): Date {
   return result
 }
 
-function ScheduleWeekView() {
+function getCourseEvents(calendarDate: Date): CalendarEvent[] {
+  const weekStart = startOfWeek(calendarDate, { weekStartsOn: 1 })
+
+  const meetingEvents = courseMeetings.map((meeting) =>
+    sessionToEvent({
+      session: meeting,
+      courseId: COURSE_CODE,
+      courseCode: COURSE_CODE,
+      courseName: COURSE_NAME,
+      groupCode: GROUP_CODE,
+      groupId: `${COURSE_CODE}-${GROUP_CODE}`,
+      groupType: 'SEMIPRESENCIAL',
+      professors: PROFESSORS,
+      classroom: meeting.classroom,
+      campusName: CAMPUS,
+      color: COLOR,
+      weekStart,
+    }),
+  )
+
+  const weekEnd = addDays(weekStart, 6)
+  const evalEvents = courseEvalEvents
+    .filter((ev) => ev.date >= weekStart && ev.date <= weekEnd)
+    .map((ev, i) => ({
+      id: `course-eval-${i}`,
+      title: ev.name,
+      courseName: COURSE_NAME,
+      courseCode: COURSE_CODE,
+      groupCode: GROUP_CODE,
+      groupId: `${COURSE_CODE}-${GROUP_CODE}`,
+      groupType: 'SEMIPRESENCIAL',
+      professors: PROFESSORS,
+      classroom: null,
+      campusName: null,
+      color: 'red' as const,
+      start: ev.date,
+      end: new Date(ev.date.getTime() + 60 * 60 * 1000),
+      courseId: COURSE_CODE,
+      group: 1,
+    }))
+
+  return [...meetingEvents, ...evalEvents]
+}
+
+function CourseWeekView() {
   const { date, hourHeight, dayWidth } = useCalendarContext()
 
   const weekStart = startOfWeek(date, { weekStartsOn: 1 })
@@ -72,7 +112,7 @@ function ScheduleWeekView() {
         }
       >
         <CalendarBodyDayMargin />
-        {weekDays.map((day, index) => (
+        {weekDays.map((day) => (
           <div
             key={day.toISOString()}
             className="flex min-w-[var(--day-width)] flex-1 flex-col lg:min-w-0"
@@ -91,19 +131,19 @@ function ScheduleWeekView() {
   )
 }
 
-function StudentSchedulePage() {
-  const navigate = useNavigate()
-  const [user, setUser] = useState<DemoUser | null>(null)
-  const [calendarMode, setCalendarMode] = useState<Mode>('week')
+export function CalendarioTab() {
   const [calendarDate, setCalendarDate] = useState(() => startOfWeek(new Date(), { weekStartsOn: 1 }))
-  useEffect(() => {
-    const currentUser = getDemoUser()
-    if (!currentUser) {
-      navigate({ to: '/auth/signin' })
-      return
-    }
-    setUser(currentUser)
-  }, [navigate])
+  const [calendarMode] = useState<Mode>('week')
+
+  const calendarEvents = useMemo(
+    () => getCourseEvents(calendarDate),
+    [calendarDate],
+  )
+
+  const weekNumber = useMemo(() => getAcademicWeekNumber(calendarDate), [calendarDate])
+  const weekLabel = `Semana ${String(weekNumber).padStart(2, '0')}`
+  const isPrevDisabled = weekNumber <= 1
+  const isNextDisabled = weekNumber >= 19
 
   const handlePrevWeek = useCallback(() => {
     setCalendarDate((prev) => navigateAcademicWeeks(prev, -1))
@@ -113,46 +153,13 @@ function StudentSchedulePage() {
     setCalendarDate((prev) => navigateAcademicWeeks(prev, 1))
   }, [])
 
-  const weekNumber = useMemo(() => getAcademicWeekNumber(calendarDate), [calendarDate])
-  const weekLabel = `Semana ${String(weekNumber).padStart(2, '0')}`
-  const isPrevDisabled = weekNumber <= 1
-  const isNextDisabled = weekNumber >= 19
-
-  const calendarEvents = useMemo(
-    () => getStudentScheduleEvents(calendarDate),
-    [calendarDate],
-  )
-
-  if (!user) return null
-
-  if (user.role !== 'student') {
-    return (
-      <main className="mx-auto flex w-full max-w-4xl grow flex-col justify-center px-6 py-10">
-        <div className="space-y-4 rounded-xl border border-border p-6">
-          <p className="text-sm text-muted-foreground">{user.roleLabel}</p>
-          <h1 className="text-2xl font-semibold">Modo en preparación</h1>
-          <p className="text-muted-foreground">
-            Por ahora solo está implementado el dashboard estudiantil. Inicia sesión con estudiante@utlm.cr para
-            revisar el flujo actual.
-          </p>
-          <Button asChild>
-            <Link to="/auth/signin">Cambiar usuario</Link>
-          </Button>
-        </div>
-      </main>
-    )
-  }
-
-  const periodValue = '2026: Semestre 1'
-  const periodItems = [periodValue]
-
   return (
-    <main className="flex w-full min-h-0 flex-1 flex-col gap-4 p-4">
+    <div className="flex h-full min-h-0 flex-col p-4">
       <CalendarProvider
         events={calendarEvents}
         setEvents={() => {}}
         mode={calendarMode}
-        setMode={setCalendarMode}
+        setMode={() => {}}
         date={calendarDate}
         setDate={setCalendarDate}
         calendarIconIsToday={false}
@@ -170,29 +177,14 @@ function StudentSchedulePage() {
               </Button>
               <span className="ml-1 text-sm font-medium tabular-nums">{weekLabel}</span>
             </div>
-            <div className="flex items-center gap-3">
-              <span className="text-sm text-muted-foreground">
-                412: Ingeniería en Computación-2022
-              </span>
-              <Combobox items={periodItems} value={periodValue} onValueChange={() => undefined}>
-                <ComboboxInput value={periodValue} disabled className="w-40" />
-                <ComboboxContent>
-                  <ComboboxList>
-                    {(item: string) => (
-                      <ComboboxItem key={item} value={item}>
-                        {item}
-                      </ComboboxItem>
-                    )}
-                  </ComboboxList>
-                </ComboboxContent>
-              </Combobox>
-            </div>
+            <Badge variant="secondary" className="hidden text-xs sm:inline-flex">{COURSE_CODE}: {COURSE_NAME}</Badge>
+            <Badge variant="secondary" className="inline-flex text-xs sm:hidden">{COURSE_CODE}</Badge>
           </div>
           <TooltipProvider delay={200}>
-            <ScheduleWeekView />
+            <CourseWeekView />
           </TooltipProvider>
         </div>
       </CalendarProvider>
-    </main>
+    </div>
   )
 }

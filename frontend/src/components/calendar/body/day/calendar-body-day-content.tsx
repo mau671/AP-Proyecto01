@@ -3,6 +3,7 @@ import { useMemo } from "react";
 
 import type { CalendarEvent as CalendarEventType } from "@/lib/types";
 
+import { cn } from "@/lib/utils";
 import { useCalendarContext } from "../../calendar-context";
 import CalendarBodyHeader from "../calendar-body-header";
 import CalendarEvent from "../calendar-event";
@@ -75,9 +76,13 @@ function calculateEventLayouts(events: CalendarEventType[], hourHeight: number):
 export default function CalendarBodyDayContent({
   date,
   headerClassName,
+  contentClassName,
+  showDayNumber = false,
 }: {
   date: Date;
   headerClassName?: string;
+  contentClassName?: string;
+  showDayNumber?: boolean;
 }) {
   const { events, hourHeight } = useCalendarContext();
 
@@ -93,9 +98,9 @@ export default function CalendarBodyDayContent({
 
   return (
     <div className="flex flex-grow flex-col">
-      <CalendarBodyHeader date={date} onlyDay className={headerClassName} />
+      <CalendarBodyHeader date={date} onlyDay={!showDayNumber} className={headerClassName} />
 
-      <div className="relative flex-1">
+      <div className={cn("relative flex-1", contentClassName)}>
         {hours.map((hour) => (
           <div
             key={hour}

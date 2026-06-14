@@ -23,7 +23,7 @@ export default function CalendarBodyHeader({
         {format(date, "EEE", { locale: es })}
       </span>
       {!onlyDay && (
-        <span className="text-foreground text-xs font-medium">{format(date, "dd")}</span>
+        <span className="text-muted-foreground text-xs font-medium">{format(date, "dd")}</span>
       )}
     </div>
   );

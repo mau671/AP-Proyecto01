@@ -1,9 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
 
+import { CalendarioTab } from './course-page/-calendar-tab'
 import { CourseTabs } from './course-page/-course-tabs'
 import { courseTabs } from './course-page/-data'
 import { DocumentsTab } from './course-page/-documents-tab'
 import { EvaluationsTab } from './course-page/-evaluations-tab'
+import { InicioTab } from './course-page/-inicio-tab'
 
 export const Route = createFileRoute(
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber',
@@ -36,6 +38,8 @@ function CoursePage() {
         }}
       />
       <div className="flex-1 overflow-y-auto">
+        {tabIndex === 0 && <InicioTab />}
+        {tabIndex === 1 && <CalendarioTab />}
         {tabIndex === 2 && <DocumentsTab />}
         {tabIndex === 3 && <EvaluationsTab />}
       </div>

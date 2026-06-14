@@ -85,6 +85,7 @@ export function Header() {
   const isCoursePath = pathParts[0] === "courses" && pathParts.length >= 6
   const isCommunityPath = pathParts[0] === "communities" && pathParts.length >= 2
   const isProfilePath = pathParts[0] === "profile" && pathParts.length >= 2
+  const isFinancePath = pathParts[0] === "finance" && pathParts.length >= 2
 
   const courseInfo = isCoursePath
     ? getCourseByParams({
@@ -131,10 +132,29 @@ export function Header() {
                       ? "Contacto"
                       : segment === "documents"
                         ? "Documentos"
-                        : segment.charAt(0).toUpperCase() + segment.slice(1),
+                        : segment === "academic-history"
+                          ? "Historial académico"
+                          : segment.charAt(0).toUpperCase() + segment.slice(1),
           })),
         ]
-        : pathParts.map((part, index) => {
+    : isFinancePath
+      ? [
+          { href: "/finance/account", label: "Financiero" },
+          ...pathParts.slice(1).map((segment, index) => ({
+            href: `/finance/${pathParts.slice(1, index + 2).join("/")}`,
+            label:
+              segment === "account"
+                ? "Estado de cuenta"
+                : segment === "payment"
+                  ? "Realizar pago"
+                  : segment === "history"
+                    ? "Historial de pagos"
+                    : segment === "other-charges"
+                      ? "Otros cobros"
+                      : segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, " "),
+          })),
+        ]
+      : pathParts.map((part, index) => {
         const href = "/" + pathParts.slice(0, index + 1).join("/")
         const label =
           part === "courses"
@@ -143,7 +163,9 @@ export function Header() {
               ? "Horario"
               : part === "finance"
                 ? "Financiero"
-            : part.charAt(0).toUpperCase() + part.slice(1).replace(/-/g, " ")
+                : part === "enrollment"
+                  ? "Matrícula"
+                  : part.charAt(0).toUpperCase() + part.slice(1).replace(/-/g, " ")
 
         return { href, label }
       })

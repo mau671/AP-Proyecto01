@@ -132,10 +132,7 @@ function StudentHome() {
       </section>
 
       <section className="mt-8 space-y-3">
-        <div>
-          <h2 className="text-xl font-semibold tracking-tight">Cursos</h2>
-          <p className="text-sm text-muted-foreground">Historial académico y matrícula activa.</p>
-        </div>
+        <h2 className="text-xl font-semibold tracking-tight">Cursos</h2>
 
         <div className="space-y-2">
           <Collapsible defaultOpen>
