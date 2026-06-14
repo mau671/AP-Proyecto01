@@ -1,19 +1,24 @@
-import { Link, createFileRoute, useNavigate } from '@tanstack/react-router'
+import { Link, Outlet, createFileRoute, useLocation, useNavigate } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 
-import { Badge } from '@/components/ui/badge'
+import { LineTabs } from '@/components/line-tabs'
 import { Button } from '@/components/ui/button'
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
-import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
 import { getDemoUser, type DemoUser } from '@/lib/demo-auth'
-import { accountYears, formatCurrency, studentProfile } from '@/lib/student-data'
+
+const financeSections = [
+  { label: 'Estado de cuenta', to: '/finance/account' },
+  { label: 'Realizar pago', to: '/finance/payment' },
+  { label: 'Historial de pagos', to: '/finance/history' },
+  { label: 'Otros cobros', to: '/finance/other-charges' },
+] as const
 
 export const Route = createFileRoute('/finance')({
-  component: StudentFinancePage,
+  component: FinanceLayout,
 })
 
-function StudentFinancePage() {
+function FinanceLayout() {
   const navigate = useNavigate()
+  const location = useLocation()
   const [user, setUser] = useState<DemoUser | null>(null)
 
   useEffect(() => {
@@ -45,83 +50,24 @@ function StudentFinancePage() {
     )
   }
 
-  return (
-    <main className="mx-auto w-full max-w-7xl grow px-4 py-6 md:px-8">
-      <section className="mb-6">
-        <p className="text-sm font-medium text-muted-foreground">{studentProfile.career}</p>
-        <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">Financiero</h1>
-        <p className="text-sm text-muted-foreground">Estado de cuenta y pagos pendientes</p>
-      </section>
+  const activeTab = financeSections.some((section) => section.to === location.pathname)
+    ? location.pathname
+    : '/finance/account'
 
-      <div className="space-y-2 rounded-xl border border-border p-3">
-        {accountYears.map((year, yearIndex) => (
-          <Collapsible key={year.year} defaultOpen={yearIndex === 0}>
-            <div className="flex items-center gap-2 rounded-md px-2 py-1.5">
-              <CollapsibleTrigger className="group grid size-6 shrink-0 place-items-center rounded-sm border border-border text-foreground">
-                <span className="text-base leading-none group-data-[panel-open]:hidden">+</span>
-                <span className="hidden text-base leading-none group-data-[panel-open]:block">-</span>
-              </CollapsibleTrigger>
-              <div className="flex min-w-0 flex-1 items-center justify-between gap-3">
-                <h3 className="truncate text-base font-semibold">{year.year}</h3>
-                <div className="flex shrink-0 items-center gap-2 text-sm text-muted-foreground">
-                  <span>{year.charges.length} cobros</span>
-                </div>
-              </div>
-            </div>
-            <CollapsibleContent className="space-y-1 pl-8 pt-1">
-              {year.charges.map((charge, chargeIndex) => (
-                <Collapsible key={`${year.year}-${charge.period}`} defaultOpen={yearIndex === 0 && chargeIndex === 0}>
-                  <div className="flex items-center gap-2 rounded-md px-2 py-1.5">
-                    <CollapsibleTrigger className="group grid size-6 shrink-0 place-items-center rounded-sm border border-border text-foreground">
-                      <span className="text-base leading-none group-data-[panel-open]:hidden">+</span>
-                      <span className="hidden text-base leading-none group-data-[panel-open]:block">-</span>
-                    </CollapsibleTrigger>
-                    <div className="flex min-w-0 flex-1 items-center justify-between gap-3">
-                      <div className="min-w-0">
-                        <h4 className="truncate text-base font-medium">{charge.period}</h4>
-                        <p className="truncate text-sm text-muted-foreground">Fecha límite sin recargo: {charge.dueDateWithoutSurcharge}</p>
-                      </div>
-                      <div className="flex shrink-0 items-center gap-2">
-                        <Badge variant={charge.status === 'Pagado' ? 'secondary' : 'destructive'}>{charge.status}</Badge>
-                        <span className="hidden font-mono text-sm font-medium sm:block">{formatCurrency(charge.balance)}</span>
-                      </div>
-                    </div>
-                  </div>
-                  <CollapsibleContent className="pl-8 pt-2">
-                    <Table>
-                      <TableBody>
-                        <TableRow>
-                          <TableCell colSpan={2} className="bg-muted/40 font-semibold">Detalle de créditos</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell className="font-medium">Créditos matriculados</TableCell>
-                          <TableCell className="text-right font-mono">{charge.enrolledCredits}</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell className="font-medium">Créditos al cobro</TableCell>
-                          <TableCell className="text-right font-mono">{charge.billedCredits}</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell colSpan={2} className="bg-muted/40 font-semibold">Detalle de montos</TableCell>
-                        </TableRow>
-                        {charge.amounts.map((amount) => (
-                          <TableRow key={amount.concept}>
-                            <TableCell className="font-medium">{amount.concept}</TableCell>
-                            <TableCell className="text-right font-mono">{formatCurrency(amount.amount)}</TableCell>
-                          </TableRow>
-                        ))}
-                        <TableRow>
-                          <TableCell className="font-semibold">Saldo</TableCell>
-                          <TableCell className="text-right font-mono font-semibold">{formatCurrency(charge.balance)}</TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
-                  </CollapsibleContent>
-                </Collapsible>
-              ))}
-            </CollapsibleContent>
-          </Collapsible>
-        ))}
+  return (
+    <main className="flex grow flex-col">
+      <LineTabs
+        tabs={financeSections.map((section) => ({ label: section.label, value: section.to }))}
+        value={activeTab}
+        onValueChange={(value) => {
+          const next = financeSections.find((section) => section.to === value)
+          if (!next) return
+          navigate({ to: next.to })
+        }}
+      />
+
+      <div className="flex-1 overflow-y-auto px-4 py-6 md:px-8">
+        <Outlet />
       </div>
     </main>
   )

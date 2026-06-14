@@ -15,12 +15,18 @@ import { Route as FinanceRouteImport } from './routes/finance'
 import { Route as CoursiaBackupRouteImport } from './routes/coursia-backup'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProfileIndexRouteImport } from './routes/profile/index'
+import { Route as FinanceIndexRouteImport } from './routes/finance/index'
 import { Route as EnrollmentIndexRouteImport } from './routes/enrollment/index'
 import { Route as ProfileStudyPlanRouteImport } from './routes/profile/study-plan'
 import { Route as ProfilePersonalRouteImport } from './routes/profile/personal'
 import { Route as ProfileDocumentsRouteImport } from './routes/profile/documents'
 import { Route as ProfileContactRouteImport } from './routes/profile/contact'
+import { Route as ProfileAcademicHistoryRouteImport } from './routes/profile/academic-history'
 import { Route as ProfileAcademicRouteImport } from './routes/profile/academic'
+import { Route as FinancePaymentRouteImport } from './routes/finance/payment'
+import { Route as FinanceOtherChargesRouteImport } from './routes/finance/other-charges'
+import { Route as FinanceHistoryRouteImport } from './routes/finance/history'
+import { Route as FinanceAccountRouteImport } from './routes/finance/account'
 import { Route as CommunitiesSplatRouteImport } from './routes/communities/$'
 import { Route as AuthSignupRouteImport } from './routes/auth/signup'
 import { Route as AuthSigninRouteImport } from './routes/auth/signin'
@@ -56,6 +62,11 @@ const ProfileIndexRoute = ProfileIndexRouteImport.update({
   path: '/',
   getParentRoute: () => ProfileRoute,
 } as any)
+const FinanceIndexRoute = FinanceIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => FinanceRoute,
+} as any)
 const EnrollmentIndexRoute = EnrollmentIndexRouteImport.update({
   id: '/enrollment/',
   path: '/enrollment/',
@@ -81,10 +92,35 @@ const ProfileContactRoute = ProfileContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => ProfileRoute,
 } as any)
+const ProfileAcademicHistoryRoute = ProfileAcademicHistoryRouteImport.update({
+  id: '/academic-history',
+  path: '/academic-history',
+  getParentRoute: () => ProfileRoute,
+} as any)
 const ProfileAcademicRoute = ProfileAcademicRouteImport.update({
   id: '/academic',
   path: '/academic',
   getParentRoute: () => ProfileRoute,
+} as any)
+const FinancePaymentRoute = FinancePaymentRouteImport.update({
+  id: '/payment',
+  path: '/payment',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const FinanceOtherChargesRoute = FinanceOtherChargesRouteImport.update({
+  id: '/other-charges',
+  path: '/other-charges',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const FinanceHistoryRoute = FinanceHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => FinanceRoute,
+} as any)
+const FinanceAccountRoute = FinanceAccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => FinanceRoute,
 } as any)
 const CommunitiesSplatRoute = CommunitiesSplatRouteImport.update({
   id: '/communities/$',
@@ -111,35 +147,46 @@ const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/coursia-backup': typeof CoursiaBackupRoute
-  '/finance': typeof FinanceRoute
+  '/finance': typeof FinanceRouteWithChildren
   '/profile': typeof ProfileRouteWithChildren
   '/schedule': typeof ScheduleRoute
   '/auth/signin': typeof AuthSigninRoute
   '/auth/signup': typeof AuthSignupRoute
   '/communities/$': typeof CommunitiesSplatRoute
+  '/finance/account': typeof FinanceAccountRoute
+  '/finance/history': typeof FinanceHistoryRoute
+  '/finance/other-charges': typeof FinanceOtherChargesRoute
+  '/finance/payment': typeof FinancePaymentRoute
   '/profile/academic': typeof ProfileAcademicRoute
+  '/profile/academic-history': typeof ProfileAcademicHistoryRoute
   '/profile/contact': typeof ProfileContactRoute
   '/profile/documents': typeof ProfileDocumentsRoute
   '/profile/personal': typeof ProfilePersonalRoute
   '/profile/study-plan': typeof ProfileStudyPlanRoute
   '/enrollment/': typeof EnrollmentIndexRoute
+  '/finance/': typeof FinanceIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/coursia-backup': typeof CoursiaBackupRoute
-  '/finance': typeof FinanceRoute
   '/schedule': typeof ScheduleRoute
   '/auth/signin': typeof AuthSigninRoute
   '/auth/signup': typeof AuthSignupRoute
   '/communities/$': typeof CommunitiesSplatRoute
+  '/finance/account': typeof FinanceAccountRoute
+  '/finance/history': typeof FinanceHistoryRoute
+  '/finance/other-charges': typeof FinanceOtherChargesRoute
+  '/finance/payment': typeof FinancePaymentRoute
   '/profile/academic': typeof ProfileAcademicRoute
+  '/profile/academic-history': typeof ProfileAcademicHistoryRoute
   '/profile/contact': typeof ProfileContactRoute
   '/profile/documents': typeof ProfileDocumentsRoute
   '/profile/personal': typeof ProfilePersonalRoute
   '/profile/study-plan': typeof ProfileStudyPlanRoute
   '/enrollment': typeof EnrollmentIndexRoute
+  '/finance': typeof FinanceIndexRoute
   '/profile': typeof ProfileIndexRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute
 }
@@ -147,18 +194,24 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/coursia-backup': typeof CoursiaBackupRoute
-  '/finance': typeof FinanceRoute
+  '/finance': typeof FinanceRouteWithChildren
   '/profile': typeof ProfileRouteWithChildren
   '/schedule': typeof ScheduleRoute
   '/auth/signin': typeof AuthSigninRoute
   '/auth/signup': typeof AuthSignupRoute
   '/communities/$': typeof CommunitiesSplatRoute
+  '/finance/account': typeof FinanceAccountRoute
+  '/finance/history': typeof FinanceHistoryRoute
+  '/finance/other-charges': typeof FinanceOtherChargesRoute
+  '/finance/payment': typeof FinancePaymentRoute
   '/profile/academic': typeof ProfileAcademicRoute
+  '/profile/academic-history': typeof ProfileAcademicHistoryRoute
   '/profile/contact': typeof ProfileContactRoute
   '/profile/documents': typeof ProfileDocumentsRoute
   '/profile/personal': typeof ProfilePersonalRoute
   '/profile/study-plan': typeof ProfileStudyPlanRoute
   '/enrollment/': typeof EnrollmentIndexRoute
+  '/finance/': typeof FinanceIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute
 }
@@ -173,29 +226,40 @@ export interface FileRouteTypes {
     | '/auth/signin'
     | '/auth/signup'
     | '/communities/$'
+    | '/finance/account'
+    | '/finance/history'
+    | '/finance/other-charges'
+    | '/finance/payment'
     | '/profile/academic'
+    | '/profile/academic-history'
     | '/profile/contact'
     | '/profile/documents'
     | '/profile/personal'
     | '/profile/study-plan'
     | '/enrollment/'
+    | '/finance/'
     | '/profile/'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/coursia-backup'
-    | '/finance'
     | '/schedule'
     | '/auth/signin'
     | '/auth/signup'
     | '/communities/$'
+    | '/finance/account'
+    | '/finance/history'
+    | '/finance/other-charges'
+    | '/finance/payment'
     | '/profile/academic'
+    | '/profile/academic-history'
     | '/profile/contact'
     | '/profile/documents'
     | '/profile/personal'
     | '/profile/study-plan'
     | '/enrollment'
+    | '/finance'
     | '/profile'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber'
   id:
@@ -208,12 +272,18 @@ export interface FileRouteTypes {
     | '/auth/signin'
     | '/auth/signup'
     | '/communities/$'
+    | '/finance/account'
+    | '/finance/history'
+    | '/finance/other-charges'
+    | '/finance/payment'
     | '/profile/academic'
+    | '/profile/academic-history'
     | '/profile/contact'
     | '/profile/documents'
     | '/profile/personal'
     | '/profile/study-plan'
     | '/enrollment/'
+    | '/finance/'
     | '/profile/'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber'
   fileRoutesById: FileRoutesById
@@ -221,7 +291,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CoursiaBackupRoute: typeof CoursiaBackupRoute
-  FinanceRoute: typeof FinanceRoute
+  FinanceRoute: typeof FinanceRouteWithChildren
   ProfileRoute: typeof ProfileRouteWithChildren
   ScheduleRoute: typeof ScheduleRoute
   AuthSigninRoute: typeof AuthSigninRoute
@@ -275,6 +345,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileIndexRouteImport
       parentRoute: typeof ProfileRoute
     }
+    '/finance/': {
+      id: '/finance/'
+      path: '/'
+      fullPath: '/finance/'
+      preLoaderRoute: typeof FinanceIndexRouteImport
+      parentRoute: typeof FinanceRoute
+    }
     '/enrollment/': {
       id: '/enrollment/'
       path: '/enrollment'
@@ -310,12 +387,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileContactRouteImport
       parentRoute: typeof ProfileRoute
     }
+    '/profile/academic-history': {
+      id: '/profile/academic-history'
+      path: '/academic-history'
+      fullPath: '/profile/academic-history'
+      preLoaderRoute: typeof ProfileAcademicHistoryRouteImport
+      parentRoute: typeof ProfileRoute
+    }
     '/profile/academic': {
       id: '/profile/academic'
       path: '/academic'
       fullPath: '/profile/academic'
       preLoaderRoute: typeof ProfileAcademicRouteImport
       parentRoute: typeof ProfileRoute
+    }
+    '/finance/payment': {
+      id: '/finance/payment'
+      path: '/payment'
+      fullPath: '/finance/payment'
+      preLoaderRoute: typeof FinancePaymentRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/finance/other-charges': {
+      id: '/finance/other-charges'
+      path: '/other-charges'
+      fullPath: '/finance/other-charges'
+      preLoaderRoute: typeof FinanceOtherChargesRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/finance/history': {
+      id: '/finance/history'
+      path: '/history'
+      fullPath: '/finance/history'
+      preLoaderRoute: typeof FinanceHistoryRouteImport
+      parentRoute: typeof FinanceRoute
+    }
+    '/finance/account': {
+      id: '/finance/account'
+      path: '/account'
+      fullPath: '/finance/account'
+      preLoaderRoute: typeof FinanceAccountRouteImport
+      parentRoute: typeof FinanceRoute
     }
     '/communities/$': {
       id: '/communities/$'
@@ -348,8 +460,28 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface FinanceRouteChildren {
+  FinanceAccountRoute: typeof FinanceAccountRoute
+  FinanceHistoryRoute: typeof FinanceHistoryRoute
+  FinanceOtherChargesRoute: typeof FinanceOtherChargesRoute
+  FinancePaymentRoute: typeof FinancePaymentRoute
+  FinanceIndexRoute: typeof FinanceIndexRoute
+}
+
+const FinanceRouteChildren: FinanceRouteChildren = {
+  FinanceAccountRoute: FinanceAccountRoute,
+  FinanceHistoryRoute: FinanceHistoryRoute,
+  FinanceOtherChargesRoute: FinanceOtherChargesRoute,
+  FinancePaymentRoute: FinancePaymentRoute,
+  FinanceIndexRoute: FinanceIndexRoute,
+}
+
+const FinanceRouteWithChildren =
+  FinanceRoute._addFileChildren(FinanceRouteChildren)
+
 interface ProfileRouteChildren {
   ProfileAcademicRoute: typeof ProfileAcademicRoute
+  ProfileAcademicHistoryRoute: typeof ProfileAcademicHistoryRoute
   ProfileContactRoute: typeof ProfileContactRoute
   ProfileDocumentsRoute: typeof ProfileDocumentsRoute
   ProfilePersonalRoute: typeof ProfilePersonalRoute
@@ -359,6 +491,7 @@ interface ProfileRouteChildren {
 
 const ProfileRouteChildren: ProfileRouteChildren = {
   ProfileAcademicRoute: ProfileAcademicRoute,
+  ProfileAcademicHistoryRoute: ProfileAcademicHistoryRoute,
   ProfileContactRoute: ProfileContactRoute,
   ProfileDocumentsRoute: ProfileDocumentsRoute,
   ProfilePersonalRoute: ProfilePersonalRoute,
@@ -372,7 +505,7 @@ const ProfileRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CoursiaBackupRoute: CoursiaBackupRoute,
-  FinanceRoute: FinanceRoute,
+  FinanceRoute: FinanceRouteWithChildren,
   ProfileRoute: ProfileRouteWithChildren,
   ScheduleRoute: ScheduleRoute,
   AuthSigninRoute: AuthSigninRoute,
