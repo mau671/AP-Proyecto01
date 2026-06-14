@@ -5,6 +5,7 @@ import { LineTabs } from '@/components/line-tabs'
 const profileSections = [
   { label: 'Datos personales', to: '/profile/personal' },
   { label: 'Datos académicos', to: '/profile/academic' },
+  { label: 'Historial académico', to: '/profile/academic-history' },
   { label: 'Plan de estudios', to: '/profile/study-plan' },
   { label: 'Contacto', to: '/profile/contact' },
   { label: 'Documentos', to: '/profile/documents' },
