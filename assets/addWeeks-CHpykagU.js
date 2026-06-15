@@ -1,0 +1,1 @@
+import{J as e}from"./index-DMWuf_zl.js";function t(t,n,r){return e(t,n*7,r)}export{t};
