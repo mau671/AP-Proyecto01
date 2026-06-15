@@ -27,7 +27,7 @@ function CoursePage() {
   const tabIndex = search.tab
 
   return (
-    <div className="flex grow flex-col">
+    <div className="flex min-h-0 flex-1 flex-col">
       <CourseTabs
         tabIndex={tabIndex}
         onTabChange={(nextTab) => {
@@ -37,7 +37,7 @@ function CoursePage() {
           })
         }}
       />
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto [scrollbar-gutter:stable]">
         {tabIndex === 0 && <InicioTab />}
         {tabIndex === 1 && <CalendarioTab />}
         {tabIndex === 2 && <DocumentsTab />}

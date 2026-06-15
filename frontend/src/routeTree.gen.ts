@@ -33,6 +33,7 @@ import { Route as AuthSigninRouteImport } from './routes/auth/signin'
 import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber'
 import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberIndexRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/index'
 import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberMembersRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/members'
+import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review'
 import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new'
 import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit'
 
@@ -165,6 +166,15 @@ const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberMembersRoute =
         CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute,
     } as any,
   )
+const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewRoute =
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewRouteImport.update(
+    {
+      id: '/evaluations/review',
+      path: '/evaluations/review',
+      getParentRoute: () =>
+        CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute,
+    } as any,
+  )
 const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRoute =
   CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRouteImport.update(
     {
@@ -211,6 +221,7 @@ export interface FileRoutesByFullPath {
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberIndexRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -236,6 +247,7 @@ export interface FileRoutesByTo {
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberIndexRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -265,6 +277,7 @@ export interface FileRoutesById {
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberIndexRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -295,6 +308,7 @@ export interface FileRouteTypes {
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -320,6 +334,7 @@ export interface FileRouteTypes {
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review'
   id:
     | '__root__'
     | '/'
@@ -348,6 +363,7 @@ export interface FileRouteTypes {
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -533,6 +549,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberMembersRouteImport
       parentRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute
     }
+    '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review': {
+      id: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review'
+      path: '/evaluations/review'
+      fullPath: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review'
+      preLoaderRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewRouteImport
+      parentRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute
+    }
     '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new': {
       id: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new'
       path: '/evaluations/new'
@@ -597,6 +620,7 @@ interface CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRouteChildren {
   CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberIndexRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberIndexRoute
   CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditRoute
   CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRoute
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewRoute
 }
 
 const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRouteChildren: CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRouteChildren =
@@ -609,6 +633,8 @@ const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRouteChildren: Cours
       CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditRoute,
     CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRoute:
       CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRoute,
+    CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewRoute:
+      CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewRoute,
   }
 
 const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRouteWithChildren =

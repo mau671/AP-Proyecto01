@@ -54,12 +54,6 @@ export function EvaluationsTab() {
 
   // Dialog States
   const [catDialog, setCatDialog] = useState<{ open: boolean }>({ open: false })
-  const [reviewDialog, setReviewDialog] = useState<{
-    open: boolean
-    evaluation?: EvaluationItem
-    groupIndex?: number
-    itemIndex?: number
-  }>({ open: false })
 
   // Handlers for Evaluations
   const openAddEval = () => {
@@ -320,8 +314,21 @@ export function EvaluationsTab() {
                                 </Button>
                               </DropdownMenuTrigger>
                               <DropdownMenuContent align="end">
-                                <DropdownMenuItem onClick={() => setReviewDialog({ open: true, evaluation: item, groupIndex, itemIndex: index })}>
-                                  <Users className="mr-2 size-4" /> Revisar entregas
+                                <DropdownMenuItem className="whitespace-nowrap" onClick={() => navigate({
+                                  to: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review',
+                                  params: {
+                                    year: params.year,
+                                    periodType: params.periodType,
+                                    periodNumber: params.periodNumber,
+                                    courseCode: params.courseCode,
+                                    groupNumber: params.groupNumber,
+                                  },
+                                  search: {
+                                    groupIndex,
+                                    itemIndex: index,
+                                  }
+                                })}>
+                                  <Users className="mr-2 size-4 shrink-0" /> Revisar entregas
                                 </DropdownMenuItem>
                                 <DropdownMenuItem onClick={() => openEditEval(groupIndex, index)}>
                                   <Pencil className="mr-2 size-4" /> Editar
@@ -551,43 +558,6 @@ export function EvaluationsTab() {
       </ResponsiveDialog>
 
       {/* El diálogo de agregar/editar evaluación ahora se maneja en páginas separadas */}
-
-      {/* Revisar Entregas Dialog */}
-      <ResponsiveDialog
-        open={reviewDialog.open}
-        onOpenChange={(o) => setReviewDialog({ open: o })}
-        title={<div className="flex flex-col gap-1"><span>Revisar Entregas</span><span className="text-sm font-normal text-muted-foreground">{reviewDialog.evaluation?.name}</span></div>}
-      >
-        <div className="space-y-4 max-h-[70vh] overflow-y-auto">
-          {enrolledStudents.map((student) => (
-            <div key={student.id} className="rounded-lg border border-border p-4 space-y-3">
-              <div className="flex items-center gap-3">
-                <div className="grid size-8 place-items-center rounded-full bg-primary/10 text-primary">
-                  <UserIcon className="size-4" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium truncate">{student.name}</p>
-                  <p className="text-xs text-muted-foreground truncate">{student.email}</p>
-                </div>
-                <div className="shrink-0 text-right">
-                  <p className="text-xs font-semibold text-green-600">Entregado</p>
-                  <p className="text-[10px] text-muted-foreground">Ayer 22:15</p>
-                </div>
-              </div>
-              <Separator />
-              <div className="flex items-center justify-between gap-4">
-                <Button variant="outline" size="sm" className="w-full h-8 text-xs">
-                  <DownloadIcon className="mr-2 size-3" /> Ver archivo
-                </Button>
-                <div className="flex items-center gap-2">
-                  <Input className="h-8 w-20 text-right text-sm" placeholder="Nota" defaultValue={Math.floor(Math.random() * reviewDialog.evaluation?.score?.max!)} />
-                  <span className="text-sm text-muted-foreground shrink-0">/ {reviewDialog.evaluation?.score?.max}</span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </ResponsiveDialog>
 
       {/* Student History Dialog */}
       <Dialog open={historyState !== null} onOpenChange={(open) => !open && setHistoryState(null)}>

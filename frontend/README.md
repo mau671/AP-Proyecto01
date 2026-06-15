@@ -1,4 +1,4 @@
-# Plataforma Universitaria Frontend
+# Universidad Tecnológica La Mejor Frontend
 
 Prototipo web basado en el proyecto `coursia`, refactorizado para ejecutarse como una SPA con Vite + React.
 
@@ -9,7 +9,6 @@ Prototipo web basado en el proyecto `coursia`, refactorizado para ejecutarse com
 - TypeScript
 - pnpm
 - TanStack Router
-- TanStack Query
 - shadcn/ui
 - Tailwind CSS
 
@@ -26,12 +25,11 @@ pnpm preview
 
 - `src/routes`: rutas file-based de TanStack Router.
 - `src/components`: componentes de aplicación y componentes shadcn/ui.
-- `src/integrations`: integración de TanStack Query y Devtools.
 - `src/lib`: utilidades y catálogos de datos.
 - `src/styles.css`: estilos originales de shadcn/Tailwind copiados desde `coursia`.
 
 ## Notas
 
 - Se eliminó TanStack Start/Nitro y la ruta server-side `/api/auth/$`.
-- Se mantiene la UI, componentes shadcn, Tailwind, TanStack Router y TanStack Query.
+- Se mantiene la UI, componentes shadcn, Tailwind y TanStack Router.
 - La autenticación queda como prototipo visual; no hay backend funcional en este entregable.

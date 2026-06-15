@@ -876,7 +876,7 @@ function CalendarPanel({
   setCalendarDate: (date: Date) => void;
 }) {
   return (
-    <div className="h-full w-full min-h-0 overflow-auto">
+    <ScrollArea className="h-full w-full min-h-0">
       <Calendar
         events={events}
         setEvents={setEvents}
@@ -888,6 +888,6 @@ function CalendarPanel({
         hourHeight={64}
         dayWidth={150}
       />
-    </div>
+    </ScrollArea>
   );
 }

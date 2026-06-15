@@ -450,7 +450,7 @@ function EditEvaluationPage() {
   }
 
   return (
-    <div className="w-full px-4 py-8 sm:px-6 md:px-8">
+    <div className="min-h-0 flex-1 overflow-y-auto [scrollbar-gutter:stable] w-full px-4 py-8 sm:px-6 md:px-8">
       {/* Header Navigation */}
       <button 
         type="button" 
@@ -729,7 +729,7 @@ function EditEvaluationPage() {
         {/* Creador de grupos */}
         {peoplePerGroup > 1 && (
           <div className="space-y-4 rounded-xl border border-border p-6 bg-muted/10 dark:bg-muted/5 animate-in fade-in duration-300">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
                 <h3 className="text-base font-semibold text-foreground">Grupos</h3>
               </div>
@@ -738,7 +738,7 @@ function EditEvaluationPage() {
                 variant="outline"
                 size="sm"
                 onClick={handleRandomizeGroups}
-                className="flex items-center gap-1.5 h-9 shrink-0 cursor-pointer self-start sm:self-auto"
+                className="flex items-center gap-1.5 h-9 shrink-0 cursor-pointer ml-auto"
               >
                 <Shuffle className="size-4 text-primary" />
                 <span>Generar aleatoriamente</span>

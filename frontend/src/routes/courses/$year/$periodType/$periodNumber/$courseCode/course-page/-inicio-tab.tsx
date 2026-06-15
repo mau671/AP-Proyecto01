@@ -186,11 +186,11 @@ export function InicioTab() {
             {topics.map((topic, idx) => (
               <div key={topic.week}>
                 <div className="flex items-start justify-between gap-2">
-                  <div className="flex items-start gap-2">
+                  <div className="flex min-w-0 flex-1 items-start gap-2">
                     <Badge variant="outline" className="mt-0.5 shrink-0 font-mono tabular-nums">Semana {String(topic.week).padStart(2, '0')}</Badge>
-                    <div className="min-w-0">
-                      <p className="truncate text-sm font-medium">{topic.title}</p>
-                      <p className="text-xs text-muted-foreground">{topic.description}</p>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-medium">{topic.title}</p>
+                      <p className="mt-0.5 text-xs text-muted-foreground">{topic.description}</p>
                     </div>
                   </div>
                   {isTeacher && (

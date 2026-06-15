@@ -33,7 +33,7 @@ export function StudentHome({ user }: { user: DemoUser }) {
   return (
     <main className="mx-auto w-full max-w-7xl grow px-4 py-6 md:px-8">
       <section className="grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
-        <div className="space-y-5">
+        <div className="min-w-0 space-y-5">
           <div>
             <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
               Bienvenido, {studentProfile.name}
@@ -49,9 +49,9 @@ export function StudentHome({ user }: { user: DemoUser }) {
 
           <div className="rounded-xl border border-border p-4">
             <div className="mb-3 flex items-center justify-between gap-4">
-              <div>
-                <h2 className="text-lg font-semibold">Avance académico</h2>
-                <p className="text-sm text-muted-foreground">{studentProfile.career}</p>
+              <div className="min-w-0">
+                <h2 className="truncate text-lg font-semibold">Avance académico</h2>
+                <p className="truncate text-sm text-muted-foreground">{studentProfile.career}</p>
               </div>
               <span className="text-sm font-medium">{studentProfile.academicProgress}%</span>
             </div>
@@ -59,14 +59,14 @@ export function StudentHome({ user }: { user: DemoUser }) {
           </div>
         </div>
 
-        <aside className="rounded-xl border border-border p-4">
+        <aside className="min-w-0 rounded-xl border border-border p-4">
           <div className="mb-4 flex items-center gap-3">
-            <span className="grid size-10 place-items-center rounded-full bg-muted">
+            <span className="grid size-10 shrink-0 place-items-center rounded-full bg-muted">
               <UserRoundIcon className="size-5" />
             </span>
-            <div>
-              <h2 className="font-semibold">Perfil rápido</h2>
-              <p className="text-sm text-muted-foreground">{studentProfile.campus}</p>
+            <div className="min-w-0">
+              <h2 className="truncate font-semibold">Perfil rápido</h2>
+              <p className="truncate text-sm text-muted-foreground">{studentProfile.campus}</p>
             </div>
           </div>
 

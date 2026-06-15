@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
-import { useLocation, useNavigate } from "@tanstack/react-router"
+import { Link, useLocation, useNavigate } from "@tanstack/react-router"
 import {
   BotIcon,
+  ChevronLeftIcon,
   ClipboardListIcon,
   CircleHelpIcon,
   EyeIcon,
@@ -174,7 +175,17 @@ export function Header() {
 
   return (
     <header className="flex h-14 items-center justify-between border-b border-border px-3 sm:px-4 md:px-6">
-      <div className="min-w-0">
+      <div className="flex min-w-0 items-center gap-2">
+        {location.pathname !== '/' && (
+          <Link
+            to={breadcrumbItems.length > 1 ? breadcrumbItems[breadcrumbItems.length - 2].href : '/'}
+            className="grid size-8 shrink-0 place-items-center rounded-md text-muted-foreground hover:bg-accent hover:text-foreground md:hidden"
+            aria-label="Volver"
+          >
+            <ChevronLeftIcon className="size-5" />
+          </Link>
+        )}
+
         <Breadcrumb className="hidden md:block">
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -206,14 +217,20 @@ export function Header() {
           </BreadcrumbList>
         </Breadcrumb>
 
-        <div className="max-w-[45vw] truncate text-sm font-medium md:hidden">
+        <div className="max-w-[55vw] min-w-0 md:hidden">
           {courseInfo ? (
-            <span className="inline-flex items-center gap-1.5">
-              <span className="truncate">{courseInfo.title}</span>
-              <Badge variant="secondary" className="shrink-0">{`G${courseInfo.groupNumber.padStart(2, "0")}`}</Badge>
-            </span>
+            <div className="flex min-w-0 items-center gap-1.5">
+              <span className="truncate text-sm font-medium">
+                {courseInfo.title}
+              </span>
+              <Badge variant="secondary" className="shrink-0 text-[10px] px-1.5 py-0.5">
+                {`GR ${courseInfo.groupNumber.padStart(2, "0")}`}
+              </Badge>
+            </div>
           ) : (
-            <span>{lastBreadcrumb?.label ?? "Inicio"}</span>
+            <span className="truncate text-sm font-medium">
+              {lastBreadcrumb?.label ?? "Inicio"}
+            </span>
           )}
         </div>
       </div>
@@ -317,7 +334,7 @@ export function Header() {
           <DropdownMenuTrigger
             nativeButton={true}
             render={
-              <Button variant="ghost" size="icon" aria-label="Cuenta" className="rounded-full p-0">
+              <Button variant="ghost" size="icon" aria-label="Cuenta" className="rounded-full p-0 ml-2">
                 <Avatar>
                   <AvatarFallback>
                     <UserIcon className="size-4" />

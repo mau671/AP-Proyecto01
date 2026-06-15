@@ -92,7 +92,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <Card className="border-border shadow-xs p-4 flex flex-col gap-4">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-4">
         {filterKey && (
           <Input
             placeholder={filterPlaceholder}

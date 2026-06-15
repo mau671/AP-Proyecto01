@@ -1,19 +1,11 @@
-import { Outlet, createRootRouteWithContext, useLocation } from '@tanstack/react-router'
+import { Outlet, createRootRoute, useLocation } from '@tanstack/react-router'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
-
-import TanStackQueryDevtools from '@/integrations/tanstack-query/devtools'
 
 import { Header } from '@/components/header'
 import { Providers } from '@/components/providers'
 
-import type { QueryClient } from '@tanstack/react-query'
-
-interface MyRouterContext {
-  queryClient: QueryClient
-}
-
-export const Route = createRootRouteWithContext<MyRouterContext>()({
+export const Route = createRootRoute({
   component: RootComponent,
   notFoundComponent: () => (
     <div className="flex grow flex-col items-center justify-center p-8">
@@ -26,11 +18,25 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 function RootComponent() {
   const location = useLocation()
   const isAuthPage = location.pathname.startsWith('/auth')
+  const pathParts = location.pathname.split("/").filter(Boolean)
+  const isCoursePath = pathParts[0] === "courses" && pathParts.length >= 6
+  const isProfilePath = pathParts[0] === "profile"
+  const isFinancePath = pathParts[0] === "finance"
+  const isEnrollmentPath = pathParts[0] === "enrollment"
+
+  let wrapperClass = "min-h-0 flex-1 w-full min-w-0"
+  if (isEnrollmentPath) {
+    wrapperClass += " flex flex-col md:overflow-hidden overflow-y-auto [scrollbar-gutter:auto]"
+  } else if (isCoursePath || isProfilePath || isFinancePath) {
+    wrapperClass += " flex flex-col overflow-hidden"
+  } else {
+    wrapperClass += " overflow-y-auto [scrollbar-gutter:stable]"
+  }
 
   return (
     <Providers>
       {!isAuthPage && <Header />}
-      <div className="min-h-0 flex-1 overflow-y-auto [scrollbar-gutter:stable]">
+      <div className={wrapperClass}>
         <Outlet />
       </div>
       <TanStackDevtools
@@ -40,7 +46,6 @@ function RootComponent() {
             name: 'Tanstack Router',
             render: <TanStackRouterDevtoolsPanel />,
           },
-          TanStackQueryDevtools,
         ]}
       />
     </Providers>

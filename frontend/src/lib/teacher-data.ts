@@ -2,8 +2,8 @@ export const teacherProfile = {
   id: 'P-938210',
   name: 'Alicia Marcela Salazar Hernandez',
   email: 'asalazar@utlm.cr',
-  department: 'Computación e Informática',
-  campus: 'Campus Central',
+  department: 'Escuela de Ingeniería en Computación',
+  campus: 'Campus Tecnológico Central Cartago',
 }
 
 export const taughtCourses = [

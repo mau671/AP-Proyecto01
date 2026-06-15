@@ -76,7 +76,7 @@ export function LineTabs({ tabs, value, onValueChange, withSeparator = true }: L
 
   return (
     <>
-      <div className="px-[3px] py-0 sm:px-[7px] md:px-[15px]">
+      <div className="pl-[2px] pr-[3px] py-0 sm:pl-[6px] sm:pr-[7px] md:pl-[14px] md:pr-[15px]">
         <Tabs value={value} onValueChange={onValueChange}>
           <div
             ref={tabsListCallbackRef}
