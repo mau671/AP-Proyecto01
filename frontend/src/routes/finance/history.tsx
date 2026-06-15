@@ -120,11 +120,9 @@ export const columns: ColumnDef<PaymentHistoryItem>[] = [
 
       return (
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Abrir menú</span>
-              <MoreHorizontal className="size-4" />
-            </Button>
+          <DropdownMenuTrigger render={<Button variant="ghost" className="h-8 w-8 p-0" />}>
+            <span className="sr-only">Abrir menú</span>
+            <MoreHorizontal className="size-4" />
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-52">
             <DropdownMenuGroup>
@@ -152,9 +150,9 @@ export const columns: ColumnDef<PaymentHistoryItem>[] = [
 
 function StudentFinanceHistoryPage() {
   return (
-    <div className="mx-auto w-full max-w-5xl space-y-4">
+    <div className="mx-auto w-full max-w-5xl space-y-6">
       {/* KPIs Generales */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-2">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card className="p-4 flex flex-col justify-center">
           <span className="text-sm font-medium text-muted-foreground">Total pagado</span>
           <span className="text-2xl font-bold mt-1">

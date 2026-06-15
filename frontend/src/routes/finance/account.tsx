@@ -1,11 +1,12 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { Table, TableBody, TableCell, TableRow, TableHeader, TableHead } from '@/components/ui/table'
 import { Card } from '@/components/ui/card'
 import { accountYears, formatCurrency } from '@/lib/student-data'
-import { Wallet, Landmark, Receipt } from 'lucide-react'
+import { Wallet, Landmark, Receipt, ArrowRight } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 export const Route = createFileRoute('/finance/account')({
   component: StudentFinanceAccountPage,
@@ -17,7 +18,7 @@ function StudentFinanceAccountPage() {
   return (
     <div className="mx-auto w-full max-w-5xl space-y-6">
       {/* KPI Cards Summary - No color bars, neutral icons */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card className="p-4 flex flex-col justify-center">
           <span className="text-sm font-medium text-muted-foreground">Saldo pendiente</span>
           <span className="text-2xl font-bold mt-1">
@@ -39,7 +40,7 @@ function StudentFinanceAccountPage() {
       </div>
 
       {/* Account Statement Accordions - Match main page course list style & indentation */}
-      <div className="space-y-2 pt-2">
+      <div className="space-y-2">
         {accountYears.map((year) => (
           <Collapsible key={year.year}>
             <div className="flex items-center gap-2 rounded-md px-2 py-1.5">
@@ -72,9 +73,13 @@ function StudentFinanceAccountPage() {
                           {formatCurrency(charge.balance)}
                         </span>
                         {charge.status !== 'Pagado' && (
-                          <Button size="sm" variant="outline" asChild className="h-7 px-2.5 text-xs font-semibold">
-                            <Link to="/finance/payment">Pagar ahora</Link>
-                          </Button>
+                          <Link 
+                            to="/finance/payment" 
+                            className={cn(buttonVariants({ size: 'sm', variant: 'outline' }), "h-7 px-2.5 text-xs font-semibold flex items-center gap-1")}
+                          >
+                            Pagar
+                            <ArrowRight className="size-3.5 shrink-0" />
+                          </Link>
                         )}
                       </div>
                     </div>

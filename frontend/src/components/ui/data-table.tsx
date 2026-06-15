@@ -11,7 +11,8 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, ChevronUp } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 import {
   Table,
@@ -31,6 +32,22 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Card } from '@/components/ui/card'
+import { Field, FieldLabel } from '@/components/ui/field'
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -38,6 +55,7 @@ interface DataTableProps<TData, TValue> {
   filterKey?: string
   filterPlaceholder?: string
   columnLabels?: Record<string, string>
+  defaultSorting?: SortingState
 }
 
 export function DataTable<TData, TValue>({
@@ -46,8 +64,9 @@ export function DataTable<TData, TValue>({
   filterKey,
   filterPlaceholder = 'Filtrar...',
   columnLabels = {},
+  defaultSorting = [],
 }: DataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = React.useState<SortingState>([])
+  const [sorting, setSorting] = React.useState<SortingState>(defaultSorting)
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
@@ -85,10 +104,8 @@ export function DataTable<TData, TValue>({
           />
         )}
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="h-9 ml-auto">
-              Columnas <ChevronDown className="ml-2 size-4" />
-            </Button>
+          <DropdownMenuTrigger render={<Button variant="outline" className="h-9 ml-auto" />}>
+            Columnas <ChevronDown className="ml-2 size-4" />
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuGroup>
@@ -118,14 +135,45 @@ export function DataTable<TData, TValue>({
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
+                  const isSorted = header.column.getIsSorted()
+                  const canSort = header.column.getCanSort()
                   return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
+                    <TableHead key={header.id} style={{ width: header.column.columnDef.size }}>
+                      {header.isPlaceholder ? null : canSort ? (
+                        <div
+                          className={cn(
+                            "flex items-center gap-1.5 cursor-pointer select-none hover:text-foreground",
+                            header.column.id === 'actions' || header.column.columnDef.id === 'actions' ? "justify-end" : ""
                           )}
+                          onClick={header.column.getToggleSortingHandler()}
+                        >
+                          <span>
+                            {flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                          </span>
+                          <div className="flex flex-col -space-y-0.5">
+                            <ChevronUp
+                              className={cn(
+                                "size-3 transition-colors",
+                                isSorted === 'asc' ? "text-foreground font-bold" : "text-muted-foreground/30"
+                              )}
+                            />
+                            <ChevronDown
+                              className={cn(
+                                "size-3 transition-colors",
+                                isSorted === 'desc' ? "text-foreground font-bold" : "text-muted-foreground/30"
+                              )}
+                            />
+                          </div>
+                        </div>
+                      ) : (
+                        flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )
+                      )}
                     </TableHead>
                   )
                 })}
@@ -141,7 +189,7 @@ export function DataTable<TData, TValue>({
                   className="hover:bg-muted/5 group"
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell key={cell.id} style={{ width: cell.column.columnDef.size }}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
@@ -158,27 +206,51 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
 
-      <div className="flex items-center justify-between space-x-2">
-        <div className="text-xs text-muted-foreground">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="text-xs text-muted-foreground order-2 sm:order-none">
           Mostrando {table.getRowModel().rows.length} de {table.getFilteredRowModel().rows.length} registros.
         </div>
-        <div className="space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            Anterior
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            Siguiente
-          </Button>
+        
+        <div className="flex flex-wrap items-center justify-between sm:justify-end gap-4 w-full sm:w-auto">
+          <Field orientation="horizontal" className="w-fit">
+            <FieldLabel htmlFor="select-rows-per-page" className="text-xs">Filas por página</FieldLabel>
+            <Select
+              value={String(table.getState().pagination.pageSize)}
+              onValueChange={(value) => {
+                table.setPageSize(Number(value))
+              }}
+            >
+              <SelectTrigger className="w-20 h-8" id="select-rows-per-page">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent align="start">
+                <SelectGroup>
+                  <SelectItem value="5">5</SelectItem>
+                  <SelectItem value="10">10</SelectItem>
+                  <SelectItem value="25">25</SelectItem>
+                  <SelectItem value="50">50</SelectItem>
+                  <SelectItem value="100">100</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </Field>
+
+          <Pagination className="mx-0 w-auto">
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious
+                  onClick={() => table.previousPage()}
+                  disabled={!table.getCanPreviousPage()}
+                />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationNext
+                  onClick={() => table.nextPage()}
+                  disabled={!table.getCanNextPage()}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
         </div>
       </div>
     </Card>

@@ -166,6 +166,30 @@ export const documentsTree: FileTreeItem[] = [
 ]
 
 export type SubmissionEntry = { name: string; submittedAt: string; isLink: boolean }
+
+export type Student = {
+  id: string
+  name: string
+  email: string
+}
+
+export const enrolledStudents: Student[] = [
+  { id: '1', name: 'Carlos Vindas Mora', email: 'cvindas@utlm.cr' },
+  { id: '2', name: 'María Fernanda Rojas', email: 'mrojas@utlm.cr' },
+  { id: '3', name: 'Jorge Pérez Sánchez', email: 'jperez@utlm.cr' },
+  { id: '4', name: 'Ana Laura Gómez', email: 'agomez@utlm.cr' },
+  { id: '5', name: 'David Rodríguez Vega', email: 'drodriguez@utlm.cr' },
+]
+
+export type TeacherSubmissionReview = {
+  studentId: string
+  submission: SubmissionEntry | null
+  submissionHistory: SubmissionEntry[]
+  score: number | null
+  feedback: string
+  feedbackFiles: { name: string }[]
+}
+
 export type EvaluationItem = {
   name: string
   score: { earned: number; max: number }
@@ -178,9 +202,10 @@ export type EvaluationItem = {
   submission: SubmissionEntry | null
   submissionHistory: SubmissionEntry[]
   feedbackFiles?: { name: string }[]
+  studentReviews?: TeacherSubmissionReview[]
 }
 
-export const evaluationGroups: { title: string; weight: number; items: EvaluationItem[] }[] = [
+export let evaluationGroups: { title: string; weight: number; items: EvaluationItem[] }[] = [
   {
     title: 'Exámenes',
     weight: 40,
@@ -312,3 +337,7 @@ export const evaluationGroups: { title: string; weight: number; items: Evaluatio
     ],
   },
 ]
+
+export function updateEvaluationGroups(newGroups: typeof evaluationGroups) {
+  evaluationGroups = newGroups
+}

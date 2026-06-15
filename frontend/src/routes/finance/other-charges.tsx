@@ -6,7 +6,7 @@ import { type ColumnDef } from '@tanstack/react-table'
 
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { DataTable } from '@/components/ui/data-table'
 import {
@@ -55,9 +55,7 @@ export const columns: ColumnDef<OtherChargeItem>[] = [
       return (
         <TooltipProvider>
           <Tooltip>
-            <TooltipTrigger asChild>
-              {content}
-            </TooltipTrigger>
+            <TooltipTrigger render={content} />
             <TooltipContent className="max-w-sm">
               <p>{concept}</p>
             </TooltipContent>
@@ -120,12 +118,13 @@ export const columns: ColumnDef<OtherChargeItem>[] = [
 
       return charge.status === 'Pendiente' ? (
         <div className="text-right flex justify-end">
-          <Button size="sm" variant="outline" asChild className="h-7 text-xs font-semibold px-2.5 whitespace-nowrap shrink-0">
-            <Link to="/finance/payment" className="flex items-center gap-1">
-              Pagar
-              <ArrowRight className="size-3.5 shrink-0" />
-            </Link>
-          </Button>
+          <Link 
+            to="/finance/payment" 
+            className={cn(buttonVariants({ size: 'sm', variant: 'outline' }), "h-7 text-xs font-semibold px-2.5 whitespace-nowrap shrink-0 flex items-center gap-1")}
+          >
+            Pagar
+            <ArrowRight className="size-3.5 shrink-0" />
+          </Link>
         </div>
       ) : (
         <div className="text-right">
@@ -144,7 +143,7 @@ function StudentFinanceOtherChargesPage() {
   return (
     <div className="mx-auto w-full max-w-5xl space-y-6">
       {/* KPIs sin separator (sin border-b ni pb-6) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card className="p-4 flex flex-col justify-center">
           <span className="text-sm font-medium text-muted-foreground">Total pendiente</span>
           <div className="flex items-center justify-between mt-1">
@@ -152,9 +151,12 @@ function StudentFinanceOtherChargesPage() {
               {formatCurrency(totalPending)}
             </span>
             {totalPending > 0 && (
-              <Button size="sm" asChild className="h-8">
-                <Link to="/finance/payment">Pagar todo</Link>
-              </Button>
+              <Link 
+                to="/finance/payment"
+                className={cn(buttonVariants({ size: 'sm' }), "h-8")}
+              >
+                Pagar todo
+              </Link>
             )}
           </div>
         </Card>

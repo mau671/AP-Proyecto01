@@ -18,6 +18,10 @@ export const courseCatalog: CourseCatalogItem[] = [
   { year: '2026', periodType: 'S', periodNumber: '1', courseCode: 'IC6831', groupNumber: '2', title: 'Aseguramiento de la calidad del software' },
   { year: '2026', periodType: 'S', periodNumber: '1', courseCode: 'CS3401', groupNumber: '2', title: 'Seminario de estudios filosóficos históricos' },
   { year: '2026', periodType: 'S', periodNumber: '1', courseCode: 'MA3405', groupNumber: '2', title: 'Estadística' },
+  { year: '2025', periodType: 'S', periodNumber: '2', courseCode: 'IC4810', groupNumber: '1', title: 'Administración de proyectos' },
+  { year: '2025', periodType: 'S', periodNumber: '2', courseCode: 'IC6831', groupNumber: '2', title: 'Aseguramiento de la calidad del software' },
+  { year: '2025', periodType: 'S', periodNumber: '1', courseCode: 'IC4810', groupNumber: '3', title: 'Administración de proyectos' },
+  { year: '2025', periodType: 'S', periodNumber: '1', courseCode: 'IC6831', groupNumber: '2', title: 'Aseguramiento de la calidad del software' },
   { year: '2025', periodType: 'V', periodNumber: '1', courseCode: 'IC6821', groupNumber: '50', title: 'Diseño de software' },
   { year: '2025', periodType: 'S', periodNumber: '2', courseCode: 'SE1107', groupNumber: '3', title: 'Apreciación de cine' },
   { year: '2025', periodType: 'S', periodNumber: '2', courseCode: 'IC4302', groupNumber: '2', title: 'Bases de datos II' },
@@ -53,7 +57,7 @@ export function getCourseByParams(params: CourseRouteParams) {
       course.periodType === params.periodType &&
       course.periodNumber === params.periodNumber &&
       course.courseCode === params.courseCode &&
-      course.groupNumber === params.groupNumber,
+      Number(course.groupNumber) === Number(params.groupNumber),
   )
 }
 

@@ -285,19 +285,34 @@ function AppointmentStatusBadge() {
 
   const config = {
     in: {
-      label: "Está en su cita de matrícula",
+      label: (
+        <>
+          <span className="hidden sm:inline">Está en su cita de matrícula</span>
+          <span className="sm:hidden">En cita</span>
+        </>
+      ),
       dotClass: "bg-emerald-500",
       badgeClass:
         "bg-emerald-500/10 text-emerald-600 border-emerald-500/20 hover:bg-emerald-500/15",
     },
     out: {
-      label: "No está en su cita de matrícula",
+      label: (
+        <>
+          <span className="hidden sm:inline">No está en su cita de matrícula</span>
+          <span className="sm:hidden">Fuera de cita</span>
+        </>
+      ),
       dotClass: "bg-red-500",
       badgeClass:
         "bg-red-500/10 text-red-600 border-red-500/20 hover:bg-red-500/15",
     },
     none: {
-      label: "No hay cita asignada",
+      label: (
+        <>
+          <span className="hidden sm:inline">No hay cita asignada</span>
+          <span className="sm:hidden">Sin cita</span>
+        </>
+      ),
       dotClass: "bg-amber-500",
       badgeClass:
         "bg-amber-500/10 text-amber-600 border-amber-500/20 hover:bg-amber-500/15",
@@ -490,9 +505,9 @@ function CoursesPanel({
 
   return (
     <div className="flex h-full min-h-0 flex-col max-md:h-auto">
-      <div className="flex h-[33px] shrink-0 items-center justify-between gap-3 border-b bg-muted/30 px-4">
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Clock className="size-4 shrink-0" />
+      <div className="flex h-[33px] shrink-0 items-center justify-between gap-3 border-b bg-background px-4">
+        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <Clock className="size-3.5 shrink-0" />
           <span className="font-mono tabular-nums">
             {format(currentTime, "d/M/yyyy HH:mm:ss")}
           </span>
@@ -500,46 +515,42 @@ function CoursesPanel({
         <AppointmentStatusBadge />
       </div>
 
-      <div className="min-h-0 flex-1 bg-muted/30 px-0 py-0 max-md:flex-none">
-        <Card className="m-0 h-full overflow-hidden rounded-none p-0 shadow-none max-md:h-auto">
-          <ScrollArea className="h-full max-md:overflow-visible max-md:h-auto">
-            <div className="divide-y divide-border">
-              {courses.map((course) => (
-                <CourseCard
-                  key={course.id}
-                  course={course}
-                  selectedGroupId={selectedGroups[course.id]}
-                  selectedGroups={selectedGroups}
-                  initialSelectedGroups={initialSelectedGroups}
-                  onSelectGroup={onSelectGroup}
-                />
-              ))}
-            </div>
-          </ScrollArea>
-        </Card>
+      <div className="min-h-0 flex-1 bg-background px-0 py-0 max-md:flex-none">
+        <ScrollArea className="h-full max-md:overflow-visible max-md:h-auto">
+          <div className="divide-y divide-border">
+            {courses.map((course) => (
+              <CourseCard
+                key={course.id}
+                course={course}
+                selectedGroupId={selectedGroups[course.id]}
+                selectedGroups={selectedGroups}
+                initialSelectedGroups={initialSelectedGroups}
+                onSelectGroup={onSelectGroup}
+              />
+            ))}
+          </div>
+        </ScrollArea>
       </div>
 
       {!hideFooter && (
-        <div className="grid grid-cols-2 gap-2 bg-muted/30 px-4 py-3">
-          <Card className="bg-muted/40">
-            <CardContent className="p-3">
-              <p className="text-xs text-muted-foreground">
-                Créditos seleccionados
-              </p>
-              <p className="text-xl font-semibold">{selectedCredits}</p>
-            </CardContent>
-          </Card>
+        <div className="grid grid-cols-2 gap-4 border-t bg-background px-4 py-4">
+          <div className="flex flex-col space-y-0.5">
+            <p className="text-[11px] uppercase tracking-wider font-semibold text-muted-foreground">
+              Créditos seleccionados
+            </p>
+            <p className="text-2xl font-bold tracking-tight text-foreground">
+              {selectedCredits}
+            </p>
+          </div>
 
-          <Card className="bg-muted/40">
-            <CardContent className="p-3">
-              <p className="text-xs text-muted-foreground">
-                Cursos seleccionados
-              </p>
-              <p className="text-xl font-semibold">
-                {Object.keys(selectedGroups).length}
-              </p>
-            </CardContent>
-          </Card>
+          <div className="flex flex-col space-y-0.5">
+            <p className="text-[11px] uppercase tracking-wider font-semibold text-muted-foreground">
+              Cursos seleccionados
+            </p>
+            <p className="text-2xl font-bold tracking-tight text-foreground">
+              {Object.keys(selectedGroups).length}
+            </p>
+          </div>
         </div>
       )}
     </div>
@@ -564,7 +575,7 @@ function CourseCard({
       <div>
         <CollapsibleTrigger
           className={cn(
-            "group flex w-full items-center gap-3 bg-muted/40 px-3 py-2 text-left transition-colors hover:bg-muted/60",
+            "group flex w-full items-center gap-3 bg-transparent px-4 py-3 text-left transition-colors hover:bg-muted/40",
           )}
         >
           <Badge variant="secondary" className="font-mono">
