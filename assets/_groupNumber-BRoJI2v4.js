@@ -1,1 +1,0 @@
-import{Yr as e,ni as t}from"./index-DMWuf_zl.js";var n=t(),r=()=>(0,n.jsx)(e,{});export{r as component};

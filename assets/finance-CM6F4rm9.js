@@ -1,1 +1,0 @@
-import{Qr as e,ni as t}from"./index-DMWuf_zl.js";var n=t();function r(){return(0,n.jsx)(e,{to:`/finance/account`,replace:!0})}export{r as component};

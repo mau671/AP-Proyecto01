@@ -1,1 +1,0 @@
-import{ni as e}from"./index-DMWuf_zl.js";var t=e();function n(){return(0,t.jsx)(`div`,{className:`flex grow`})}export{n as component};
