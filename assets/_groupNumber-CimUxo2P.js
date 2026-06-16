@@ -1,1 +1,0 @@
-import{di as e,ni as t}from"./index-DOjKxR0l.js";var n=e(),r=()=>(0,n.jsx)(t,{});export{r as component};

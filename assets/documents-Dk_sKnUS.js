@@ -1,1 +1,0 @@
-import{t as e}from"./document-tree-Bc5_hzSa.js";import{di as t}from"./index-DOjKxR0l.js";import{a as n}from"./-data-rBEfKUJO.js";var r=t();function i(){return(0,r.jsx)(`div`,{className:`p-6`,children:(0,r.jsx)(e,{items:n})})}var a=i;export{a as component};

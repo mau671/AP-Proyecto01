@@ -1,1 +1,0 @@
-import{R as e}from"./index-DOjKxR0l.js";function t(t,n,r){return e(t,n*7,r)}export{t};
