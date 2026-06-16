@@ -59,7 +59,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
       <CardHeader>
         <CardTitle>Crear cuenta</CardTitle>
         <CardDescription>
-          Simula el registro con un correo institucional de UTLM.
+          Ingresa tu información a continuación para crear tu cuenta.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -86,7 +86,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
               <FieldLabel htmlFor="password">Contraseña</FieldLabel>
               <Input id="password" name="password" type="password" required />
               <FieldDescription>
-                Para el prototipo, solo se valida que no esté vacía.
+                Debe tener al menos 8 caracteres.
               </FieldDescription>
             </Field>
             <Field>

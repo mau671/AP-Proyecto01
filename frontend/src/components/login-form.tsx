@@ -50,7 +50,7 @@ export function LoginForm({
         <CardHeader>
           <CardTitle>Iniciar sesión</CardTitle>
           <CardDescription>
-            Ingresa con una cuenta demo de la Universidad Tecnológica La Mejor.
+            Ingresa tu correo electrónico a continuación para iniciar sesión.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -71,9 +71,6 @@ export function LoginForm({
                   <FieldLabel htmlFor="password">Contraseña</FieldLabel>
                 </div>
                 <Input id="password" name="password" type="password" required />
-                <FieldDescription>
-                  Para el prototipo, cualquier contraseña no vacía es válida.
-                </FieldDescription>
               </Field>
               {error ? <p className="text-sm text-destructive">{error}</p> : null}
               <Field>
