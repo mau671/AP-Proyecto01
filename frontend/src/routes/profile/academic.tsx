@@ -11,7 +11,7 @@ function ProfileAcademic() {
   return (
     <div className="mx-auto grid w-full max-w-5xl gap-4 md:grid-cols-2">
       <DisabledInput id="career" label="Carrera" value="Ingeniería en Computación" />
-      <DisabledInput id="campus" label="Sede" value="Campus Tecnológico Central Cartago" />
+      <DisabledInput id="campus" label="Sede" value="Sede Central" />
       <DisabledInput id="schedule" label="Jornada" value="Diurna" />
     </div>
   )

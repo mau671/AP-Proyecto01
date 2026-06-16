@@ -166,7 +166,15 @@ export function Header() {
                 ? "Financiero"
                 : part === "enrollment"
                   ? "Matrícula"
-                  : part.charAt(0).toUpperCase() + part.slice(1).replace(/-/g, " ")
+                  : part === "management"
+                    ? "Gestión"
+                    : part === "students"
+                      ? "Estudiantes"
+                      : part === "teachers"
+                        ? "Docentes"
+                        : part === "periods"
+                          ? "Períodos"
+                          : part.charAt(0).toUpperCase() + part.slice(1).replace(/-/g, " ")
 
         return { href, label }
       })
@@ -288,7 +296,7 @@ export function Header() {
 
               <div className="space-y-3 px-1.5 text-muted-foreground">
                 <div className="flex items-center gap-3"><PhoneCallIcon className="size-5" /><span>+ 506 2550-2069</span></div>
-                <div className="flex items-center gap-3"><MailIcon className="size-5" /><span>tec-digital@itcr.ac.cr</span></div>
+                <div className="flex items-center gap-3"><MailIcon className="size-5" /><span>soporte@utlm.cr</span></div>
                 <div className="flex items-center gap-3"><TimerIcon className="size-5" /><span>L-V de 7:30am a 4:30pm</span></div>
               </div>
 
@@ -296,7 +304,7 @@ export function Header() {
 
               <div className="space-y-2">
                 <a
-                  href="https://tecdigital.tec.ac.cr/servicios/Mapa_Campus_TEC_CA.pdf"
+                  href="https://utlm.cr/mapa.pdf"
                   target="_blank"
                   rel="noreferrer"
                   className="flex w-full items-center gap-3 rounded-md px-1.5 py-1.5 text-left text-muted-foreground hover:bg-accent hover:text-foreground"
@@ -305,7 +313,7 @@ export function Header() {
                   <span>Mapa del campus</span>
                 </a>
                 <a
-                  href="https://t.me/TecKapiBot"
+                  href="https://t.me/UTLMBot"
                   target="_blank"
                   rel="noreferrer"
                   className="flex w-full items-center gap-3 rounded-md px-1.5 py-1.5 text-left text-muted-foreground hover:bg-accent hover:text-foreground"

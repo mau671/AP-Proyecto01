@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { getDemoUser, type DemoUser } from '@/lib/demo-auth'
 import { StudentHome } from './-student-home'
 import { TeacherHome } from './-teacher-home'
+import { AdminHome } from './-admin-home'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Link } from '@tanstack/react-router'
@@ -36,13 +37,17 @@ function DashboardEntry() {
     return <TeacherHome user={user} />
   }
 
+  if (user.role === 'admin') {
+    return <AdminHome user={user} />
+  }
+
   return (
     <main className="mx-auto flex w-full max-w-4xl grow flex-col justify-center px-6 py-10">
       <div className="space-y-4 rounded-xl border border-border p-6">
         <Badge variant="secondary">{user.roleLabel}</Badge>
-        <h1 className="text-2xl font-semibold">Modo en preparación</h1>
+        <h1 className="text-2xl font-semibold">Rol no soportado</h1>
         <p className="text-muted-foreground">
-          Por ahora solo está implementado el dashboard estudiantil y docente.
+          Contacte a soporte.
         </p>
         <Button asChild>
           <Link to="/auth/signin">Cambiar usuario</Link>

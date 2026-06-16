@@ -7,7 +7,7 @@ export const studentProfile = {
   name: "Estudiante Demo",
   id: "2024143009",
   career: "Ingeniería en Computación",
-  campus: "Campus Tecnológico Central Cartago",
+  campus: "Sede Central",
   period: "I Semestre 2026",
   credits: 19,
   academicProgress: 62,
@@ -287,7 +287,7 @@ const currentEnrollmentGroups = studentScheduleGroups.map((group) => ({
   courseCode: group.courseCode,
   groupCode: group.groupCode,
   groupType: group.groupType,
-  campusName: "Campus Tecnológico Central Cartago",
+  campusName: "Sede Central",
   professors: group.professors,
   meetings: group.meetings,
   availableSeats: group.availableSeats,
@@ -308,7 +308,7 @@ const additionalEnrollmentGroups: Array<{
     courseCode: "CI1230",
     groupCode: "12",
     groupType: "VIRTUAL",
-    campusName: "Campus Tecnológico Local San José",
+    campusName: "Sede San José",
     professors: ["HERNANDEZ ROJAS MARIA"],
     meetings: [
       {
@@ -342,7 +342,7 @@ const additionalEnrollmentGroups: Array<{
     courseCode: "CS3401",
     groupCode: "05",
     groupType: "SEMIPRESENCIAL",
-    campusName: "Campus Tecnológico Local San Carlos",
+    campusName: "Sede San Carlos",
     professors: ["VARGAS ARAYA PAULA"],
     meetings: [
       {
@@ -365,7 +365,7 @@ const additionalEnrollmentGroups: Array<{
     courseCode: "IC4810",
     groupCode: "04",
     groupType: "SEMIPRESENCIAL",
-    campusName: "Campus Tecnológico Local San José",
+    campusName: "Sede San José",
     professors: ["MORALES CAMPOS ANDREA"],
     meetings: [
       {
@@ -428,7 +428,7 @@ const additionalEnrollmentGroups: Array<{
     courseCode: "MA3405",
     groupCode: "06",
     groupType: "REGULAR",
-    campusName: "Campus Tecnológico Local San José",
+    campusName: "Sede San José",
     professors: ["SOLIS UMAÑA KARLA"],
     meetings: [
       {
@@ -494,7 +494,7 @@ export function getStudentScheduleEvents(date = new Date()): CalendarEvent[] {
         groupType: group.groupType,
         professors: group.professors,
         classroom: session.classroom,
-        campusName: "CAMPUS TECNOLOGICO CENTRAL CARTAGO",
+        campusName: "SEDE CENTRAL",
         color: group.color,
         weekStart,
       }),

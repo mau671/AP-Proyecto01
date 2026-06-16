@@ -7,7 +7,7 @@ export const communityLabels: Record<string, string> = {
   catedras: 'Cátedras',
   'catedra-estadistica': 'Cátedra de Estadística',
   estudiantes: 'Estudiantes',
-  'campus-central-cartago': 'Campus Tecnológico Central Cartago',
+  'campus-central-cartago': 'Sede Central',
 }
 
 export function getCommunityLabel(id: string) {

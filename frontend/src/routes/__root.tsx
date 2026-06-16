@@ -23,11 +23,12 @@ function RootComponent() {
   const isProfilePath = pathParts[0] === "profile"
   const isFinancePath = pathParts[0] === "finance"
   const isEnrollmentPath = pathParts[0] === "enrollment"
+  const isManagementPath = pathParts[0] === "management"
 
   let wrapperClass = "min-h-0 flex-1 w-full min-w-0"
   if (isEnrollmentPath) {
     wrapperClass += " flex flex-col md:overflow-hidden overflow-y-auto [scrollbar-gutter:auto]"
-  } else if (isCoursePath || isProfilePath || isFinancePath) {
+  } else if (isCoursePath || isProfilePath || isFinancePath || isManagementPath) {
     wrapperClass += " flex flex-col overflow-hidden"
   } else {
     wrapperClass += " overflow-y-auto [scrollbar-gutter:stable]"

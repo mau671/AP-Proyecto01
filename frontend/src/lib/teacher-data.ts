@@ -3,7 +3,7 @@ export const teacherProfile = {
   name: 'Alicia Marcela Salazar Hernandez',
   email: 'asalazar@utlm.cr',
   department: 'Escuela de Ingeniería en Computación',
-  campus: 'Campus Tecnológico Central Cartago',
+  campus: 'Sede Central',
 }
 
 export const taughtCourses = [

@@ -24,7 +24,7 @@ const COURSE_NAME = 'Administración de proyectos'
 const GROUP_CODE = '01'
 const PROFESSORS = ['Alicia Marcela Salazar Hernandez']
 const COLOR = 'orange'
-const CAMPUS = 'CAMPUS TECNOLOGICO CENTRAL CARTAGO'
+const CAMPUS = 'SEDE CENTRAL'
 
 function getAcademicWeekNumber(date: Date): number {
   const monday = startOfWeek(date, { weekStartsOn: 1 })

@@ -1,8 +1,9 @@
 export const courseTabs = [
   'Inicio',
+  'Asistencia',
+  'Evaluaciones',
   'Calendario',
   'Documentos',
-  'Evaluaciones',
   'GAAP',
   'Evaluación docente',
 ] as const

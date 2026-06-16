@@ -114,7 +114,7 @@ function getStatus(courseCode: string): CourseStatus {
 }
 
 export const curriculumFilters = {
-  campus: 'Campus Tecnológico Central Cartago',
+  campus: 'Sede Central',
   career: 'CA: Escuela de Ingeniería en Computación',
   plan: '412: Ingeniería en Computación-2022',
 }

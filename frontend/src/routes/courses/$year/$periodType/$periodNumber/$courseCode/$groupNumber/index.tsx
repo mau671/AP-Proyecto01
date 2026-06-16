@@ -6,6 +6,7 @@ import { courseTabs } from '../course-page/-data'
 import { DocumentsTab } from '../course-page/-documents-tab'
 import { EvaluationsTab } from '../course-page/-evaluations-tab'
 import { InicioTab } from '../course-page/-inicio-tab'
+import { AttendanceTab } from '../course-page/-attendance-tab'
 
 export const Route = createFileRoute(
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/',
@@ -39,9 +40,10 @@ function CoursePage() {
       />
       <div className="flex-1 overflow-y-auto [scrollbar-gutter:stable]">
         {tabIndex === 0 && <InicioTab />}
-        {tabIndex === 1 && <CalendarioTab />}
-        {tabIndex === 2 && <DocumentsTab />}
-        {tabIndex === 3 && <EvaluationsTab />}
+        {tabIndex === 1 && <AttendanceTab />}
+        {tabIndex === 2 && <EvaluationsTab />}
+        {tabIndex === 3 && <CalendarioTab />}
+        {tabIndex === 4 && <DocumentsTab />}
       </div>
     </div>
   )
