@@ -48,11 +48,9 @@ const columns = [
     header: '',
     cell: () => (
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="size-8 p-0">
-            <span className="sr-only">Abrir menú</span>
-            <MoreHorizontal className="size-4" />
-          </Button>
+        <DropdownMenuTrigger render={<Button variant="ghost" className="size-8 p-0" />}>
+          <span className="sr-only">Abrir menú</span>
+          <MoreHorizontal className="size-4" />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem>

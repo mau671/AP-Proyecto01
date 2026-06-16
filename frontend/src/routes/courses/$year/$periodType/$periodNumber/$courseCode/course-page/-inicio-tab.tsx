@@ -195,10 +195,8 @@ export function InicioTab() {
                   </div>
                   {isTeacher && (
                     <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0">
-                          <MoreVertical className="size-4" />
-                        </Button>
+                      <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className="h-8 w-8 shrink-0" />}>
+                        <MoreVertical className="size-4" />
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuItem onClick={() => setTopicDialog({ open: true, editing: topic, index: idx })}>
@@ -250,10 +248,8 @@ export function InicioTab() {
                 </div>
                 {isTeacher && (
                   <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0">
-                        <MoreVertical className="size-4" />
-                      </Button>
+                    <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className="h-8 w-8 shrink-0" />}>
+                      <MoreVertical className="size-4" />
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem onClick={() => setExamDialog({ open: true, editing: exam, index: idx })}>
@@ -302,10 +298,8 @@ export function InicioTab() {
                   </div>
                   {isTeacher && (
                     <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0">
-                          <MoreVertical className="size-4" />
-                        </Button>
+                      <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className="h-8 w-8 shrink-0" />}>
+                        <MoreVertical className="size-4" />
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuItem onClick={() => setNewsDialog({ open: true, editing: item, index: idx })}>
