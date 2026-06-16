@@ -6,13 +6,18 @@ import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
 
 const srcPath = fileURLToPath(new URL("./src", import.meta.url));
+const fastDeepEqualPath = fileURLToPath(
+  new URL("./src/lib/fast-deep-equal-esm.ts", import.meta.url)
+);
 
 const config = defineConfig({
   resolve: {
-    alias: {
-      "@": srcPath,
-      "#": srcPath,
-    },
+    alias: [
+      { find: "@", replacement: srcPath },
+      { find: "#", replacement: srcPath },
+      { find: /^fast-deep-equal$/, replacement: fastDeepEqualPath },
+      { find: /^fast-deep-equal\/es6\/react\.js$/, replacement: fastDeepEqualPath }
+    ],
   },
   plugins: [
     devtools(),
