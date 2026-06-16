@@ -1,1 +1,0 @@
-import{ni as e,oi as t}from"./index-BZshLZDf.js";var n=t();function r(){return(0,n.jsx)(e,{to:`/profile/personal`,replace:!0})}export{r as component};
