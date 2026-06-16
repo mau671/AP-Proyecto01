@@ -1,0 +1,1 @@
+import{Y as e}from"./index-BZshLZDf.js";function t(t,n,r){return e(t,n*7,r)}export{t};

@@ -1,1 +1,0 @@
-import{Y as e}from"./index-CrXcHgA5.js";function t(t,n,r){return e(t,n*7,r)}export{t};
