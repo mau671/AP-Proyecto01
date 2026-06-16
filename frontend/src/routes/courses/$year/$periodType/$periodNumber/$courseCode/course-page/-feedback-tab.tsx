@@ -78,14 +78,14 @@ export function FeedbackTab() {
     <div className="space-y-6">
       {!isTeacher ? (
         hasSubmitted ? (
-          <div className="text-center py-20 max-w-2xl mx-auto">
+          <div className="text-center py-20 max-w-2xl mx-auto p-6">
             <h2 className="text-2xl font-bold text-primary mb-4">¡Gracias por tu participación!</h2>
             <p className="text-lg">
               Tu evaluación ha sido enviada de forma anónima. Esto ayuda a mejorar la calidad del curso.
             </p>
           </div>
         ) : (
-          <div className="max-w-3xl mx-auto w-full pt-8 pb-10">
+          <div className="max-w-3xl mx-auto w-full p-6">
             <p className="text-lg font-medium leading-relaxed mb-6">
               Evalúa el desempeño del docente en el curso de forma anónima y utilizando una escala de 1 a 10, donde 1 corresponde a “Muy deficiente” y 10 a “Excelente”.
             </p>
@@ -141,7 +141,7 @@ export function FeedbackTab() {
           </div>
         )
       ) : (
-        <div className="max-w-3xl mx-auto w-full pt-8 pb-10 space-y-6">
+        <div className="max-w-3xl mx-auto w-full p-6 space-y-6">
           {responses.map((response, i) => {
               const avgScore = response.answers.reduce((a, b) => a + b, 0) / response.answers.length
               return (
