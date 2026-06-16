@@ -313,7 +313,7 @@ export function EvaluationsTab() {
                                   <MoreVertical className="size-4" />
                                 </Button>
                               </DropdownMenuTrigger>
-                              <DropdownMenuContent align="end">
+                              <DropdownMenuContent align="end" className="w-48">
                                 <DropdownMenuItem className="whitespace-nowrap" onClick={() => navigate({
                                   to: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review',
                                   params: {
