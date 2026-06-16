@@ -1,0 +1,1 @@
+import{Zr as e}from"./index-B7RARChZ.js";var t=e();function n(){return(0,t.jsx)(`div`,{className:`flex grow`})}export{n as component};

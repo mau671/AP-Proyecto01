@@ -1,1 +1,0 @@
-import{ni as e,oi as t}from"./index-DCkZQAid.js";var n=t();function r(){return(0,n.jsx)(e,{to:`/finance/account`,replace:!0})}export{r as component};

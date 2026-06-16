@@ -1,1 +1,0 @@
-import{$r as e,oi as t}from"./index-DCkZQAid.js";var n=t(),r=()=>(0,n.jsx)(e,{});export{r as component};
