@@ -16,7 +16,7 @@ export function CourseTabs() {
   else if (currentPath.startsWith('/calendar')) activeIndex = 3
   else if (currentPath.startsWith('/documents')) activeIndex = 4
   else if (currentPath.startsWith('/gaap')) activeIndex = 5
-  else if (currentPath.startsWith('/teacher-evaluation')) activeIndex = 6
+  else if (currentPath.startsWith('/feedback')) activeIndex = 6
 
   const paths = [
     '/home',
@@ -25,7 +25,7 @@ export function CourseTabs() {
     '/calendar',
     '/documents',
     '/gaap',
-    '/teacher-evaluation'
+    '/feedback'
   ]
 
   return (

@@ -41,6 +41,7 @@ import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberMembersR
 import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs'
 import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new'
 import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsHomeRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/home'
+import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsFeedbackRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/feedback'
 import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsDocumentsRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/documents'
 import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsCalendarRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/calendar'
 import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsAttendanceRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/attendance'
@@ -228,6 +229,15 @@ const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsHomeRoute =
         CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRoute,
     } as any,
   )
+const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsFeedbackRoute =
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsFeedbackRouteImport.update(
+    {
+      id: '/feedback',
+      path: '/feedback',
+      getParentRoute: () =>
+        CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRoute,
+    } as any,
+  )
 const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsDocumentsRoute =
   CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsDocumentsRouteImport.update(
     {
@@ -334,6 +344,7 @@ export interface FileRoutesByFullPath {
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/attendance': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsAttendanceRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/calendar': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsCalendarRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/documents': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsDocumentsRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/feedback': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsFeedbackRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/home': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsHomeRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit/$id': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditIdRoute
@@ -371,6 +382,7 @@ export interface FileRoutesByTo {
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/attendance': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsAttendanceRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/calendar': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsCalendarRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/documents': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsDocumentsRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/feedback': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsFeedbackRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/home': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsHomeRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit/$id': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditIdRoute
@@ -414,6 +426,7 @@ export interface FileRoutesById {
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/attendance': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsAttendanceRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/calendar': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsCalendarRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/documents': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsDocumentsRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/feedback': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsFeedbackRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/home': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsHomeRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit/$id': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditIdRoute
@@ -457,6 +470,7 @@ export interface FileRouteTypes {
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/attendance'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/calendar'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/documents'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/feedback'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/home'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit/$id'
@@ -494,6 +508,7 @@ export interface FileRouteTypes {
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/attendance'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/calendar'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/documents'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/feedback'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/home'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit/$id'
@@ -536,6 +551,7 @@ export interface FileRouteTypes {
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/attendance'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/calendar'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/documents'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/feedback'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/home'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit/$id'
@@ -784,6 +800,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsHomeRouteImport
       parentRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRoute
     }
+    '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/feedback': {
+      id: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/feedback'
+      path: '/feedback'
+      fullPath: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/feedback'
+      preLoaderRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsFeedbackRouteImport
+      parentRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRoute
+    }
     '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/documents': {
       id: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/documents'
       path: '/documents'
@@ -909,6 +932,7 @@ interface CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRouteChildre
   CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsAttendanceRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsAttendanceRoute
   CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsCalendarRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsCalendarRoute
   CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsDocumentsRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsDocumentsRoute
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsFeedbackRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsFeedbackRoute
   CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsHomeRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsHomeRoute
   CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsEvaluationsIndexRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsEvaluationsIndexRoute
   CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsGaapIndexRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsGaapIndexRoute
@@ -922,6 +946,8 @@ const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRouteChildren: C
       CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsCalendarRoute,
     CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsDocumentsRoute:
       CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsDocumentsRoute,
+    CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsFeedbackRoute:
+      CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsFeedbackRoute,
     CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsHomeRoute:
       CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsHomeRoute,
     CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsEvaluationsIndexRoute:
