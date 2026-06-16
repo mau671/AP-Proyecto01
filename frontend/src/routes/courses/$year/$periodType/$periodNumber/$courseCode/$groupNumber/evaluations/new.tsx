@@ -40,6 +40,7 @@ export const Route = createFileRoute(
 
 function AddEvaluationPage() {
   const navigate = Route.useNavigate()
+  const params = Route.useParams()
   
   // Form States
   const [evalDate, setEvalDate] = useState<Date | undefined>()
@@ -308,6 +309,7 @@ function AddEvaluationPage() {
     const serializedGroups = groups.map(g => `${g.name}: ${g.students.join(', ')}`)
 
     const newEval: EvaluationItem = {
+      id: Date.now(),
       name: formData.get('name') as string,
       description: formData.get('description') as string,
       dueDate: evalDate ? format(evalDate, 'dd/MM/yyyy HH:mm') : '',
@@ -330,15 +332,27 @@ function AddEvaluationPage() {
     toast.success('Evaluación agregada con éxito')
     
     navigate({
-      to: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber',
-      search: { tab: 3 }
+      to: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations',
+      params: {
+        year: params.year,
+        periodType: params.periodType,
+        periodNumber: params.periodNumber,
+        courseCode: params.courseCode,
+        groupNumber: params.groupNumber,
+      }
     })
   }
 
   const handleCancel = () => {
     navigate({
-      to: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber',
-      search: { tab: 3 }
+      to: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations',
+      params: {
+        year: params.year,
+        periodType: params.periodType,
+        periodNumber: params.periodNumber,
+        courseCode: params.courseCode,
+        groupNumber: params.groupNumber,
+      }
     })
   }
 
@@ -492,14 +506,16 @@ function AddEvaluationPage() {
                 <Label className="text-sm font-medium">Fecha y hora de entrega</Label>
                 <div className="w-full">
                   <Popover>
-                    <PopoverTrigger className="w-full" asChild>
-                      <Button
-                        variant="outline"
-                        className={cn("w-full justify-start text-left font-normal h-9", !evalDate && "text-muted-foreground")}
-                      >
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        {evalDate ? format(evalDate, "PPP HH:mm", { locale: es }) : <span>Seleccionar fecha y hora</span>}
-                      </Button>
+                    <PopoverTrigger
+                      render={
+                        <Button
+                          variant="outline"
+                          className={cn("w-full justify-start text-left font-normal h-9", !evalDate && "text-muted-foreground")}
+                        />
+                      }
+                    >
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {evalDate ? format(evalDate, "PPP HH:mm", { locale: es }) : <span>Seleccionar fecha y hora</span>}
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0" align="start">
                       <div className="flex flex-col min-[430px]:flex-row">

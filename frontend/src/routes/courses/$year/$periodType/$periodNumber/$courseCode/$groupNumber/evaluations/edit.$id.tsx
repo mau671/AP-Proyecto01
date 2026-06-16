@@ -33,23 +33,32 @@ import {
 import { evaluationGroups, updateEvaluationGroups, type EvaluationItem } from '../../course-page/-data'
 
 export const Route = createFileRoute(
-  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit',
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit/$id',
 )({
-  validateSearch: (search: Record<string, unknown>) => {
-    return {
-      groupIndex: typeof search.groupIndex === 'number' ? search.groupIndex : 0,
-      itemIndex: typeof search.itemIndex === 'number' ? search.itemIndex : 0,
-    }
-  },
   component: EditEvaluationPage,
 })
 
 function EditEvaluationPage() {
   const navigate = Route.useNavigate()
-  const { groupIndex, itemIndex } = Route.useSearch()
+  const params = Route.useParams()
+  const evalId = parseInt(params.id, 10)
 
-  const group = evaluationGroups[groupIndex]
-  const item = group?.items[itemIndex]
+  let groupIndex = -1
+  let itemIndex = -1
+  let item = null
+  let group = null
+
+  for (let gIdx = 0; gIdx < evaluationGroups.length; gIdx++) {
+    const g = evaluationGroups[gIdx]
+    const iIdx = g.items.findIndex(i => i.id === evalId)
+    if (iIdx !== -1) {
+      groupIndex = gIdx
+      itemIndex = iIdx
+      group = g
+      item = g.items[iIdx]
+      break
+    }
+  }
 
   // If the item doesn't exist, go back
   useEffect(() => {
@@ -437,15 +446,27 @@ function EditEvaluationPage() {
     toast.success('Evaluación modificada con éxito')
     
     navigate({
-      to: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber',
-      search: { tab: 3 }
+      to: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations',
+      params: {
+        year: params.year,
+        periodType: params.periodType,
+        periodNumber: params.periodNumber,
+        courseCode: params.courseCode,
+        groupNumber: params.groupNumber,
+      }
     })
   }
 
   const handleCancel = () => {
     navigate({
-      to: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber',
-      search: { tab: 3 }
+      to: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations',
+      params: {
+        year: params.year,
+        periodType: params.periodType,
+        periodNumber: params.periodNumber,
+        courseCode: params.courseCode,
+        groupNumber: params.groupNumber,
+      }
     })
   }
 

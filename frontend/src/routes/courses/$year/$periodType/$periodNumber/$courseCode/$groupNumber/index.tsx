@@ -1,50 +1,11 @@
-import { createFileRoute } from '@tanstack/react-router'
-
-import { CalendarioTab } from '../course-page/-calendar-tab'
-import { CourseTabs } from '../course-page/-course-tabs'
-import { courseTabs } from '../course-page/-data'
-import { DocumentsTab } from '../course-page/-documents-tab'
-import { EvaluationsTab } from '../course-page/-evaluations-tab'
-import { InicioTab } from '../course-page/-inicio-tab'
-import { AttendanceTab } from '../course-page/-attendance-tab'
+import { createFileRoute, redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute(
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/',
 )({
-  validateSearch: (search: Record<string, unknown>) => {
-    const rawTab = Number(search.tab)
-    const tab = Number.isInteger(rawTab) ? rawTab : 0
-
-    return {
-      tab: Math.min(Math.max(tab, 0), courseTabs.length - 1),
-    }
-  },
-  component: CoursePage,
+  beforeLoad: ({ params }) => {
+    throw redirect({
+      to: `/courses/${params.year}/${params.periodType}/${params.periodNumber}/${params.courseCode}/${params.groupNumber}/home`
+    })
+  }
 })
-
-function CoursePage() {
-  const navigate = Route.useNavigate()
-  const search = Route.useSearch()
-  const tabIndex = search.tab
-
-  return (
-    <div className="flex min-h-0 flex-1 flex-col">
-      <CourseTabs
-        tabIndex={tabIndex}
-        onTabChange={(nextTab) => {
-          navigate({
-            search: (prev) => ({ ...prev, tab: nextTab }),
-            replace: true,
-          })
-        }}
-      />
-      <div className="flex-1 overflow-y-auto [scrollbar-gutter:stable]">
-        {tabIndex === 0 && <InicioTab />}
-        {tabIndex === 1 && <AttendanceTab />}
-        {tabIndex === 2 && <EvaluationsTab />}
-        {tabIndex === 3 && <CalendarioTab />}
-        {tabIndex === 4 && <DocumentsTab />}
-      </div>
-    </div>
-  )
-}

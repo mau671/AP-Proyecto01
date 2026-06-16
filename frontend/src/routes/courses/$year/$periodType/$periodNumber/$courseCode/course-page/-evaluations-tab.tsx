@@ -69,19 +69,16 @@ export function EvaluationsTab() {
     })
   }
 
-  const openEditEval = (groupIndex: number, itemIndex: number) => {
+  const openEditEval = (evalId: number) => {
     navigate({
-      to: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit',
+      to: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit/$id',
       params: {
         year: params.year,
         periodType: params.periodType,
         periodNumber: params.periodNumber,
         courseCode: params.courseCode,
         groupNumber: params.groupNumber,
-      },
-      search: {
-        groupIndex,
-        itemIndex,
+        id: evalId.toString()
       }
     })
   }
@@ -308,29 +305,24 @@ export function EvaluationsTab() {
                           </CollapsibleTrigger>
                           {isTeacher && (
                             <DropdownMenu>
-                              <DropdownMenuTrigger asChild>
-                                <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0 ml-2">
-                                  <MoreVertical className="size-4" />
-                                </Button>
+                              <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className="h-8 w-8 shrink-0 ml-2" />}>
+                                <MoreVertical className="size-4" />
                               </DropdownMenuTrigger>
                               <DropdownMenuContent align="end" className="w-48">
                                 <DropdownMenuItem className="whitespace-nowrap" onClick={() => navigate({
-                                  to: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review',
+                                  to: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review/$id',
                                   params: {
                                     year: params.year,
                                     periodType: params.periodType,
                                     periodNumber: params.periodNumber,
                                     courseCode: params.courseCode,
                                     groupNumber: params.groupNumber,
-                                  },
-                                  search: {
-                                    groupIndex,
-                                    itemIndex: index,
+                                    id: item.id.toString()
                                   }
                                 })}>
                                   <Users className="mr-2 size-4 shrink-0" /> Revisar entregas
                                 </DropdownMenuItem>
-                                <DropdownMenuItem onClick={() => openEditEval(groupIndex, index)}>
+                                <DropdownMenuItem onClick={() => openEditEval(item.id)}>
                                   <Pencil className="mr-2 size-4" /> Editar
                                 </DropdownMenuItem>
                                 <DropdownMenuItem className="text-destructive focus:text-destructive" onClick={() => handleDeleteEval(groupIndex, index)}>
@@ -513,14 +505,8 @@ export function EvaluationsTab() {
                       </Button>
                     ) : (
                       <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button 
-                            variant="ghost" 
-                            size="icon" 
-                            className="size-8 shrink-0 cursor-pointer"
-                          >
-                            <MoreVertical className="size-4" />
-                          </Button>
+                        <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className="size-8 shrink-0 cursor-pointer" />}>
+                          <MoreVertical className="size-4" />
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                           <DropdownMenuItem onClick={() => setEditingIndex(idx)} className="cursor-pointer">

@@ -38,9 +38,17 @@ import { Route as AuthSigninRouteImport } from './routes/auth/signin'
 import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber'
 import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberIndexRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/index'
 import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberMembersRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/members'
-import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review'
+import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs'
 import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new'
-import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit'
+import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsHomeRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/home'
+import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsDocumentsRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/documents'
+import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsCalendarRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/calendar'
+import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsAttendanceRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/attendance'
+import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsGaapIndexRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/gaap/index'
+import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsEvaluationsIndexRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/evaluations/index'
+import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberGaapReviewGaapIdRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/gaap/review.$gaapId'
+import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewIdRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review.$id'
+import { Route as CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditIdRouteImport } from './routes/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit.$id'
 
 const ScheduleRoute = ScheduleRouteImport.update({
   id: '/schedule',
@@ -196,15 +204,12 @@ const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberMembersRoute =
         CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute,
     } as any,
   )
-const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewRoute =
-  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewRouteImport.update(
-    {
-      id: '/evaluations/review',
-      path: '/evaluations/review',
-      getParentRoute: () =>
-        CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute,
-    } as any,
-  )
+const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRoute =
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRouteImport.update({
+    id: '/_tabs',
+    getParentRoute: () =>
+      CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute,
+  } as any)
 const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRoute =
   CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRouteImport.update(
     {
@@ -214,11 +219,83 @@ const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRoute 
         CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute,
     } as any,
   )
-const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditRoute =
-  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditRouteImport.update(
+const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsHomeRoute =
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsHomeRouteImport.update(
     {
-      id: '/evaluations/edit',
-      path: '/evaluations/edit',
+      id: '/home',
+      path: '/home',
+      getParentRoute: () =>
+        CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRoute,
+    } as any,
+  )
+const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsDocumentsRoute =
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsDocumentsRouteImport.update(
+    {
+      id: '/documents',
+      path: '/documents',
+      getParentRoute: () =>
+        CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRoute,
+    } as any,
+  )
+const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsCalendarRoute =
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsCalendarRouteImport.update(
+    {
+      id: '/calendar',
+      path: '/calendar',
+      getParentRoute: () =>
+        CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRoute,
+    } as any,
+  )
+const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsAttendanceRoute =
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsAttendanceRouteImport.update(
+    {
+      id: '/attendance',
+      path: '/attendance',
+      getParentRoute: () =>
+        CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRoute,
+    } as any,
+  )
+const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsGaapIndexRoute =
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsGaapIndexRouteImport.update(
+    {
+      id: '/gaap/',
+      path: '/gaap/',
+      getParentRoute: () =>
+        CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRoute,
+    } as any,
+  )
+const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsEvaluationsIndexRoute =
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsEvaluationsIndexRouteImport.update(
+    {
+      id: '/evaluations/',
+      path: '/evaluations/',
+      getParentRoute: () =>
+        CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRoute,
+    } as any,
+  )
+const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberGaapReviewGaapIdRoute =
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberGaapReviewGaapIdRouteImport.update(
+    {
+      id: '/gaap/review/$gaapId',
+      path: '/gaap/review/$gaapId',
+      getParentRoute: () =>
+        CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute,
+    } as any,
+  )
+const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewIdRoute =
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewIdRouteImport.update(
+    {
+      id: '/evaluations/review/$id',
+      path: '/evaluations/review/$id',
+      getParentRoute: () =>
+        CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute,
+    } as any,
+  )
+const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditIdRoute =
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditIdRouteImport.update(
+    {
+      id: '/evaluations/edit/$id',
+      path: '/evaluations/edit/$id',
       getParentRoute: () =>
         CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute,
     } as any,
@@ -254,9 +331,16 @@ export interface FileRoutesByFullPath {
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRouteWithChildren
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/members': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberMembersRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberIndexRoute
-  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/attendance': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsAttendanceRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/calendar': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsCalendarRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/documents': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsDocumentsRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/home': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsHomeRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRoute
-  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit/$id': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditIdRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review/$id': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewIdRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/gaap/review/$gaapId': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberGaapReviewGaapIdRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsEvaluationsIndexRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/gaap/': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsGaapIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -282,11 +366,18 @@ export interface FileRoutesByTo {
   '/finance': typeof FinanceIndexRoute
   '/management': typeof ManagementIndexRoute
   '/profile': typeof ProfileIndexRoute
-  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/members': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberMembersRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberIndexRoute
-  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/members': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberMembersRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/attendance': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsAttendanceRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/calendar': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsCalendarRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/documents': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsDocumentsRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/home': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsHomeRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRoute
-  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit/$id': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditIdRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review/$id': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewIdRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/gaap/review/$gaapId': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberGaapReviewGaapIdRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsEvaluationsIndexRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/gaap': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsGaapIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -317,11 +408,19 @@ export interface FileRoutesById {
   '/management/': typeof ManagementIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRouteWithChildren
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRouteWithChildren
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/members': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberMembersRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberIndexRoute
-  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/attendance': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsAttendanceRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/calendar': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsCalendarRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/documents': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsDocumentsRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/home': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsHomeRoute
   '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRoute
-  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit/$id': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditIdRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review/$id': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewIdRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/gaap/review/$gaapId': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberGaapReviewGaapIdRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/evaluations/': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsEvaluationsIndexRoute
+  '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/gaap/': typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsGaapIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -355,9 +454,16 @@ export interface FileRouteTypes {
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/members'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/'
-    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/attendance'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/calendar'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/documents'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/home'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new'
-    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit/$id'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review/$id'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/gaap/review/$gaapId'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/gaap/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -383,11 +489,18 @@ export interface FileRouteTypes {
     | '/finance'
     | '/management'
     | '/profile'
-    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/members'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber'
-    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/members'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/attendance'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/calendar'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/documents'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/home'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new'
-    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit/$id'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review/$id'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/gaap/review/$gaapId'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/gaap'
   id:
     | '__root__'
     | '/'
@@ -417,11 +530,19 @@ export interface FileRouteTypes {
     | '/management/'
     | '/profile/'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/members'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/'
-    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/attendance'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/calendar'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/documents'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/home'
     | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new'
-    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit/$id'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review/$id'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/gaap/review/$gaapId'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/evaluations/'
+    | '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/gaap/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -642,11 +763,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberMembersRouteImport
       parentRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute
     }
-    '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review': {
-      id: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review'
-      path: '/evaluations/review'
-      fullPath: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review'
-      preLoaderRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewRouteImport
+    '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs': {
+      id: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs'
+      path: ''
+      fullPath: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber'
+      preLoaderRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRouteImport
       parentRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute
     }
     '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/new': {
@@ -656,11 +777,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRouteImport
       parentRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute
     }
-    '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit': {
-      id: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit'
-      path: '/evaluations/edit'
-      fullPath: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit'
-      preLoaderRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditRouteImport
+    '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/home': {
+      id: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/home'
+      path: '/home'
+      fullPath: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/home'
+      preLoaderRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsHomeRouteImport
+      parentRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRoute
+    }
+    '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/documents': {
+      id: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/documents'
+      path: '/documents'
+      fullPath: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/documents'
+      preLoaderRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsDocumentsRouteImport
+      parentRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRoute
+    }
+    '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/calendar': {
+      id: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/calendar'
+      path: '/calendar'
+      fullPath: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/calendar'
+      preLoaderRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsCalendarRouteImport
+      parentRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRoute
+    }
+    '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/attendance': {
+      id: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/attendance'
+      path: '/attendance'
+      fullPath: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/attendance'
+      preLoaderRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsAttendanceRouteImport
+      parentRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRoute
+    }
+    '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/gaap/': {
+      id: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/gaap/'
+      path: '/gaap'
+      fullPath: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/gaap/'
+      preLoaderRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsGaapIndexRouteImport
+      parentRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRoute
+    }
+    '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/evaluations/': {
+      id: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/_tabs/evaluations/'
+      path: '/evaluations'
+      fullPath: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/'
+      preLoaderRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsEvaluationsIndexRouteImport
+      parentRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRoute
+    }
+    '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/gaap/review/$gaapId': {
+      id: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/gaap/review/$gaapId'
+      path: '/gaap/review/$gaapId'
+      fullPath: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/gaap/review/$gaapId'
+      preLoaderRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberGaapReviewGaapIdRouteImport
+      parentRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute
+    }
+    '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review/$id': {
+      id: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review/$id'
+      path: '/evaluations/review/$id'
+      fullPath: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/review/$id'
+      preLoaderRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewIdRouteImport
+      parentRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute
+    }
+    '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit/$id': {
+      id: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit/$id'
+      path: '/evaluations/edit/$id'
+      fullPath: '/courses/$year/$periodType/$periodNumber/$courseCode/$groupNumber/evaluations/edit/$id'
+      preLoaderRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditIdRouteImport
       parentRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRoute
     }
   }
@@ -728,26 +905,62 @@ const ProfileRouteChildren: ProfileRouteChildren = {
 const ProfileRouteWithChildren =
   ProfileRoute._addFileChildren(ProfileRouteChildren)
 
+interface CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRouteChildren {
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsAttendanceRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsAttendanceRoute
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsCalendarRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsCalendarRoute
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsDocumentsRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsDocumentsRoute
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsHomeRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsHomeRoute
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsEvaluationsIndexRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsEvaluationsIndexRoute
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsGaapIndexRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsGaapIndexRoute
+}
+
+const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRouteChildren: CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRouteChildren =
+  {
+    CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsAttendanceRoute:
+      CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsAttendanceRoute,
+    CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsCalendarRoute:
+      CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsCalendarRoute,
+    CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsDocumentsRoute:
+      CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsDocumentsRoute,
+    CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsHomeRoute:
+      CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsHomeRoute,
+    CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsEvaluationsIndexRoute:
+      CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsEvaluationsIndexRoute,
+    CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsGaapIndexRoute:
+      CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsGaapIndexRoute,
+  }
+
+const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRouteWithChildren =
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRoute._addFileChildren(
+    CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRouteChildren,
+  )
+
 interface CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRouteChildren {
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRouteWithChildren
   CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberMembersRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberMembersRoute
   CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberIndexRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberIndexRoute
-  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditRoute
   CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRoute
-  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewRoute
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditIdRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditIdRoute
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewIdRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewIdRoute
+  CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberGaapReviewGaapIdRoute: typeof CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberGaapReviewGaapIdRoute
 }
 
 const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRouteChildren: CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRouteChildren =
   {
+    CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRoute:
+      CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberTabsRouteWithChildren,
     CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberMembersRoute:
       CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberMembersRoute,
     CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberIndexRoute:
       CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberIndexRoute,
-    CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditRoute:
-      CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditRoute,
     CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRoute:
       CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsNewRoute,
-    CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewRoute:
-      CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewRoute,
+    CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditIdRoute:
+      CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsEditIdRoute,
+    CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewIdRoute:
+      CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberEvaluationsReviewIdRoute,
+    CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberGaapReviewGaapIdRoute:
+      CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberGaapReviewGaapIdRoute,
   }
 
 const CoursesYearPeriodTypePeriodNumberCourseCodeGroupNumberRouteWithChildren =

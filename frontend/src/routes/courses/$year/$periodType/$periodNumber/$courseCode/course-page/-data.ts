@@ -192,6 +192,7 @@ export type TeacherSubmissionReview = {
 }
 
 export type EvaluationItem = {
+  id: number
   name: string
   score: { earned: number; max: number }
   description: string
@@ -212,6 +213,7 @@ export let evaluationGroups: { title: string; weight: number; items: EvaluationI
     weight: 40,
     items: [
       {
+        id: 1,
         name: 'Examen parcial 1',
         score: { earned: 14.5, max: 20 },
         description: 'Evaluación teórica de los temas vistos en las semanas 1 a 4.',
@@ -226,6 +228,7 @@ export let evaluationGroups: { title: string; weight: number; items: EvaluationI
         ],
       },
       {
+        id: 2,
         name: 'Examen parcial 2',
         score: { earned: 16.2, max: 20 },
         description: 'Evaluación acumulativa de contenidos prácticos y conceptuales.',
@@ -246,6 +249,7 @@ export let evaluationGroups: { title: string; weight: number; items: EvaluationI
     weight: 40,
     items: [
       {
+        id: 3,
         name: 'Tarea 1',
         score: { earned: 8.8, max: 12 },
         description: 'Resolver ejercicios de análisis y adjuntar evidencia en PDF.',
@@ -262,6 +266,7 @@ export let evaluationGroups: { title: string; weight: number; items: EvaluationI
         ],
       },
       {
+        id: 4,
         name: 'Tarea 2',
         score: { earned: 11.4, max: 14 },
         description: 'Informe corto con resultados y conclusiones del laboratorio.',
@@ -276,6 +281,7 @@ export let evaluationGroups: { title: string; weight: number; items: EvaluationI
         ],
       },
       {
+        id: 5,
         name: 'Tarea 3',
         score: { earned: 13.0, max: 14 },
         description: 'Implementación de mejora incremental con documentación técnica.',
@@ -298,6 +304,7 @@ export let evaluationGroups: { title: string; weight: number; items: EvaluationI
     weight: 20,
     items: [
       {
+        id: 6,
         name: 'Propuesta de proyecto',
         score: { earned: 9.5, max: 10 },
         description: 'Propuesta inicial con objetivos, alcance y cronograma.',
@@ -313,6 +320,7 @@ export let evaluationGroups: { title: string; weight: number; items: EvaluationI
         ],
       },
       {
+        id: 7,
         name: 'Proyecto final',
         score: { earned: 15.0, max: 10 },
         description: 'Entrega final del proyecto con informe y presentación.',
