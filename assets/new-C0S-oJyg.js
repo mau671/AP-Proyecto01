@@ -1,0 +1,1 @@
+import{Ii as e,Mi as t,ji as n}from"./index-D8s5EXxL.js";import{t as r}from"./-gaap-editor-B3LKE-eL.js";var i=e();function a(){let e=n(),{year:a,periodType:o,periodNumber:s,courseCode:c,groupNumber:l}=t({strict:!1}),u=`/courses/${a}/${o}/${s}/${c}/${l}/gaap`;return(0,i.jsx)(r,{onSave:()=>e({to:u}),onCancel:()=>e({to:u})})}export{a as component};

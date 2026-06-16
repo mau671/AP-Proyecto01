@@ -1,0 +1,1 @@
+import{Li as e,Ui as t}from"./index-D8s5EXxL.js";var n=t(e()),r=n.createContext({disabled:!1});function i(){return n.useContext(r)}export{i as t};

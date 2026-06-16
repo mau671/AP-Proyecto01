@@ -1,0 +1,1 @@
+import{Li as e,Ui as t,ei as n}from"./index-D8s5EXxL.js";var r=t(e()),i=r.createContext({formRef:{current:{fields:new Map}},errors:{},clearErrors:n,validationMode:`onSubmit`,submitAttemptedRef:{current:!1}});function a(){return r.useContext(i)}export{a as t};

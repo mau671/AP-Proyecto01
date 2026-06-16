@@ -1,0 +1,1 @@
+import{Ai as e,Ii as t}from"./index-D8s5EXxL.js";var n=t();function r(){return(0,n.jsx)(e,{to:`/finance/account`,replace:!0})}export{r as component};

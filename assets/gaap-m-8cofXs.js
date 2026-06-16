@@ -1,0 +1,1 @@
+import{n as e}from"./-gaap-tab-CFNPlVQU.js";var t=e;export{t as component};

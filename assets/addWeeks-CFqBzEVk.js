@@ -1,0 +1,1 @@
+import{B as e}from"./index-D8s5EXxL.js";function t(t,n,r){return e(t,n*7,r)}export{t};
