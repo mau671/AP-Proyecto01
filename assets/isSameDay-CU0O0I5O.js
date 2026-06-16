@@ -1,0 +1,1 @@
+import{f as e,p as t}from"./format-COUHy7us.js";function n(n,r,i){let[a,o]=t(i?.in,n,r);return+e(a)==+e(o)}export{n as t};

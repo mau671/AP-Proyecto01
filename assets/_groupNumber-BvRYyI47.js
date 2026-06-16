@@ -1,1 +1,0 @@
-import{Ur as e,Zr as t}from"./index-B7RARChZ.js";var n=t(),r=()=>(0,n.jsx)(e,{});export{r as component};

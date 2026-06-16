@@ -1,1 +1,0 @@
-import{Qr as e,ri as t}from"./index-B7RARChZ.js";var n=t(e()),r=n.createContext({disabled:!1});function i(){return n.useContext(r)}export{i as t};

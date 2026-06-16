@@ -1,0 +1,1 @@
+import{ai as e,di as t}from"./index-DOjKxR0l.js";var n=t();function r(){return(0,n.jsx)(e,{to:`/profile/personal`,replace:!0})}export{r as component};

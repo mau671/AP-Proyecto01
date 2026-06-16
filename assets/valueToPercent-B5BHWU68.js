@@ -1,0 +1,1 @@
+var e=new Map;function t(t,n){let r=JSON.stringify({locale:t,options:n}),i=e.get(r);if(i)return i;let a=new Intl.NumberFormat(t,n);return e.set(r,a),a}function n(e,n,r){return e==null?``:t(n,r).format(e)}function r(e,t,r){return e==null?``:r?n(e,t,r):n(e/100,t,{style:`percent`})}function i(e,t,n){return(e-t)*100/(n-t)}export{n,r,i as t};

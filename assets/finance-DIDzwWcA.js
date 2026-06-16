@@ -1,1 +1,0 @@
-import{Kr as e,Zr as t}from"./index-B7RARChZ.js";var n=t();function r(){return(0,n.jsx)(e,{to:`/finance/account`,replace:!0})}export{r as component};
