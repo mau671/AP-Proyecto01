@@ -167,4 +167,8 @@ body {
   html {
     @apply font-sans;
   }
+
+  .bn-container {
+    @apply rounded-2xl shadow-sm;
+  }
 }

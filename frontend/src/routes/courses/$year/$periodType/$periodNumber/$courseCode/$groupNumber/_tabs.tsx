@@ -11,7 +11,7 @@ function TabsLayout() {
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <CourseTabs />
-      <div className="flex-1 overflow-y-auto flex flex-col [scrollbar-gutter:stable]">
+      <div className="flex-1 overflow-y-auto flex flex-col">
         <Outlet />
       </div>
     </div>
