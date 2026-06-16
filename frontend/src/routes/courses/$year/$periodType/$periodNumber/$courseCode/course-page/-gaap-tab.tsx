@@ -1,5 +1,8 @@
-import { useState } from 'react'
+import { useState, createContext, useContext } from 'react'
 import { Link, useParams } from '@tanstack/react-router'
+
+export const GaapContext = createContext<any>({})
+export const useGaapContext = () => useContext(GaapContext)
 import {
   CalendarIcon,
   CheckIcon,
@@ -40,9 +43,7 @@ export function GaapTab() {
   const user = getDemoUser()
   const ROLE = user?.role || 'student'
   
-  const [selectedEvalId, setSelectedEvalId] = useState<string | null>(evaluations[0].id)
-  const [mode, setMode] = useState<'view' | 'edit' | 'create'>('view')
-
+  const { selectedEvalId } = useGaapContext() || {}
   const { year, periodType, periodNumber, courseCode, groupNumber } = useParams({ strict: false }) as any
 
   const selectedEval = evaluations.find((e) => e.id === selectedEvalId)
@@ -414,204 +415,125 @@ export function GaapTab() {
     }
   }
 
-  return (
-    <div className="grid w-full bg-background flex-1" style={{ gridTemplateColumns: '300px 1fr' }}>
-      {/* Sidebar de Evaluaciones */}
-      <div className="border-r border-border bg-muted/30">
-        <div className="sticky top-0 flex flex-col gap-4 p-4 max-h-screen overflow-y-auto">
+  return selectedEval?.sections ? (
+    <div className="space-y-4 pb-10">
+      <div className="space-y-4">
+        <div className="flex justify-between items-start gap-4 flex-wrap">
+          <h1 className="text-2xl font-bold tracking-tight text-foreground">
+            {selectedEval.title}
+          </h1>
+          
           {ROLE === 'teacher' && (
-            <div className="pb-4 border-b border-border">
-              <Button 
-                className="w-full" 
-                onClick={() => {
-                  setMode('create')
-                  setSelectedEvalId(null)
-                }}
+            <div className="flex items-center gap-3 ml-auto">
+              <Link to={`/courses/${year}/${periodType}/${periodNumber}/${courseCode}/${groupNumber}/gaap/edit/${selectedEval.id}`} className={buttonVariants({ variant: 'outline' })}>
+                <PencilIcon className="size-4 mr-2" /> Editar
+              </Link>
+              <Link
+                to={`/courses/${year}/${periodType}/${periodNumber}/${courseCode}/${groupNumber}/gaap/review/${selectedEval.id}`}
+                className={buttonVariants({ variant: 'default' })}
               >
-                <PlusIcon className="mr-2 size-4" /> Nueva evaluación
-              </Button>
+                <EyeIcon className="size-4 mr-2" /> Ver respuestas
+              </Link>
             </div>
           )}
+        </div>
 
-          {evaluations.map((evaluation) => {
-            const isSelected = evaluation.id === selectedEvalId
-            return (
-              <Card
-                key={evaluation.id}
-                role="button"
-                tabIndex={0}
-                onClick={() => {
-                  setSelectedEvalId(evaluation.id)
-                  setMode('view')
-                }}
-                className={cn(
-                  'cursor-pointer transition-colors text-left shadow-sm',
-                  isSelected
-                    ? 'bg-[#003B70] text-primary-foreground border-[#003B70] hover:bg-[#003B70]/90'
-                    : 'bg-background border-border hover:bg-muted text-foreground'
-                )}
-              >
-                <CardHeader className="p-4">
-                  <CardTitle
-                    className={cn(
-                      'text-sm flex items-start justify-between',
-                      isSelected ? 'text-primary-foreground' : ''
-                    )}
-                  >
-                    <span>{evaluation.title}</span>
-                    {ROLE !== 'teacher' && (
-                      <span className="text-xs font-normal opacity-80">
-                        {evaluation.score}
-                      </span>
-                    )}
-                  </CardTitle>
-                  <CardDescription
-                    className={cn(
-                      'text-xs mt-1',
-                      isSelected ? 'text-primary-foreground/80' : ''
-                    )}
-                  >
-                    {ROLE === 'teacher' ? 'Límite: ' : 'Realizada: '}
-                    <br />
-                    {ROLE === 'teacher' ? evaluation.dueDate : evaluation.dateTaken}
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-            )
-          })}
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground border-b border-border pb-4">
+          {selectedEval.dueDate && (
+            <div className="flex items-center gap-2">
+              <CalendarIcon className="size-4 opacity-70" />
+              <span>Fecha límite: {selectedEval.dueDate}</span>
+            </div>
+          )}
+          {selectedEval.attempts && (
+            <div className="flex items-center gap-2">
+              <RotateCcwIcon className="size-4 opacity-70" />
+              <span>Intentos: {selectedEval.attempts}</span>
+            </div>
+          )}
+          {selectedEval.questionCount && (
+            <div className="flex items-center gap-2">
+              <ListIcon className="size-4 opacity-70" />
+              <span>Preguntas: {selectedEval.questionCount}</span>
+            </div>
+          )}
+          {selectedEval.timeLimit && (
+            <div className="flex items-center gap-2">
+              <ClockIcon className="size-4 opacity-70" />
+              <span>Tiempo: {selectedEval.timeLimit}</span>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Área de Solucionario / Editor */}
-      <div className="p-6 lg:p-10">
-        {(mode === 'create' || mode === 'edit') ? (
-          <EvaluationEditor 
-            initialData={mode === 'edit' ? selectedEval : undefined}
-            onSave={() => setMode('view')}
-            onCancel={() => setMode('view')}
-          />
-        ) : selectedEval?.sections ? (
-          <div className="space-y-8 pb-10">
-            <div className="space-y-4">
-              <div className="flex justify-between items-start gap-4 flex-wrap">
-                <h1 className="text-3xl font-bold tracking-tight text-foreground">
-                  {selectedEval.title}
-                </h1>
-                
-                {ROLE === 'teacher' && (
-                  <div className="flex items-center gap-3">
-                    <Button variant="outline" onClick={() => setMode('edit')}>
-                      <PencilIcon className="size-4 mr-2" /> Editar
-                    </Button>
-                    <Link
-                      to={`/courses/${year}/${periodType}/${periodNumber}/${courseCode}/${groupNumber}/gaap/review/${selectedEval.id}`}
-                      className={buttonVariants({ variant: 'default' })}
-                    >
-                      <EyeIcon className="size-4 mr-2" /> Ver respuestas
-                    </Link>
-                  </div>
+      <div className="space-y-10">
+        {selectedEval.sections.map((section) => (
+          <div key={section.id} className="space-y-6">
+            <div className="space-y-1">
+              <div className="flex items-center gap-3">
+                <h2 className="text-xl font-medium text-foreground">
+                  {section.title}
+                </h2>
+                {section.typeBadge && (
+                  <Badge
+                    variant="secondary"
+                    className="font-normal text-xs"
+                  >
+                    {section.typeBadge}
+                  </Badge>
                 )}
               </div>
-
-              <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground border-b border-border pb-4">
-                {selectedEval.dueDate && (
-                  <div className="flex items-center gap-2">
-                    <CalendarIcon className="size-4 opacity-70" />
-                    <span>Fecha límite: {selectedEval.dueDate}</span>
-                  </div>
-                )}
-                {selectedEval.attempts && (
-                  <div className="flex items-center gap-2">
-                    <RotateCcwIcon className="size-4 opacity-70" />
-                    <span>Intentos: {selectedEval.attempts}</span>
-                  </div>
-                )}
-                {selectedEval.questionCount && (
-                  <div className="flex items-center gap-2">
-                    <ListIcon className="size-4 opacity-70" />
-                    <span>Preguntas: {selectedEval.questionCount}</span>
-                  </div>
-                )}
-                {selectedEval.timeLimit && (
-                  <div className="flex items-center gap-2">
-                    <ClockIcon className="size-4 opacity-70" />
-                    <span>Tiempo: {selectedEval.timeLimit}</span>
-                  </div>
-                )}
-              </div>
+              <p className="text-sm text-muted-foreground">
+                {section.description}
+              </p>
             </div>
 
-            <div className="space-y-10">
-              {selectedEval.sections.map((section) => (
-                <div key={section.id} className="space-y-6">
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-3">
-                      <h2 className="text-xl font-medium text-foreground">
-                        {section.title}
-                      </h2>
-                      {section.typeBadge && (
-                        <Badge
-                          variant="secondary"
-                          className="font-normal text-xs"
-                        >
-                          {section.typeBadge}
-                        </Badge>
+            <div className="space-y-8">
+              {section.questions.map((question) => (
+                <div key={question.id} className="space-y-4">
+                  <div className="flex flex-wrap items-center justify-between gap-4">
+                    <h3 className="font-bold text-foreground text-lg">
+                      Pregunta {question.number}
+                    </h3>
+                    <div className="flex items-center gap-3 text-sm font-medium px-3 py-1 bg-muted rounded-md text-muted-foreground">
+                      <span>
+                        Valor: {question.value} pt
+                        {question.value !== 1 ? 's' : ''}
+                      </span>
+                      {ROLE !== 'teacher' && (
+                        <>
+                          <span className="w-px h-4 bg-border"></span>
+                          <span
+                            className={cn(
+                              question.earned === question.value
+                                ? 'text-green-600 dark:text-green-500'
+                                : 'text-foreground'
+                            )}
+                          >
+                            Obtenido: {question.earned} pt
+                            {question.earned !== 1 ? 's' : ''}
+                          </span>
+                        </>
                       )}
                     </div>
-                    <p className="text-sm text-muted-foreground">
-                      {section.description}
-                    </p>
                   </div>
 
-                  <div className="space-y-8">
-                    {section.questions.map((question) => (
-                      <div key={question.id} className="space-y-4">
-                        <div className="flex flex-wrap items-center justify-between gap-4">
-                          <h3 className="font-bold text-foreground text-lg">
-                            Pregunta {question.number}
-                          </h3>
-                          <div className="flex items-center gap-3 text-sm font-medium px-3 py-1 bg-muted rounded-md text-muted-foreground">
-                            <span>
-                              Valor: {question.value} pt
-                              {question.value !== 1 ? 's' : ''}
-                            </span>
-                            {ROLE !== 'teacher' && (
-                              <>
-                                <span className="w-px h-4 bg-border"></span>
-                                <span
-                                  className={cn(
-                                    question.earned === question.value
-                                      ? 'text-green-600 dark:text-green-500'
-                                      : 'text-foreground'
-                                  )}
-                                >
-                                  Obtenido: {question.earned} pt
-                                  {question.earned !== 1 ? 's' : ''}
-                                </span>
-                              </>
-                            )}
-                          </div>
-                        </div>
+                  <p className="text-sm text-foreground">
+                    {question.text}
+                  </p>
 
-                        <p className="text-sm text-foreground">
-                          {question.text}
-                        </p>
-
-                        {/* Renderizado dinámico del contenido de la pregunta */}
-                        {renderQuestionContent(question)}
-                      </div>
-                    ))}
-                  </div>
+                  {/* Renderizado dinámico del contenido de la pregunta */}
+                  {renderQuestionContent(question)}
                 </div>
               ))}
             </div>
           </div>
-        ) : (
-          <div className="flex h-full items-center justify-center text-muted-foreground">
-            Selecciona una evaluación para ver su solucionario.
-          </div>
-        )}
+        ))}
       </div>
+    </div>
+  ) : (
+    <div className="flex h-[400px] items-center justify-center text-muted-foreground">
+      Selecciona una evaluación para ver su solucionario.
     </div>
   )
 }

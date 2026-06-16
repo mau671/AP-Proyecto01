@@ -56,6 +56,7 @@ interface DataTableProps<TData, TValue> {
   filterPlaceholder?: string
   columnLabels?: Record<string, string>
   defaultSorting?: SortingState
+  pageSize?: number
 }
 
 export function DataTable<TData, TValue>({
@@ -65,6 +66,7 @@ export function DataTable<TData, TValue>({
   filterPlaceholder = 'Filtrar...',
   columnLabels = {},
   defaultSorting = [],
+  pageSize = 10,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>(defaultSorting)
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
@@ -82,6 +84,11 @@ export function DataTable<TData, TValue>({
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    initialState: {
+      pagination: {
+        pageSize,
+      },
+    },
     state: {
       sorting,
       columnFilters,
@@ -206,14 +213,14 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
 
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="text-xs text-muted-foreground order-2 sm:order-none">
+      <div className="flex items-center flex-wrap gap-4">
+        <div className="text-xs text-muted-foreground">
           Mostrando {table.getRowModel().rows.length} de {table.getFilteredRowModel().rows.length} registros.
         </div>
         
-        <div className="flex flex-wrap items-center justify-between sm:justify-end gap-4 w-full sm:w-auto">
+        <div className="flex items-center gap-4 ml-auto">
           <Field orientation="horizontal" className="w-fit">
-            <FieldLabel htmlFor="select-rows-per-page" className="text-xs">Filas por página</FieldLabel>
+            <FieldLabel htmlFor="select-rows-per-page" className="text-xs whitespace-nowrap">Filas por página</FieldLabel>
             <Select
               value={String(table.getState().pagination.pageSize)}
               onValueChange={(value) => {

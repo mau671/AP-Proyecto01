@@ -310,13 +310,13 @@ export function EvaluationEditor({ initialData, onSave, onCancel }: { initialDat
 
   return (
     <div className="space-y-8 pb-10 max-w-4xl mx-auto">
-      <div className="flex justify-between items-center border-b border-border pb-4">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">
-          {initialData ? 'Editar evaluación' : 'Crear nueva evaluación GAAP'}
+      <div className="flex flex-wrap items-center gap-4 border-b border-border pb-4">
+        <h1 className="text-2xl font-bold tracking-tight text-foreground">
+          {initialData ? 'Editar evaluación' : 'Crear evaluación GAAP'}
         </h1>
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2 ml-auto">
           <Button variant="outline" onClick={onCancel}>Cancelar</Button>
-          <Button onClick={() => onSave({})}>Guardar cambios</Button>
+          <Button onClick={() => onSave({})}>Guardar</Button>
         </div>
       </div>
 
