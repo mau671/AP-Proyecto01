@@ -1,0 +1,299 @@
+\documentclass[12pt,letterpaper]{article}
+
+% Codificación e idioma
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+
+% Formato general
+\usepackage{geometry}
+\geometry{letterpaper,margin=2.5cm}
+\usepackage{setspace}
+\setstretch{1.15}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\setlength{\headheight}{13.6pt}
+\usepackage{lastpage}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{pdflscape}
+
+% Tablas
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{ltablex}
+\keepXColumns
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+% Diagramas
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+
+% Colores principales del documento
+\definecolor{tecblue}{HTML}{0B2F5B}
+\definecolor{teclightblue}{HTML}{EAF1F8}
+\definecolor{tablegray}{HTML}{F4F6F8}
+\definecolor{diagramgreen}{HTML}{B2C19C}
+\definecolor{diagramlight}{HTML}{E5E9DE}
+\definecolor{diagramtext}{HTML}{565A60}
+
+% Encabezado y pie de página
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\small Organigrama del proyecto}
+\fancyfoot[R]{\small Página~\thepage\ de~\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Títulos
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{tecblue}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{tecblue}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{tecblue}}
+  {\thesubsubsection}{1em}{}
+
+\captionsetup{labelfont=bf,labelsep=period,font=small}
+\renewcommand{\contentsname}{Índice}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+\begin{document}
+
+\begin{titlepage}
+    \thispagestyle{empty}
+    \centering
+
+    \vspace*{1.2cm}
+
+    {\Large\bfseries Instituto Tecnológico de Costa Rica\par}
+    \vspace{0.35cm}
+    {\large Campus Tecnológico Central Cartago\par}
+
+    \vfill
+
+    {\Large\bfseries Entregable 08 - Organigrama del proyecto\par}
+    \vspace{0.7cm}
+    {\large Plataforma Universitaria Integrada:\par}
+    \vspace{0.15cm}
+    {\large Modernización y Centralización de Procesos Académicos y Administrativos\par}
+
+    \vfill
+
+    {\bfseries Profesora:\par}
+    \vspace{0.15cm}
+    {Alicia Marcela Salazar Hernández\par}
+
+    \vspace{0.9cm}
+
+    {\bfseries Estudiantes:\par}
+    \vspace{0.15cm}
+    {Mauricio González Prendas: 2024143009\par}
+    {Isaac Jiménez Blanco: 2024202804\par}
+    {Tamara Robles Camacho: 2024099342\par}
+
+    \vfill
+
+    {16 de junio de 2026\par}
+    \vspace{0.3cm}
+    {I Semestre\par}
+    {2026\par}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Introducción}
+
+El presente documento corresponde al Entregable 8, Organigrama del Proyecto, del proyecto Plataforma Universitaria Integrada, desarrollado para la Universidad Tecnológica La Mejor. Este entregable tiene como finalidad definir la estructura básica del equipo, los roles principales y la relación jerárquica entre las personas que participan en la gestión y desarrollo del proyecto.
+
+El organigrama permite visualizar quién patrocina el proyecto, quién lo dirige y quiénes ejecutan las actividades principales. También ayuda a evitar confusiones sobre responsabilidades y facilita la comunicación interna del equipo.
+
+Para este proyecto se consideran los roles: Sponsor, Project Manager, Analistas de Negocio y Documentadores, y Desarrolladores Front-End y QA.
+
+\section{Organigrama del proyecto}
+
+\subsection{Esquema general del organigrama}
+
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+    font=\scriptsize,
+    text=diagramtext,
+    box/.style={rounded corners=12pt, draw=none, fill=diagramlight, align=center, text width=3.6cm, minimum height=1.45cm, inner sep=6pt},
+    mainbox/.style={box, fill=diagramgreen, text width=4.8cm, minimum height=1.85cm},
+    midbox/.style={box, fill=diagramgreen, text width=5.0cm, minimum height=0.95cm},
+    team/.style={box, fill=diagramgreen, text width=2.9cm, minimum height=0.85cm},
+    connector/.style={dashed, line width=0.8pt, draw=black}
+]
+
+\node[mainbox] (sponsor) at (0,0) {\textbf{Dr. Roberto Mora\\Fallas}\\[5pt] SPONSOR DEL PROYECTO\\[5pt] Rector de la Universidad Tecnológica La\\Mejor};
+
+\node[midbox] (pm) at (0,-2.25) {\textbf{Tamara Robles Camacho}\\[5pt] Project Manager};
+
+\node[team] (team) at (0,-3.95) {\textbf{Equipo de trabajo}};
+
+\node[box, text width=3.6cm, minimum height=1.75cm] (analyst) at (-6.25,-6.25) {\textbf{Isaac Jiménez Blanco}\\[4pt] -Analista de Neg. y Doc. 1\\-Documentación y control\\del proyecto};
+
+\node[box, text width=3.35cm, minimum height=1.85cm] (ux) at (-2.1,-6.25) {\textbf{Jorge Abarca Quiros}\\[4pt] -Analista de Neg. y Doc. 2\\-Documentación y riesgos};
+
+\node[box, text width=3.35cm, minimum height=1.85cm] (dev) at (2.1,-6.25) {\textbf{Mauricio González Prendas}\\[4pt] -Dev Front-End 1 y QA\\-Portales básicos y QA};
+
+\node[box, text width=3.6cm, minimum height=1.75cm] (qa) at (6.25,-6.25) {\textbf{Carlos Sainz Arce}\\[4pt] -Dev Front-End 2 y QA\\-Portales fin/ejec. y QA};
+
+\draw[connector] (sponsor.south) -- (pm.north);
+\draw[connector] (pm.south) -- (team.north);
+\draw[connector] (team.south) -- ++(0,-0.45) coordinate (branch);
+\draw[connector] (branch) -| (analyst.north);
+\draw[connector] (branch) -| (ux.north);
+\draw[connector] (branch) -| (dev.north);
+\draw[connector] (branch) -| (qa.north);
+
+\end{tikzpicture}%
+}
+\caption{Organigrama principal del proyecto Plataforma Universitaria Integrada.}
+\end{figure}
+
+\clearpage
+\begin{landscape}
+\thispagestyle{empty}
+
+% Encabezado manual para página horizontal: evita que fancyhdr quede rotado en el borde lateral.
+\noindent\begin{minipage}{\linewidth}
+\raggedleft \small Organigrama del proyecto\\[0.2em]
+\hrule height 0.4pt
+\end{minipage}
+\vspace{0.75em}
+
+\subsection{Stakeholders de apoyo y validación}
+
+\begin{figure}[H]
+\centering
+\resizebox{0.96\linewidth}{!}{%
+\begin{tikzpicture}[
+    font=\scriptsize,
+    text=diagramtext,
+    box/.style={rounded corners=12pt, draw=none, fill=diagramlight, align=center, text width=3.2cm, minimum height=1.45cm, inner sep=5pt},
+    mainbox/.style={box, fill=diagramgreen, text width=5.0cm, minimum height=1.1cm},
+    connector/.style={dashed, line width=0.8pt, draw=black, line cap=round}
+]
+
+\node[mainbox] (top) at (0,0) {\textbf{Stakeholders externos\\de apoyo y validación}};
+
+\coordinate (barcenter) at (0,-2.0);
+\coordinate (leftbar) at (-10.0,-2.0);
+\coordinate (rightbar) at (10.0,-2.0);
+
+\node[box, text width=3.2cm, minimum height=1.55cm] (patricia) at (-10.0,-3.65) {\textbf{Lic. Patricia\\Vargas Soto}\\[7pt] Directora\\Administrativa};
+
+\node[box, text width=3.2cm, minimum height=1.55cm] (carlos) at (-6.0,-5.35) {\textbf{Ing. Carlos Brenes\\Mora}\\[7pt] Director de TI};
+
+\node[box, text width=3.2cm, minimum height=1.75cm] (andrea) at (-2.0,-3.95) {\textbf{Prof. Andrea Solís\\Zamora}\\[7pt] Representante\\docente};
+
+\node[box, text width=3.2cm, minimum height=1.75cm] (estudiantes) at (2.0,-3.95) {\textbf{Estudiantes}\\[10pt] Usuarios finales del\\Portal Estudiantil};
+
+\node[box, text width=3.25cm, minimum height=1.55cm] (financiero) at (6.0,-5.35) {\textbf{Departamento\\Financiero}\\[7pt] Área financiera de la\\institución};
+
+\node[box, text width=3.25cm, minimum height=1.65cm] (hosting) at (10.0,-3.65) {\textbf{Proveedor\\de Hosting}\\[7pt] Soporte externo si se\\requiere despliegue\\del prototipo};
+
+% La línea horizontal se dibuja una sola vez; las bajantes se conectan de forma individual
+% para evitar líneas superpuestas o duplicadas sobre el trazo punteado.
+\draw[connector] (top.south) -- (barcenter);
+\draw[connector] (leftbar) -- (rightbar);
+\draw[connector] (-10.0,-2.0) -- (patricia.north);
+\draw[connector] (-6.0,-2.0) -- (carlos.north);
+\draw[connector] (-2.0,-2.0) -- (andrea.north);
+\draw[connector] (2.0,-2.0) -- (estudiantes.north);
+\draw[connector] (6.0,-2.0) -- (financiero.north);
+\draw[connector] (10.0,-2.0) -- (hosting.north);
+
+\end{tikzpicture}%
+}
+\caption{Stakeholders externos de apoyo y validación del proyecto.}
+\end{figure}
+
+\vfill
+\noindent\begin{minipage}{\linewidth}
+\hrule height 0.4pt
+\vspace{0.35em}
+\raggedleft \small Página~\thepage\ de~\pageref{LastPage}
+\end{minipage}
+\end{landscape}
+\clearpage
+
+\section{Descripción breve de los roles}
+
+En la siguiente tabla se describen los roles principales definidos para el proyecto.
+
+\begin{table}[H]
+\centering
+{\small
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{p{4.0cm} p{4.4cm} Y}
+\toprule
+\textbf{Rol} & \textbf{Nombre} & \textbf{Responsabilidad principal} \\
+\midrule
+Sponsor & Dr. Roberto Mora Fallas & Autorizar el proyecto, brindar apoyo institucional y aprobar decisiones importantes \\
+Project Manager & Tamara Robles Camacho & Coordinar el proyecto, dar seguimiento al avance y comunicar decisiones relevantes \\
+Analista de Negocio y Doc. 1 & Isaac Jiménez Blanco & Apoyar la definición del alcance, documentación y control del proyecto \\
+Analista de Negocio y Doc. 2 & Jorge Abarca Quiros & Elaborar entregables documentales, apoyar gestión de riesgos y costos \\
+Desarrollador Front-End 1 y QA & Mauricio González Prendas & Construir las pantallas estudiantil, docente y admin. Realizar pruebas de calidad \\
+Desarrollador Front-End 2 y QA & Carlos Sainz Arce & Construir el portal financiero y ejecutivo. Realizar pruebas de calidad \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+El equipo está conformado por cinco integrantes, lo que permite una mayor especialización en las tareas de documentación y desarrollo técnico.
+
+\section{Explicación del organigrama}
+
+El organigrama se organiza en tres niveles principales. En el primer nivel se encuentra el Sponsor, quien representa la autoridad institucional y tiene la capacidad de aprobar el proyecto, validar entregables importantes y apoyar cuando se presenten decisiones que afecten alcance, tiempo, costo o calidad.
+
+En el segundo nivel se ubica la Project Manager. Este rol se encarga de coordinar el trabajo del equipo, revisar avances, mantener comunicación con los interesados y asegurar que los entregables se completen dentro del plazo definido. En este proyecto, la entrega final debe realizarse antes del 24 de junio de 2026, por lo que la coordinación del equipo es un punto clave.
+
+En el tercer nivel se encuentra el equipo ejecutor. Los Analistas de Negocio (1 y 2) apoyan la comprensión del problema, la definición del alcance y elaboran la documentación del proyecto. Los Desarrolladores Front-End y QA (1 y 2) se dividen la construcción de los módulos del prototipo web y revisan que el prototipo cumpla los criterios mínimos de calidad y navegación.
+
+Los stakeholders externos aparecen como apoyo de validación. Estos actores no ejecutan directamente el proyecto, pero pueden aportar información importante sobre procesos administrativos, técnicos, docentes, financieros y estudiantiles. Su participación ayuda a que el prototipo represente mejor las necesidades de la Universidad Tecnológica La Mejor.
+
+\section{Relación entre roles y entregables}
+
+La siguiente tabla muestra cómo se relacionan los roles del organigrama con los entregables principales del proyecto.
+
+\begin{table}[H]
+\centering
+{\small
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{p{4.3cm} Y}
+\toprule
+\textbf{Rol} & \textbf{Entregables o actividades relacionadas} \\
+\midrule
+Sponsor & Aprobación del Project Charter, revisión de avances importantes y validación de cierre \\
+Project Manager & Seguimiento del cronograma, coordinación del equipo, control de cambios y comunicación \\
+Analistas de Negocio y Doc. & Definición del alcance, documentación, riesgos, adquisiciones y evaluación de cambios \\
+Desarrolladores Front-End y QA & Login, dashboard principal, módulos web, dashboard ejecutivo y pruebas de calidad \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+Esta distribución permite que cada rol tenga una función clara dentro del proyecto. También facilita la creación posterior del cronograma y la asignación de responsables en Microsoft Project.
+
+\section{Conclusión}
+
+El organigrama del proyecto Plataforma Universitaria Integrada permite visualizar de forma clara cómo se organiza el equipo de trabajo. La estructura está compuesta por un Sponsor, una Project Manager y un equipo ejecutor con roles de análisis de negocio, diseño UX/UI, desarrollo Front-End y QA.
+
+La distribución en cinco integrantes responde adecuadamente al alcance académico del proyecto, permitiendo un desarrollo paralelo de la documentación y el prototipo. El esquema permite mantener orden en las responsabilidades, facilitar la comunicación y apoyar la planificación de otros entregables como el cronograma, la matriz RACI, el plan de recursos, el plan de comunicaciones y el plan de calidad.
+
+\end{document}
