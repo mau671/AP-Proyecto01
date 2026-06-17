@@ -1,0 +1,305 @@
+\documentclass[11pt,spanish]{article}
+
+% =========================================================
+% PLANTILLA BASE PARA INFORMES ACADÉMICOS / TÉCNICOS
+% =========================================================
+% Instrucciones rápidas:
+% 1. Edite los datos de la sección "DATOS DEL DOCUMENTO".
+% 3. Use las tablas de ejemplo como base para nuevas tablas.
+% 4. Para tablas anchas, use el entorno widepage incluido abajo.
+% 5. Las imágenes se cargan con \SafeImage, que no falla si el archivo no existe.
+
+% --- Idioma y codificación ---
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- Márgenes / papel ---
+\usepackage{geometry}
+\geometry{a4paper, margin=2.7cm}
+
+% --- Matemáticas ---
+\usepackage{amsmath}
+
+% --- Tablas, enlaces y elementos visuales ---
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes.geometric,arrows.meta,calc}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage[hidelinks]{hyperref}
+
+% --- Encabezado y pie de página ---
+\usepackage[myheadings]{fancyhdr}
+\usepackage{lastpage}
+\setlength{\headheight}{30pt}
+\setlength{\footskip}{30pt}
+
+% --- Interlineado ---
+\linespread{1.2}
+\sloppy
+
+% =========================================================
+% DATOS DEL DOCUMENTO
+% =========================================================
+\newcommand{\Institucion}{Instituto Tecnológico de Costa Rica}
+\newcommand{\Campus}{Campus Tecnológico Central Cartago}
+\newcommand{\DocumentoTitulo}{Entregable 3 -- Registro de Stakeholders}
+\newcommand{\DocumentoSubtitulo}{}
+\newcommand{\Curso}{Administración de proyectos}
+\newcommand{\Profesor}{Alicia Marcela Salazar Hernández}
+\newcommand{\FechaDocumento}{7 de junio de 2026}
+\newcommand{\PeriodoAcademico}{I Semestre}
+\newcommand{\AnioDocumento}{2026}
+
+\newcommand{\EstudiantesPortada}{%
+    Mauricio González Prendas: 2024143009\\
+    Isaac Jiménez Blanco: 2024202804\\
+    Tamara Robles Camacho: 2024099342%
+}
+
+% Datos que aparecen en el encabezado.
+\newcommand{\DocHeaderLeft}{}
+\newcommand{\DocHeaderRight}{Registro de Stakeholders}
+\newcommand{\DocFooterRight}{Página~\thepage\ de~\pageref{LastPage}}
+
+% Metadatos PDF.
+\title{\DocumentoTitulo}
+\author{\EstudiantesPortada}
+\date{\FechaDocumento}
+
+% =========================================================
+% CONFIGURACIÓN DE TABLAS Y UTILIDADES
+% =========================================================
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\renewcommand{\arraystretch}{1.22}
+\setlength{\LTpre}{0.5em}
+\setlength{\LTpost}{0.5em}
+
+% Imagen segura: si el archivo no existe, muestra un recuadro de marcador.
+\newcommand{\SafeImage}[2][0.92\textwidth]{%
+    \IfFileExists{#2}{%
+        \includegraphics[width=#1]{#2}%
+    }{%
+        \fbox{%
+            \begin{minipage}[c][4cm][c]{#1}
+            \centering
+            Imagen pendiente:\\
+            \texttt{#2}
+            \end{minipage}%
+        }%
+    }%
+}
+
+% Figura reutilizable.
+\newcommand{\EvidenceFigure}[3]{%
+    \begin{figure}[H]
+    \centering
+    \SafeImage{#1}
+    \caption{#2}
+    \label{#3}
+    \end{figure}%
+}
+
+% =========================================================
+% ENCABEZADO Y PIE
+% =========================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\DocHeaderLeft}
+\fancyhead[R]{\DocHeaderRight}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[R]{\DocFooterRight}
+
+% Estilo equivalente para páginas horizontales.
+\fancypagestyle{widefancy}{%
+    \fancyhf{}%
+    \fancyhead[L]{\DocHeaderLeft}%
+    \fancyhead[R]{\DocHeaderRight}%
+    \renewcommand{\headrulewidth}{0.4pt}%
+    \renewcommand{\footrulewidth}{0.4pt}%
+    \fancyfoot[R]{\DocFooterRight}%
+}
+
+% =========================================================
+% PÁGINAS HORIZONTALES PARA TABLAS ANCHAS
+% =========================================================
+\makeatletter
+\newcommand{\SyncPageBuilderDimensions}{%
+    \global\vsize=\textheight
+    \global\@colroom=\textheight
+    \global\@colht=\textheight
+}
+\makeatother
+
+\newenvironment{widepage}{%
+    \clearpage
+    \hypersetup{pageanchor=false}%
+    \paperwidth=297mm
+    \paperheight=210mm
+    \pdfpagewidth=297mm
+    \pdfpageheight=210mm
+    \newgeometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}%
+    \setlength{\textwidth}{243mm}%
+    \setlength{\textheight}{156mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \pagestyle{widefancy}%
+}{%
+    \clearpage
+    \paperwidth=210mm
+    \paperheight=297mm
+    \pdfpagewidth=210mm
+    \pdfpageheight=297mm
+    \restoregeometry
+    \setlength{\textwidth}{156mm}%
+    \setlength{\textheight}{243mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \hypersetup{pageanchor=true}%
+    \pagestyle{fancy}%
+}
+
+% =========================================================
+% PORTADA
+% =========================================================
+\newcommand{\MakeCover}{%
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+
+{\bfseries \huge \Institucion \par}
+\vspace{0.25cm}
+{\LARGE \Campus \par}
+
+\vfill
+
+{\huge \DocumentoTitulo \par}
+
+\vfill
+
+{\bfseries \LARGE Profesora: \par}
+{\Large \Profesor \par}
+
+\vfill
+
+{\bfseries \LARGE Estudiantes: \par}
+{\Large \EstudiantesPortada \par}
+
+\vfill
+
+{\bfseries\LARGE Fecha: \par}
+{\Large \FechaDocumento \par}
+
+\vfill
+
+{\LARGE \PeriodoAcademico \par}
+{\LARGE \AnioDocumento \par}
+
+\end{titlepage}%
+}
+
+% =========================================================
+% DOCUMENTO
+% =========================================================
+\begin{document}
+\hypersetup{pageanchor=false}
+
+% =========================
+% Portada
+% =========================
+\MakeCover
+
+% =========================
+% Índice
+% =========================
+\pagenumbering{roman}
+\pagestyle{empty}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+\pagestyle{fancy}
+
+% =========================
+% Contenido
+% =========================
+
+\section{Introducción}
+
+En este documento corresponde al Registro de Stakeholders (partes interesadas o interesados) del proyecto Plataforma Universitaria Integrada, desarrollado para la Universidad Tecnológica La Mejor. Esta información forma parte del grupo de procesos de Inicio, según el marco metodológico del PMI, y su propósito es identificar, clasificar y definir a las personas que formaran parte de este proyecto y que pueden afectar o verse afectados por el desarrollo y los resultados del mismo.
+
+
+La identificación temprana de los interesados es fundamental para garantizar una buena comunicación, gestionar expectativas y asegurar el apoyo durante el ciclo de vida del proyecto. Los stakeholdes se dividirán en dos partes, los internos (miembros del equipo de desarrollo y administración) y los externos (futuros actores de la plataforma), para cada uno se documenta su cargo, nivel de interés, influencia y poder, así como la estrategia más adecuada para mantener su participación con los objetivos del proyecto.
+
+
+La estácala de referencia para comprender mejor la tabla es: Influencia y Poder se valoran del 1 al 5 (1= muy bajo, 5= muy alto)
+
+\section{Stakeholders internos del proyecto}
+
+En la siguiente tabla se muestran los stakeholders Internos del proyecto:
+
+\begin{widepage}
+{\small
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{p{3.8cm} p{3.8cm} p{5.8cm} p{1.9cm} p{1.4cm} p{5.8cm}}
+\toprule
+\textbf{Nombre} & \textbf{Cargo} & \textbf{Interés} & \textbf{Influencia} & \textbf{Poder} & \textbf{Estrategia de involucramiento} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Nombre} & \textbf{Cargo} & \textbf{Interés} & \textbf{Influencia} & \textbf{Poder} & \textbf{Estrategia de involucramiento} \\
+\midrule
+\endhead
+Tamara Robles Camacho & Project Manager & Garantizar que el proyecto se ejecute dentro del alcance, tiempo y costo definidos & 5 & 5 & Liderar reuniones semanales de seguimiento, tomar decisiones sobre cambios y gestionar comunicaciones con el patrocinador \\
+Mauricio González Prendas & Desarrollador Frontend 1 \& QA & Desarrollar un front-end funcional, navegable y de calidad que cumpla los criterios de aceptación & 5 & 4 & Participar en la definición del alcance técnico, revisiones de código y pruebas de calidad antes de cada entrega \\
+Carlos Sainz Arce & Desarrollador Frontend 2 \& QA & Desarrollar un front-end funcional, navegable y de calidad que cumpla los criterios de aceptación & 5 & 4 & Participar en la definición del alcance técnico, revisiones de código y pruebas de calidad antes de cada entrega junto con el desarrollador 1 \\
+Isaac Jiménez Blanco & Analista de Negocio \& Documentador 1 & Asegurar que todos los entregables documentales estén completos, coherentes y alineados con los estándares PMI & 5 & 4 & Responsable de redactar y revisar entregables, mantener actualizado el registro de riesgos y la documentación del proyecto \\
+Jorge Abarca Quiros & Analista de Negocio \& Documentador 2 & Asegurar, junto con el analista y documentador 1, que todos los entregables documentales estén completos, coherentes y alineados con los estándares PMI & 5 & 4 & Redacta y analiza los entregables, manteniendo actualizado la documentación. \\
+\bottomrule
+\end{longtable}
+}
+\end{widepage}
+\section{Stakeholders externos}
+
+En la siguiente tabla se mencionan las partes externas interesadas para este proyecto:
+
+\begin{widepage}
+{\small
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{p{3.8cm} p{4.3cm} p{5.8cm} p{1.9cm} p{1.4cm} p{5.4cm}}
+\toprule
+\textbf{Nombre} & \textbf{Cargo} & \textbf{Interés} & \textbf{Influencia} & \textbf{Poder} & \textbf{Estrategia de involucramiento} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Nombre} & \textbf{Cargo} & \textbf{Interés} & \textbf{Influencia} & \textbf{Poder} & \textbf{Estrategia de involucramiento} \\
+\midrule
+\endhead
+Dr. Roberto Mora Fallas & Rector – Patrocinador del Proyecto & Modernizar la institución, mejorar la imagen universitaria y optimizar los procesos internos & 4 & 5 & Presentarle el Project Charter para aprobación, informes ejecutivos mensuales y acta de cierre \\
+Lic. Patricia Vargas Soto & Directora Administrativa & Reducir la carga operativa del personal y eliminar duplicidad de datos entre departamentos & 4 & 4 & Reuniones de validación de requerimientos administrativos y revisión del módulo de gestión \\
+Ing. Carlos Brenes Mora & Director de TI & Garantizar que la solución sea técnicamente viable, segura y mantenible a futuro & 3 & 4 & Consultas técnicas en la fase de planificación y revisión de la arquitectura del frontend \\
+Prof. Andrea Solís Zamora & Representante Docente & Contar con herramientas digitales que simplifiquen el registro de calificaciones y asistencia & 4 & 3 & Participar en sesiones de validación del portal docente y pruebas de usuario \\
+Estudiantes (colectivo) & Usuarios Finales – Portal Estudiantil & Acceder a matrícula, calificaciones, horarios y pagos de forma rápida y en línea & 5 & 2 & Encuestas de satisfacción y pruebas de usabilidad del portal estudiantil \\
+Depto. Financiero & Área Financiera & Digitalizar los procesos de cobro de matrícula y generación de reportes financieros & 4 & 3 & Validación de requerimientos del módulo financiero y revisión de casos de uso así como las pruebas de usuario para ese modulo. \\
+Proveedor de Hosting & Proveedor Externo & Ofrecer infraestructura confiable para el despliegue del sistema & 2 & 2 & Contrato de servicio con SLA definido, revisión periódica de disponibilidad \\
+\bottomrule
+\end{longtable}
+}
+\end{widepage}
+
+\end{document}
+

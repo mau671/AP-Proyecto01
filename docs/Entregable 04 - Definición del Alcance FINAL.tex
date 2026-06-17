@@ -1,0 +1,623 @@
+\documentclass[11pt,spanish]{article}
+
+% =========================================================
+% PLANTILLA BASE PARA INFORMES ACADÉMICOS / TÉCNICOS
+% =========================================================
+
+% --- Idioma y codificación ---
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- Márgenes / papel ---
+\usepackage{geometry}
+\geometry{a4paper, margin=2.7cm}
+
+% --- Matemáticas ---
+\usepackage{amsmath}
+
+% --- Tablas, enlaces y elementos visuales ---
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes.geometric,arrows.meta,calc}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage[hidelinks]{hyperref}
+
+% --- Encabezado y pie de página ---
+\usepackage[myheadings]{fancyhdr}
+\usepackage{lastpage}
+\setlength{\headheight}{30pt}
+\setlength{\footskip}{30pt}
+
+% --- Interlineado ---
+\linespread{1.2}
+\sloppy
+
+% =========================================================
+% DATOS DEL DOCUMENTO
+% =========================================================
+\newcommand{\Institucion}{Instituto Tecnológico de Costa Rica}
+\newcommand{\Campus}{Campus Tecnológico Central Cartago}
+\newcommand{\DocumentoTitulo}{Entregable 04 -- Definición del Alcance}
+\newcommand{\DocumentoSubtitulo}{}
+\newcommand{\Curso}{Administración de proyectos}
+\newcommand{\Profesor}{Alicia Marcela Salazar Hernández}
+\newcommand{\FechaDocumento}{8 de junio de 2026}
+\newcommand{\PeriodoAcademico}{I Semestre}
+\newcommand{\AnioDocumento}{2026}
+
+\newcommand{\AutoresPortada}{%
+    Mauricio González Prendas: 2024143009\\
+    Isaac Jiménez Blanco: 2024202804\\
+    Tamara Robles Camacho: 2024099342%
+}
+
+% Datos que aparecen en el encabezado.
+\newcommand{\DocHeaderLeft}{}
+\newcommand{\DocHeaderRight}{Definición del Alcance}
+\newcommand{\DocFooterRight}{Página~\thepage\ de~\pageref{LastPage}}
+
+% Metadatos PDF.
+\title{\DocumentoTitulo}
+\author{\AutoresPortada}
+\date{\FechaDocumento}
+
+% =========================================================
+% CONFIGURACIÓN DE TABLAS Y UTILIDADES
+% =========================================================
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.22}
+\setlength{\LTpre}{0.5em}
+\setlength{\LTpost}{0.5em}
+\setcounter{tocdepth}{3}
+
+% Imagen segura: si el archivo no existe, muestra un recuadro de marcador.
+\newcommand{\SafeImage}[2][0.92\textwidth]{%
+    \IfFileExists{#2}{%
+        \includegraphics[width=#1]{#2}%
+    }{%
+        \fbox{%
+            \begin{minipage}[c][4cm][c]{#1}
+            \centering
+            Imagen pendiente:\\
+            \texttt{#2}
+            \end{minipage}%
+        }%
+    }%
+}
+
+% Figura reutilizable.
+\newcommand{\EvidenceFigure}[3]{%
+    \begin{figure}[H]
+    \centering
+    \SafeImage{#1}
+    \caption{#2}
+    \label{#3}
+    \end{figure}%
+}
+
+% =========================================================
+% ENCABEZADO Y PIE
+% =========================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\DocHeaderLeft}
+\fancyhead[R]{\DocHeaderRight}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[R]{\DocFooterRight}
+
+% Estilo equivalente para páginas horizontales.
+\fancypagestyle{widefancy}{%
+    \fancyhf{}%
+    \fancyhead[L]{\DocHeaderLeft}%
+    \fancyhead[R]{\DocHeaderRight}%
+    \renewcommand{\headrulewidth}{0.4pt}%
+    \renewcommand{\footrulewidth}{0.4pt}%
+    \fancyfoot[R]{\DocFooterRight}%
+}
+
+% =========================================================
+% PÁGINAS HORIZONTALES PARA TABLAS ANCHAS
+% =========================================================
+\makeatletter
+\newcommand{\SyncPageBuilderDimensions}{%
+    \global\vsize=\textheight
+    \global\@colroom=\textheight
+    \global\@colht=\textheight
+}
+\makeatother
+
+\newenvironment{widepage}{%
+    \clearpage
+    \hypersetup{pageanchor=false}%
+    \paperwidth=297mm
+    \paperheight=210mm
+    \pdfpagewidth=297mm
+    \pdfpageheight=210mm
+    \newgeometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}%
+    \setlength{\textwidth}{243mm}%
+    \setlength{\textheight}{156mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \pagestyle{widefancy}%
+}{%
+    \clearpage
+    \paperwidth=210mm
+    \paperheight=297mm
+    \pdfpagewidth=210mm
+    \pdfpageheight=297mm
+    \restoregeometry
+    \setlength{\textwidth}{156mm}%
+    \setlength{\textheight}{243mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \hypersetup{pageanchor=true}%
+    \pagestyle{fancy}%
+}
+
+% =========================================================
+% PORTADA
+% =========================================================
+\newcommand{\MakeCover}{%
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+
+{\bfseries \huge \Institucion \par}
+\vspace{0.25cm}
+{\LARGE \Campus \par}
+
+\vfill
+
+{\huge \DocumentoTitulo \par}
+
+\vfill
+
+{\bfseries \LARGE Profesora: \par}
+{\Large \Profesor \par}
+
+\vfill
+
+{\bfseries \LARGE Estudiantes: \par}
+{\Large \AutoresPortada \par}
+
+\vfill
+
+{\bfseries\LARGE Fecha: \par}
+{\Large \FechaDocumento \par}
+
+\vfill
+
+{\LARGE \PeriodoAcademico \par}
+{\LARGE \AnioDocumento \par}
+
+\end{titlepage}%
+}
+
+% =========================================================
+% DOCUMENTO
+% =========================================================
+\begin{document}
+\hypersetup{pageanchor=false}
+
+% =========================
+% Portada
+% =========================
+\MakeCover
+
+% =========================
+% Índice
+% =========================
+\pagenumbering{roman}
+\pagestyle{empty}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+\pagestyle{fancy}
+
+% =========================
+% Contenido
+% =========================
+\section{Introducción}
+
+El presente documento corresponde al Entregable 4, Definición del Alcance, del proyecto Plataforma Universitaria Integrada, desarrollado para la Universidad Tecnológica La Mejor. Este entregable forma parte de la fase de planificación del proyecto y tiene como finalidad establecer de manera clara qué trabajo será incluido, qué elementos quedarán fuera, cuáles condiciones se asumen como verdaderas y qué limitaciones deberán respetarse durante el desarrollo.
+
+La definición del alcance es importante porque permite evitar confusiones entre el equipo de trabajo, el patrocinador y los interesados del proyecto. Además, ayuda a controlar el crecimiento no planificado del alcance, conocido como scope creep, ya que deja por escrito los límites del proyecto desde etapas tempranas.
+
+Este proyecto consiste en diseñar y desarrollar un prototipo Front-End web navegable para representar los principales procesos académicos, administrativos y financieros de la Universidad Tecnológica La Mejor. La solución propuesta no contempla backend funcional ni una base de datos real, ya que el enfoque principal del proyecto es la gestión de proyectos y la construcción de una interfaz navegable que demuestre cómo podría funcionar la plataforma.
+
+La definición del alcance presentada en este documento se basa en el Project Charter, el Business Case y el Registro de Stakeholders realizados previamente, con el fin de mantener coherencia entre los objetivos, los entregables esperados y las necesidades identificadas para la institución.
+
+\section{Propósito de la definición del alcance}
+
+El propósito de este documento es establecer los límites formales del proyecto Plataforma Universitaria Integrada. Para lograrlo, se describen los elementos que sí serán desarrollados, los elementos que no serán considerados durante esta etapa, los supuestos bajo los cuales se planifica el trabajo, las restricciones existentes y los entregables que debe producir el equipo.
+
+La definición del alcance permite responder de forma clara a las siguientes preguntas:
+
+\begin{itemize}[leftmargin=*]
+    \item ¿Qué se va a desarrollar?
+    \item ¿Qué módulos tendrá el prototipo?
+    \item ¿Qué documentos forman parte del proyecto?
+    \item ¿Qué actividades no serán realizadas?
+    \item ¿Qué condiciones se asumen para poder planificar?
+    \item ¿Qué límites afectan tiempo, costo, tecnología y recursos?
+    \item ¿Qué entregables deben completarse antes del cierre?
+\end{itemize}
+
+Este documento será utilizado como referencia para el WBS, el cronograma, la matriz RACI, la estimación de costos, el plan de calidad, el registro de riesgos y el proceso de control de cambios. Cualquier solicitud que modifique el alcance aquí definido deberá analizarse mediante el procedimiento formal de control de cambios.
+
+\section{Alcance incluido}
+
+El alcance incluido corresponde a todo el trabajo que será desarrollado dentro del proyecto. En este caso, el proyecto incluye tanto entregables de administración de proyectos como el desarrollo de un prototipo web navegable.
+
+\subsection{Alcance general del proyecto}
+
+El proyecto incluye el diseño y desarrollo de una Plataforma Universitaria Integrada en formato de prototipo Front-End. La plataforma deberá representar los procesos principales de la universidad mediante pantallas navegables y módulos funcionales a nivel de interfaz.
+
+El sistema debe permitir visualizar una estructura centralizada para los siguientes portales:
+
+\begin{itemize}[leftmargin=*]
+    \item Portal Estudiantil
+    \item Portal Docente
+    \item Portal Administrativo
+    \item Portal Financiero
+    \item Dashboard Ejecutivo
+\end{itemize}
+
+Además, el proyecto incluye la elaboración de los documentos requeridos por el curso de Administración de Proyectos, aplicando los grupos de procesos de inicio, planificación, ejecución, monitoreo y control, y cierre.
+
+\subsection{Módulos incluidos en el prototipo}
+
+En la siguiente tabla se muestra el alcance funcional incluido para el prototipo Front-End.
+
+\begin{table}[H]
+\centering
+\caption{Alcance funcional incluido para el prototipo Front-End}
+\label{tab:modulos-incluidos}
+{\small
+\begin{tabularx}{\textwidth}{L{4cm} Y}
+\toprule
+\textbf{Módulo} & \textbf{Funcionalidades incluidas} \\
+\midrule
+Login & Pantalla de inicio de sesión para simular el acceso a la plataforma \\
+Dashboard principal & Menú inicial con acceso a los portales principales del sistema \\
+Portal Estudiantil & Perfil del estudiante, matrícula de cursos, horarios, calificaciones, estado de cuenta e historial académico \\
+Portal Docente & Gestión de cursos, registro de asistencia y registro de calificaciones \\
+Portal Administrativo & Gestión de estudiantes, gestión de docentes, gestión de cursos y períodos académicos \\
+Portal Financiero & Pagos de matrícula, pagos de cursos e historial de pagos \\
+Dashboard Ejecutivo & Cantidad de estudiantes activos, ingresos por matrícula, indicadores académicos e indicadores financieros \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+\subsection{Alcance del Portal Estudiantil}
+
+El Portal Estudiantil será diseñado para representar las funciones principales que necesita un estudiante dentro de la plataforma. Este portal debe permitir que el usuario visualice su información académica y financiera desde un único lugar.
+
+Incluye:
+
+\begin{itemize}[leftmargin=*]
+    \item Inicio de sesión simulado
+    \item Visualización del perfil del estudiante
+    \item Matrícula de cursos disponibles
+    \item Consulta de horarios
+    \item Consulta de calificaciones
+    \item Consulta del estado de cuenta
+    \item Historial académico del estudiante
+\end{itemize}
+
+Este módulo busca representar una experiencia más centralizada para el estudiante, reduciendo la dependencia de varios sistemas o trámites presenciales.
+
+\subsection{Alcance del Portal Docente}
+
+El Portal Docente será diseñado para representar las funciones principales que necesita un profesor dentro de la universidad. Su objetivo es facilitar la gestión académica de los cursos asignados.
+
+Incluye:
+
+\begin{itemize}[leftmargin=*]
+    \item Visualización de cursos asignados
+    \item Gestión básica de cursos
+    \item Registro de asistencia
+    \item Registro de calificaciones
+    \item Consulta de estudiantes por curso
+\end{itemize}
+
+Este portal no realizará cálculos reales de promedios ni guardará información en una base de datos real. La información mostrada podrá ser simulada para fines de prototipo.
+
+\subsection{Alcance del Portal Administrativo}
+
+El Portal Administrativo será diseñado para representar la gestión interna de la universidad. Este módulo se relaciona con los procesos administrativos que actualmente se encuentran dispersos o se realizan de forma manual.
+
+Incluye:
+
+\begin{itemize}[leftmargin=*]
+    \item Gestión de estudiantes
+    \item Gestión de docentes
+    \item Gestión de cursos
+    \item Gestión de períodos académicos
+    \item Visualización de información administrativa básica
+\end{itemize}
+
+Este portal funcionará como una representación visual de los procesos administrativos principales, sin automatizar completamente los flujos reales de la universidad.
+
+\subsection{Alcance del Portal Financiero}
+
+El Portal Financiero será diseñado para representar los procesos relacionados con pagos y consultas financieras de los estudiantes. Su finalidad es mostrar cómo la universidad podría centralizar la información financiera dentro de la misma plataforma.
+
+Incluye:
+
+\begin{itemize}[leftmargin=*]
+    \item Consulta de pagos de matrícula
+    \item Consulta de pagos de cursos
+    \item Historial de pagos
+    \item Visualización de estado financiero del estudiante
+\end{itemize}
+
+El módulo financiero no procesará pagos reales, no se conectará con bancos y no utilizará una pasarela de pagos funcional. La información será representativa y podrá ser simulada.
+
+\subsection{Alcance del Dashboard Ejecutivo}
+
+El Dashboard Ejecutivo será diseñado para apoyar la toma de decisiones de la alta dirección. Este módulo permitirá visualizar indicadores académicos y financieros de manera resumida.
+
+Incluye:
+
+\begin{itemize}[leftmargin=*]
+    \item Cantidad de estudiantes activos
+    \item Ingresos por matrícula
+    \item Indicadores académicos básicos
+    \item Indicadores financieros básicos
+    \item Representación visual de información consolidada
+\end{itemize}
+
+Este dashboard utilizará datos simulados, ya que no existirá conexión con una base de datos real. Su finalidad es demostrar cómo podría presentarse la información para la toma de decisiones.
+
+\subsection{Alcance de la documentación del proyecto}
+
+Además del prototipo, el proyecto incluye documentos de administración de proyectos. Estos documentos permiten demostrar que el equipo aplicó procesos de inicio, planificación, ejecución, monitoreo y control, y cierre.
+
+Incluye:
+
+\begin{itemize}[leftmargin=*]
+    \item Business Case
+    \item Project Charter
+    \item Registro de Stakeholders
+    \item Definición del Alcance
+    \item WBS
+    \item Cronograma del Proyecto
+    \item Matriz RACI
+    \item Organigrama del Proyecto
+    \item Plan de Recursos
+    \item Estimación de Costos
+    \item Plan de Calidad
+    \item Plan de Comunicaciones
+    \item Plan de Gestión de Riesgos
+    \item Registro de Riesgos
+    \item Matriz Probabilidad e Impacto
+    \item Plan de Adquisiciones
+    \item KPIs del Proyecto
+    \item Desarrollo del Front-End
+    \item Proceso de Control de Cambios
+    \item Solicitud de Cambio 1
+    \item Solicitud de Cambio 2
+    \item Evaluación de Cambios
+    \item Dashboard Ejecutivo del Proyecto
+    \item Informe Ejecutivo
+    \item Acta de Cierre
+    \item Reflexiones y Recomendaciones
+\end{itemize}
+
+\section{Alcance excluido}
+
+El alcance excluido corresponde a todo aquello que no será desarrollado en esta etapa del proyecto. Esta sección es necesaria para evitar expectativas incorrectas sobre el producto final.
+
+En la siguiente tabla se presentan los elementos excluidos del alcance.
+
+\begin{longtable}{L{5.2cm} L{9.2cm}}
+\caption{Elementos excluidos del alcance}\label{tab:alcance-excluido}\\
+\toprule
+\textbf{Elemento excluido} & \textbf{Justificación} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Elemento excluido} & \textbf{Justificación} \\
+\midrule
+\endhead
+Backend funcional & El proyecto solicita enfocarse en el Front-End navegable \\
+Base de datos real & Los datos podrán ser simulados dentro del prototipo \\
+Integración con sistemas reales de la universidad & No se cuenta con acceso a sistemas institucionales reales \\
+Autenticación institucional real & El login será representativo y no validará usuarios reales \\
+Pasarela de pagos real & El módulo financiero no procesará pagos reales \\
+Migración de datos históricos & No se trabajará con información real de estudiantes o docentes \\
+Aplicación móvil nativa & El alcance solicitado corresponde a una plataforma web \\
+Despliegue en producción & El prototipo será académico y no operará como sistema institucional oficial \\
+Automatización completa de procesos & Se representarán flujos principales, no procesos productivos completos \\
+Compra e implementación de un ERP comercial & El Business Case seleccionó una solución a la medida \\
+Soporte operativo posterior al cierre & El proyecto finaliza con la entrega académica y acta de cierre \\
+Capacitación formal a usuarios reales & Se puede incluir una propuesta de capacitación, pero no una ejecución real \\
+\bottomrule
+\end{longtable}
+
+También queda fuera del alcance cualquier funcionalidad adicional que no esté incluida en los módulos mínimos definidos. Por ejemplo, notificaciones automáticas, reportes avanzados, integración con correo institucional, firma digital, chat interno, expediente académico completo en producción o analítica avanzada.
+
+Si alguno de estos elementos se desea incluir posteriormente, deberá ser gestionado como una solicitud de cambio y evaluarse su impacto en alcance, tiempo, costo, calidad y riesgos.
+
+\section{Supuestos}
+
+Los supuestos son condiciones que se consideran verdaderas para poder planificar el proyecto. Si alguno de estos supuestos cambia, puede afectar la ejecución o requerir ajustes en el plan.
+
+\begin{longtable}{L{2cm} L{12.4cm}}
+\caption{Supuestos del proyecto}\label{tab:supuestos}\\
+\toprule
+\textbf{Código} & \textbf{Supuesto} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Código} & \textbf{Supuesto} \\
+\midrule
+\endhead
+S1 & El proyecto será desarrollado como un prototipo académico de Front-End navegable \\
+S2 & No será necesario desarrollar backend ni base de datos funcional \\
+S3 & La información mostrada en el prototipo podrá ser simulada \\
+S4 & El equipo contará con acceso a computadoras, internet y herramientas de desarrollo web \\
+S5 & GitHub será utilizado únicamente para administrar el código del prototipo \\
+S6 & Los documentos del proyecto serán elaborados de forma separada por integrantes del equipo \\
+S7 & Los documentos deberán mantener coherencia en nombres, roles, presupuesto, alcance y fechas \\
+S8 & El presupuesto base será el mismo definido en el Business Case \\
+S9 & El proyecto deberá completarse antes del 24 de junio de 2026 \\
+S10 & El cronograma será elaborado en Microsoft Project \\
+S11 & Los stakeholders estarán disponibles para validaciones generales del proyecto \\
+S12 & Los módulos mínimos definidos serán suficientes para cumplir con la consigna del proyecto final \\
+S13 & Las revisiones de calidad se realizarán mediante pruebas manuales del prototipo \\
+S14 & Los cambios importantes serán evaluados mediante el proceso formal de control de cambios \\
+\bottomrule
+\end{longtable}
+
+\section{Restricciones}
+
+Las restricciones son límites que condicionan la ejecución del proyecto. Estas restricciones deben considerarse durante la planificación y el desarrollo.
+
+\begin{longtable}{L{2cm} L{12.4cm}}
+\caption{Restricciones del proyecto}\label{tab:restricciones}\\
+\toprule
+\textbf{Código} & \textbf{Restricción} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Código} & \textbf{Restricción} \\
+\midrule
+\endhead
+R1 & El proyecto debe entregarse el 24 de junio de 2026 \\
+R2 & El prototipo debe ser web y navegable \\
+R3 & No se permite presentar únicamente un prototipo en Figma, Canva u otra herramienta similar \\
+R4 & El sistema debe desarrollarse usando tecnologías web permitidas como React, Angular, Vue, HTML, CSS o JavaScript \\
+R5 & No se desarrollará backend funcional \\
+R6 & No se desarrollará base de datos real \\
+R7 & El equipo está compuesto por pocos integrantes, por lo que se deberán combinar roles \\
+R8 & Los entregables documentales deben cumplir los elementos solicitados por la profesora \\
+R9 & El cronograma debe elaborarse en Microsoft Project \\
+R10 & El presupuesto preliminar debe mantenerse alineado con el Business Case \\
+R11 & Las decisiones relevantes deben ser comunicadas al equipo para evitar documentos incongruentes \\
+R12 & Cualquier cambio que afecte alcance, tiempo, costo, calidad o riesgos debe pasar por control de cambios \\
+\bottomrule
+\end{longtable}
+
+Estas restricciones hacen que el equipo deba priorizar los elementos obligatorios y evitar agregar funcionalidades no solicitadas. Debido a que el tiempo disponible es corto, se debe controlar especialmente el alcance y mantener el enfoque en los módulos mínimos requeridos.
+
+\section{Entregables}
+
+Los entregables del proyecto se dividen en dos grupos. El primer grupo corresponde a los entregables de gestión del proyecto y el segundo corresponde al producto técnico desarrollado.
+
+\subsection{Entregables de gestión del proyecto}
+
+\begin{longtable}{L{1.5cm} L{4.8cm} L{8.1cm}}
+\caption{Entregables de gestión del proyecto}\label{tab:entregables-gestion}\\
+\toprule
+\textbf{Código} & \textbf{Entregable} & \textbf{Descripción} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Código} & \textbf{Entregable} & \textbf{Descripción} \\
+\midrule
+\endhead
+E1 & Business Case & Documento que justifica la necesidad del proyecto, analiza alternativas y define beneficios esperados \\
+E2 & Project Charter & Documento que autoriza formalmente el proyecto y define sus elementos generales \\
+E3 & Registro de Stakeholders & Documento que identifica interesados, nivel de interés, influencia, poder y estrategia de involucramiento \\
+E4 & Definición del Alcance & Documento que define alcance incluido, excluido, supuestos, restricciones y entregables \\
+E5 & WBS & Estructura de desglose del trabajo hasta nivel de paquete de trabajo \\
+E6 & Cronograma del Proyecto & Cronograma elaborado en Microsoft Project con tareas, dependencias, duración, recursos, hitos y ruta crítica \\
+E7 & Matriz RACI & Matriz que define responsables, aprobadores, consultados e informados \\
+E8 & Organigrama del Proyecto & Representación jerárquica de los roles principales del proyecto \\
+E9 & Plan de Recursos & Documento que define recursos humanos, tecnológicos y materiales \\
+E10 & Estimación de Costos & Documento que estima costos de mano de obra, software, hardware, servicios y contingencias \\
+E11 & Plan de Calidad & Documento que define objetivos, aseguramiento, control, métricas y criterios de aceptación \\
+E12 & Plan de Comunicaciones & Documento que define qué se comunica, frecuencia, medio, responsable y destinatarios \\
+E13 & Plan de Gestión de Riesgos & Documento que define la metodología para identificar y gestionar riesgos \\
+E14 & Registro de Riesgos & Documento con mínimo 10 riesgos, causa, probabilidad, impacto, nivel, responsable y respuesta \\
+E15 & Matriz Probabilidad e Impacto & Representación gráfica de los riesgos identificados \\
+E16 & Plan de Adquisiciones & Documento que define qué se compra, qué se desarrolla internamente y justificación make vs buy \\
+E17 & KPIs del Proyecto & Indicadores de tiempo, costo, calidad, riesgos y productividad \\
+E19 & Proceso de Control de Cambios & Procedimiento formal para gestionar cambios \\
+E20 & Solicitud de Cambio 1 & Simulación de una solicitud de cambio real \\
+E21 & Solicitud de Cambio 2 & Simulación de una segunda solicitud de cambio real \\
+E22 & Evaluación de Cambios & Análisis del impacto de cambios sobre alcance, tiempo, costo, calidad y riesgos \\
+E23 & Dashboard Ejecutivo del Proyecto & Vista de indicadores de desempeño del proyecto \\
+E24 & Informe Ejecutivo & Resumen del proyecto dirigido a la alta gerencia \\
+E25 & Acta de Cierre & Documento formal para cerrar el proyecto \\
+E26 & Reflexiones y Recomendaciones & Análisis crítico sobre gestión, equipo, riesgos, calidad y aprendizajes \\
+\bottomrule
+\end{longtable}
+
+\subsection{Entregable técnico del proyecto}
+
+\begin{table}[H]
+\centering
+\caption{Entregable técnico del proyecto}
+\label{tab:entregable-tecnico}
+{\small
+\begin{tabularx}{\textwidth}{L{1.5cm} L{4.8cm} Y}
+\toprule
+\textbf{Código} & \textbf{Entregable} & \textbf{Descripción} \\
+\midrule
+E18 & Desarrollo del Front-End & Prototipo web navegable con login, dashboard principal, módulo de matrícula, cursos, horarios, calificaciones, financiero, administrativo y dashboard ejecutivo \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+El entregable técnico debe permitir la navegación entre las pantallas principales y mostrar visualmente los procesos definidos en el alcance. No se espera una solución productiva completa, sino un prototipo funcional a nivel de interfaz.
+
+\section{Criterios generales de aceptación}
+
+Aunque los criterios específicos se detallarán en el Plan de Calidad y en el WBS, se definen criterios generales para validar que el alcance fue cumplido.
+
+\begin{longtable}{L{4.6cm} L{9.8cm}}
+\caption{Criterios generales de aceptación}\label{tab:criterios-aceptacion}\\
+\toprule
+\textbf{Área} & \textbf{Criterio de aceptación} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Área} & \textbf{Criterio de aceptación} \\
+\midrule
+\endhead
+Alcance del producto & El prototipo incluye los módulos mínimos solicitados en la consigna \\
+Navegación & El usuario puede desplazarse entre login, dashboard principal y módulos principales \\
+Portal Estudiantil & Se visualizan perfil, matrícula, horarios, calificaciones, estado de cuenta e historial académico \\
+Portal Docente & Se visualizan cursos, asistencia y calificaciones \\
+Portal Administrativo & Se visualizan estudiantes, docentes, cursos y períodos académicos \\
+Portal Financiero & Se visualizan pagos de matrícula, pagos de cursos e historial de pagos \\
+Dashboard Ejecutivo & Se visualizan indicadores académicos y financieros básicos \\
+Documentación & Los documentos mantienen coherencia con el Business Case, Project Charter y Registro de Stakeholders \\
+Calidad & No existen errores críticos de navegación al momento de la entrega \\
+Tiempo & Los entregables se completan antes del 24 de junio de 2026 \\
+\bottomrule
+\end{longtable}
+
+Estos criterios permiten validar el alcance sin agregar trabajo innecesario. Si un elemento no está incluido en esta definición, no deberá desarrollarse salvo que sea aprobado formalmente mediante control de cambios.
+
+\section{Conclusión}
+
+La definición del alcance del proyecto Plataforma Universitaria Integrada establece una base clara para desarrollar el prototipo Front-End y los documentos de administración de proyectos requeridos. El alcance incluido permite representar los procesos principales de la Universidad Tecnológica La Mejor, mientras que el alcance excluido evita expectativas incorrectas sobre backend, base de datos, pagos reales o integración con sistemas institucionales.
+
+Los supuestos y restricciones muestran que el proyecto debe ejecutarse en un periodo corto y con recursos limitados, por lo que es necesario mantener control sobre las actividades, priorizar lo solicitado y evitar cambios que no sean necesarios. También se establece una lista de entregables que servirá como guía para el seguimiento del proyecto y para la validación final.
+
+Con esta definición, el equipo cuenta con una referencia formal para elaborar el WBS, el cronograma, los planes de calidad, comunicaciones, riesgos, adquisiciones y cambios. Además, permite mantener coherencia con los documentos previos y asegurar que el producto final responda al propósito definido desde el inicio del proyecto.
+
+\end{document}

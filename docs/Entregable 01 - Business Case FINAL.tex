@@ -1,0 +1,478 @@
+\documentclass[11pt,spanish]{article}
+
+% =========================================================
+% PLANTILLA BASE PARA INFORMES ACADÉMICOS / TÉCNICOS
+% =========================================================
+
+% --- Idioma y codificación ---
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+\DeclareUnicodeCharacter{20A1}{\textcolonmonetary}
+\DeclareUnicodeCharacter{00F7}{\(\div\)}
+\DeclareUnicodeCharacter{00D7}{\(\times\)}
+\DeclareUnicodeCharacter{2212}{\(-\)}
+
+% --- Márgenes / papel ---
+\usepackage{geometry}
+\geometry{a4paper, margin=2.7cm}
+
+% --- Matemáticas ---
+\usepackage{amsmath}
+
+% --- Tablas, enlaces y elementos visuales ---
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes.geometric,arrows.meta,calc}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage[hidelinks]{hyperref}
+
+% --- Encabezado y pie de página ---
+\usepackage[myheadings]{fancyhdr}
+\usepackage{lastpage}
+\setlength{\headheight}{30pt}
+\setlength{\footskip}{30pt}
+
+% --- Interlineado ---
+\linespread{1.2}
+\sloppy
+
+% =========================================================
+% DATOS DEL DOCUMENTO
+% =========================================================
+\newcommand{\Institucion}{Instituto Tecnológico de Costa Rica}
+\newcommand{\Campus}{Campus Tecnológico Central Cartago}
+\newcommand{\DocumentoTitulo}{Entregable 1 - Business Case}
+\newcommand{\DocumentoSubtitulo}{Plataforma Universitaria Integrada:\\[0.2cm] Modernización y Centralización de Procesos Académicos y Administrativos}
+\newcommand{\Curso}{Administración de proyectos}
+\newcommand{\Profesor}{Alicia Marcela Salazar Hernández}
+\newcommand{\FechaDocumento}{6 de junio de 2026}
+\newcommand{\PeriodoAcademico}{I Semestre}
+\newcommand{\AnioDocumento}{2026}
+
+\newcommand{\AutoresPortada}{%
+    Mauricio González Prendas: 2024143009\\
+    Isaac Jiménez Blanco: 2024202804\\
+    Tamara Robles Camacho: 2024099342%
+}
+
+% Datos que aparecen en el encabezado.
+\newcommand{\DocHeaderLeft}{}
+\newcommand{\DocHeaderRight}{Business Case}
+\newcommand{\DocFooterRight}{Página~\thepage\ de~\pageref{LastPage}}
+
+% Metadatos PDF.
+\title{\DocumentoTitulo}
+\author{\AutoresPortada}
+\date{\FechaDocumento}
+
+% =========================================================
+% CONFIGURACIÓN DE TABLAS Y UTILIDADES
+% =========================================================
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\renewcommand{\arraystretch}{1.22}
+\setlength{\LTpre}{0.5em}
+\setlength{\LTpost}{0.5em}
+
+% Imagen segura: si el archivo no existe, muestra un recuadro de marcador.
+\newcommand{\SafeImage}[2][0.92\textwidth]{%
+    \IfFileExists{#2}{%
+        \includegraphics[width=#1]{#2}%
+    }{%
+        \fbox{%
+            \begin{minipage}[c][4cm][c]{#1}
+            \centering
+            Imagen pendiente:\\
+            \texttt{#2}
+            \end{minipage}%
+        }%
+    }%
+}
+
+% Figura reutilizable.
+\newcommand{\EvidenceFigure}[3]{%
+    \begin{figure}[H]
+    \centering
+    \SafeImage{#1}
+    \caption{#2}
+    \label{#3}
+    \end{figure}%
+}
+
+% =========================================================
+% ENCABEZADO Y PIE
+% =========================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\DocHeaderLeft}
+\fancyhead[R]{\DocHeaderRight}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[R]{\DocFooterRight}
+
+% Estilo equivalente para páginas horizontales.
+\fancypagestyle{widefancy}{%
+    \fancyhf{}%
+    \fancyhead[L]{\DocHeaderLeft}%
+    \fancyhead[R]{\DocHeaderRight}%
+    \renewcommand{\headrulewidth}{0.4pt}%
+    \renewcommand{\footrulewidth}{0.4pt}%
+    \fancyfoot[R]{\DocFooterRight}%
+}
+
+% =========================================================
+% PÁGINAS HORIZONTALES PARA TABLAS ANCHAS
+% =========================================================
+\makeatletter
+\newcommand{\SyncPageBuilderDimensions}{%
+    \global\vsize=\textheight
+    \global\@colroom=\textheight
+    \global\@colht=\textheight
+}
+\makeatother
+
+\newenvironment{widepage}{%
+    \clearpage
+    \hypersetup{pageanchor=false}%
+    \paperwidth=297mm
+    \paperheight=210mm
+    \pdfpagewidth=297mm
+    \pdfpageheight=210mm
+    \newgeometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}%
+    \setlength{\textwidth}{243mm}%
+    \setlength{\textheight}{156mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \pagestyle{widefancy}%
+}{%
+    \clearpage
+    \paperwidth=210mm
+    \paperheight=297mm
+    \pdfpagewidth=210mm
+    \pdfpageheight=297mm
+    \restoregeometry
+    \setlength{\textwidth}{156mm}%
+    \setlength{\textheight}{243mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \hypersetup{pageanchor=true}%
+    \pagestyle{fancy}%
+}
+
+% =========================================================
+% PORTADA
+% =========================================================
+\newcommand{\MakeCover}{%
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+
+{\bfseries \huge \Institucion \par}
+\vspace{0.25cm}
+{\LARGE \Campus \par}
+
+\vfill
+
+{\huge \DocumentoTitulo \par}
+\vspace{0.4cm}
+{\Large \DocumentoSubtitulo \par}
+
+\vfill
+
+{\bfseries \LARGE Profesora: \par}
+{\Large \Profesor \par}
+
+\vfill
+
+{\bfseries \LARGE Estudiantes: \par}
+{\Large \AutoresPortada \par}
+
+\vfill
+
+{\bfseries\LARGE Fecha: \par}
+{\Large \FechaDocumento \par}
+
+\vfill
+
+{\LARGE \PeriodoAcademico \par}
+{\LARGE \AnioDocumento \par}
+
+\end{titlepage}%
+}
+
+% =========================================================
+% DOCUMENTO
+% =========================================================
+\begin{document}
+\hypersetup{pageanchor=false}
+
+% =========================
+% Portada
+% =========================
+\MakeCover
+
+% =========================
+% Índice
+% =========================
+\pagenumbering{roman}
+\pagestyle{empty}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+\pagestyle{fancy}
+
+% =========================
+% Contenido
+% =========================
+\section{Situación actual}
+
+La Universidad Tecnológica La Mejor es una institución superior que actualmente presenta muchos problemas a causa de como gestionan sus procesos académicos, administrativos y financieros, ya que es mediante una serie de sistemas independientes que no se encuentran integrados entre sí. Esta segmentación tecnológica representa un obstáculo para la eficiencia operativa de la institución.
+
+Los sistemas actualmente en uso son: hojas de cálculo para el registro de calificaciones, correo electrónico para la comunicación entre departamentos, sistemas propietarios sin conexión para la gestión financiera y registros físicos o digitales dispersas para el historial académico estudiantil.
+
+\subsection{Diagnostico operativo}
+
+El análisis de la situación actual muestra los siguientes hallazgos críticos:
+
+\begin{itemize}[leftmargin=*]
+    \item Duplicidad de datos: Mucha de la información se registra de manera manual en múltiples sistemas, generando inconsistencias y errores.
+    \item Falta de visibilidad: Las autoridades no disponen de indicadores consolidados en tiempo real para la toma de decisiones estratégicas.
+    \item Procesos lentos: La matrícula estudiantil, el registro de calificaciones y los tramites financieros dependen de intervención manual en cada etapa.
+    \item Comunicación deficiente: La información no fluye de forma automática entre el departamento académico, administrativo y financiero.
+    \item Insatisfacción estudiantil: los estudiantes deben acudir presencialmente o contactar múltiples oficinas para realizar gestiones básicas.
+\end{itemize}
+
+\section{Problema identificado}
+
+El problema central de la Universidad Tecnológica La Mejor se basa en la ausencia de una plataforma integrada que centralice y automatice los procesos académicos, administrativos y financieros de la institución. Esta carencia genera ineficiencias operativas medibles, deterioro en la experiencia del usuario y limitaciones significativas para la toma de decisiones basada en datos.
+
+\subsection{Árbol de problemas}
+
+Los efectos identificados como consecuencia directa del problema central son:
+
+\begin{itemize}[leftmargin=*]
+    \item Incremento en los tiempos de atención al estudiante por procesos manuales repetitivos.
+    \item Alta tasa de errores en registros académicos y financieros por falta de validación automatizada.
+    \item Imposibilidad de generar reportes ejecutivos en tiempo real para la toma de decisiones.
+    \item Carga administrativa excesiva sobre el personal docente y administrativo.
+    \item Pérdida de competitividad institucional frente a universidades con sistemas modernos.
+\end{itemize}
+
+\subsection{Impacto cuantificable}
+
+Se estima que la situación actual genera los siguientes impactos negativos:
+
+\begin{itemize}[leftmargin=*]
+    \item Tiempo promedio de atención por tramite estudiantil: 45 a 90 minutos presenciales.
+    \item Porcentaje de errores en registros académicos manuales: aproximadamente 8-12\%.
+    \item Horas trabajadas de los funcionarios semanales destinadas a tareas administrativas redundantes: más de 120 horas por departamento.
+    \item Costo de oportunidad estimado por ineficiencias operativas: significativo para la sostenibilidad institucional.
+\end{itemize}
+
+\section{Oportunidad de mejora}
+
+La modernización tecnológica de la Universidad Tecnológica La Mejor representa una oportunidad para transformar su modelo operativo mejorar la experiencia de todos los funcionarios y estudiantes de la institución y posicionarse como una institución de referencia en gestión universitaria en la región.
+
+\subsection{Visión de la solución}
+
+El desarrollo de una Plataforma Universitaria Integrada permitirá consolidar en un único punto de acceso todos los procesos académicos, administrativos y financieros, ofreciendo interfaces diferenciadas para estudiantes, docentes, personal administrativo, área financiera y alta dirección.
+
+\subsection{Oportunidades identificadas}
+
+Automatización de procesos: reducir de forma considerable el tiempo dedicado a tareas manuales y repetitivas:
+
+\begin{itemize}[leftmargin=*]
+    \item Centralización de la información: garantizar una única fuente de verdad para todos los datos institucionales.
+    \item Mejora en la experiencia estudiantil: brindar un portal accesible para realizar trámites en línea.
+    \item Habilitación de inteligencia institucional: generar dashboards ejecutivos con indicadores académicos y financieros en tiempo real.
+    \item Reducción de errores operativos: implementar validaciones automáticas que eliminen inconsistencias financieras en tiempo real.
+    \item Escalabilidad: diseñar una arquitectura que permita incorporar nuevos módulos o funcionalidades en el futuro.
+\end{itemize}
+
+\section{Beneficios esperados}
+
+Para este nuevo sistema, se espera varios beneficios que mejorarán la experiencia de todos los actores de la institución.
+
+\subsection{Beneficios cuantitativos}
+
+En la siguiente tabla se muestra los beneficios junto con la situación actual y la meta esperada:
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{p{5.2cm} p{4.1cm} Y}
+\toprule
+\textbf{Beneficio} & \textbf{Situación Actual} & \textbf{Meta Esperada} \\
+\midrule
+Tiempo promedio por trámite estudiantil & 45 - 90 min presenciales & 5 - 10 min en línea \\
+Tasa de error en registros académicos & 8\% - 12\% & \textless{} 1\% \\
+Horas administrativas por semana & \textgreater{} 120 horas/departamento & \textless{} 40 horas/departamento \\
+Satisfacción estudiantil (encuesta) & No medida / baja & \textgreater{} 85\% satisfacción \\
+Disponibilidad de reportes ejecutivos & 72 hrs promedio & Tiempo real \\
+Acceso a trámites fuera del campus & No disponible & 24/7 desde dispositivos inteligentes \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Beneficios cualitativos}
+
+\begin{itemize}[leftmargin=*]
+    \item Mejora en la imagen institucional y percepción de modernidad por parte de estudiantes y docentes.
+    \item Mayor transparencia en los procesos académicos y financieros para todos los actores.
+    \item Fortalecimiento de la cultura organizacional orientada a la eficiencia y la innovación.
+    \item Cumplimiento de estándares de calidad universitaria y posibilidad de acreditación institucional.
+    \item Retención estudiantil mejorada gracias a una experiencia universitaria más fluida y satisfactoria.
+    \item Reducción del estrés operativo del personal administrativo y docente.
+\end{itemize}
+
+\section{Alternativas evaluadas}
+
+Para atender la problemática identificada, se evaluaron tres alternativas estratégicas con distintos niveles de inversión, riesgo y beneficio. La primera alternativa fue a status quo, es decir, dejar el proyecto a como lo están manejando actualmente, la segunda alternativa fue un sistema ERP (Planificación de Recursos Empresariales) Comercial que centraliza la gestión de los procesos operativos, financieros y de recursos humanos de una empresa en una única plataforma y la última alternativa fue un desarrollo a la medida donde se puede adaptar 100\% el software a la medida de la institución. A continuación, se presenta el análisis comparativo:
+
+\begin{widepage}
+{\small
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{p{4.1cm} p{4.8cm} p{5.8cm} p{7.2cm}}
+\toprule
+\textbf{Criterio} & \textbf{Alternativa A Status Quo} & \textbf{Alternativa B Sistema ERP Comercial} & \textbf{Alternativa C Desarrollo a la Medida (Recomendada)} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Criterio} & \textbf{Alternativa A Status Quo} & \textbf{Alternativa B Sistema ERP Comercial} & \textbf{Alternativa C Desarrollo a la Medida (Recomendada)} \\
+\midrule
+\endhead
+Costo de implementación & Ninguno & Muy alto (más de 65 millones) & Moderado (según alcance) \\
+Tiempo de implementación & Inmediato & 12 - 24 meses & 4 - 6 meses \\
+Adaptación a la institución & Alta (actual) & Baja (genérico) & Muy alta (personalizado) \\
+Escalabilidad & Nula & Media & Alta \\
+Mantenimiento & Complejo & Dependencia del proveedor & Autonomía interna \\
+Mejora operativa esperada & Ninguna & Alta & Muy alta \\
+Riesgo de adopción & Bajo & Alto & Medio \\
+Recomendación & No viable & No viable (costo) & Opción Seleccionada \\
+\bottomrule
+\end{longtable}
+}
+\end{widepage}
+
+\subsection{Justificación de la alternativa seleccionada}
+
+La Alternativa C - Desarrollo a la Medida: fue seleccionada por ofrecer el mejor balance entre costo, tiempo de implementación, adaptabilidad a los procesos específicos de la Universidad y potencial de mejora operativa. A diferencia de un ERP comercial genérico, una solución desarrollada internamente puede ajustarse con precisión a los flujos de trabajo institucionales, evitar licencias costosas y garantizar la autonomía tecnológica a largo plazo.
+
+\section{Justificación económica}
+
+La posibilidad económica del proyecto se sustenta en el análisis de costos de implementación versus los beneficios operativos y estratégicos que generará la plataforma a mediano y largo plazo.
+
+\subsection{Estimación de costos del proyecto}
+
+En la siguiente tabla se muestra la categoría de costo con su respectivo costo estimado y el porcentaje del total del costo final:
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{Y p{4.1cm} p{2.7cm}}
+\toprule
+\textbf{Categoría de Costo} & \textbf{Costo Estimado} & \textbf{\% del Total} \\
+\midrule
+Mano de obra (equipo de proyecto) & ₡10 millones & 43\% \\
+Licencias y herramientas de software & ₡1,700,000 millones & 7\% \\
+Infraestructura y hosting & ₡1,900,000 millones & 8\% \\
+Capacitación y gestión del cambio & ₡2,300,500 millones & 10\% \\
+Pruebas y control de calidad & ₡3,000,000 millones & 13\% \\
+Contingencias (10\%) & ₡1,600,000 millones & 8\% \\
+Documentación y gestión del proyecto & ₡2,700,000 millones & 11\% \\
+TOTAL ESTIMADO & ₡23,200,500 millones & 100\% \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Retorno sobre la inversión}
+
+Considerando los ahorros operativos estimados derivados de la reducción de horas administrativas, la disminución de errores en registros y la eliminación de procesos manuales redundantes, se proyecta un retorno de la inversión dentro del primer año de operación del sistema.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{Y p{5cm}}
+\toprule
+\textbf{Fuente de Ahorro / Beneficio} & \textbf{Estimación Anual (USD)} \\
+\midrule
+Reducción de horas administrativas redundantes & ₡9,000,000 millones \\
+Eliminación de errores y correcciones manuales & ₡4,000,000 millones \\
+Reducción de costos en materiales físicos e impresión & ₡2,500,000 millones \\
+Mejora en retención estudiantil (estimado) & ₡8,000,000 millones \\
+Reducción de tiempo de atención al estudiante & ₡3,500,000 millones \\
+AHORRO / BENEFICIO ANUAL ESTIMADO & ₡27,000,000 millones \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Análisis costo-beneficio}
+
+En la siguiente tabla se muestra un análisis de la inversión entre el costo y el beneficio de implementar este proyecto en la institución, beneficio estimado, periodo de recuperación y el retorno de la inversión estimado en 1 y 3 años.
+
+Las fórmulas usadas para sacar dichos resultados son las siguientes:
+
+Período de recuperación: Inversión ÷ Beneficio anual
+
+ROI año 1: (Beneficio año 1 − Inversión) ÷ Inversión × 100
+
+ROI año 3: (Beneficio acumulado 3 años − Inversión) ÷ Inversión × 100
+
+Relación B/C: Beneficio anual ÷ Inversión (año 1), o Beneficio acumulado ÷ Inversión (año 3)
+
+A continuación, los resultados:
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{Y p{5.2cm}}
+\toprule
+Inversión total del proyecto & ₡ 23,200,500 millones \\
+Beneficio anual estimado & ₡27,000,000 millones \\
+Período de recuperación de la inversión & \textless{}= 12 meses \\
+Retorno sobre la Inversión proyectado (año 1) & 16.4\% \\
+Retorno sobre la Inversión proyectado (año 3) & \textgreater{}249\% \\
+Relación Costo-Beneficio (B/C) & 1.16 (primer año) / \textgreater{}3.50 (año 3) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Conclusión}
+
+La Universidad Tecnológica La Mejor enfrenta un desafío operativo real y urgente: sus procesos académicos, administrativos y financieros operan de forma segmentada, generando ineficiencias medibles, sobrecarga al personal y una experiencia pobre para estudiantes y docentes.
+
+El análisis presentado en este Business Case demuestra con claridad que la inversión en una Plataforma Universitaria Integrada desarrollada a la medida representa la alternativa más favorable, estratégica y rentable para resolver la problemática identificada. Las demás alternativas evaluadas, tanto el mantenimiento del status quo como la adquisición de un ERP comercial, fueron descartadas por su inviabilidad operativa y económica respectivamente.
+
+Los beneficios proyectados, tanto cuantitativos como cualitativos, superan el costo de la inversión inicial, con un período de recuperación estimado menor o igual doce meses y un retorno sobre la inversión superior al 249\% en un horizonte de tres años. Además, la plataforma posicionará a la institución en un nivel de madurez tecnológica que le permitirá competir, crecer y ofrecer servicios de calidad a su comunidad universitaria.
+
+Por lo anterior, se recomienda formalmente la aprobación y ejecución del proyecto Plataforma Universitaria Integrada, autorizando los recursos humanos, tecnológicos y financieros necesarios para su desarrollo en el plazo establecido.
+
+\subsection{Firmas de aprobación}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{Y Y Y}
+\toprule
+\textbf{Elaborado por} & \textbf{Revisado por} & \textbf{Aprobado por} \\
+\midrule
+\begin{tabular}[c]{@{}l@{}}Equipo de Proyecto\\Firma y fecha\end{tabular} & \begin{tabular}[c]{@{}l@{}}Project Manager\\Firma y fecha\end{tabular} & \begin{tabular}[c]{@{}l@{}}Rector / Patrocinador\\Firma y fecha\end{tabular} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\end{document}

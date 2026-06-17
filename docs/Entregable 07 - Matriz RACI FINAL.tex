@@ -1,0 +1,392 @@
+\documentclass[11pt,spanish]{article}
+
+% =========================================================
+% PLANTILLA BASE PARA INFORMES ACADÉMICOS / TÉCNICOS
+% =========================================================
+
+% --- Idioma y codificación ---
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\DeclareUnicodeCharacter{2265}{\ensuremath{\geq}}
+
+% --- Márgenes / papel ---
+\usepackage{geometry}
+\geometry{a4paper, margin=2.7cm}
+
+% --- Matemáticas ---
+\usepackage{amsmath}
+
+% --- Tablas, enlaces y elementos visuales ---
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes.geometric,arrows.meta,calc}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage[hidelinks]{hyperref}
+
+% --- Encabezado y pie de página ---
+\usepackage[myheadings]{fancyhdr}
+\usepackage{lastpage}
+\setlength{\headheight}{30pt}
+\setlength{\footskip}{30pt}
+
+% --- Interlineado ---
+\linespread{1.2}
+\sloppy
+
+% =========================================================
+% DATOS DEL DOCUMENTO
+% =========================================================
+\newcommand{\Institucion}{Instituto Tecnológico de Costa Rica}
+\newcommand{\Campus}{Campus Tecnológico Central Cartago}
+\newcommand{\DocumentoTitulo}{Entregable 7 - Matriz RACI}
+\newcommand{\DocumentoSubtitulo}{}
+\newcommand{\Curso}{Administración de proyectos}
+\newcommand{\Profesor}{Alicia Marcela Salazar Hernández}
+\newcommand{\FechaDocumento}{14 de junio de 2026}
+\newcommand{\PeriodoAcademico}{I Semestre}
+\newcommand{\AnioDocumento}{2026}
+
+\newcommand{\AutoresPortada}{%
+    Mauricio González Prendas: 2024143009\\
+    Isaac Jiménez Blanco: 2024202804\\
+    Tamara Robles Camacho: 2024099342%
+}
+
+\newcommand{\DocHeaderLeft}{}
+\newcommand{\DocHeaderRight}{Matriz RACI}
+\newcommand{\DocFooterRight}{Página~\thepage\ de~\pageref{LastPage}}
+
+\title{\DocumentoTitulo}
+\author{\AutoresPortada}
+\date{\FechaDocumento}
+
+% =========================================================
+% CONFIGURACIÓN DE TABLAS Y UTILIDADES
+% =========================================================
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.22}
+\setlength{\LTpre}{0.5em}
+\setlength{\LTpost}{0.5em}
+
+\newcommand{\SafeImage}[2][0.92\textwidth]{%
+    \IfFileExists{#2}{%
+        \includegraphics[width=#1]{#2}%
+    }{%
+        \fbox{%
+            \begin{minipage}[c][4cm][c]{#1}
+            \centering
+            Imagen pendiente:\\
+            \texttt{#2}
+            \end{minipage}%
+        }%
+    }%
+}
+
+\newcommand{\EvidenceFigure}[3]{%
+    \begin{figure}[H]
+    \centering
+    \SafeImage{#1}
+    \caption{#2}
+    \label{#3}
+    \end{figure}%
+}
+
+% =========================================================
+% ENCABEZADO Y PIE
+% =========================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\DocHeaderLeft}
+\fancyhead[R]{\DocHeaderRight}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[R]{\DocFooterRight}
+
+\fancypagestyle{widefancy}{%
+    \fancyhf{}%
+    \fancyhead[L]{\DocHeaderLeft}%
+    \fancyhead[R]{\DocHeaderRight}%
+    \renewcommand{\headrulewidth}{0.4pt}%
+    \renewcommand{\footrulewidth}{0.4pt}%
+    \fancyfoot[R]{\DocFooterRight}%
+}
+
+% =========================================================
+% PÁGINAS HORIZONTALES PARA TABLAS ANCHAS
+% =========================================================
+\makeatletter
+\newcommand{\SyncPageBuilderDimensions}{%
+    \global\vsize=\textheight
+    \global\@colroom=\textheight
+    \global\@colht=\textheight
+}
+\makeatother
+
+\newenvironment{widepage}{%
+    \clearpage
+    \hypersetup{pageanchor=false}%
+    \paperwidth=297mm
+    \paperheight=210mm
+    \pdfpagewidth=297mm
+    \pdfpageheight=210mm
+    \newgeometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}%
+    \setlength{\textwidth}{243mm}%
+    \setlength{\textheight}{156mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \pagestyle{widefancy}%
+}{%
+    \clearpage
+    \paperwidth=210mm
+    \paperheight=297mm
+    \pdfpagewidth=210mm
+    \pdfpageheight=297mm
+    \restoregeometry
+    \setlength{\textwidth}{156mm}%
+    \setlength{\textheight}{243mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \hypersetup{pageanchor=true}%
+    \pagestyle{fancy}%
+}
+
+% =========================================================
+% PORTADA
+% =========================================================
+\newcommand{\MakeCover}{%
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+
+{\bfseries \huge \Institucion \par}
+\vspace{0.25cm}
+{\LARGE \Campus \par}
+
+\vfill
+
+{\huge \DocumentoTitulo \par}
+\vspace{0.4cm}
+{\Large \DocumentoSubtitulo \par}
+
+\vfill
+
+{\bfseries \LARGE Profesora: \par}
+{\Large \Profesor \par}
+
+\vfill
+
+{\bfseries \LARGE Estudiantes: \par}
+{\Large \AutoresPortada \par}
+
+\vfill
+
+{\bfseries\LARGE Fecha: \par}
+{\Large \FechaDocumento \par}
+
+\vfill
+
+{\LARGE \PeriodoAcademico \par}
+{\LARGE \AnioDocumento \par}
+
+\end{titlepage}%
+}
+
+% =========================================================
+% DOCUMENTO
+% =========================================================
+\begin{document}
+\hypersetup{pageanchor=false}
+
+\MakeCover
+
+\pagenumbering{roman}
+\pagestyle{empty}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+\pagestyle{fancy}
+
+% =========================
+% Contenido
+% =========================
+\section{Introducción}
+
+La Matriz RACI (Responsable, Aprobador, Consultado y Informado) es una herramienta muy importante en la gestión de proyectos que permite definir con claridad las responsabilidades de cada miembro del equipo y stakeholder para cada actividad principal del proyecto. Su correcta aplicación elimina ambigüedades, evita duplicidades de esfuerzo y asegura que cada tarea tenga un único responsable de su ejecución y un único responsable final de su resultado.
+
+
+El presente documento define la Matriz RACI del proyecto Plataforma Universitaria Integrada, abarcando todas las actividades principales desde el inicio hasta el cierre del proyecto, en concordancia con los grupos de procesos del PMI.
+
+\section{Equipo del proyecto}
+
+En la siguiente tabla se muestran los roles del equipo junto con su responsabilidad principal y los entregables asignados.
+
+
+\begin{table}[H]
+\centering
+\caption{Equipo del proyecto}
+\label{tab:equipo-proyecto}
+{\small
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{p{3cm} p{3.2cm} Y p{4.2cm}}
+\toprule
+\textbf{Rol} & \textbf{Nombre} & \textbf{Responsabilidad principal} & \textbf{Entregables asignados} \\
+\midrule
+Project Manager & Tamara Robles Camacho & Dirección general, gestión documental y coordinación del equipo & E2, E20, E21, E23, E25, E26 \\
+Desarrollador Frontend \& QA 1 & Mauricio González Prendas & Desarrollo del front-end navegable, pruebas de calidad & E18 (Portal estudiantil, portal docente y portal administrativo ) \\
+Desarrollador Frontend \& QA 2 & Carlos Sainz Arce & Desarrollo del front-end navegable, pruebas de calidad & E18 (Portal financiero, portal ejecutivo ) \\
+Analista de Negocio \& Documentador 1 & Isaac Jiménez Blanco & Elaboración de entregables documentales PMI & E1, E3–E9, E19 \\
+Analista de Negocio \& Documentador 2 & Jorge Abarca Quiros & Elaboración de entregables documentales PMI & E10-E17, E22, E24 \\
+Rector / Patrocinador & Dr. Roberto Mora Fallas & Aprobación, toma de decisiones estratégicas & Aprobación de entregables clave \\
+Directora Administrativa & Lic. Patricia Vargas Soto & Validación de requerimientos administrativos & Revisión de módulos administrativos \\
+Director de TI & Ing. Carlos Brenes Mora & Revisión técnica y viabilidad de la solución & Revisión técnica del frontend \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+
+\section{Convención RACI}
+
+La siguiente convención aplica a todas las actividades documentadas en la matriz:
+
+
+\begin{table}[H]
+\centering
+\caption{Convención RACI}
+\label{tab:convencion-raci}
+{\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{Y Y Y Y}
+\toprule
+\textbf{R – Responsable} & \textbf{A – Aprobador} & \textbf{C – Consultado} & \textbf{I – Informado} \\
+\midrule
+Ejecuta la tarea directamente & Responsable final, toma decisiones & Asesora y valida el resultado & Se le informa del progreso \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+
+\subsection{Notas de aplicación}
+
+\begin{itemize}[leftmargin=*]
+
+    \item Cada actividad debe tener exactamente un (1) responsable final (A – Accountable).
+
+    \item Puede haber múltiples ejecutores (R – Responsible) en una misma actividad.
+
+    \item Los roles C e I no ejecutan la tarea pero participan en el proceso de validación o comunicación.
+
+    \item El Project Manager mantiene rol A en todas las actividades de gestión y planificación.
+
+\end{itemize}
+
+\section{Matriz de responsabilidades}
+
+A continuación se muestra la matriz copleta de responsabilidades organizada por fase del proyecto y actividad principal, con la asignación RACI para cada miembro del equipo y stakeholders clave:
+
+
+\begin{widepage}
+{\scriptsize
+\setlength{\tabcolsep}{2pt}
+\begin{longtable}{p{1.8cm} p{5.8cm} C{1.45cm} C{1.45cm} C{1.45cm} C{1.45cm} C{1.45cm} C{1.45cm} C{1.45cm} C{1.45cm}}
+\caption{Matriz de responsabilidades}\label{tab:matriz-responsabilidades}\\
+\toprule
+\textbf{Fase} & \textbf{Actividad principal} & \textbf{Project Manager (Tamara)} & \textbf{Dev Frontend 2 (Mauricio)} & \textbf{Dev Frontend 2 (Carlos)} & \textbf{Analista Doc. 1 (Isaac)} & \textbf{Analista Doc. 2 (Jorge)} & \textbf{Rector / Sponsor (Dr. Roberto)} & \textbf{Dir. Admin. (Lic. Patricia)} & \textbf{Dir. TI (Ing. Carlos)} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Fase} & \textbf{Actividad principal} & \textbf{Project Manager (Tamara)} & \textbf{Dev Frontend 2 (Mauricio)} & \textbf{Dev Frontend 2 (Carlos)} & \textbf{Analista Doc. 1 (Isaac)} & \textbf{Analista Doc. 2 (Jorge)} & \textbf{Rector / Sponsor (Dr. Roberto)} & \textbf{Dir. Admin. (Lic. Patricia)} & \textbf{Dir. TI (Ing. Carlos)} \\
+\midrule
+\endhead
+Inicio & Elaborar Business Case & A & I & I & R & C & C & C & I \\
+Inicio & Desarrollar Project Charter & A & I & I & R & C & C & I & I \\
+Inicio & Identificar y registrar stakeholders & A & I & I & R & C & C & C & C \\
+Planificación & Definir alcance del proyecto & A & C & C & R & C & I & C & C \\
+Planificación & Elaborar WBS con criterios de aceptación & A & C & C & R & C & I & I & I \\
+Planificación & Desarrollar cronograma (MS Project) & A & C & C & R & C & I & I & I \\
+Planificación & Definir Matriz RACI y organigrama & A & C & C & R & C & I & I & I \\
+Planificación & Elaborar Plan de Recursos & A & C & C & R & C & I & C & I \\
+Planificación & Estimar costos del proyecto & A & C & C & R & R & C & C & I \\
+Planificación & Elaborar Plan de Calidad & A & C & C & R & R & I & I & C \\
+Planificación & Elaborar Plan de Comunicaciones & A & C & C & R & R & C & C & I \\
+Planificación & Elaborar Plan de Gestión de Riesgos & A & C & C & R & R & I & I & C \\
+Planificación & Elaborar Registro de Riesgos (≥10) & A & C & C & R & R & I & I & C \\
+Planificación & Elaborar Matriz Probabilidad e Impacto & A & C & C & R & R & I & I & C \\
+Planificación & Elaborar Plan de Adquisiciones & A & C & C & R & R & C & C & C \\
+Ejecución & Desarrollar Login y Dashboard principal & C & C & R & I & I & I & I & A \\
+Ejecución & Desarrollar Portal Estudiantil & C & R & C & I & I & I & C & A \\
+Ejecución & Desarrollar Portal Docente & C & R & C & I & I & I & C & A \\
+Ejecución & Desarrollar Portal Administrativo & C & R & C & I & I & I & A & C \\
+Ejecución & Desarrollar Portal Financiero & C & C & R & I & I & I & C & A \\
+Ejecución & Desarrollar Dashboard Ejecutivo del sistema & C & C & R & I & I & A & C & C \\
+Ejecución & Realizar pruebas de usabilidad y QA & A & C & R & C & C & I & C & C \\
+Monitoreo & Definir y monitorear KPIs del proyecto & A & I & I & C & R & C & I & I \\
+Monitoreo & Gestionar control de cambios & A & C & C & R & C & C & I & I \\
+Monitoreo & Elaborar solicitudes de cambio & A & C & C & C & R & C & I & I \\
+Monitoreo & Evaluar impacto de cambios (alcance/costo) & A & C & C & C & R & C & I & C \\
+Monitoreo & Dar seguimiento al cronograma & A & C & C & R & R & I & I & I \\
+Monitoreo & Dar seguimiento a riesgos activos & A & C & C & R & C & I & I & C \\
+Monitoreo & Mantener Dashboard Ejecutivo del proyecto & A & C & C & C & R & C & I & I \\
+Cierre & Elaborar Informe Ejecutivo final & A & I & I & C & R & C & C & I \\
+Cierre & Formalizar Acta de Cierre del proyecto & A & I & I & R & C & A & C & I \\
+Cierre & Documentar Reflexiones y Recomendaciones & A & R & R & R & R & I & I & I \\
+\bottomrule
+\end{longtable}
+}
+\end{widepage}
+
+
+\section{Análisis de carga por rol}
+
+En la siguiente tabla se observan cuántas veces aparece cada persona como R,A y C.
+
+
+\begin{table}[H]
+\centering
+\caption{Análisis de carga por rol}
+\label{tab:analisis-carga-rol}
+{\small
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{p{4.2cm} C{1.5cm} C{1.5cm} C{1.5cm} Y}
+\toprule
+\textbf{Rol} & \textbf{\# como R} & \textbf{\# como A} & \textbf{\# como C} & \textbf{Observación} \\
+\midrule
+Project Manager (Tamara) & 0 & 26 & 6 & Lidera toda la gestión del proyecto \\
+Dev Frontend 1 (Mauricio) & 4 & 0 & 22 & Foco en ejecución técnica del frontend \\
+Dev Frontend 2 (Carlos) & 4 & 0 & 21 & Foco en ejecución técnica del frontend \\
+Analista Doc. 1 (Isaac) & 18 & 0 & 6 & Principal ejecutor de documentación PMI \\
+Analista Doc. 2 (Jorge) & 14 & 0 & 11 & Principal ejecutor de documentación PMI \\
+Rector / Patrocinador & 0 & 2 & 9 & Toma decisiones estratégicas y aprueba \\
+Directora Administrativa & 0 & 1 & 14 & Valida requerimientos administrativos \\
+Director de TI & 0 & 4 & 12 & Revisa viabilidad técnica \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+
+\section{Observaciones finales}
+
+La presente Matriz RACI fue elaborada en concordancia con los roles definidos en el organigrama del proyecto y es coherente con los paquetes de trabajo identificados en el WBS. Cualquier modificación en el equipo del proyecto o en el alcance deberá reflejarse en una actualización de este documento mediante el proceso formal de control de cambios.
+
+
+Se recomienda revisar esta matriz al inicio de cada fase del proyecto para verificar que las asignaciones siguen siendo vigentes y que la carga de trabajo por rol se mantiene balanceada.
+
+\end{document}

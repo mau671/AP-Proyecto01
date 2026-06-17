@@ -1,7 +1,7 @@
 # TODO
 
 ## Mauricio
-- [ ] Entregable 18: Desarrollo del Front-End
+- [x] Entregable 18: Desarrollo del Front-End
 - [ ] Entregable 20: Solicitud de Cambio #1
 - [ ] Entregable 21: Solicitud de Cambio #2
 - [ ] Entregable 23: Dashboard Ejecutivo del Proyecto

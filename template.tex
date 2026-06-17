@@ -1,0 +1,587 @@
+\documentclass[11pt,spanish]{article}
+
+% =========================================================
+% PLANTILLA BASE PARA INFORMES ACADÉMICOS / TÉCNICOS
+% =========================================================
+% Instrucciones rápidas:
+% 1. Edite los datos de la sección "DATOS DEL DOCUMENTO".
+% 2. Reemplace los textos marcados como TODO.
+% 3. Use las tablas de ejemplo como base para nuevas tablas.
+% 4. Para tablas anchas, use el entorno widepage incluido abajo.
+% 5. Las imágenes se cargan con \SafeImage, que no falla si el archivo no existe.
+
+% --- Idioma y codificación ---
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- Márgenes / papel ---
+\usepackage{geometry}
+\geometry{a4paper, margin=2.7cm}
+
+% --- Matemáticas ---
+\usepackage{amsmath}
+
+% --- Tablas, enlaces y elementos visuales ---
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes.geometric,arrows.meta,calc}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage[hidelinks]{hyperref}
+
+% --- Encabezado y pie de página ---
+\usepackage[myheadings]{fancyhdr}
+\usepackage{lastpage}
+\setlength{\headheight}{30pt}
+\setlength{\footskip}{30pt}
+
+% --- Interlineado ---
+\linespread{1.2}
+\sloppy
+
+% =========================================================
+% DATOS DEL DOCUMENTO
+% =========================================================
+\newcommand{\Institucion}{Nombre de la institución}
+\newcommand{\Campus}{Nombre del campus o sede}
+\newcommand{\DocumentoTitulo}{Título del documento}
+\newcommand{\DocumentoSubtitulo}{Subtítulo opcional del documento}
+\newcommand{\Curso}{Nombre del curso o proyecto}
+\newcommand{\Profesor}{Nombre del profesor o responsable}
+\newcommand{\FechaDocumento}{Día de mes de año}
+\newcommand{\PeriodoAcademico}{Periodo académico}
+\newcommand{\AnioDocumento}{Año}
+
+% Autores. Edite, agregue o elimine líneas según corresponda.
+\newcommand{\AutoresPortada}{%
+    Nombre Apellido: Identificación\\
+    Nombre Apellido: Identificación\\
+    Nombre Apellido: Identificación%
+}
+
+% Datos que aparecen en el encabezado.
+\newcommand{\DocHeaderLeft}{Proyecto / Curso}
+\newcommand{\DocHeaderRight}{Nombre corto del informe}
+\newcommand{\DocFooterRight}{Página~\thepage\ de~\pageref{LastPage}}
+
+% Metadatos PDF.
+\title{\DocumentoTitulo}
+\author{\AutoresPortada}
+\date{\FechaDocumento}
+
+% =========================================================
+% CONFIGURACIÓN DE TABLAS Y UTILIDADES
+% =========================================================
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\renewcommand{\arraystretch}{1.22}
+\setlength{\LTpre}{0.5em}
+\setlength{\LTpost}{0.5em}
+
+% Imagen segura: si el archivo no existe, muestra un recuadro de marcador.
+\newcommand{\SafeImage}[2][0.92\textwidth]{%
+    \IfFileExists{#2}{%
+        \includegraphics[width=#1]{#2}%
+    }{%
+        \fbox{%
+            \begin{minipage}[c][4cm][c]{#1}
+            \centering
+            Imagen pendiente:\\
+            \texttt{#2}
+            \end{minipage}%
+        }%
+    }%
+}
+
+% Figura reutilizable.
+\newcommand{\EvidenceFigure}[3]{%
+    \begin{figure}[H]
+    \centering
+    \SafeImage{#1}
+    \caption{#2}
+    \label{#3}
+    \end{figure}%
+}
+
+% =========================================================
+% ENCABEZADO Y PIE
+% =========================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\DocHeaderLeft}
+\fancyhead[R]{\DocHeaderRight}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[R]{\DocFooterRight}
+
+% Estilo equivalente para páginas horizontales.
+\fancypagestyle{widefancy}{%
+    \fancyhf{}%
+    \fancyhead[L]{\DocHeaderLeft}%
+    \fancyhead[R]{\DocHeaderRight}%
+    \renewcommand{\headrulewidth}{0.4pt}%
+    \renewcommand{\footrulewidth}{0.4pt}%
+    \fancyfoot[R]{\DocFooterRight}%
+}
+
+% =========================================================
+% PÁGINAS HORIZONTALES PARA TABLAS ANCHAS
+% =========================================================
+\makeatletter
+\newcommand{\SyncPageBuilderDimensions}{%
+    \global\vsize=\textheight
+    \global\@colroom=\textheight
+    \global\@colht=\textheight
+}
+\makeatother
+
+\newenvironment{widepage}{%
+    \clearpage
+    \hypersetup{pageanchor=false}%
+    \paperwidth=297mm
+    \paperheight=210mm
+    \pdfpagewidth=297mm
+    \pdfpageheight=210mm
+    \newgeometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}%
+    \setlength{\textwidth}{243mm}%
+    \setlength{\textheight}{156mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \pagestyle{widefancy}%
+}{%
+    \clearpage
+    \paperwidth=210mm
+    \paperheight=297mm
+    \pdfpagewidth=210mm
+    \pdfpageheight=297mm
+    \restoregeometry
+    \setlength{\textwidth}{156mm}%
+    \setlength{\textheight}{243mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \hypersetup{pageanchor=true}%
+    \pagestyle{fancy}%
+}
+
+% =========================================================
+% PORTADA
+% =========================================================
+\newcommand{\MakeCover}{%
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+
+{\bfseries \huge \Institucion \par}
+\vspace{0.25cm}
+{\LARGE \Campus \par}
+
+\vfill
+
+{\huge \DocumentoTitulo \par}
+\vspace{0.4cm}
+{\Large \DocumentoSubtitulo \par}
+
+\vfill
+
+{\bfseries \LARGE Profesor(a) / Responsable: \par}
+{\Large \Profesor \par}
+
+\vfill
+
+{\bfseries \LARGE Estudiantes / Autores: \par}
+{\Large \AutoresPortada \par}
+
+\vfill
+
+{\bfseries\LARGE Fecha: \par}
+{\Large \FechaDocumento \par}
+
+\vfill
+
+{\LARGE \PeriodoAcademico \par}
+{\LARGE \AnioDocumento \par}
+
+\end{titlepage}%
+}
+
+% =========================================================
+% DOCUMENTO
+% =========================================================
+\begin{document}
+\hypersetup{pageanchor=false}
+
+% =========================
+% Portada
+% =========================
+\MakeCover
+
+% =========================
+% Índice
+% =========================
+\pagenumbering{roman}
+\pagestyle{empty}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+\pagestyle{fancy}
+
+% =========================
+% Contenido
+% =========================
+\section{Introducción}
+
+TODO: Escriba una introducción general del documento, el contexto del trabajo, el alcance evaluado y la finalidad del informe.
+
+\section{Contexto del proyecto}
+
+TODO: Describa el sistema, producto, organización o situación evaluada. Incluya el propósito del proyecto y los módulos o áreas consideradas.
+
+\section{Objetivos}
+
+\subsection{Objetivo general}
+
+TODO: Redacte el objetivo general del documento.
+
+\subsection{Objetivos específicos}
+
+\begin{enumerate}[label=\arabic*.]
+    \item TODO: Objetivo específico 1.
+    \item TODO: Objetivo específico 2.
+    \item TODO: Objetivo específico 3.
+\end{enumerate}
+
+\section{Plan de trabajo o plan de calidad}
+
+TODO: Explique la metodología utilizada, responsables, herramientas, criterios de aceptación, métricas o cualquier estrategia aplicada.
+
+\subsection{Alcance y responsabilidades}
+
+\begin{table}[H]
+\centering
+\caption{Módulos o áreas incluidos en el alcance}
+\label{tab:alcance-incluido}
+\begin{tabularx}{\textwidth}{p{4.2cm} p{3cm} Y}
+\toprule
+\textbf{Área / Módulo} & \textbf{Responsable} & \textbf{Actividades principales} \\
+\midrule
+TODO & TODO & TODO \\
+TODO & TODO & TODO \\
+TODO & TODO & TODO \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Elementos excluidos del alcance}
+\label{tab:alcance-excluido}
+\begin{tabularx}{\textwidth}{p{4.5cm} Y}
+\toprule
+\textbf{Elemento excluido} & \textbf{Justificación} \\
+\midrule
+TODO & TODO \\
+TODO & TODO \\
+TODO & TODO \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Requisitos, criterios o elementos evaluados}
+
+\begin{table}[H]
+\centering
+\caption{Requisitos o criterios evaluados}
+\label{tab:requisitos}
+\begin{tabularx}{\textwidth}{p{1.8cm} p{2.6cm} Y p{2.7cm}}
+\toprule
+\textbf{ID} & \textbf{Tipo} & \textbf{Descripción} & \textbf{Responsable} \\
+\midrule
+REQ-01 & Funcional & TODO & TODO \\
+REQ-02 & No funcional & TODO & TODO \\
+REQ-03 & Funcional & TODO & TODO \\
+REQ-04 & No funcional & TODO & TODO \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Herramientas utilizadas}
+
+\begin{table}[H]
+\centering
+\caption{Herramientas utilizadas}
+\label{tab:herramientas}
+\begin{tabularx}{\textwidth}{p{3.5cm} Y}
+\toprule
+\textbf{Herramienta} & \textbf{Uso dentro del proyecto} \\
+\midrule
+TODO & TODO \\
+TODO & TODO \\
+TODO & TODO \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Métricas y criterios de aceptación}
+
+\begin{table}[H]
+\centering
+\caption{Métricas y criterios de aceptación}
+\label{tab:metricas-aceptacion}
+\begin{tabularx}{\textwidth}{p{4.1cm} p{3.2cm} p{3.2cm} Y}
+\toprule
+\textbf{Métrica} & \textbf{Aceptación total} & \textbf{Aceptación parcial} & \textbf{Rechazo} \\
+\midrule
+TODO & TODO & TODO & TODO \\
+TODO & TODO & TODO & TODO \\
+TODO & TODO & TODO & TODO \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Matriz de trazabilidad}
+
+TODO: Explique cómo se relacionan los requisitos o criterios con los casos, evidencias, resultados o responsables. La siguiente tabla está configurada en página horizontal para permitir más columnas.
+
+\begin{widepage}
+{\small
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{p{1.5cm} p{5.3cm} p{4.4cm} p{3.4cm} p{1.9cm} p{2.2cm} p{2.1cm}}
+\caption{Matriz de trazabilidad}\label{tab:trazabilidad}\\
+\toprule
+\textbf{Req.} & \textbf{Descripción} & \textbf{Casos / Evidencias} & \textbf{Tipo} & \textbf{Resultado} & \textbf{Defecto / Hallazgo} & \textbf{Resp.} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Req.} & \textbf{Descripción} & \textbf{Casos / Evidencias} & \textbf{Tipo} & \textbf{Resultado} & \textbf{Defecto / Hallazgo} & \textbf{Resp.} \\
+\midrule
+\endhead
+REQ-01 & TODO & TODO & TODO & TODO & TODO & TODO \\
+REQ-02 & TODO & TODO & TODO & TODO & TODO & TODO \\
+REQ-03 & TODO & TODO & TODO & TODO & TODO & TODO \\
+\bottomrule
+\end{longtable}
+}
+\end{widepage}
+
+\section{Casos de prueba, actividades o evidencias ejecutadas}
+
+\subsection{Bloque 1}
+
+TODO: Describa los casos, actividades o pruebas realizadas en este bloque.
+
+\begin{table}[H]
+\centering
+\caption{Resumen de resultados del bloque 1}
+\label{tab:resultados-bloque-1}
+\begin{tabularx}{\textwidth}{p{2.8cm} Y p{3cm} p{3cm}}
+\toprule
+\textbf{ID} & \textbf{Descripción} & \textbf{Resultado esperado} & \textbf{Resultado obtenido} \\
+\midrule
+CP-001 & TODO & TODO & TODO \\
+CP-002 & TODO & TODO & TODO \\
+CP-003 & TODO & TODO & TODO \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\EvidenceFigure{images/evidencia-ejemplo.png}{Evidencia visual de ejemplo}{fig:evidencia-ejemplo}
+
+\subsection{Bloque 2}
+
+TODO: Describa un segundo conjunto de actividades, pruebas o resultados.
+
+\begin{table}[H]
+\centering
+\caption{Resultados cuantitativos de ejemplo}
+\label{tab:resultados-cuantitativos}
+\begin{tabularx}{\textwidth}{p{4cm} p{3cm} p{3cm} Y}
+\toprule
+\textbf{Indicador} & \textbf{Valor esperado} & \textbf{Valor obtenido} & \textbf{Interpretación} \\
+\midrule
+TODO & TODO & TODO & TODO \\
+TODO & TODO & TODO & TODO \\
+TODO & TODO & TODO & TODO \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Resumen consolidado}
+
+\begin{widepage}
+{\small
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{p{2.2cm} p{4.5cm} p{2.6cm} p{3.4cm} p{2.4cm} p{6.2cm}}
+\caption{Resumen consolidado de casos, actividades o evidencias}\label{tab:casos-resumen}\\
+\toprule
+\textbf{ID} & \textbf{Nombre} & \textbf{Área} & \textbf{Tipo} & \textbf{Resultado} & \textbf{Observaciones} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Nombre} & \textbf{Área} & \textbf{Tipo} & \textbf{Resultado} & \textbf{Observaciones} \\
+\midrule
+\endhead
+CP-001 & TODO & TODO & TODO & TODO & TODO \\
+CP-002 & TODO & TODO & TODO & TODO & TODO \\
+CP-003 & TODO & TODO & TODO & TODO & TODO \\
+\bottomrule
+\end{longtable}
+}
+\end{widepage}
+
+\section{Hallazgos o defectos encontrados}
+
+TODO: Presente los hallazgos, defectos, problemas, riesgos o incumplimientos detectados durante la evaluación.
+
+\begin{widepage}
+{\small
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{p{1.8cm} p{3.3cm} p{5.2cm} p{1.8cm} p{1.8cm} p{4.6cm} p{2cm} p{2cm}}
+\caption{Registro formal de hallazgos o defectos}\label{tab:defectos}\\
+\toprule
+\textbf{ID} & \textbf{Área} & \textbf{Descripción} & \textbf{Severidad} & \textbf{Prioridad} & \textbf{Resultado esperado} & \textbf{Estado} & \textbf{Resp.} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Área} & \textbf{Descripción} & \textbf{Severidad} & \textbf{Prioridad} & \textbf{Resultado esperado} & \textbf{Estado} & \textbf{Resp.} \\
+\midrule
+\endhead
+DEF-001 & TODO & TODO & TODO & TODO & TODO & TODO & TODO \\
+DEF-002 & TODO & TODO & TODO & TODO & TODO & TODO & TODO \\
+\bottomrule
+\end{longtable}
+}
+\end{widepage}
+
+\section{Análisis de resultados}
+
+TODO: Interprete los resultados obtenidos. Relacione métricas, evidencias, requisitos, hallazgos y criterios de aceptación.
+
+\section{Evaluación general}
+
+\subsection{Cumplimiento funcional}
+
+TODO: Analice el cumplimiento funcional observado.
+
+\subsection{Calidad no funcional}
+
+TODO: Analice rendimiento, accesibilidad, seguridad, usabilidad, mantenibilidad u otros atributos relevantes.
+
+\subsection{Riesgos identificados}
+
+\begin{table}[H]
+\centering
+\caption{Riesgos identificados}
+\label{tab:riesgos}
+\begin{tabularx}{\textwidth}{p{3cm} Y p{3cm} p{3cm}}
+\toprule
+\textbf{Riesgo} & \textbf{Descripción} & \textbf{Impacto} & \textbf{Mitigación} \\
+\midrule
+TODO & TODO & TODO & TODO \\
+TODO & TODO & TODO & TODO \\
+TODO & TODO & TODO & TODO \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Conclusiones}
+
+\begin{enumerate}[label=\arabic*.]
+    \item TODO: Conclusión 1.
+    \item TODO: Conclusión 2.
+    \item TODO: Conclusión 3.
+\end{enumerate}
+
+\section{Recomendaciones}
+
+\begin{enumerate}[label=\arabic*.]
+    \item TODO: Recomendación 1.
+    \item TODO: Recomendación 2.
+    \item TODO: Recomendación 3.
+\end{enumerate}
+
+\section{Anexos}
+
+TODO: Incluya evidencias, reportes técnicos, criterios adicionales o material complementario.
+
+\subsection{Anexo A: evidencias visuales}
+
+\begin{longtable}{p{3cm} p{4.2cm} p{7cm}}
+\caption{Evidencias visuales utilizadas}\label{tab:anexo-evidencias}\\
+\toprule
+\textbf{Área} & \textbf{Casos relacionados} & \textbf{Evidencia documentada} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Área} & \textbf{Casos relacionados} & \textbf{Evidencia documentada} \\
+\midrule
+\endhead
+TODO & TODO & TODO \\
+TODO & TODO & TODO \\
+TODO & TODO & TODO \\
+\bottomrule
+\end{longtable}
+
+\subsection{Anexo B: reportes o respaldos técnicos}
+
+\begin{table}[H]
+\centering
+\caption{Reportes técnicos considerados como respaldo}
+\label{tab:anexo-reportes}
+\begin{tabularx}{\textwidth}{p{3.8cm} p{4.2cm} Y}
+\toprule
+\textbf{Herramienta / Fuente} & \textbf{Reporte o resultado} & \textbf{Uso dentro del análisis} \\
+\midrule
+TODO & TODO & TODO \\
+TODO & TODO & TODO \\
+TODO & TODO & TODO \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Anexo C: criterios de clasificación}
+
+\begin{table}[H]
+\centering
+\caption{Criterios de severidad aplicados a hallazgos}
+\label{tab:anexo-severidad}
+\begin{tabularx}{\textwidth}{p{3cm} Y}
+\toprule
+\textbf{Severidad} & \textbf{Criterio utilizado} \\
+\midrule
+Crítica & Bloquea un flujo principal completo, impide la operación esencial o expone información sensible. \\
+Alta & Afecta una función importante y ofrece una alternativa limitada o poco clara. \\
+Media & Afecta experiencia, consistencia o resultados parciales sin bloquear completamente el uso. \\
+Baja & Corresponde a un problema visual, textual, de accesibilidad menor o de mejora de comunicación. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Criterios de prioridad aplicados a hallazgos}
+\label{tab:anexo-prioridad}
+\begin{tabularx}{\textwidth}{p{3cm} Y}
+\toprule
+\textbf{Prioridad} & \textbf{Criterio utilizado} \\
+\midrule
+Alta & Debe atenderse antes de una entrega porque afecta fuertemente el resultado o impide validar un requisito relevante. \\
+Media & Debe documentarse y corregirse cuando se planifique mantenimiento del área afectada. \\
+Baja & Puede gestionarse como mejora futura si no compromete el flujo principal ni la seguridad. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\end{document}

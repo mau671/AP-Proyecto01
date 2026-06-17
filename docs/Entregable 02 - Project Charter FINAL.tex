@@ -1,0 +1,809 @@
+\documentclass[11pt,spanish]{article}
+
+% =========================================================
+% PLANTILLA BASE PARA INFORMES ACADÉMICOS / TÉCNICOS
+% =========================================================
+
+% --- Idioma y codificación ---
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+\DeclareUnicodeCharacter{20A1}{\textcolonmonetary}
+
+% --- Márgenes / papel ---
+\usepackage{geometry}
+\geometry{a4paper, margin=2.7cm}
+
+% --- Matemáticas ---
+\usepackage{amsmath}
+
+% --- Tablas, enlaces y elementos visuales ---
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes.geometric,arrows.meta,calc}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage[hidelinks]{hyperref}
+
+% --- Encabezado y pie de página ---
+\usepackage[myheadings]{fancyhdr}
+\usepackage{lastpage}
+\setlength{\headheight}{30pt}
+\setlength{\footskip}{30pt}
+
+% --- Interlineado ---
+\linespread{1.2}
+\sloppy
+
+% =========================================================
+% DATOS DEL DOCUMENTO
+% =========================================================
+\newcommand{\Institucion}{Instituto Tecnológico de Costa Rica}
+\newcommand{\Campus}{Campus Tecnológico Central Cartago}
+\newcommand{\DocumentoTitulo}{Project Charter}
+\newcommand{\DocumentoSubtitulo}{Plataforma Universitaria Integrada:\ Modernización y Centralización de Procesos Académicos y Administrativos}
+\newcommand{\Curso}{Administración de proyectos}
+\newcommand{\Profesor}{Alicia Marcela Salazar Hernández}
+\newcommand{\FechaDocumento}{8 de junio de 2026}
+\newcommand{\PeriodoAcademico}{I Semestre}
+\newcommand{\AnioDocumento}{2026}
+
+\newcommand{\AutoresPortada}{%
+    Mauricio González Prendas: 2024143009\\
+    Isaac Jiménez Blanco: 2024202804\\
+    Tamara Robles Camacho: 2024099342%
+}
+
+% Datos que aparecen en el encabezado.
+\newcommand{\DocHeaderLeft}{}
+\newcommand{\DocHeaderRight}{Project Charter}
+\newcommand{\DocFooterRight}{Página~\thepage\ de~\pageref{LastPage}}
+
+% Metadatos PDF.
+\title{\DocumentoTitulo}
+\author{\AutoresPortada}
+\date{\FechaDocumento}
+
+% =========================================================
+% CONFIGURACIÓN DE TABLAS Y UTILIDADES
+% =========================================================
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\renewcommand{\arraystretch}{1.22}
+\setlength{\LTpre}{0.5em}
+\setlength{\LTpost}{0.5em}
+
+% Imagen segura: si el archivo no existe, muestra un recuadro de marcador.
+\newcommand{\SafeImage}[2][0.92\textwidth]{%
+    \IfFileExists{#2}{%
+        \includegraphics[width=#1]{#2}%
+    }{%
+        \fbox{%
+            \begin{minipage}[c][4cm][c]{#1}
+            \centering
+            Imagen pendiente:\\
+            \texttt{#2}
+            \end{minipage}%
+        }%
+    }%
+}
+
+% Figura reutilizable.
+\newcommand{\EvidenceFigure}[3]{%
+    \begin{figure}[H]
+    \centering
+    \SafeImage{#1}
+    \caption{#2}
+    \label{#3}
+    \end{figure}%
+}
+
+% =========================================================
+% ENCABEZADO Y PIE
+% =========================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\DocHeaderLeft}
+\fancyhead[R]{\DocHeaderRight}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[R]{\DocFooterRight}
+
+% Estilo equivalente para páginas horizontales.
+\fancypagestyle{widefancy}{%
+    \fancyhf{}%
+    \fancyhead[L]{\DocHeaderLeft}%
+    \fancyhead[R]{\DocHeaderRight}%
+    \renewcommand{\headrulewidth}{0.4pt}%
+    \renewcommand{\footrulewidth}{0.4pt}%
+    \fancyfoot[R]{\DocFooterRight}%
+}
+
+% =========================================================
+% PÁGINAS HORIZONTALES PARA TABLAS ANCHAS
+% =========================================================
+\makeatletter
+\newcommand{\SyncPageBuilderDimensions}{%
+    \global\vsize=\textheight
+    \global\@colroom=\textheight
+    \global\@colht=\textheight
+}
+\makeatother
+
+\newenvironment{widepage}{%
+    \clearpage
+    \hypersetup{pageanchor=false}%
+    \paperwidth=297mm
+    \paperheight=210mm
+    \pdfpagewidth=297mm
+    \pdfpageheight=210mm
+    \newgeometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}%
+    \setlength{\textwidth}{243mm}%
+    \setlength{\textheight}{156mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \pagestyle{widefancy}%
+}{%
+    \clearpage
+    \paperwidth=210mm
+    \paperheight=297mm
+    \pdfpagewidth=210mm
+    \pdfpageheight=297mm
+    \restoregeometry
+    \setlength{\textwidth}{156mm}%
+    \setlength{\textheight}{243mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \hypersetup{pageanchor=true}%
+    \pagestyle{fancy}%
+}
+
+% =========================================================
+% PORTADA
+% =========================================================
+\newcommand{\MakeCover}{%
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+
+{\bfseries \huge \Institucion \par}
+\vspace{0.25cm}
+{\LARGE \Campus \par}
+
+\vfill
+
+{\huge \DocumentoTitulo \par}
+\vspace{0.4cm}
+{\Large \DocumentoSubtitulo \par}
+
+\vfill
+
+{\bfseries \LARGE Profesora: \par}
+{\Large \Profesor \par}
+
+\vfill
+
+{\bfseries \LARGE Estudiantes: \par}
+{\Large \AutoresPortada \par}
+
+\vfill
+
+{\bfseries\LARGE Fecha: \par}
+{\Large \FechaDocumento \par}
+
+\vfill
+
+{\LARGE \PeriodoAcademico \par}
+{\LARGE \AnioDocumento \par}
+
+\end{titlepage}%
+}
+
+% =========================================================
+% DOCUMENTO
+% =========================================================
+\begin{document}
+\hypersetup{pageanchor=false}
+
+% =========================
+% Portada
+% =========================
+\MakeCover
+
+% =========================
+% Índice
+% =========================
+\pagenumbering{roman}
+\pagestyle{empty}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+\pagestyle{fancy}
+
+% =========================
+% Contenido
+% =========================
+\section{Charter / contract}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{0.82\textwidth}{p{3.8cm} Y}
+\toprule
+\textbf{Title} & Plataforma Universitaria Integrada \\
+\textbf{Sponsor} & Dr. Roberto Mora Fallas \\
+\textbf{Leader} & Tamara Robles Camacho \\
+\textbf{Date} & 8 de junio de 2026 \\
+\textbf{Version} & 1.0 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Problem definition and purpose}
+
+La Universidad Tecnológica La Mejor presenta problemas importantes en la forma en que gestiona sus procesos académicos, administrativos y financieros. Actualmente la información se encuentra distribuida en varios sistemas independientes, hojas de cálculo, correos electrónicos y registros físicos o digitales separados. Esto provoca duplicidad de datos, errores en registros, atrasos en trámites y poca visibilidad para la toma de decisiones.
+
+El resultado que no se desea mantener es una gestión universitaria fragmentada, donde estudiantes, docentes, personal administrativo y autoridades deben consultar información en diferentes lugares. Esta situación hace que los procesos sean más lentos y que la institución dependa mucho de tareas manuales.
+
+Lo que se busca lograr con el proyecto es diseñar y desarrollar un prototipo web navegable de una Plataforma Universitaria Integrada. La solución permitirá representar en un solo sistema los principales procesos estudiantiles, docentes, administrativos, financieros y ejecutivos de la universidad. El enfoque del proyecto es la gestión del proyecto y el desarrollo de un Front-End funcional, no el desarrollo de un backend ni de una base de datos real.
+
+Los procesos que generan actualmente este resultado son los siguientes:
+
+\begin{itemize}[leftmargin=*]
+    \item Proceso de matrícula de cursos
+    \item Proceso de consulta de horarios
+    \item Proceso de registro y consulta de calificaciones
+    \item Proceso de estado de cuenta y pagos
+    \item Proceso de gestión de estudiantes, docentes y cursos
+    \item Proceso de generación de reportes académicos y financieros
+    \item Proceso de comunicación entre áreas académicas, administrativas y financieras
+\end{itemize}
+
+Las medidas que permitirán evidenciar una mejora son:
+
+\begin{itemize}[leftmargin=*]
+    \item Reducción del tiempo promedio de atención por trámite estudiantil
+    \item Disminución de errores en registros académicos y financieros
+    \item Cantidad de módulos representados correctamente en el prototipo
+    \item Cumplimiento de criterios de aceptación definidos para cada módulo
+    \item Nivel de satisfacción esperado por parte de usuarios internos y estudiantes
+    \item Disponibilidad de indicadores ejecutivos en una pantalla consolidada
+\end{itemize}
+
+El desempeño actual muestra trámites estudiantiles lentos, con tiempos estimados entre 45 y 90 minutos de atención presencial. También se identifica una tasa de error aproximada entre 8\% y 12\% en registros manuales, además de más de 120 horas semanales dedicadas a tareas administrativas redundantes por departamento.
+
+La meta de desempeño es representar una solución que reduzca el tiempo de trámite estudiantil a un rango estimado entre 5 y 10 minutos en línea, disminuir los errores esperados a menos del 1\% mediante validaciones del sistema y mostrar información ejecutiva de manera consolidada. Para efectos del proyecto académico, se espera completar la documentación de administración del proyecto y el prototipo Front-End navegable antes del 24 de junio de 2026. Esto implica trabajar con un cronograma corto y controlado, priorizando los módulos mínimos solicitados y evitando agregar funcionalidades fuera del alcance.
+
+\section{Business case}
+
+El problema actual tiene impacto directo en los estudiantes, docentes, personal administrativo, área financiera y autoridades de la Universidad Tecnológica La Mejor.
+
+En los estudiantes, el impacto se refleja en trámites lentos, necesidad de acudir a varias oficinas y dificultad para consultar información académica o financiera desde un único lugar. Esto afecta la experiencia estudiantil y genera insatisfacción con los servicios institucionales.
+
+En los docentes, el impacto se observa en procesos manuales para registrar calificaciones, controlar asistencia y consultar información de cursos. Esto aumenta la carga operativa y reduce el tiempo disponible para actividades académicas.
+
+En el personal administrativo y financiero, el problema genera duplicidad de registros, revisión manual de información y dificultad para mantener datos actualizados. También aumenta el riesgo de errores al trabajar con información dispersa.
+
+En la alta dirección, el impacto se relaciona con la poca visibilidad para tomar decisiones. Al no contar con indicadores académicos y financieros centralizados, los reportes dependen de consolidaciones manuales y pueden tardar mucho tiempo en generarse.
+
+Este proyecto es prioridad porque la universidad necesita modernizar sus procesos y centralizar la información para mejorar la eficiencia operativa. Además, el proyecto permite trabajar una solución alineada con proyectos de TI, donde se deben gestionar alcance, cronograma, costos, calidad, riesgos, recursos, comunicaciones y cambios.
+
+Los entregables clave esperados son:
+
+\begin{itemize}[leftmargin=*]
+    \item Project Charter del proyecto
+    \item Definición del alcance
+    \item WBS del proyecto
+    \item Cronograma en Microsoft Project
+    \item Matriz RACI
+    \item Organigrama del proyecto
+    \item Plan de recursos
+    \item Estimación de costos
+    \item Plan de calidad
+    \item Plan de comunicaciones
+    \item Plan de gestión y registro de riesgos
+    \item Matriz de probabilidad e impacto
+    \item Plan de adquisiciones
+    \item KPIs del proyecto
+    \item Prototipo Front-End navegable
+    \item Proceso de control de cambios
+    \item Solicitudes y evaluación de cambios
+    \item Dashboard ejecutivo del proyecto
+    \item Informe ejecutivo
+    \item Acta de cierre
+    \item Reflexiones y recomendaciones
+\end{itemize}
+
+Los beneficios indirectos que pueden surgir del proyecto son una mejor imagen institucional, mayor transparencia en los procesos, reducción de carga operativa y una base inicial para futuras etapas de automatización.
+
+\subsection{Objetivos del proyecto Plataforma Universitaria Integrada}
+
+\begin{enumerate}[label=\arabic*.]
+    \item Desarrollar un prototipo Front-End web navegable que represente los módulos principales de la Universidad Tecnológica La Mejor.
+    \item Centralizar visualmente los procesos académicos, administrativos y financieros dentro de una misma plataforma.
+    \item Diseñar un Portal Estudiantil con inicio de sesión, perfil, matrícula, horarios, calificaciones, estado de cuenta e historial académico.
+    \item Diseñar un Portal Docente con gestión de cursos, registro de asistencia y registro de calificaciones.
+    \item Diseñar un Portal Administrativo con gestión de estudiantes, docentes, cursos y períodos académicos.
+    \item Diseñar un Portal Financiero con pagos de matrícula, pagos de cursos e historial de pagos.
+    \item Diseñar un Dashboard Ejecutivo con indicadores de estudiantes activos, ingresos por matrícula, indicadores académicos e indicadores financieros.
+    \item Aplicar los grupos de procesos de PMI mediante entregables de inicio, planificación, ejecución, monitoreo y control, y cierre.
+\end{enumerate}
+
+\subsection{Criterios de éxito del proyecto}
+
+El proyecto será considerado exitoso si se cumplen los siguientes criterios:
+
+\begin{itemize}[leftmargin=*]
+    \item El prototipo Front-End incluye los módulos mínimos solicitados en el alcance del proyecto.
+    \item La navegación permite ingresar al login, dashboard principal, portal estudiantil, portal docente, portal administrativo, portal financiero y dashboard ejecutivo.
+    \item Los documentos del proyecto mantienen coherencia entre alcance, cronograma, riesgos, calidad, costos y cambios.
+    \item El cronograma se entrega en Microsoft Project con tareas, subtareas, dependencias, duraciones, responsables, recursos, costos, hitos y ruta crítica.
+    \item El prototipo no presenta errores críticos de navegación al momento de la entrega final.
+    \item Los entregables se completan y revisan antes del 24 de junio de 2026.
+    \item El Sponsor y el equipo validan que el proyecto cumple con el propósito definido en el Project Charter.
+\end{itemize}
+
+\section{Key players}
+
+\subsection{Sponsor}
+
+Dr. Roberto Mora Fallas Rector de la Universidad Tecnológica La Mejor
+
+Su participación es necesaria porque representa a la alta dirección y autoriza el inicio formal del proyecto. Además, valida que el proyecto responda a la necesidad institucional de modernizar y centralizar los procesos académicos, administrativos y financieros.
+
+Su rol es brindar patrocinio, aprobar el Project Charter, revisar avances importantes, validar entregables principales y apoyar al equipo cuando existan decisiones que afecten alcance, tiempo, costo o calidad.
+
+\subsection{Leader}
+
+Tamara Robles Camacho Project Manager
+
+Su participación es necesaria porque debe coordinar el proyecto y mantener alineado el trabajo del equipo con los objetivos definidos. También es responsable de dar seguimiento a las actividades, riesgos, comunicaciones y cambios.
+
+Su rol es liderar la planificación, organizar reuniones de seguimiento, distribuir responsabilidades, comunicar avances al patrocinador y verificar que los entregables se completen dentro del alcance establecido.
+
+\subsection{Members}
+
+Isaac Jiménez Blanco Analista de Negocio y Documentador
+
+Su participación es necesaria porque el proyecto requiere una documentación clara, coherente y alineada con las prácticas vistas en el curso. Además, apoya el análisis de alcance, riesgos, calidad, comunicaciones, adquisiciones y cambios.
+
+Su rol es elaborar y revisar entregables documentales, mantener coherencia entre documentos, apoyar el registro de riesgos, documentar procesos de cambio y asegurar que la información del proyecto sea trazable.
+
+Mauricio González Prendas Desarrollador Front-End y QA
+
+Su participación es necesaria porque el proyecto requiere un prototipo web navegable y funcional. También se necesita validar la calidad del producto mediante revisiones visuales, pruebas manuales y criterios de aceptación.
+
+Su rol es desarrollar el Front-End, construir las pantallas principales, organizar la navegación del prototipo, realizar pruebas básicas y corregir defectos encontrados durante la revisión.
+
+\subsection{Other key people}
+
+Lic. Patricia Vargas Soto Directora Administrativa
+
+Su participación es importante porque representa las necesidades del área administrativa. Su rol es validar procesos relacionados con estudiantes, docentes, cursos y períodos académicos.
+
+Ing. Carlos Brenes Mora Director de TI
+
+Su participación es importante porque debe revisar la viabilidad técnica del prototipo y asegurar que la solución sea mantenible y coherente con una plataforma web institucional.
+
+Prof. Andrea Solís Zamora Representante Docente
+
+Su participación es importante porque aporta la perspectiva de los docentes. Su rol es validar que el portal docente permita representar cursos, asistencia y calificaciones de forma clara.
+
+Estudiantes Usuarios finales del Portal Estudiantil
+
+Su participación es importante porque son uno de los principales grupos beneficiados. Su rol es validar la facilidad de uso del portal estudiantil y la claridad de los procesos de matrícula, horarios, calificaciones y estado de cuenta.
+
+Departamento Financiero Área Financiera
+
+Su participación es importante porque valida las necesidades relacionadas con pagos de matrícula, pagos de cursos, historial de pagos e indicadores financieros.
+
+Proveedor de Hosting Proveedor externo
+
+Su participación puede ser necesaria si el prototipo se despliega en un ambiente web. Su rol es brindar disponibilidad del servicio y soporte básico de infraestructura.
+
+\section{Scope}
+
+\subsection{In scope}
+
+El proyecto cubrirá el diseño y desarrollo de un prototipo Front-End web navegable para la Universidad Tecnológica La Mejor. El alcance incluye los procesos principales de los portales estudiantil, docente, administrativo, financiero y dashboard ejecutivo.
+
+El alcance incluye:
+
+\begin{itemize}[leftmargin=*]
+    \item Inicio de sesión
+    \item Dashboard principal
+    \item Portal Estudiantil
+    \item Perfil del estudiante
+    \item Matrícula de cursos
+    \item Consulta de horarios
+    \item Consulta de calificaciones
+    \item Estado de cuenta
+    \item Historial académico
+    \item Portal Docente
+    \item Gestión de cursos
+    \item Registro de asistencia
+    \item Registro de calificaciones
+    \item Portal Administrativo
+    \item Gestión de estudiantes
+    \item Gestión de docentes
+    \item Gestión de cursos
+    \item Gestión de períodos académicos
+    \item Portal Financiero
+    \item Pagos de matrícula
+    \item Pagos de cursos
+    \item Historial de pagos
+    \item Dashboard Ejecutivo
+    \item Cantidad de estudiantes activos
+    \item Ingresos por matrícula
+    \item Indicadores académicos
+    \item Indicadores financieros
+    \item Documentación de gestión del proyecto según los entregables solicitados
+    \item Uso de GitHub únicamente para el control del prototipo Front-End
+\end{itemize}
+
+También se incluye la elaboración de documentos de gestión bajo el enfoque del curso de Administración de Proyectos. Estos documentos cubren inicio, planificación, ejecución, monitoreo y control, y cierre.
+
+\subsection{Out of scope}
+
+Queda fuera del alcance el desarrollo de backend funcional y la construcción de una base de datos real. El proyecto tampoco incluye integración con sistemas reales de la universidad, autenticación institucional real, pasarela de pagos real ni migración de datos históricos.
+
+También queda fuera del alcance una aplicación móvil nativa, la automatización completa de procesos institucionales, el despliegue en ambiente productivo oficial y la operación real del sistema después del cierre del proyecto académico.
+
+No se incluye la sustitución total de sistemas institucionales existentes, ni la compra de licencias comerciales de ERP. El prototipo funcionará como una representación navegable de la plataforma propuesta, usando datos simulados cuando sea necesario.
+
+\section{Milestones}
+
+Asumiendo que el proyecto inicia formalmente el 8 de junio de 2026 y debe entregarse el 24 de junio de 2026, los hitos principales son:
+
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Aprobación del Project Charter y confirmación del alcance general}
+
+    Duración estimada:
+
+    8 de junio de 2026
+
+    Fecha estimada de cierre:
+
+    8 de junio de 2026
+
+    \item \textbf{Finalización de entregables de inicio y planificación base}
+
+    Duración estimada:
+
+    8 al 11 de junio de 2026
+
+    Fecha estimada de cierre:
+
+    11 de junio de 2026
+
+    \item \textbf{Elaboración de alcance, WBS, RACI, organigrama, recursos y costos}
+
+    Duración estimada:
+
+    10 al 14 de junio de 2026
+
+    Fecha estimada de cierre:
+
+    14 de junio de 2026
+
+    \item \textbf{Elaboración del cronograma, plan de calidad, comunicaciones, riesgos y adquisiciones}
+
+    Duración estimada:
+
+    12 al 17 de junio de 2026
+
+    Fecha estimada de cierre:
+
+    17 de junio de 2026
+
+    \item \textbf{Desarrollo de módulos principales del Front-End}
+
+    Duración estimada:
+
+    12 al 20 de junio de 2026
+
+    Fecha estimada de cierre:
+
+    20 de junio de 2026
+
+    \item \textbf{Elaboración de KPIs, control de cambios, solicitudes de cambio y evaluación de cambios}
+
+    Duración estimada:
+
+    17 al 21 de junio de 2026
+
+    Fecha estimada de cierre:
+
+    21 de junio de 2026
+
+    \item \textbf{Dashboard ejecutivo del proyecto, informe ejecutivo, acta de cierre y reflexiones}
+
+    Duración estimada:
+
+    20 al 23 de junio de 2026
+
+    Fecha estimada de cierre:
+
+    23 de junio de 2026
+
+    \item \textbf{Revisión final, correcciones, integración de documentos y entrega}
+
+    Duración estimada:
+
+    23 al 24 de junio de 2026
+
+    Fecha estimada de cierre:
+
+    24 de junio de 2026
+\end{enumerate}
+
+\section{Enablers / risk mitigation}
+
+Para que el proyecto avance correctamente se deben tener condiciones mínimas que permitan controlar el trabajo, reducir riesgos y mantener alineado al equipo.
+
+\subsection{Gobernanza clara del proyecto}
+
+Debe existir una estructura clara de roles con Sponsor, Project Manager, miembros del equipo y stakeholders clave. Esto permite saber quién aprueba, quién ejecuta, quién valida y quién debe ser informado.
+
+\subsection{Alcance definido desde el inicio}
+
+El alcance debe indicar qué módulos se construirán y qué elementos quedan fuera. Esto reduce el riesgo de scope creep y evita que se agreguen funciones no planificadas.
+
+\subsection{Uso de un repositorio para el prototipo}
+
+GitHub debe utilizarse únicamente para el código del Front-End. Esto ayuda a mantener control de versiones, organizar avances y evitar pérdida de trabajo.
+
+\subsection{Comunicación constante del equipo}
+
+El equipo debe mantener revisiones frecuentes para verificar avance, dudas y cambios. Esto evita documentos incongruentes, duplicidad de tareas y atrasos en entregables.
+
+\subsection{Criterios de aceptación por módulo}
+
+Cada módulo debe tener criterios básicos de aceptación. Por ejemplo navegación clara, información visible, pantallas coherentes y cumplimiento de las funciones mínimas solicitadas.
+
+\subsection{Plan de calidad}
+
+Debe existir una revisión del producto y de los documentos. Esto incluye pruebas manuales, revisión visual, checklist de navegación y validación contra el alcance.
+
+\subsection{Control formal de cambios}
+
+Cualquier cambio que afecte alcance, cronograma, costo, calidad o riesgos debe documentarse. Esto permite analizar impacto antes de aprobar nuevas solicitudes.
+
+\subsection{Seguimiento del cronograma}
+
+El cronograma debe elaborarse en Microsoft Project y debe incluir tareas, subtareas, dependencias, duraciones, recursos, hitos, ruta crítica, responsables y costos. Esto permite controlar el avance y detectar atrasos.
+
+\subsection{Gestión de riesgos}
+
+Se debe mantener un registro de riesgos con causa, probabilidad, impacto, nivel, responsable y estrategia de respuesta. Esto permite anticipar problemas antes de que afecten la entrega.
+
+\subsection{Reserva de contingencia}
+
+El presupuesto debe mantener una reserva para imprevistos. Esta reserva permite responder a ajustes de calidad, retrasos o necesidades técnicas que no fueron previstas desde el inicio.
+
+\subsection{Seguimiento frecuente por la corta duración del proyecto}
+
+Debido a que la fecha de entrega es el 24 de junio de 2026, el equipo debe realizar revisiones frecuentes del avance. Esto permite detectar atrasos rápido, corregir documentos incongruentes y priorizar los entregables obligatorios antes de la fecha final.
+
+\section{Barriers / risks}
+
+Las principales barreras y riesgos del proyecto se relacionan con el alcance, el tiempo disponible, la coordinación del equipo, la calidad del prototipo y la coherencia entre los documentos.
+
+\subsection{Alcance creciente}
+
+Existe riesgo de que se quieran agregar funciones adicionales que no estaban contempladas al inicio. Esto puede afectar el cronograma, aumentar el esfuerzo y reducir la calidad.
+
+\subsection{Documentos incongruentes}
+
+Como los entregables están divididos entre diferentes integrantes, puede existir inconsistencia en nombres, presupuesto, roles, fechas o alcance. Esto puede afectar la calidad general del proyecto final.
+
+\subsection{Subestimación del esfuerzo del Front-End}
+
+El prototipo incluye varios módulos y pantallas. Si se subestima el esfuerzo, el desarrollo puede atrasarse o quedar incompleto.
+
+\subsection{Falta de criterios de calidad}
+
+Si no se definen criterios de aceptación claros, el equipo puede considerar listo un módulo que todavía no cumple con navegación, diseño o funcionalidad mínima.
+
+\subsection{Dependencia de herramientas}
+
+Problemas con GitHub, Microsoft Project, herramientas de diseño o ambiente de desarrollo pueden generar retrasos o pérdida de avance.
+
+\subsection{Disponibilidad limitada de integrantes}
+
+El equipo está formado por pocos miembros, por lo que cada persona tiene varios entregables asignados. Esto puede generar sobrecarga y afectar la revisión final.
+
+\subsection{Cambios tardíos}
+
+Si se solicitan cambios cerca de la fecha de entrega, puede afectarse el cronograma y la calidad. Por eso se debe usar el proceso formal de control de cambios.
+
+\subsection{Riesgo de baja usabilidad}
+
+El prototipo puede cumplir con las pantallas solicitadas pero no ser fácil de usar. Esto afectaría la experiencia de estudiantes, docentes y administrativos.
+
+\subsection{Riesgo de falta de trazabilidad}
+
+Si los entregables no se conectan entre sí, puede ser difícil demostrar la relación entre alcance, WBS, cronograma, riesgos, calidad y cierre.
+
+\subsection{Restricción fuerte de tiempo}
+
+El proyecto debe entregarse el 24 de junio de 2026, por lo que el equipo cuenta con un periodo reducido para completar documentación, prototipo, revisión de calidad y cierre. Este riesgo puede afectar la profundidad de algunos entregables si no se prioriza correctamente el trabajo.
+
+\subsection{Supuestos}
+
+\begin{itemize}[leftmargin=*]
+    \item El equipo tendrá acceso a las herramientas necesarias para desarrollar el prototipo y elaborar los documentos.
+    \item El prototipo puede usar datos simulados.
+    \item No se requiere backend ni base de datos funcional.
+    \item La plataforma será web y navegable.
+    \item Los documentos serán elaborados de forma separada pero mantendrán coherencia entre sí.
+    \item El presupuesto base utilizado será el definido en el Business Case.
+    \item El patrocinador y stakeholders estarán disponibles para validaciones generales.
+    \item El cronograma final será elaborado en Microsoft Project.
+    \item GitHub se utilizará solo para el código del prototipo.
+    \item Los cambios relevantes serán documentados y evaluados antes de ser aprobados.
+\end{itemize}
+
+\section{Support estimates}
+
+Para desarrollar el proyecto se requiere apoyo en personal, herramientas, conocimientos técnicos, tiempo de trabajo y presupuesto. Aunque el proyecto no contempla una solución productiva completa, sí requiere una planificación adecuada y un prototipo web funcional que represente la plataforma universitaria.
+
+\subsection{Personal requerido}
+
+El equipo núcleo del proyecto estará compuesto por tres personas, con roles combinados debido al tamaño del grupo.
+
+\begin{itemize}[leftmargin=*]
+    \item 1 Project Manager
+    \item 1 Analista de Negocio y Documentador
+    \item 1 Desarrollador Front-End
+    \item 1 Responsable de QA, asumido por el desarrollador Front-End
+    \item Apoyo de stakeholders externos para validación de procesos
+\end{itemize}
+
+\subsection{Roles principales}
+
+\textbf{Tamara Robles Camacho}
+
+Project Manager
+
+Responsable de coordinar el proyecto, revisar avances, gestionar comunicaciones y asegurar cumplimiento general.
+
+Isaac Jiménez Blanco
+
+Analista de Negocio y Documentador
+
+Responsable de apoyar la documentación, alcance, riesgos, calidad, comunicaciones, adquisiciones y cambios.
+
+Mauricio González Prendas
+
+Desarrollador Front-End y QA
+
+Responsable de construir el prototipo web navegable y realizar pruebas básicas de calidad.
+
+\subsection{Equipamiento y herramientas requeridas}
+
+\begin{itemize}[leftmargin=*]
+    \item Computadoras personales del equipo
+    \item Conexión a internet
+    \item GitHub para el repositorio del prototipo
+    \item Microsoft Project para el cronograma
+    \item Herramientas de desarrollo web
+    \item Editor de código
+    \item Navegadores web para pruebas
+    \item Herramientas de documentación como Word y Excel
+    \item Herramientas de comunicación como WhatsApp, correo o Teams
+\end{itemize}
+
+\subsection{Especialización requerida}
+
+\begin{itemize}[leftmargin=*]
+    \item Administración de proyectos bajo enfoque PMI
+    \item Gestión de alcance, tiempo, costo, calidad, riesgos y comunicaciones
+    \item Desarrollo Front-End con tecnologías web
+    \item Diseño básico de interfaces y navegación
+    \item Control de calidad de software
+    \item Gestión de cambios
+    \item Elaboración de documentación técnica y administrativa
+\end{itemize}
+
+\subsection{Presupuesto estimado}
+
+El presupuesto preliminar del proyecto es de ₡23,200,500 según el Business Case elaborado. La distribución referencial es la siguiente:
+
+\begin{itemize}[leftmargin=*]
+    \item Mano de obra del equipo de proyecto ₡10,000,000
+    \item Licencias y herramientas de software ₡1,700,000
+    \item Infraestructura y hosting ₡1,900,000
+    \item Capacitación y gestión del cambio ₡2,300,500
+    \item Pruebas y control de calidad ₡3,000,000
+    \item Contingencias ₡1,600,000
+    \item Documentación y gestión del proyecto ₡2,700,000
+    \item Total estimado ₡23,200,500
+\end{itemize}
+
+Este presupuesto funciona como referencia preliminar. Cualquier ajuste importante deberá ser revisado mediante control de cambios, especialmente si afecta alcance, cronograma, costo, calidad o riesgos.
+
+\section{Contract agreement}
+
+\subsection{Role sponsor}
+
+I understand I have the following responsibilities
+
+\begin{itemize}[leftmargin=*]
+    \item Brindar guía y apoyo en la definición del Project Charter junto con la Project Manager.
+    \item Comprometerse a revisar los entregables principales del proyecto.
+    \item Ayudar al equipo a superar barreras que puedan afectar alcance, tiempo, costo o calidad.
+    \item Verificar que los beneficios definidos sean coherentes con las necesidades institucionales.
+    \item Aprobar formalmente el inicio del proyecto y sus cambios principales.
+\end{itemize}
+
+Signed
+
+Dr. Roberto Mora Fallas - Sponsor del proyecto
+
+Firma: \rule{7cm}{0.4pt}
+
+Fecha: 8/06/2026
+
+\subsection{Role leader}
+
+I understand I have the following responsibilities
+
+\begin{itemize}[leftmargin=*]
+    \item Guiar al equipo durante la planificación y ejecución del proyecto.
+    \item Organizar revisiones del equipo y brindar actualizaciones periódicas de avance.
+    \item Coordinar revisiones formales con el Sponsor.
+    \item Asegurar que las acciones del proyecto sean completadas.
+    \item Notificar al Sponsor si cambia el alcance, propósito, cronograma, presupuesto o equipo.
+    \item Gestionar riesgos, comunicaciones y cambios del proyecto.
+\end{itemize}
+
+Signed
+
+Tamara Robles Camacho - Project Manager
+
+Firma: \rule{7cm}{0.4pt}
+
+Fecha: 8/06/2026
+
+\subsection{Role members}
+
+I understand I have the following responsibilities
+
+\begin{itemize}[leftmargin=*]
+    \item Contribuir al objetivo general del proyecto.
+    \item Comprometerse con el propósito y metas definidas.
+    \item Completar los entregables individuales asignados.
+    \item Aportar conocimiento técnico, documental o de calidad según el rol.
+    \item Mantener responsabilidad mutua dentro del equipo.
+    \item Comunicar riesgos, bloqueos o preocupaciones a tiempo.
+    \item Cumplir con el tiempo y responsabilidades definidas en el proyecto.
+\end{itemize}
+
+Signed
+
+Isaac Jiménez Blanco - Member - Analista de Negocio y Documentador
+
+Firma: \rule{7cm}{0.4pt}
+
+Fecha: 8/06/2026
+
+Mauricio González Prendas - Member - Desarrollador Front-End y QA
+
+Firma: \rule{7cm}{0.4pt}
+
+Fecha: 8/06/2026
+
+\end{document}
