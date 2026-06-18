@@ -7,9 +7,8 @@
 % --- Idioma y codificación ---
 \usepackage[spanish,es-tabla]{babel}
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{textcomp}
-\DeclareUnicodeCharacter{20A1}{\textcolonmonetary}
+\usepackage{newunicodechar}
+\newunicodechar{₡}{\textcolonmonetary}
 
 % --- Márgenes / papel ---
 \usepackage{geometry}
@@ -184,9 +183,7 @@
 
 \vfill
 
-{\huge \DocumentoTitulo \par}
-\vspace{0.4cm}
-{\Large \DocumentoSubtitulo \par}
+{\huge Project Charter \par}
 
 \vfill
 

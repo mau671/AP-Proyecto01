@@ -7,12 +7,11 @@
 % --- Idioma y codificación ---
 \usepackage[spanish,es-tabla]{babel}
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{textcomp}
-\DeclareUnicodeCharacter{20A1}{\textcolonmonetary}
-\DeclareUnicodeCharacter{00F7}{\(\div\)}
-\DeclareUnicodeCharacter{00D7}{\(\times\)}
-\DeclareUnicodeCharacter{2212}{\(-\)}
+\usepackage{newunicodechar}
+\newunicodechar{₡}{\textcolonmonetary}
+\newunicodechar{÷}{\(\div\)}
+\newunicodechar{×}{\(\times\)}
+\newunicodechar{−}{\(-\)}
 
 % --- Márgenes / papel ---
 \usepackage{geometry}
@@ -187,9 +186,7 @@
 
 \vfill
 
-{\huge \DocumentoTitulo \par}
-\vspace{0.4cm}
-{\Large \DocumentoSubtitulo \par}
+{\huge Business Case \par}
 
 \vfill
 
