@@ -1,0 +1,961 @@
+
+\documentclass[11pt,spanish]{article}
+
+% =========================================================
+% PLANTILLA BASE PARA INFORMES ACADÉMICOS / TÉCNICOS
+% =========================================================
+
+% --- Idioma y codificación ---
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{newunicodechar}
+\newunicodechar{₡}{\textcolonmonetary}
+
+% --- Márgenes / papel ---
+\usepackage{geometry}
+\geometry{a4paper, margin=2.7cm}
+
+% --- Matemáticas ---
+\usepackage{amsmath}
+
+% --- Tablas, enlaces y elementos visuales ---
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes.geometric,arrows.meta,calc}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage[hidelinks]{hyperref}
+
+% --- Encabezado y pie de página ---
+\usepackage[myheadings]{fancyhdr}
+\usepackage{lastpage}
+\setlength{\headheight}{30pt}
+\setlength{\footskip}{30pt}
+
+% --- Interlineado ---
+\linespread{1.2}
+\sloppy
+
+% =========================================================
+% DATOS DEL DOCUMENTO
+% =========================================================
+\newcommand{\Institucion}{Instituto Tecnológico de Costa Rica}
+\newcommand{\Campus}{Campus Tecnológico Central Cartago}
+\newcommand{\DocumentoTitulo}{Entregable 11 -- Plan de Calidad}
+\newcommand{\DocumentoSubtitulo}{Plataforma Universitaria Integrada:\\Modernización y Centralización de Procesos Académicos y Administrativos}
+\newcommand{\Curso}{Administración de proyectos}
+\newcommand{\Profesor}{Alicia Marcela Salazar Hernández}
+\newcommand{\FechaDocumento}{9 de junio de 2026}
+\newcommand{\PeriodoAcademico}{I Semestre}
+\newcommand{\AnioDocumento}{2026}
+
+\newcommand{\AutoresPortada}{%
+    Mauricio González Prendas: 2024143009\\
+    Isaac Jiménez Blanco: 2024202804\\
+    Tamara Robles Camacho: 2024099342%
+}
+
+% Datos que aparecen en el encabezado.
+\newcommand{\DocHeaderLeft}{}
+\newcommand{\DocHeaderRight}{Plan de Calidad}
+\newcommand{\DocFooterRight}{Página~\thepage\ de~\pageref{LastPage}}
+
+% Metadatos PDF.
+\title{\DocumentoTitulo}
+\author{\AutoresPortada}
+\date{\FechaDocumento}
+
+% =========================================================
+% CONFIGURACIÓN DE TABLAS Y UTILIDADES
+% =========================================================
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\renewcommand{\arraystretch}{1.22}
+\setlength{\LTpre}{0.5em}
+\setlength{\LTpost}{0.5em}
+
+% Subtítulos menores en bloque, no en línea.
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+  {1.25ex \@plus1ex \@minus.2ex}%
+  {0.6ex}%
+  {\normalfont\normalsize\bfseries}}
+\makeatother
+
+% Imagen segura: si el archivo no existe, muestra un recuadro de marcador.
+\newcommand{\SafeImage}[2][0.92\textwidth]{%
+    \IfFileExists{#2}{%
+        \includegraphics[width=#1]{#2}%
+    }{%
+        \fbox{%
+            \begin{minipage}[c][4cm][c]{#1}
+            \centering
+            Imagen pendiente:\\
+            \texttt{#2}
+            \end{minipage}%
+        }%
+    }%
+}
+
+% Figura reutilizable.
+\newcommand{\EvidenceFigure}[3]{%
+    \begin{figure}[H]
+    \centering
+    \SafeImage{#1}
+    \caption{#2}
+    \label{#3}
+    \end{figure}%
+}
+
+% =========================================================
+% ENCABEZADO Y PIE
+% =========================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\DocHeaderLeft}
+\fancyhead[R]{\DocHeaderRight}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[R]{\DocFooterRight}
+
+% Estilo equivalente para páginas horizontales.
+\fancypagestyle{widefancy}{%
+    \fancyhf{}%
+    \fancyhead[L]{\DocHeaderLeft}%
+    \fancyhead[R]{\DocHeaderRight}%
+    \renewcommand{\headrulewidth}{0.4pt}%
+    \renewcommand{\footrulewidth}{0.4pt}%
+    \fancyfoot[R]{\DocFooterRight}%
+}
+
+% =========================================================
+% PÁGINAS HORIZONTALES PARA TABLAS ANCHAS
+% =========================================================
+\makeatletter
+\newcommand{\SyncPageBuilderDimensions}{%
+    \global\vsize=\textheight
+    \global\@colroom=\textheight
+    \global\@colht=\textheight
+}
+\makeatother
+
+\newenvironment{widepage}{%
+    \clearpage
+    \hypersetup{pageanchor=false}%
+    \paperwidth=297mm
+    \paperheight=210mm
+    \pdfpagewidth=297mm
+    \pdfpageheight=210mm
+    \newgeometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}%
+    \setlength{\textwidth}{243mm}%
+    \setlength{\textheight}{156mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \pagestyle{widefancy}%
+}{%
+    \clearpage
+    \paperwidth=210mm
+    \paperheight=297mm
+    \pdfpagewidth=210mm
+    \pdfpageheight=297mm
+    \restoregeometry
+    \setlength{\textwidth}{156mm}%
+    \setlength{\textheight}{243mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \hypersetup{pageanchor=true}%
+    \pagestyle{fancy}%
+}
+
+% =========================================================
+% PORTADA
+% =========================================================
+\newcommand{\MakeCover}{%
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+
+{\bfseries \huge \Institucion \par}
+\vspace{0.25cm}
+{\LARGE \Campus \par}
+
+\vfill
+
+{\huge Plan de Calidad \par}
+
+\vfill
+
+{\bfseries \LARGE Profesora: \par}
+{\Large \Profesor \par}
+
+\vfill
+
+{\bfseries \LARGE Estudiantes: \par}
+{\Large \AutoresPortada \par}
+
+\vfill
+
+{\bfseries\LARGE Fecha: \par}
+{\Large \FechaDocumento \par}
+
+\vfill
+
+{\LARGE \PeriodoAcademico \par}
+{\LARGE \AnioDocumento \par}
+
+\end{titlepage}%
+}
+
+% =========================================================
+% DOCUMENTO
+% =========================================================
+\begin{document}
+\hypersetup{pageanchor=false}
+
+% =========================
+% Portada
+% =========================
+\MakeCover
+
+% =========================
+% Índice
+% =========================
+\pagenumbering{roman}
+\pagestyle{empty}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+\pagestyle{fancy}
+
+% =========================
+% Contenido
+% =========================
+\section{Introducción}
+
+El presente documento corresponde al Plan de Calidad del proyecto Plataforma Universitaria Integrada, desarrollado para la Universidad Tecnológica La Mejor. Este proyecto surge como respuesta a la necesidad de modernizar y centralizar procesos académicos, administrativos y financieros que actualmente se gestionan mediante sistemas separados, hojas de cálculo, correos, registros físicos o herramientas digitales dispersas. Esta situación genera duplicidad de información, lentitud en los trámites, falta de visibilidad para la toma de decisiones y una experiencia poco eficiente para estudiantes, docentes y personal administrativo.
+
+De acuerdo con el Business Case del proyecto, la plataforma busca ofrecer una solución integrada que permita representar de manera clara los procesos universitarios principales y reducir los problemas asociados a la fragmentación de la información. Sin embargo, dentro del alcance definido para esta entrega no se desarrollará un sistema completo en producción, sino un prototipo Front-End web navegable. Por esta razón, la calidad del proyecto debe evaluarse de forma coherente con ese alcance, considerando principalmente la navegación, la representación visual de los módulos, la consistencia de la interfaz, la claridad de la información presentada y la alineación entre el prototipo y la documentación administrativa del proyecto.
+
+El Plan de Calidad permite definir cómo se asegurará que los entregables cumplan con los requisitos establecidos desde la fase de inicio y planificación. Para ello, se toman como referencia los entregables elaborados previamente, entre ellos el Project Charter, el Registro de Stakeholders, la Definición del Alcance, el Cronograma del Proyecto y el Organigrama del Proyecto. Estos documentos establecen elementos esenciales como el propósito del proyecto, los interesados principales, los roles del equipo, el alcance incluido, el alcance excluido, las restricciones, las fechas de trabajo, los costos estimados y los criterios generales de aceptación. Por lo tanto, este plan no se limita a revisar el prototipo, sino que también busca mantener coherencia entre todos los documentos del proyecto.
+
+En este caso, la calidad se entiende desde dos dimensiones principales. La primera corresponde a la calidad del producto, la cual se relaciona con el prototipo web navegable. Esto incluye verificar que existan los módulos definidos en el alcance, como Login, Dashboard principal, Portal Estudiantil, Portal Docente, Portal Administrativo, Portal Financiero y Dashboard Ejecutivo. También implica revisar que la navegación sea clara, que los datos mostrados sean simulados, que no existan errores críticos y que la interfaz sea comprensible para los distintos tipos de usuarios representados.
+
+La segunda dimensión corresponde a la calidad del proceso de gestión del proyecto. Esta se relaciona con la forma en que el equipo planifica, documenta, controla y valida el trabajo. En este sentido, el plan considera el cumplimiento del cronograma elaborado en Microsoft Project, la asignación de responsables, el control del presupuesto total estimado de ₡27,200,500, la identificación de riesgos, el manejo formal de cambios y la organización de evidencias para la entrega final. Esto permite que el proyecto no solo tenga un prototipo funcional a nivel visual, sino también una gestión ordenada y defendible.
+
+Debido a que el proyecto tiene un alcance académico y un tiempo limitado de ejecución, el Plan de Calidad se adapta a esa realidad. No se realizarán pruebas de backend, base de datos, autenticación real, pasarela de pagos, pruebas de carga productivas ni integración con sistemas institucionales reales, ya que estos elementos fueron excluidos del alcance. En cambio, se priorizarán revisiones manuales, validaciones de navegación, pruebas de usabilidad básica, revisión de coherencia documental y control de defectos visibles en el prototipo.
+
+Este documento establece los objetivos de calidad, normas aplicables, estándares de referencia, métricas, actividades de aseguramiento y control, herramientas, responsables, criterios de aceptación, puntos de verificación y estimaciones de tiempo. Con ello se busca que el equipo cuente con una guía clara para prevenir errores, detectar problemas antes de la entrega y asegurar que la Plataforma Universitaria Integrada cumpla con lo planificado para el cierre del proyecto.
+
+\section{Plan de calidad}
+
+Un Plan de Calidad es un documento que define cómo se asegurará que los entregables del proyecto cumplan con los requisitos, estándares, criterios de aceptación y expectativas definidas. En proyectos de TI, la calidad no se limita únicamente a que el sistema funcione. También se relaciona con la forma en que se gestiona el trabajo, se documentan los entregables, se controlan los cambios, se revisan los riesgos y se valida que el producto final corresponda al alcance aprobado.
+
+En el proyecto Plataforma Universitaria Integrada, el Plan de Calidad tiene como finalidad asegurar que el prototipo Front-End web navegable represente correctamente los procesos académicos, administrativos y financieros de la Universidad Tecnológica La Mejor. Además, busca garantizar que los documentos de administración de proyectos mantengan coherencia entre sí, especialmente en nombres, roles, fechas, presupuesto, alcance, cronograma, entregables y criterios de aceptación.
+
+El proyecto no contempla backend funcional, base de datos real, autenticación institucional real, pasarela de pagos real ni despliegue en producción. Por esta razón, la calidad será evaluada principalmente sobre el prototipo visual navegable, la consistencia de los módulos, la experiencia de usuario, la documentación del proyecto, el cumplimiento del cronograma y la alineación con los entregables definidos previamente.
+
+\subsection{Objetivos de calidad}
+
+Los objetivos de calidad definen lo que se espera lograr en el proyecto para considerar que el producto y la gestión cumplen con lo planificado. Estos objetivos servirán como referencia durante el desarrollo, la revisión y la validación final del proyecto.
+
+\paragraph*{Objetivo 1}\mbox{}\\
+Garantizar que el prototipo Front-End web navegable represente correctamente los módulos principales definidos en el alcance: Login, Dashboard principal, Portal Estudiantil, Portal Docente, Portal Administrativo, Portal Financiero y Dashboard Ejecutivo. Cada módulo deberá permitir navegación clara, uso de datos simulados y visualización de la información mínima establecida para cada portal.
+
+\paragraph*{Objetivo 2}\mbox{}\\
+Asegurar que los entregables documentales mantengan coherencia con el Business Case, Project Charter, Registro de Stakeholders, Definición del Alcance, Cronograma del Proyecto y Organigrama del Proyecto. Esto incluye mantener los mismos nombres de roles, responsables, fechas, presupuesto total, alcance incluido, alcance excluido y criterios generales de aceptación.
+
+\paragraph*{Objetivo 3}\mbox{}\\
+Reducir la presencia de errores críticos de navegación en el prototipo antes de la entrega final. Para este proyecto, se considerará error crítico cualquier problema que impida ingresar a un módulo principal, visualizar una pantalla requerida o continuar un flujo básico de navegación.
+
+\paragraph*{Objetivo 4}\mbox{}\\
+Verificar que el proyecto se mantenga dentro del alcance aprobado y que cualquier cambio relevante sea analizado mediante el proceso formal de control de cambios. Esto permite evitar agregar funcionalidades innecesarias que puedan afectar el tiempo, costo, calidad o riesgos del proyecto.
+
+\subsection{Normas que se aplicarán}
+
+Las normas establecen reglas internas que el equipo deberá seguir para asegurar un desarrollo ordenado, responsable y coherente. En este proyecto se aplicarán las siguientes normas:
+
+\paragraph*{Protección de datos simulados}
+
+\begin{itemize}[leftmargin=*]
+    \item No se utilizarán datos reales de estudiantes, docentes, personal administrativo o personal financiero.
+    \item Los nombres, pagos, calificaciones, cursos e indicadores mostrados en el prototipo serán datos simulados.
+    \item No se incluirá información sensible que pueda confundirse con datos reales de la institución.
+\end{itemize}
+
+\paragraph*{Control de acceso representativo}
+
+\begin{itemize}[leftmargin=*]
+    \item El login será una simulación visual y no validará usuarios reales.
+    \item La interfaz deberá diferenciar visualmente los portales principales según el tipo de usuario o módulo.
+    \item No se prometerá autenticación institucional real, ya que está fuera del alcance.
+\end{itemize}
+
+\paragraph*{Seguridad básica de interfaz}
+
+\begin{itemize}[leftmargin=*]
+    \item No se mostrarán mensajes que expongan información sensible.
+    \item Las pantallas deberán presentar una navegación clara y controlada.
+    \item El prototipo no deberá solicitar información personal innecesaria.
+\end{itemize}
+
+\paragraph*{Consistencia documental}
+
+\begin{itemize}[leftmargin=*]
+    \item Todos los documentos del proyecto deberán mantener el mismo nombre del proyecto.
+    \item Los roles principales deberán coincidir con el Registro de Stakeholders y el Organigrama del Proyecto.
+    \item El presupuesto deberá mantenerse alineado con el Business Case.
+    \item Las fechas deberán respetar la planificación definida en Microsoft Project.
+    \item Los entregables deberán coincidir con la lista oficial del alcance.
+\end{itemize}
+
+\paragraph*{Control de cambios}
+
+\begin{itemize}[leftmargin=*]
+    \item Cualquier cambio que afecte alcance, tiempo, costo, calidad o riesgos deberá ser tratado mediante el proceso formal de control de cambios.
+    \item No se deberán agregar funcionalidades fuera del alcance sin análisis previo.
+    \item Las solicitudes de cambio deberán evaluarse antes de modificar documentos o prototipo.
+\end{itemize}
+
+\paragraph*{Validación de información institucional}
+
+\begin{itemize}[leftmargin=*]
+    \item Los procesos académicos, administrativos y financieros representados en el prototipo deberán mantenerse a nivel general y académico.
+    \item La plataforma no debe presentarse como un sistema institucional real.
+    \item El Dashboard Ejecutivo utilizará indicadores simulados, pero coherentes con el propósito de apoyar la toma de decisiones.
+\end{itemize}
+
+\subsection{Estándares que se aplicarán}
+
+Los estándares permiten evaluar el proyecto con criterios técnicos y de gestión reconocidos. Para la Plataforma Universitaria Integrada se adoptan los siguientes estándares y buenas prácticas:
+
+\paragraph*{ISO/IEC 25010 como guía de calidad del producto}\mbox{}\\
+Se utilizará como referencia principal para evaluar características de calidad del prototipo. En este proyecto se priorizan:
+
+\begin{itemize}[leftmargin=*]
+    \item Adecuación funcional
+    \item Usabilidad
+    \item Fiabilidad
+    \item Seguridad básica
+    \item Compatibilidad
+    \item Eficiencia de rendimiento
+    \item Mantenibilidad
+    \item Portabilidad
+\end{itemize}
+
+\paragraph*{Buenas prácticas de gestión de proyectos según PMI}\mbox{}\\
+El proyecto se gestionará mediante entregables de inicio, planificación, ejecución, monitoreo y control, y cierre. Esto permite mantener una estructura ordenada y coherente con los documentos solicitados en el curso.
+
+\paragraph*{Buenas prácticas de desarrollo Front-End}
+
+\begin{itemize}[leftmargin=*]
+    \item Organización clara de archivos y componentes.
+    \item Uso de nombres comprensibles en pantallas, módulos y elementos visuales.
+    \item Navegación consistente entre páginas.
+    \item Revisión del prototipo antes de la entrega.
+    \item Uso de repositorio para controlar cambios del código.
+\end{itemize}
+
+\paragraph*{Accesibilidad con referencia WCAG}\mbox{}\\
+Aunque el proyecto no busca una certificación formal de accesibilidad, se tomarán como referencia buenas prácticas básicas:
+
+\begin{itemize}[leftmargin=*]
+    \item Textos legibles.
+    \item Contraste adecuado.
+    \item Botones y menús identificables.
+    \item Navegación clara.
+    \item Diseño responsivo cuando sea posible.
+\end{itemize}
+
+\paragraph*{Seguridad web básica con referencia OWASP}\mbox{}\\
+Debido a que no existe backend ni autenticación real, no se aplicarán pruebas de seguridad profundas. Sin embargo, se usarán criterios básicos como:
+
+\begin{itemize}[leftmargin=*]
+    \item No solicitar datos sensibles innecesarios.
+    \item No mostrar información confidencial.
+    \item Mantener flujos de navegación controlados.
+    \item Evitar formularios confusos o mensajes de error inseguros.
+\end{itemize}
+
+\paragraph*{Estándar interno de documentación}\mbox{}\\
+Los documentos deberán estar redactados con estructura clara, títulos consistentes. También deberán evitar contradicciones entre alcance, cronograma, costos, roles y criterios de aceptación.
+
+\subsection{Métricas de calidad}
+
+Las métricas permiten verificar si el proyecto cumple con los objetivos definidos. Para este proyecto se utilizarán métricas simples, debido a que el alcance corresponde a un prototipo académico de Front-End navegable y no a un sistema en producción.
+
+\begin{table}[H]
+\centering
+\caption{Métricas de calidad}
+\label{tab:metricas-calidad}
+{\small
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{p{3.8cm} Y Y}
+\toprule
+\textbf{Área evaluada} & \textbf{Métrica} & \textbf{Meta de calidad} \\
+\midrule
+Navegación del prototipo & Módulos principales accesibles desde el dashboard & 100\% de módulos definidos en el alcance \\
+Funcionalidad visual & Pantallas mínimas representadas por módulo & 100\% de pantallas principales \\
+Errores críticos & Errores que impiden navegar o visualizar módulos & 0 errores críticos al momento de entrega \\
+Usabilidad & Claridad de menús, botones y flujo de navegación & Navegación entendible sin instrucciones extensas \\
+Documentación & Coherencia entre entregables & Sin contradicciones importantes en roles, fechas, costos o alcance \\
+Cronograma & Cumplimiento de fecha final & Entrega antes o el 24 de junio de 2026 \\
+Costos & Alineación con presupuesto base & Mantener total de ₡27,200,500 \\
+Cambios & Cambios relevantes gestionados formalmente & 100\% de cambios importantes evaluados \\
+Calidad visual & Consistencia de colores, distribución y legibilidad & Interfaz uniforme en módulos principales \\
+Evidencia & Capturas, archivos y documentos organizados & Carpeta final completa en SharePoint \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+\subsection{Actividades de aseguramiento y control}
+
+Las actividades de aseguramiento y control permiten garantizar que la calidad se revise durante el proyecto y no únicamente al final. El aseguramiento de calidad busca prevenir errores. El control de calidad busca detectar y corregir errores antes de la entrega.
+
+\subsubsection{Aseguramiento de calidad}
+
+\paragraph*{Revisión temprana del alcance}
+
+\begin{itemize}[leftmargin=*]
+    \item Confirmar que el prototipo solo incluya los módulos definidos.
+    \item Verificar que no se agreguen funciones fuera del alcance.
+    \item Revisar que el alcance excluido se respete durante el desarrollo.
+\end{itemize}
+
+\paragraph*{Revisión de coherencia documental}
+
+\begin{itemize}[leftmargin=*]
+    \item Comparar Business Case, Project Charter, Registro de Stakeholders, Definición del Alcance, Cronograma y Organigrama.
+    \item Verificar que los roles del equipo sean consistentes en todos los documentos.
+    \item Revisar que el presupuesto total sea el mismo en los entregables donde aparezca.
+    \item Confirmar que la fecha final del proyecto sea el 24 de junio de 2026.
+\end{itemize}
+
+\paragraph*{Revisión del cronograma}
+
+\begin{itemize}[leftmargin=*]
+    \item Verificar que las tareas tengan duración, fechas, dependencias, recursos, responsables, costos e hitos.
+    \item Confirmar que la ruta crítica esté identificada en Microsoft Project.
+    \item Revisar que el cronograma sea coherente con el alcance y los recursos disponibles.
+\end{itemize}
+
+\paragraph*{Revisión de diseño y navegación}
+
+\begin{itemize}[leftmargin=*]
+    \item Revisar que los módulos principales tengan una estructura visual clara.
+    \item Verificar que el Dashboard principal permita acceder a los portales definidos.
+    \item Revisar que los nombres de secciones sean entendibles para estudiantes, docentes, administración y área financiera.
+\end{itemize}
+
+\paragraph*{Revisión de roles y responsabilidades}
+
+\begin{itemize}[leftmargin=*]
+    \item Validar que Tamara Robles Camacho mantenga el rol de Project Manager.
+    \item Validar que Isaac Jiménez Blanco mantenga el rol de Analista de Negocio y Documentador 1.
+    \item Validar que Jorge Abarca Quiros mantenga el rol de Analista de Negocio y Documentador 2.
+    \item Validar que Mauricio González Prendas mantenga el rol de Desarrollador Front-End 1 y QA.
+    \item Validar que Carlos Sainz Arce mantenga el rol de Desarrollador Front-End 2 y QA.
+    \item Confirmar que los stakeholders externos sean considerados como apoyo de validación, no como ejecutores directos.
+\end{itemize}
+
+\subsubsection{Control de calidad}
+
+\paragraph*{Pruebas manuales de navegación}
+
+\begin{itemize}[leftmargin=*]
+    \item Ingresar al prototipo desde el login simulado.
+    \item Acceder al Dashboard principal.
+    \item Entrar al Portal Estudiantil.
+    \item Entrar al Portal Docente.
+    \item Entrar al Portal Administrativo.
+    \item Entrar al Portal Financiero.
+    \item Entrar al Dashboard Ejecutivo.
+    \item Verificar que cada enlace principal funcione.
+\end{itemize}
+
+\paragraph*{Pruebas de contenido visual}
+
+\begin{itemize}[leftmargin=*]
+    \item Revisar que cada módulo muestre la información mínima definida.
+    \item Confirmar que los datos utilizados sean simulados.
+    \item Verificar que los títulos, botones y menús sean consistentes.
+\end{itemize}
+
+\paragraph*{Pruebas de usabilidad básica}
+
+\begin{itemize}[leftmargin=*]
+    \item Revisar si un usuario puede identificar fácilmente dónde entrar.
+    \item Revisar si el flujo de navegación es claro.
+    \item Verificar que no existan pantallas confusas o sin salida.
+\end{itemize}
+
+\paragraph*{Pruebas de compatibilidad básica}
+
+\begin{itemize}[leftmargin=*]
+    \item Probar el prototipo en al menos un navegador principal.
+    \item Si el tiempo lo permite, revisar en dos navegadores.
+    \item Verificar que el diseño no se rompa en una pantalla de escritorio común.
+\end{itemize}
+
+\paragraph*{Control de defectos}
+
+\begin{itemize}[leftmargin=*]
+    \item Registrar errores encontrados durante las pruebas.
+    \item Clasificar errores como críticos, medios o bajos.
+    \item Corregir errores críticos antes de la entrega.
+    \item Revalidar los módulos corregidos.
+\end{itemize}
+
+\paragraph*{Revisión final de entregables}
+
+\begin{itemize}[leftmargin=*]
+    \item Verificar nombres de archivos.
+    \item Revisar ortografía básica.
+    \item Confirmar que los documentos estén completos.
+    \item Validar que el prototipo y los documentos estén organizados en la carpeta de entrega.
+\end{itemize}
+
+\subsection{Herramientas}
+
+Las herramientas de apoyo permiten organizar el trabajo, controlar versiones, revisar calidad y dejar evidencia del avance del proyecto. Para este Plan de Calidad se utilizarán las siguientes:
+
+\paragraph*{Gestión del cronograma}
+
+\begin{itemize}[leftmargin=*]
+    \item Microsoft Project Profesional 2024 para tareas, subtareas, dependencias, duración, recursos, responsables, costos, hitos, ruta crítica y línea base.
+\end{itemize}
+
+\paragraph*{Gestión documental}
+
+\begin{itemize}[leftmargin=*]
+    \item Microsoft Word para la elaboración de entregables.
+    \item SharePoint para almacenar y compartir la carpeta final del proyecto.
+    \item PDF para entregar evidencias del cronograma, ruta crítica, recursos y estadísticas del proyecto.
+\end{itemize}
+
+\paragraph*{Control de versiones}
+
+\begin{itemize}[leftmargin=*]
+    \item GitHub para administrar el código del prototipo Front-End.
+    \item Commits y ramas cuando sea necesario para registrar avances del desarrollo.
+\end{itemize}
+
+\paragraph*{Diseño y apoyo visual}
+
+\begin{itemize}[leftmargin=*]
+    \item Figma, Canva u otra herramienta visual únicamente como apoyo de diseño.
+    \item Estas herramientas no sustituyen el prototipo web navegable, ya que el alcance exige desarrollo web.
+\end{itemize}
+
+\paragraph*{Desarrollo Front-End}
+
+\begin{itemize}[leftmargin=*]
+    \item Tecnologías web permitidas como HTML, CSS, JavaScript, React, Angular o Vue.
+    \item Editor de código seleccionado por el equipo.
+\end{itemize}
+
+\paragraph*{Pruebas y control de calidad}
+
+\begin{itemize}[leftmargin=*]
+    \item Checklist manual de pruebas.
+    \item Navegadores web para validar navegación.
+    \item Capturas de pantalla como evidencia.
+    \item Revisión entre compañeros antes de la entrega.
+\end{itemize}
+
+\paragraph*{Comunicación del equipo}
+
+\begin{itemize}[leftmargin=*]
+    \item Reuniones cortas de seguimiento.
+    \item Mensajes grupales para resolver dudas y coordinar cambios.
+\end{itemize}
+
+\subsection{Responsables}
+
+La definición de responsables permite que cada actividad de calidad tenga un dueño claro. En este proyecto, algunos roles son combinados debido al tamaño del equipo y al alcance académico del trabajo.
+
+\paragraph*{Sponsor}\mbox{}\\
+Dr. Roberto Mora Fallas
+
+\begin{itemize}[leftmargin=*]
+    \item Aprueba el Project Charter.
+    \item Revisa avances importantes.
+    \item Valida el cierre del proyecto.
+    \item Representa el interés institucional de modernizar los procesos universitarios.
+\end{itemize}
+
+\paragraph*{Project Manager}\mbox{}\\
+Tamara Robles Camacho
+
+\begin{itemize}[leftmargin=*]
+    \item Coordina el trabajo del equipo.
+    \item Da seguimiento al cronograma, costos y entregables.
+    \item Verifica que el proyecto se mantenga dentro del alcance.
+    \item Coordina decisiones relacionadas con cambios, riesgos y comunicación.
+    \item Revisa que el equipo cumpla con las fechas definidas.
+\end{itemize}
+
+\paragraph*{Analista de Negocio y Documentador 1}\mbox{}\\
+Isaac Jiménez Blanco
+
+\begin{itemize}[leftmargin=*]
+    \item Elabora y revisa documentos de planificación y control (mitad de entregables).
+    \item Mantiene coherencia entre alcance, cronograma, calidad, riesgos, adquisiciones y cambios.
+    \item Define criterios de aceptación y puntos de revisión.
+    \item Apoya la validación de que los módulos representen los procesos principales de la universidad.
+\end{itemize}
+
+\paragraph*{Analista de Negocio y Documentador 2}\mbox{}\\
+Jorge Abarca Quiros
+
+\begin{itemize}[leftmargin=*]
+    \item Elabora y revisa documentos de planificación y control (mitad de entregables).
+    \item Apoya la gestión de riesgos, costos y comunicaciones del proyecto.
+    \item Mantiene actualizada la documentación del proyecto.
+\end{itemize}
+
+\paragraph*{Desarrollador Front-End 1 y QA}\mbox{}\\
+Mauricio González Prendas
+
+\begin{itemize}[leftmargin=*]
+    \item Desarrolla el prototipo web navegable (módulos principales).
+    \item Implementa pantallas, módulos y navegación principal.
+    \item Ejecuta pruebas manuales de navegación y funcionalidad visual.
+    \item Registra errores encontrados en el prototipo.
+    \item Aplica correcciones antes de la revisión final.
+\end{itemize}
+
+\paragraph*{Desarrollador Front-End 2 y QA}\mbox{}\\
+Carlos Sainz Arce
+
+\begin{itemize}[leftmargin=*]
+    \item Implementa los módulos del portal financiero y ejecutivo.
+    \item Ejecuta pruebas manuales de navegación y funcionalidad visual.
+    \item Realiza pruebas de calidad del front-end junto con el desarrollador 1.
+\end{itemize}
+
+\paragraph*{Stakeholders externos de validación}\mbox{}\\
+Lic. Patricia Vargas Soto
+
+\begin{itemize}[leftmargin=*]
+    \item Apoya la revisión del enfoque administrativo.
+\end{itemize}
+
+\paragraph*{Ing. Carlos Brenes Mora}
+
+\begin{itemize}[leftmargin=*]
+    \item Apoya la revisión técnica general y la viabilidad visual del prototipo.
+\end{itemize}
+
+\paragraph*{Prof. Andrea Solís Zamora}
+
+\begin{itemize}[leftmargin=*]
+    \item Apoya la validación del Portal Docente.
+\end{itemize}
+
+\paragraph*{Estudiantes}
+
+\begin{itemize}[leftmargin=*]
+    \item Representan usuarios finales del Portal Estudiantil.
+    \item Pueden apoyar en pruebas de usabilidad simuladas.
+\end{itemize}
+
+\paragraph*{Departamento Financiero}
+
+\begin{itemize}[leftmargin=*]
+    \item Apoya la validación del Portal Financiero y los indicadores relacionados con pagos.
+\end{itemize}
+
+\paragraph*{Proveedor de Hosting}
+
+\begin{itemize}[leftmargin=*]
+    \item Se considera como referencia externa para infraestructura, aunque no se realizará despliegue productivo.
+\end{itemize}
+
+\subsection{Criterios de aceptación}
+
+El proyecto Plataforma Universitaria Integrada será aceptado cuando cumpla con los siguientes criterios:
+
+\paragraph*{Alcance del prototipo}
+
+\begin{itemize}[leftmargin=*]
+    \item El prototipo incluye Login, Dashboard principal, Portal Estudiantil, Portal Docente, Portal Administrativo, Portal Financiero y Dashboard Ejecutivo.
+    \item Los módulos corresponden al alcance definido previamente.
+\end{itemize}
+
+\paragraph*{Navegación}
+
+\begin{itemize}[leftmargin=*]
+    \item El usuario puede desplazarse entre el login, dashboard principal y módulos principales.
+    \item Los botones o enlaces principales funcionan correctamente.
+    \item No existen errores críticos que impidan navegar.
+\end{itemize}
+
+\paragraph*{Portal Estudiantil}
+
+\begin{itemize}[leftmargin=*]
+    \item Se visualiza perfil del estudiante.
+    \item Se representa matrícula de cursos.
+    \item Se muestran horarios.
+    \item Se muestran calificaciones.
+    \item Se visualiza estado de cuenta.
+    \item Se visualiza historial académico.
+\end{itemize}
+
+\paragraph*{Portal Docente}
+
+\begin{itemize}[leftmargin=*]
+    \item Se visualizan cursos asignados.
+    \item Se representa registro de asistencia.
+    \item Se representa registro de calificaciones.
+    \item Se muestra información básica de estudiantes por curso.
+\end{itemize}
+
+\paragraph*{Portal Administrativo}
+
+\begin{itemize}[leftmargin=*]
+    \item Se visualiza gestión de estudiantes.
+    \item Se visualiza gestión de docentes.
+    \item Se visualiza gestión de cursos.
+    \item Se visualizan períodos académicos.
+\end{itemize}
+
+\paragraph*{Portal Financiero}
+
+\begin{itemize}[leftmargin=*]
+    \item Se visualizan pagos de matrícula.
+    \item Se visualizan pagos de cursos.
+    \item Se muestra historial de pagos.
+    \item No se procesan pagos reales.
+\end{itemize}
+
+\paragraph*{Dashboard Ejecutivo}
+
+\begin{itemize}[leftmargin=*]
+    \item Se visualizan indicadores académicos básicos.
+    \item Se visualizan indicadores financieros básicos.
+    \item Se representa información consolidada para la toma de decisiones.
+    \item Los datos mostrados son simulados.
+\end{itemize}
+
+\paragraph*{Calidad visual y usabilidad}
+
+\begin{itemize}[leftmargin=*]
+    \item La interfaz mantiene consistencia visual entre módulos.
+    \item Los textos son legibles.
+    \item Los menús son claros.
+    \item La distribución de pantallas permite comprender el flujo general del sistema.
+\end{itemize}
+
+\paragraph*{Documentación del proyecto}
+
+\begin{itemize}[leftmargin=*]
+    \item Los documentos mantienen coherencia con el Business Case, Project Charter, Registro de Stakeholders, Definición del Alcance, Cronograma y Organigrama.
+    \item Los entregables tienen nombres correctos.
+    \item Las fechas, roles, presupuesto y alcance no se contradicen.
+    \item El presupuesto total se mantiene en ₡27,200,500.
+\end{itemize}
+
+\paragraph*{Cronograma y evidencia}
+
+\begin{itemize}[leftmargin=*]
+    \item El cronograma fue elaborado en Microsoft Project.
+    \item El cronograma incluye tareas, subtareas, dependencias, duraciones, recursos, hitos, responsables, costos y ruta crítica.
+    \item Se conservan evidencias en PDF del cronograma, recursos, ruta crítica y estadísticas del proyecto.
+    \item La entrega se realiza antes o el 24 de junio de 2026.
+\end{itemize}
+
+\subsection{Puntos de verificación}
+
+Durante el desarrollo del proyecto se realizarán puntos de verificación para revisar calidad antes de la entrega final.
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Revisión de inicio} Se verifica que el Business Case, Project Charter y Registro de Stakeholders estén alineados. En esta revisión se comprueba que el problema, propósito, sponsor, roles, interesados y beneficios esperados tengan coherencia.
+    \item \textbf{Revisión de alcance} Se valida que la Definición del Alcance indique claramente qué se incluye, qué se excluye, cuáles son los supuestos, restricciones, entregables y criterios generales de aceptación.
+    \item \textbf{Revisión del cronograma} Se revisa que el cronograma en Microsoft Project tenga tareas, dependencias, duración, recursos, hitos, ruta crítica, responsables y costos. También se verifica que la fecha final sea el 24 de junio de 2026 y que el presupuesto total sea de ₡27,200,500.
+    \item \textbf{Revisión de roles y organización} Se verifica que el Organigrama del Proyecto mantenga una estructura clara con Sponsor, Project Manager, Analistas de Negocio y Documentadores, y Desarrolladores Front-End y QA. También se revisa que los stakeholders externos aparezcan como apoyo de validación.
+    \item \textbf{Revisión del diseño del prototipo} Se revisa que el prototipo tenga una estructura clara, pantallas comprensibles y navegación entre módulos. Esta revisión evita retrabajo antes de finalizar el desarrollo.
+    \item \textbf{Revisión del Front-End} Se verifica que los módulos principales estén implementados a nivel visual y navegable. También se revisa que los datos sean simulados y que no se prometa funcionalidad que está fuera del alcance.
+    \item \textbf{Pruebas manuales} Se ejecuta un checklist de navegación y funcionalidad visual. Se registran errores, se corrigen los problemas críticos y se revalida el prototipo.
+    \item \textbf{Revisión final de documentos} Se revisa la coherencia entre todos los entregables, especialmente nombres, fechas, roles, presupuesto, alcance, criterios de aceptación y evidencia.
+    \item \textbf{Validación de cierre} Se confirma que el prototipo y los documentos estén listos para la entrega final. También se prepara la carpeta compartida en SharePoint con documentos, evidencias y archivos correspondientes.
+\end{itemize}
+
+\subsection{Tareas y estimación de tiempo}
+
+La estimación de tiempo del Plan de Calidad se basa en una técnica ascendente, donde se desglosan las actividades necesarias para asegurar y controlar la calidad del proyecto. Estas tareas están incluidas dentro del cronograma general del proyecto y no representan trabajo adicional fuera del alcance.
+
+\paragraph*{Fase 1: Planificación de calidad}
+
+\begin{table}[H]
+\centering
+\caption{Fase 1: planificación de calidad}
+\label{tab:fase-1-planificacion-calidad}
+{\small
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{Y p{3.2cm}}
+\toprule
+\textbf{Tarea} & \textbf{Tiempo estimado} \\
+\midrule
+Revisión del alcance y criterios generales de aceptación & 2 horas \\
+Definición de objetivos de calidad & 2 horas \\
+Definición de métricas de calidad & 2 horas \\
+Selección de estándares aplicables & 2 horas \\
+Documentación del Plan de Calidad & 4 horas \\
+Total & 12 horas \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+\paragraph*{Fase 2: Aseguramiento documental}
+
+\begin{table}[H]
+\centering
+\caption{Fase 2: aseguramiento documental}
+\label{tab:fase-2-aseguramiento-documental}
+{\small
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{Y p{3.2cm}}
+\toprule
+\textbf{Tarea} & \textbf{Tiempo estimado} \\
+\midrule
+Revisión de coherencia entre Business Case y Project Charter & 2 horas \\
+Revisión de coherencia entre Stakeholders, Organigrama y roles & 2 horas \\
+Revisión de coherencia entre Alcance, Cronograma y Costos & 3 horas \\
+Revisión de nombres, fechas y entregables & 2 horas \\
+Ajustes menores de formato y redacción & 3 horas \\
+Total & 12 horas \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+\paragraph*{Fase 3: Aseguramiento del prototipo Front-End}
+
+\begin{table}[H]
+\centering
+\caption{Fase 3: aseguramiento del prototipo Front-End}
+\label{tab:fase-3-aseguramiento-prototipo}
+{\small
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{Y p{3.2cm}}
+\toprule
+\textbf{Tarea} & \textbf{Tiempo estimado} \\
+\midrule
+Revisión de estructura del Dashboard principal & 2 horas \\
+Revisión del Portal Estudiantil & 2 horas \\
+Revisión del Portal Docente & 2 horas \\
+Revisión del Portal Administrativo & 2 horas \\
+Revisión del Portal Financiero & 2 horas \\
+Revisión del Dashboard Ejecutivo & 2 horas \\
+Total & 12 horas \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+\paragraph*{Fase 4: Control de calidad y pruebas}
+
+\begin{table}[H]
+\centering
+\caption{Fase 4: control de calidad y pruebas}
+\label{tab:fase-4-control-calidad-pruebas}
+{\small
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{Y p{3.2cm}}
+\toprule
+\textbf{Tarea} & \textbf{Tiempo estimado} \\
+\midrule
+Ejecución de pruebas manuales de navegación & 4 horas \\
+Pruebas de usabilidad básica & 3 horas \\
+Pruebas de compatibilidad en navegador & 2 horas \\
+Registro de defectos encontrados & 2 horas \\
+Corrección de defectos críticos & 4 horas \\
+Revalidación de módulos corregidos & 3 horas \\
+Total & 18 horas \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+\paragraph*{Fase 5: Validación final y evidencia}
+
+\begin{table}[H]
+\centering
+\caption{Fase 5: validación final y evidencia}
+\label{tab:fase-5-validacion-final}
+{\small
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{Y p{3.2cm}}
+\toprule
+\textbf{Tarea} & \textbf{Tiempo estimado} \\
+\midrule
+Revisión final del prototipo contra criterios de aceptación & 3 horas \\
+Revisión final de documentos & 3 horas \\
+Preparación de evidencias en PDF & 2 horas \\
+Organización de carpeta final & 2 horas \\
+Validación final del equipo & 2 horas \\
+Total & 12 horas \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+\paragraph*{Resumen de tiempo de calidad}
+
+\begin{table}[H]
+\centering
+\caption{Resumen de tiempo de calidad}
+\label{tab:resumen-tiempo-calidad}
+{\small
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabularx}{\textwidth}{Y p{3.2cm}}
+\toprule
+\textbf{Tarea} & \textbf{Tiempo estimado} \\
+\midrule
+Planificación de calidad & 12 horas \\
+Aseguramiento documental & 12 horas \\
+Aseguramiento del prototipo Front-End & 12 horas \\
+Control de calidad y pruebas & 18 horas \\
+Validación final y evidencia & 12 horas \\
+Total & 66 horas \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+\subsection{Relación del plan de calidad con el cronograma y el presupuesto}
+
+El Plan de Calidad se relaciona directamente con el cronograma del proyecto elaborado en Microsoft Project. Dentro del cronograma se incluyó la tarea Elaborar plan de calidad, además de actividades posteriores relacionadas con desarrollo Front-End, control de cambios, evaluación de cambios, dashboard ejecutivo, informe ejecutivo, acta de cierre y revisión final.
+
+La calidad también se relaciona con el presupuesto del proyecto. En el Business Case se definió un presupuesto total estimado de ₡27,200,500. Dentro de ese presupuesto se contempla una partida específica de pruebas y control de calidad por ₡3,000,000. Además, varias actividades de calidad se distribuyen dentro de la documentación, desarrollo, gestión del proyecto y revisión final.
+
+El control de calidad será especialmente importante durante la etapa final del proyecto, ya que el tiempo disponible es corto y la entrega debe realizarse antes del 24 de junio de 2026. Por esta razón, el equipo debe priorizar la prevención de errores, la revisión temprana y la validación continua de los módulos principales. Esto reduce el riesgo de retrabajo y ayuda a mantener la calidad sin afectar el cronograma.
+
+También se debe considerar que el proyecto es académico y de alcance limitado. Por ello, no se realizarán pruebas de backend, pruebas de base de datos, pruebas de carga reales, auditorías de seguridad avanzadas ni validación con sistemas institucionales. La calidad se evaluará según lo que realmente está dentro del alcance: prototipo Front-End navegable, documentación coherente, gestión correcta del proyecto y evidencia clara del cumplimiento.
+
+\section{Conclusión}
+
+El Plan de Calidad del proyecto Plataforma Universitaria Integrada establece los criterios, normas, estándares, métricas, actividades, herramientas y responsables necesarios para asegurar que el proyecto cumpla con los requisitos definidos. Este plan permite revisar tanto la calidad del producto como la calidad del proceso de gestión del proyecto.
+
+La calidad del producto se evaluará principalmente mediante la revisión del prototipo Front-End web navegable, considerando la navegación, los módulos principales, la consistencia visual, el uso de datos simulados y la ausencia de errores críticos. La calidad del proceso se evaluará mediante la coherencia entre documentos, el cumplimiento del cronograma, la correcta asignación de roles, el control de cambios y la organización de evidencias.
+
+Este Plan de Calidad también ayuda a mantener el alcance bajo control, ya que evita que el equipo agregue funcionalidades no solicitadas, como backend funcional, base de datos real, autenticación institucional, pagos reales o despliegue en producción. De esta forma, el equipo puede concentrarse en cumplir los entregables obligatorios y entregar una solución clara, navegable y alineada con el objetivo del proyecto.
+
+Con la aplicación de este plan, el equipo cuenta con una guía para prevenir errores, detectar problemas antes de la entrega, corregir defectos críticos y validar que el proyecto responda a las necesidades planteadas desde el Business Case, Project Charter, Registro de Stakeholders, Definición del Alcance, Cronograma y Organigrama del Proyecto.
+
+\end{document}

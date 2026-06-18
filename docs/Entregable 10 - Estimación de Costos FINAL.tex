@@ -1,0 +1,441 @@
+
+\documentclass[11pt,spanish]{article}
+
+% =========================================================
+% PLANTILLA BASE PARA INFORMES ACADÉMICOS / TÉCNICOS
+% =========================================================
+
+% --- Idioma y codificación ---
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{newunicodechar}
+\newunicodechar{₡}{\textcolonmonetary}
+\newunicodechar{•}{\textbullet}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{–}{--}
+
+% --- Márgenes / papel ---
+\usepackage{geometry}
+\geometry{a4paper, margin=2.7cm}
+
+% --- Matemáticas ---
+\usepackage{amsmath}
+
+% --- Tablas, enlaces y elementos visuales ---
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes.geometric,arrows.meta,calc}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage[hidelinks]{hyperref}
+
+% --- Encabezado y pie de página ---
+\usepackage[myheadings]{fancyhdr}
+\usepackage{lastpage}
+\setlength{\headheight}{30pt}
+\setlength{\footskip}{30pt}
+
+% --- Interlineado ---
+\linespread{1.2}
+\sloppy
+
+% =========================================================
+% DATOS DEL DOCUMENTO
+% =========================================================
+\newcommand{\Institucion}{Instituto Tecnológico de Costa Rica}
+\newcommand{\Campus}{Campus Tecnológico Central Cartago}
+\newcommand{\DocumentoTitulo}{Estimación de Costos}
+\newcommand{\DocumentoSubtitulo}{}
+\newcommand{\Curso}{Administración de proyectos}
+\newcommand{\Profesor}{Alicia Marcela Salazar Hernández}
+\newcommand{\FechaDocumento}{16 de junio de 2026}
+\newcommand{\PeriodoAcademico}{I Semestre}
+\newcommand{\AnioDocumento}{2026}
+
+\newcommand{\AutoresPortada}{%
+    Mauricio González Prendas: 2024143009\\
+    Isaac Jiménez Blanco: 2024202804\\
+    Tamara Robles Camacho: 2024099342%
+}
+
+% Datos que aparecen en el encabezado.
+\newcommand{\DocHeaderLeft}{}
+\newcommand{\DocHeaderRight}{Estimación de Costos}
+\newcommand{\DocFooterRight}{Página~\thepage\ de~\pageref{LastPage}}
+
+% Metadatos PDF.
+\title{\DocumentoTitulo}
+\author{\AutoresPortada}
+\date{\FechaDocumento}
+
+% =========================================================
+% CONFIGURACIÓN DE TABLAS Y UTILIDADES
+% =========================================================
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcolumntype{P}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.22}
+\setlength{\LTpre}{0.5em}
+\setlength{\LTpost}{0.5em}
+
+% Imagen segura: si el archivo no existe, muestra un recuadro de marcador.
+\newcommand{\SafeImage}[2][0.92\textwidth]{%
+    \IfFileExists{#2}{%
+        \includegraphics[width=#1]{#2}%
+    }{%
+        \fbox{%
+            \begin{minipage}[c][4cm][c]{#1}
+            \centering
+            Imagen pendiente:\\
+            \texttt{#2}
+            \end{minipage}%
+        }%
+    }%
+}
+
+% Figura reutilizable.
+\newcommand{\EvidenceFigure}[3]{%
+    \begin{figure}[H]
+    \centering
+    \SafeImage{#1}
+    \caption{#2}
+    \label{#3}
+    \end{figure}%
+}
+
+% =========================================================
+% ENCABEZADO Y PIE
+% =========================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\DocHeaderRight}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[R]{\DocFooterRight}
+
+% Estilo equivalente para páginas horizontales.
+\fancypagestyle{widefancy}{%
+    \fancyhf{}%
+    \fancyhead[R]{\DocHeaderRight}%
+    \renewcommand{\headrulewidth}{0.4pt}%
+    \renewcommand{\footrulewidth}{0.4pt}%
+    \fancyfoot[R]{\DocFooterRight}%
+}
+
+% =========================================================
+% PÁGINAS HORIZONTALES PARA TABLAS ANCHAS
+% =========================================================
+\makeatletter
+\newcommand{\SyncPageBuilderDimensions}{%
+    \global\vsize=\textheight
+    \global\@colroom=\textheight
+    \global\@colht=\textheight
+}
+\makeatother
+
+\newenvironment{widepage}{%
+    \clearpage
+    \hypersetup{pageanchor=false}%
+    \paperwidth=297mm
+    \paperheight=210mm
+    \pdfpagewidth=297mm
+    \pdfpageheight=210mm
+    \newgeometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}%
+    \setlength{\textwidth}{243mm}%
+    \setlength{\textheight}{156mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \pagestyle{widefancy}%
+}{%
+    \clearpage
+    \paperwidth=210mm
+    \paperheight=297mm
+    \pdfpagewidth=210mm
+    \pdfpageheight=297mm
+    \restoregeometry
+    \setlength{\textwidth}{156mm}%
+    \setlength{\textheight}{243mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \hypersetup{pageanchor=true}%
+    \pagestyle{fancy}%
+}
+
+% =========================================================
+% PORTADA
+% =========================================================
+\newcommand{\MakeCover}{%
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+
+{\bfseries \huge \Institucion \par}
+\vspace{0.25cm}
+{\LARGE \Campus \par}
+
+\vfill
+
+{\huge \DocumentoTitulo \par}
+
+\vfill
+
+{\bfseries \LARGE Profesora: \par}
+{\Large \Profesor \par}
+
+\vfill
+
+{\bfseries \LARGE Estudiantes: \par}
+{\Large \AutoresPortada \par}
+
+\vfill
+
+{\bfseries\LARGE Fecha: \par}
+{\Large \FechaDocumento \par}
+
+\vfill
+
+{\LARGE \PeriodoAcademico \par}
+{\LARGE \AnioDocumento \par}
+
+\end{titlepage}%
+}
+
+% =========================================================
+% DOCUMENTO
+% =========================================================
+\begin{document}
+\hypersetup{pageanchor=false}
+
+% =========================
+% Portada
+% =========================
+\MakeCover
+
+% =========================
+% Índice
+% =========================
+\pagenumbering{roman}
+\pagestyle{empty}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+\pagestyle{fancy}
+
+% =========================
+% Contenido
+% =========================
+\begin{table}[H]
+\centering
+\caption{Información general del documento}
+\label{tab:informacion-general}
+\begin{tabularx}{\textwidth}{P{5.2cm} Y}
+\toprule
+Nombre del Proyecto & Plataforma Universitaria Integrada \\
+Organización & Universidad Tecnológica La Mejor \\
+Tipo de Documento & Estimación de Costos – Entregable 10 \\
+Project Manager & Tamara Robles Camacho \\
+Moneda & Colones Costarricenses (₡) \\
+Técnicas Aplicadas & Bottom-Up (Ascendente) + PERT (Tres Puntos) \\
+Versión & 1.0  |  Junio 2026 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Introducción y metodología}
+
+La estimación de costos es el proceso de predecir los recursos financieros necesarios para completar cada componente del proyecto. Para este proyecto se aplica una técnica (PERT) aprobada por el PMBOK:
+
+\begin{table}[H]
+\centering
+\caption{Técnica aplicada}
+\label{tab:tecnica-aplicada}
+{\small
+\begin{tabularx}{\textwidth}{P{3.8cm} Y Y}
+\toprule
+\textbf{Técnica} & \textbf{Descripción} & \textbf{Aplicación en este proyecto} \\
+\midrule
+PERT (Tres Puntos) & Considera incertidumbre con tres escenarios: Optimista (O), Más Probable (M) y Pesimista (P). Fórmula: (O + 4M + P) / 6 & Se aplica a los requisitos por semana, con sus tareas, además de los rubros adicionales: software, hardware, servicios y contingencias. \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+\section{Estimación PERT}
+
+En la siguiente tabla se muestra la estimación de costos detallada para cada tarea utilizando la técnica PERT:
+
+\begin{widepage}
+{\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{P{7.9cm} P{3.0cm} P{3.2cm} P{3.0cm} P{4.8cm}}
+\caption{Estimación PERT del proyecto}\label{tab:estimacion-pert}\\
+\toprule
+\multicolumn{5}{P{22.5cm}}{\textbf{Estimación PERT – Plataforma Universitaria Integrada}} \\
+\multicolumn{5}{P{22.5cm}}{Universidad Tecnológica La Mejor  |  I Semestre 2026  |  Plazo: 3 meses  |  Equipo: 5 personas  |  Moneda: Colones (₡)} \\
+\midrule
+\textbf{Tareas} & \textbf{Optimista} & \textbf{Más probable} & \textbf{Pesimista} & \textbf{Costo estimado (O + 4M + P) / 6} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Tareas} & \textbf{Optimista} & \textbf{Más probable} & \textbf{Pesimista} & \textbf{Costo estimado (O + 4M + P) / 6} \\
+\midrule
+\endhead
+\multicolumn{5}{P{22.5cm}}{\textbf{Fase 1: Inicio (Semanas 1–2)}} \\
+\multicolumn{5}{P{22.5cm}}{\textbf{Gestión de Inicio (Business Case, Charter, Stakeholders)}} \\
+Elaborar Business Case completo & ₡480.000 & ₡700.000 & ₡900.000 & ₡696.667 \\
+Desarrollar Project Charter & ₡300.000 & ₡450.000 & ₡600.000 & ₡450.000 \\
+Registrar y analizar stakeholders & ₡200.000 & ₡280.000 & ₡420.000 & ₡290.000 \\
+Coordinación y gestión del PM (Inicio) & ₡300.000 & ₡450.000 & ₡600.000 & ₡450.000 \\
+\textbf{SUBTOTAL FASE 1 – INICIO} &  &  &  & \textbf{₡1.886.667} \\
+\addlinespace[0.35em]
+\multicolumn{5}{P{22.5cm}}{\textbf{Fase 2: Planificación (Semanas 2–5)}} \\
+\multicolumn{5}{P{22.5cm}}{\textbf{Documentación PMI – Alcance, WBS, Cronograma}} \\
+Definir alcance incluido/excluido & ₡200.000 & ₡280.000 & ₡420.000 & ₡290.000 \\
+Elaborar WBS con criterios de aceptación & ₡280.000 & ₡360.000 & ₡540.000 & ₡376.667 \\
+Cronograma en MS Project (tareas, hitos) & ₡350.000 & ₡480.000 & ₡720.000 & ₡498.333 \\
+\multicolumn{5}{P{22.5cm}}{\textbf{Documentación PMI – Recursos, Costos, Calidad}} \\
+RACI, organigrama y Plan de Recursos & ₡200.000 & ₡280.000 & ₡420.000 & ₡290.000 \\
+Estimación de costos (PERT) & ₡180.000 & ₡240.000 & ₡360.000 & ₡250.000 \\
+Plan de Recursos & ₡110.000 & ₡220.000 & ₡330.000 & ₡220.000 \\
+Plan de Calidad con métricas & ₡160.000 & ₡220.000 & ₡330.000 & ₡228.333 \\
+\multicolumn{5}{P{22.5cm}}{\textbf{Documentación PMI – Comunicaciones, Riesgos, Adquisiciones}} \\
+Plan de Comunicaciones & ₡140.000 & ₡200.000 & ₡300.000 & ₡206.667 \\
+Plan Gestión de Riesgos + Registro & ₡280.000 & ₡380.000 & ₡570.000 & ₡395.000 \\
+Matriz de Probabilidad e Impacto & ₡120.000 & ₡180.000 & ₡270.000 & ₡185.000 \\
+Plan de Adquisiciones & ₡120.000 & ₡180.000 & ₡270.000 & ₡185.000 \\
+Gestión y coordinación del PM (Planif.) & ₡400.000 & ₡540.000 & ₡810.000 & ₡561.667 \\
+\textbf{SUBTOTAL FASE 2 – PLANIFICACIÓN} &  &  &  & \textbf{₡3.686.667} \\
+\addlinespace[0.35em]
+\multicolumn{5}{P{22.5cm}}{\textbf{Fase 3: Ejecución – Desarrollo Frontend (Semanas 4–10)}} \\
+\multicolumn{5}{P{22.5cm}}{\textbf{Módulos del Sistema – Dev Frontend 1 (Mauricio)}} \\
+Login y Dashboard Principal & ₡580.000 & ₡640.000 & ₡980.000 & ₡686.667 \\
+Portal Estudiantil – Matrícula y Horarios & ₡670.000 & ₡890.000 & ₡1.280.000 & ₡918.333 \\
+Portal Estudiantil – Calificaciones e Historial & ₡490.000 & ₡660.000 & ₡980.000 & ₡685.000 \\
+Portal Docente – Gestión cursos y asistencia & ₡500.000 & ₡700.000 & ₡960.000 & ₡710.000 \\
+Portal Docente – Registro de calificaciones & ₡360.000 & ₡490.000 & ₡720.000 & ₡506.667 \\
+Portal Administrativo – CRUD completo & ₡690.000 & ₡890.000 & ₡1.270.000 & ₡920.000 \\
+\multicolumn{5}{P{22.5cm}}{\textbf{Módulos del Sistema – Dev Frontend 2 (Carlos)}} \\
+Portal Financiero – Pagos e historial & ₡480.000 & ₡700.000 & ₡960.000 & ₡706.667 \\
+Dashboard Ejecutivo del sistema & ₡480.000 & ₡640.000 & ₡960.000 & ₡666.667 \\
+\multicolumn{5}{P{22.5cm}}{\textbf{Módulos Compartidos – Ambos Devs}} \\
+Integración entre módulos y navegación & ₡320.000 & ₡500.000 & ₡660.000 & ₡496.667 \\
+Pruebas de usabilidad y QA (ambos devs) & ₡480.000 & ₡710.000 & ₡960.000 & ₡713.333 \\
+\textbf{SUBTOTAL FASE 3 – EJECUCIÓN} &  &  &  & \textbf{₡7.010.000} \\
+\addlinespace[0.35em]
+\multicolumn{5}{P{22.5cm}}{\textbf{Fase 4: Monitoreo y Control (Semanas 1–12, continuo)}} \\
+\multicolumn{5}{P{22.5cm}}{\textbf{Seguimiento y Control}} \\
+Definir y monitorear KPIs del proyecto & ₡200.000 & ₡350.000 & ₡420.000 & ₡336.667 \\
+Control de cambios + Solicitudes \#1 y \#2 & ₡240.000 & ₡320.000 & ₡480.000 & ₡333.333 \\
+Evaluación de impacto de cambios & ₡160.000 & ₡270.000 & ₡330.000 & ₡261.667 \\
+Seguimiento cronograma y riesgos activos & ₡200.000 & ₡280.000 & ₡420.000 & ₡290.000 \\
+Dashboard Ejecutivo del proyecto & ₡200.000 & ₡350.000 & ₡420.000 & ₡336.667 \\
+Gestión PM (reuniones, reportes, coordinación) & ₡480.000 & ₡710.000 & ₡960.000 & ₡713.333 \\
+\textbf{SUBTOTAL FASE 4 – MONITOREO Y CONTROL} &  &  &  & \textbf{₡2.271.667} \\
+\addlinespace[0.35em]
+\multicolumn{5}{P{22.5cm}}{\textbf{Fase 5: Cierre (Semana 12)}} \\
+\multicolumn{5}{P{22.5cm}}{\textbf{Entregables de Cierre}} \\
+Informe Ejecutivo final & ₡120.000 & ₡220.000 & ₡270.000 & ₡211.667 \\
+Acta de Cierre formal & ₡100.000 & ₡190.000 & ₡210.000 & ₡178.333 \\
+Reflexiones y Recomendaciones del equipo & ₡120.000 & ₡200.000 & ₡270.000 & ₡198.333 \\
+\textbf{SUBTOTAL FASE 5 – CIERRE} &  &  &  & \textbf{₡588.333} \\
+\addlinespace[0.35em]
+\multicolumn{5}{P{22.5cm}}{\textbf{Rubros Adicionales (Software, Hardware, Servicios)}} \\
+\multicolumn{5}{P{22.5cm}}{\textbf{Software}} \\
+MS Project licencia comercial (3 meses) & ₡30.000 & ₡70.000 & ₡90.000 & ₡66.667 \\
+Office 365 – 5 usuarios (3 meses) & ₡90.000 & ₡130.000 & ₡180.000 & ₡131.667 \\
+Herramientas premium opcionales & ₡0 & ₡20.000 & ₡60.000 & ₡23.333 \\
+\multicolumn{5}{P{22.5cm}}{\textbf{Hardware}} \\
+USB / almacenamiento externo (5 unidades) & ₡10.000 & ₡20.000 & ₡25.000 & ₡19.167 \\
+Periféricos complementarios & ₡5.000 & ₡15.000 & ₡20.000 & ₡14.167 \\
+\multicolumn{5}{P{22.5cm}}{\textbf{Servicios}} \\
+Internet (5 personas x 3 meses x ₡25,000) & ₡225.000 & ₡370.000 & ₡450.000 & ₡359.167 \\
+Impresiones y material físico & ₡6.000 & ₡10.000 & ₡17.000 & ₡10.500 \\
+Transporte a reuniones presenciales & ₡20.000 & ₡42.000 & ₡60.000 & ₡41.333 \\
+\textbf{SUBTOTAL RUBROS ADICIONALES} &  &  &  & \textbf{₡666.000} \\
+\addlinespace[0.35em]
+Subtotal antes de contingencias &  &  &  & \textbf{₡16.109.333} \\
+Reserva para Contingencias (10\%) &  &  &  & \textbf{₡1.515.867} \\
+\textbf{PRESUPUESTO TOTAL DEL PROYECTO (PERT + Contingencias)} &  &  &  & \textbf{₡17.625.200} \\
+\addlinespace[0.35em]
+\multicolumn{5}{P{22.5cm}}{\textbf{Notas:}} \\
+\multicolumn{5}{P{22.5cm}}{• Fórmula PERT: Costo Estimado = (Optimista + 4 × Más Probable + Pesimista) / 6} \\
+\multicolumn{5}{P{22.5cm}}{• El escenario Optimista asume todo sale bien; el Pesimista incluye retrasos, correcciones y sobrecostos.} \\
+\multicolumn{5}{P{22.5cm}}{• Equipo: Tamara Robles (PM), Mauricio González (Dev Frontend 1), Dev Frontend 2 (Carlos Sainz Arce), Isaac Jiménez (Analista 1), Analista 2 (Jorge Abarca Quiros).} \\
+\multicolumn{5}{P{22.5cm}}{• Plazo total del proyecto: 3 meses (12 semanas). Moneda: Colones Costarricenses (₡).} \\
+\multicolumn{5}{P{22.5cm}}{• Los costos de mano de obra se basan en tarifas de mercado TI Costa Rica para perfiles junior-medio (₡8,000–₡10,000/hr).} \\
+\bottomrule
+\end{longtable}
+}
+\end{widepage}
+
+\section{Reserva para contingencias}
+
+Según el estándar PMI, toda estimación debe incluir una reserva para contingencias que cubra riesgos identificados e imprevistos menores. Para este proyecto se aplica el 10\% sobre el subtotal de todos los rubros, que es la práctica estándar en proyectos de TI de mediana escala.
+
+\begin{table}[H]
+\centering
+\caption{Reserva para contingencias}
+\label{tab:reserva-contingencias}
+\begin{tabularx}{\textwidth}{Y P{4cm}}
+\toprule
+\textbf{Concepto} & \textbf{Monto} \\
+\midrule
+Subtotal – Fase 1 (Inicio) & ₡1 886 667 \\
+Subtotal – Fase 2 (Planificación) & ₡3 686 667 \\
+Subtotal – Fase 3 (Desarrollo Frontend) & ₡7 010 000 \\
+Subtotal – Fase 4 (Monitoreo y Control) & ₡2 271 667 \\
+Subtotal – Fase 5 (Cierre) & ₡588 333 \\
+Subtotal – Rubros Adicionales (Software, Hardware y Servicios) & ₡666 000 \\
+SUBTOTAL ANTES DE CONTINGENCIAS & ₡16 109 333 \\
+Reserva para Contingencias (10\%) & ₡1 515 867 \\
+PRESUPUESTO TOTAL DEL PROYECTO & ₡17 625 200 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Resumen ejecutivo del presupuesto}
+
+La siguiente tabla consolida todos los rubros identificados y presenta la distribución porcentual del presupuesto total del proyecto:
+
+\begin{table}[H]
+\centering
+\caption{Resumen ejecutivo del presupuesto}
+\label{tab:resumen-presupuesto}
+\begin{tabularx}{\textwidth}{Y P{3.2cm} P{2.8cm} P{3cm}}
+\toprule
+\textbf{Rubro} & \textbf{Monto estimado} & \textbf{\% del total} & \textbf{Técnica usada} \\
+\midrule
+Fase 1 (Inicio) & ₡1 886 667 & 10.70\% & PERT \\
+Fase 2 (Planificación) & ₡3 686 667 & 20.92\% & PERT \\
+Fase 3 (Desarrollo Frontend) & ₡7 010 000 & 39.77\% & PERT \\
+Fase 4 (Monitoreo y Control) & ₡2 271 667 & 12.89\% & PERT \\
+Fase 5 (Cierre) & ₡588 333 & 3.34\% & PERT \\
+Subtotal – Rubros Adicionales (Software, Hardware y Servicios) & ₡666 000 & 3.34\% & PERT \\
+Contingencias (10\%) & ₡1 515 867 & 8.60\% & \% sobre subtotal \\
+PRESUPUESTO TOTAL DEL PROYECTO & 100\% & ₡17 625 200 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Observaciones clave}
+
+\begin{itemize}
+    \item La mano de obra representa el 87.62\% del presupuesto total, lo que es típico en proyectos de software donde el capital humano es el principal activo.
+    \item El uso de herramientas gratuitas (GitHub, React, VS Code) redujo significativamente el rubro de software.
+    \item Las contingencias cubren principalmente retrasos en entregables documentales y ajustes de alcance no previstos.
+\end{itemize}
+
+\end{document}
