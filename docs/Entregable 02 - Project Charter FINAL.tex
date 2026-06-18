@@ -11,17 +11,14 @@
 \newunicodechar{₡}{\textcolonmonetary}
 
 % --- Márgenes / papel ---
-\usepackage{geometry}
-\geometry{
-    a4paper,
+\usepackage[
     left=2.5cm,
     right=2.5cm,
     top=2.5cm,
     bottom=2.5cm,
     headsep=0.5cm,
-    footskip=0.8cm,
-    headheight=30pt
-}
+    footskip=0.8cm
+]{geometry}
 
 % --- Matemáticas ---
 \usepackage{amsmath}
@@ -41,10 +38,8 @@
 \usepackage[hidelinks]{hyperref}
 
 % --- Encabezado y pie de página ---
-\usepackage[myheadings]{fancyhdr}
+\usepackage{fancyhdr}
 \usepackage{lastpage}
-\setlength{\headheight}{30pt}
-\setlength{\footskip}{30pt}
 
 % --- Interlineado ---
 \linespread{1.2}
@@ -73,8 +68,8 @@
 
 % Datos que aparecen en el encabezado.
 \newcommand{\DocHeaderLeft}{}
-\newcommand{\DocHeaderRight}{Project Charter}
-\newcommand{\DocFooterRight}{Página~\thepage\ de~\pageref{LastPage}}
+\newcommand{\DocHeaderRight}{\DocumentoTitulo}
+\newcommand{\DocFooterRight}{Página \thepage\ de \pageref{LastPage}}
 
 % Metadatos PDF.
 \title{\DocumentoTitulo}
@@ -119,20 +114,18 @@
 % =========================================================
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\DocHeaderLeft}
-\fancyhead[R]{\DocHeaderRight}
+\fancyhead[R]{\DocumentoTitulo}
 \renewcommand{\headrulewidth}{0.4pt}
+\fancyfoot[R]{Página \thepage\ de \pageref{LastPage}}
 \renewcommand{\footrulewidth}{0.4pt}
-\fancyfoot[R]{\DocFooterRight}
 
 % Estilo equivalente para páginas horizontales.
 \fancypagestyle{widefancy}{%
     \fancyhf{}%
-    \fancyhead[L]{\DocHeaderLeft}%
-    \fancyhead[R]{\DocHeaderRight}%
+    \fancyhead[R]{\DocumentoTitulo}%
     \renewcommand{\headrulewidth}{0.4pt}%
+    \fancyfoot[R]{Página \thepage\ de \pageref{LastPage}}%
     \renewcommand{\footrulewidth}{0.4pt}%
-    \fancyfoot[R]{\DocFooterRight}%
 }
 
 % =========================================================
@@ -153,7 +146,7 @@
     \paperheight=210mm
     \pdfpagewidth=297mm
     \pdfpageheight=210mm
-    \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm,headheight=30pt}%
+    \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm}%
     \setlength{\textwidth}{247mm}%
     \setlength{\textheight}{160mm}%
     \setlength{\linewidth}{\textwidth}%
@@ -262,92 +255,92 @@
 
 \section{Definición del problema y propósito}
 
-La Universidad Tecnológica La Mejor presenta problemas importantes en la forma en que gestiona sus procesos académicos administrativos y financieros debido a que actualmente la información se encuentra distribuida en varios sistemas independientes hojas de cálculo correos electrónicos y registros físicos o digitales completamente separados. Esta situación provoca una constante duplicidad de datos y errores graves en registros junto con atrasos notables en trámites por lo tanto existe muy poca visibilidad para la toma de decisiones institucionales.
+La Universidad Tecnológica La Mejor presenta problemas importantes en la forma en que gestiona sus procesos académicos, administrativos y financieros, debido a que actualmente la información se encuentra distribuida en varios sistemas independientes, hojas de cálculo, correos electrónicos y registros físicos o digitales completamente separados. Esta situación provoca una constante duplicidad de datos y errores graves en registros, junto con atrasos notables en trámites, por lo tanto, existe muy poca visibilidad para la toma de decisiones institucionales.
 
-El resultado que no se desea mantener es una gestión universitaria fragmentada donde estudiantes docentes personal administrativo y autoridades deben consultar información en diferentes lugares ya que esta situación hace que los procesos sean mucho más lentos esto implica que la institución dependa excesivamente de tareas operativas manuales.
+El resultado que no se desea mantener es una gestión universitaria fragmentada, donde estudiantes, docentes, personal administrativo y autoridades deben consultar información en diferentes lugares, ya que esta situación hace que los procesos sean mucho más lentos, esto implica que la institución dependa excesivamente de tareas operativas manuales.
 
-Lo que se busca lograr con el proyecto es diseñar y desarrollar un prototipo web navegable de una plataforma universitaria integrada para lo cual la solución permitirá representar en un solo sistema virtual los principales procesos estudiantiles docentes administrativos financieros y ejecutivos de la universidad. El enfoque del proyecto es puramente la gestión del proyecto y el desarrollo de un entorno visual funcional debido a que no se contempla el desarrollo de un sistema de procesamiento real ni de una base de datos operativa.
+Lo que se busca lograr con el proyecto es diseñar y desarrollar un prototipo web navegable de una plataforma universitaria integrada, para lo cual la solución permitirá representar en un solo sistema virtual los principales procesos estudiantiles, docentes, administrativos, financieros y ejecutivos de la universidad. El enfoque del proyecto es puramente la gestión del proyecto y el desarrollo de un entorno visual funcional, debido a que no se contempla el desarrollo de un sistema de procesamiento real ni de una base de datos operativa.
 
 Los procesos que generan actualmente este resultado deficiente son los detallados a continuación
 
 \begin{itemize}
-    \item Proceso manual de matrícula de cursos estudiantiles
-    \item Proceso desactualizado de consulta de horarios
-    \item Proceso ineficiente de registro y consulta de calificaciones
-    \item Proceso fragmentado de estado de cuenta y pagos
-    \item Proceso aislado de gestión de estudiantes docentes y cursos
-    \item Proceso tardío de generación de reportes académicos y financieros
-    \item Proceso de comunicación deficiente entre las áreas académicas administrativas y financieras
+    \item Proceso manual de matrícula de cursos estudiantiles.
+    \item Proceso desactualizado de consulta de horarios.
+    \item Proceso ineficiente de registro y consulta de calificaciones.
+    \item Proceso fragmentado de estado de cuenta y pagos.
+    \item Proceso aislado de gestión de estudiantes, docentes y cursos.
+    \item Proceso tardío de generación de reportes académicos y financieros.
+    \item Proceso de comunicación deficiente entre las áreas académicas, administrativas y financieras.
 \end{itemize}
 
 Las medidas que permitirán evidenciar una mejora real son las siguientes
 
 \begin{itemize}
-    \item Reducción comprobable del tiempo promedio de atención por trámite estudiantil
-    \item Disminución sistemática de errores en registros académicos y financieros
-    \item Cantidad de módulos representados correctamente en el prototipo entregado
-    \item Cumplimiento estricto de criterios de aceptación definidos para cada módulo
-    \item Nivel de satisfacción esperado por parte de todos los usuarios internos y estudiantes
-    \item Disponibilidad inmediata de indicadores ejecutivos en una pantalla consolidada
+    \item Reducción comprobable del tiempo promedio de atención por trámite estudiantil.
+    \item Disminución sistemática de errores en registros académicos y financieros.
+    \item Cantidad de módulos representados correctamente en el prototipo entregado.
+    \item Cumplimiento estricto de criterios de aceptación definidos para cada módulo.
+    \item Nivel de satisfacción esperado por parte de todos los usuarios internos y estudiantes.
+    \item Disponibilidad inmediata de indicadores ejecutivos en una pantalla consolidada.
 \end{itemize}
 
-El desempeño actual muestra trámites estudiantiles excesivamente lentos con tiempos estimados entre 45 y 90 minutos de atención presencial de esta manera también se identifica una tasa de error aproximada entre el 8 y 12 por ciento en registros manuales además de más de 120 horas semanales dedicadas a tareas administrativas redundantes por cada departamento universitario.
+El desempeño actual muestra trámites estudiantiles excesivamente lentos, con tiempos estimados entre 45 y 90 minutos de atención presencial, de esta manera, también se identifica una tasa de error aproximada entre el 8 y 12 por ciento en registros manuales, además de más de 120 horas semanales dedicadas a tareas administrativas redundantes por cada departamento universitario.
 
-La meta principal de desempeño es representar una solución tecnológica que reduzca el tiempo de trámite estudiantil a un rango estimado entre 5 y 10 minutos en línea para lo cual se requiere disminuir los errores esperados a menos del 1 por ciento mediante validaciones estrictas del sistema y de esa manera mostrar información ejecutiva de forma sumamente consolidada. Para efectos de este proyecto académico se espera completar toda la documentación de administración del proyecto y el prototipo visual navegable antes del 24 de junio de 2026 en consecuencia esto implica trabajar con un cronograma corto y sumamente controlado priorizando los módulos mínimos solicitados y evitando agregar funcionalidades que se encuentren fuera del alcance estipulado.
+La meta principal de desempeño es representar una solución tecnológica que reduzca el tiempo de trámite estudiantil a un rango estimado entre 5 y 10 minutos en línea, para lo cual se requiere disminuir los errores esperados a menos del 1 por ciento mediante validaciones estrictas del sistema, y de esa manera, mostrar información ejecutiva de forma sumamente consolidada. Para efectos de este proyecto académico, se espera completar toda la documentación de administración del proyecto y el prototipo visual navegable antes del 24 de junio de 2026, en consecuencia, esto implica trabajar con un cronograma corto y sumamente controlado, priorizando los módulos mínimos solicitados y evitando agregar funcionalidades que se encuentren fuera del alcance estipulado.
 
 \section{Caso de negocio}
 
-El problema actual tiene un impacto directo y perjudicial en los estudiantes docentes personal administrativo área financiera y autoridades académicas de la Universidad Tecnológica La Mejor.
+El problema actual tiene un impacto directo y perjudicial en los estudiantes, docentes, personal administrativo, área financiera y autoridades académicas de la Universidad Tecnológica La Mejor.
 
-En el caso de los estudiantes el impacto negativo se refleja en trámites muy lentos y la necesidad obligatoria de acudir a varias oficinas junto con la dificultad para consultar información académica o financiera desde un único lugar unificado ya que esto afecta severamente la experiencia estudiantil y genera muchísima insatisfacción general con los servicios institucionales.
+En el caso de los estudiantes, el impacto negativo se refleja en trámites muy lentos y la necesidad obligatoria de acudir a varias oficinas, junto con la dificultad para consultar información académica o financiera desde un único lugar unificado, ya que esto afecta severamente la experiencia estudiantil y genera muchísima insatisfacción general con los servicios institucionales.
 
-En cuanto a los docentes el impacto operativo se observa en la gran cantidad de procesos manuales requeridos para registrar calificaciones controlar la asistencia y consultar información de cursos de esta manera se aumenta significativamente la carga operativa diaria por lo tanto se reduce el valioso tiempo disponible para las actividades propiamente académicas.
+En cuanto a los docentes, el impacto operativo se observa en la gran cantidad de procesos manuales requeridos para registrar calificaciones, controlar la asistencia y consultar información de cursos, de esta manera, se aumenta significativamente la carga operativa diaria, por lo tanto, se reduce el valioso tiempo disponible para las actividades propiamente académicas.
 
-Para el personal administrativo y financiero el problema central genera una constante duplicidad de registros y una continua revisión manual de la información junto con una enorme dificultad para mantener todos los datos actualizados asimismo esto aumenta dramáticamente el riesgo de cometer errores humanos al trabajar con información sumamente dispersa.
+Para el personal administrativo y financiero, el problema central genera una constante duplicidad de registros y una continua revisión manual de la información, junto con una enorme dificultad para mantener todos los datos actualizados, asimismo, esto aumenta dramáticamente el riesgo de cometer errores humanos al trabajar con información sumamente dispersa.
 
-En la alta dirección el impacto se relaciona íntimamente con la muy poca visibilidad que poseen para tomar decisiones estratégicas debido a que al no contar con indicadores académicos y financieros centralizados los reportes finales dependen de consolidaciones manuales muy tediosas esto implica que pueden tardar muchísimo tiempo en generarse.
+En la alta dirección, el impacto se relaciona íntimamente con la muy poca visibilidad que poseen para tomar decisiones estratégicas, debido a que, al no contar con indicadores académicos y financieros centralizados, los reportes finales dependen de consolidaciones manuales muy tediosas, esto implica que pueden tardar muchísimo tiempo en generarse.
 
-Este proyecto tecnológico es prioridad debido a que la universidad necesita modernizar urgentemente sus procesos y centralizar la información para lograr mejorar la eficiencia operativa global además de que el proyecto permite trabajar una solución moderna que está alineada completamente con proyectos informáticos donde se deben gestionar adecuadamente aspectos como alcance cronograma costos calidad riesgos recursos comunicaciones y cambios.
+Este proyecto tecnológico es prioridad debido a que la universidad necesita modernizar urgentemente sus procesos y centralizar la información para lograr mejorar la eficiencia operativa global, además de que el proyecto permite trabajar una solución moderna que está alineada completamente con proyectos informáticos donde se deben gestionar adecuadamente aspectos como alcance, cronograma, costos, calidad, riesgos, recursos, comunicaciones y cambios.
 
 Los entregables clave esperados para el final del proyecto son los siguientes
 
 \begin{itemize}
-    \item Documento fundacional del proyecto
-    \item Definición detallada del alcance
-    \item Estructura de desglose del trabajo del proyecto
-    \item Cronograma estructurado en un gestor de proyectos
-    \item Matriz de asignación de responsabilidades
-    \item Organigrama completo del proyecto
-    \item Plan integral de recursos
-    \item Estimación financiera de costos
-    \item Plan de gestión de calidad
-    \item Plan estructurado de comunicaciones
-    \item Plan de gestión y registro activo de riesgos
-    \item Matriz de evaluación de probabilidad e impacto
-    \item Plan formal de adquisiciones
-    \item Indicadores clave de rendimiento del proyecto
-    \item Prototipo visual navegable
-    \item Proceso estructurado de control de cambios
-    \item Solicitudes formales y evaluación técnica de cambios
-    \item Tablero ejecutivo visual del proyecto
-    \item Informe ejecutivo final
-    \item Acta de cierre formal
-    \item Reflexiones académicas y recomendaciones
+    \item Documento fundacional del proyecto.
+    \item Definición detallada del alcance.
+    \item Estructura de desglose del trabajo del proyecto.
+    \item Cronograma estructurado en un gestor de proyectos.
+    \item Matriz de asignación de responsabilidades.
+    \item Organigrama completo del proyecto.
+    \item Plan integral de recursos.
+    \item Estimación financiera de costos.
+    \item Plan de gestión de calidad.
+    \item Plan estructurado de comunicaciones.
+    \item Plan de gestión y registro activo de riesgos.
+    \item Matriz de evaluación de probabilidad e impacto.
+    \item Plan formal de adquisiciones.
+    \item Indicadores clave de rendimiento del proyecto.
+    \item Prototipo visual navegable.
+    \item Proceso estructurado de control de cambios.
+    \item Solicitudes formales y evaluación técnica de cambios.
+    \item Tablero ejecutivo visual del proyecto.
+    \item Informe ejecutivo final.
+    \item Acta de cierre formal.
+    \item Reflexiones académicas y recomendaciones.
 \end{itemize}
 
-Los importantes beneficios indirectos que pueden surgir de la ejecución del proyecto son una mucho mejor imagen institucional y una mayor transparencia en los procesos junto con una notable reducción de la carga operativa además de establecer una base inicial tecnológica para futuras etapas de automatización institucional.
+Los importantes beneficios indirectos que pueden surgir de la ejecución del proyecto son una mucho mejor imagen institucional y una mayor transparencia en los procesos, junto con una notable reducción de la carga operativa, además de establecer una base inicial tecnológica para futuras etapas de automatización institucional.
 
 \subsection{Objetivos del proyecto}
 
 \begin{enumerate}
-    \item Desarrollar un prototipo visual web navegable que represente fielmente los módulos principales de la Universidad Tecnológica La Mejor
-    \item Centralizar visualmente de manera eficiente los procesos académicos administrativos y financieros dentro de una misma plataforma unificada
-    \item Diseñar un portal estudiantil con inicio de sesión y funciones de matrícula horarios calificaciones estado de cuenta e historial académico
-    \item Diseñar un portal docente completo con gestión directa de cursos registro diario de asistencia y registro de calificaciones
-    \item Diseñar un portal administrativo robusto con gestión general de estudiantes docentes cursos y períodos académicos
-    \item Diseñar un portal financiero seguro con pagos en línea de matrícula pagos de cursos y acceso al historial de pagos
-    \item Diseñar un tablero ejecutivo interactivo con indicadores valiosos de estudiantes activos ingresos por matrícula e indicadores académicos y financieros
-    \item Aplicar rigurosamente los grupos de procesos metodológicos mediante entregables técnicos de inicio planificación ejecución monitoreo y control junto con el cierre
+    \item Desarrollar un prototipo visual web navegable que represente fielmente los módulos principales de la Universidad Tecnológica La Mejor.
+    \item Centralizar visualmente, de manera eficiente, los procesos académicos, administrativos y financieros dentro de una misma plataforma unificada.
+    \item Diseñar un portal estudiantil con inicio de sesión y funciones de matrícula, horarios, calificaciones, estado de cuenta e historial académico.
+    \item Diseñar un portal docente completo con gestión directa de cursos, registro diario de asistencia y registro de calificaciones.
+    \item Diseñar un portal administrativo robusto con gestión general de estudiantes, docentes, cursos y períodos académicos.
+    \item Diseñar un portal financiero seguro con pagos en línea de matrícula, pagos de cursos y acceso al historial de pagos.
+    \item Diseñar un tablero ejecutivo interactivo con indicadores valiosos de estudiantes activos, ingresos por matrícula e indicadores académicos y financieros.
+    \item Aplicar rigurosamente los grupos de procesos metodológicos mediante entregables técnicos de inicio, planificación, ejecución, monitoreo y control, junto con el cierre.
 \end{enumerate}
 
 \subsection{Criterios de éxito del proyecto}
@@ -355,280 +348,280 @@ Los importantes beneficios indirectos que pueden surgir de la ejecución del pro
 El proyecto será considerado sumamente exitoso si se cumplen los siguientes criterios de calidad
 
 \begin{itemize}
-    \item El prototipo web incluye absolutamente todos los módulos mínimos solicitados en el alcance original del proyecto
-    \item La navegación técnica permite ingresar de forma fluida al sistema principal y al portal estudiantil docente administrativo financiero y ejecutivo
-    \item Los documentos formales del proyecto mantienen una total coherencia entre el alcance cronograma riesgos calidad costos y cambios documentados
-    \item El cronograma general se entrega de forma completa incluyendo tareas subtareas dependencias duraciones responsables recursos costos hitos y la respectiva ruta crítica
-    \item El prototipo diseñado no presenta errores críticos de navegación funcional al momento de realizar la entrega final
-    \item Los documentos entregables se completan y revisan satisfactoriamente antes del 24 de junio de 2026
-    \item El patrocinador principal y todo el equipo de trabajo validan que el proyecto cumple cabalmente con el propósito definido en este documento fundacional
+    \item El prototipo web incluye absolutamente todos los módulos mínimos solicitados en el alcance original del proyecto.
+    \item La navegación técnica permite ingresar de forma fluida al sistema principal y al portal estudiantil, docente, administrativo, financiero y ejecutivo.
+    \item Los documentos formales del proyecto mantienen una total coherencia entre el alcance, cronograma, riesgos, calidad, costos y cambios documentados.
+    \item El cronograma general se entrega de forma completa, incluyendo tareas, subtareas, dependencias, duraciones, responsables, recursos, costos, hitos y la respectiva ruta crítica.
+    \item El prototipo diseñado no presenta errores críticos de navegación funcional al momento de realizar la entrega final.
+    \item Los documentos entregables se completan y revisan satisfactoriamente antes del 24 de junio de 2026.
+    \item El patrocinador principal y todo el equipo de trabajo validan que el proyecto cumple cabalmente con el propósito definido en este documento fundacional.
 \end{itemize}
 
 \section{Participantes clave}
 
 \subsection{Patrocinador principal}
 
-El doctor Roberto Mora Fallas es el rector actual de la Universidad Tecnológica La Mejor
+El doctor Roberto Mora Fallas es el rector actual de la Universidad Tecnológica La Mejor.
 
-Su gran participación es estrictamente necesaria porque representa directamente a la alta dirección institucional de esta manera autoriza el inicio formal y presupuestario del proyecto además de que valida que el trabajo responda a la necesidad imperiosa de modernizar y centralizar los procesos académicos administrativos y financieros.
+Su gran participación es estrictamente necesaria porque representa directamente a la alta dirección institucional, de esta manera, autoriza el inicio formal y presupuestario del proyecto, además de que valida que el trabajo responda a la necesidad imperiosa de modernizar y centralizar los procesos académicos, administrativos y financieros.
 
-Su importante rol es brindar un patrocinio constante además de aprobar este documento fundacional y revisar los avances más relevantes junto con validar todos los entregables principales para lo cual también debe apoyar decididamente al equipo cuando existan decisiones complejas que afecten el alcance tiempo costo o calidad esperada.
+Su importante rol es brindar un patrocinio constante, además de aprobar este documento fundacional y revisar los avances más relevantes, junto con validar todos los entregables principales, para lo cual también debe apoyar decididamente al equipo cuando existan decisiones complejas que afecten el alcance, tiempo, costo o calidad esperada.
 
 \subsection{Líder del proyecto}
 
-La estudiante Tamara Robles Camacho es la directora formal del proyecto
+La estudiante Tamara Robles Camacho es la directora formal del proyecto.
 
-Su participación activa es absolutamente necesaria porque debe coordinar de manera experta el proyecto y mantener siempre alineado el trabajo de todo el equipo técnico con los objetivos estratégicos definidos desde el inicio asimismo es la gran responsable de dar un seguimiento estricto a las actividades riesgos comunicaciones y solicitudes de cambios.
+Su participación activa es absolutamente necesaria porque debe coordinar de manera experta el proyecto y mantener siempre alineado el trabajo de todo el equipo técnico con los objetivos estratégicos definidos desde el inicio, asimismo, es la gran responsable de dar un seguimiento estricto a las actividades, riesgos, comunicaciones y solicitudes de cambios.
 
-Su exigente rol es liderar toda la fase de planificación y organizar reuniones operativas de seguimiento junto con distribuir las responsabilidades diarias y comunicar los avances logrados al patrocinador para lo cual debe verificar minuciosamente que los entregables se completen dentro del alcance que ha sido previamente establecido.
+Su exigente rol es liderar toda la fase de planificación y organizar reuniones operativas de seguimiento, junto con distribuir las responsabilidades diarias y comunicar los avances logrados al patrocinador, para lo cual debe verificar minuciosamente que los entregables se completen dentro del alcance que ha sido previamente establecido.
 
 \subsection{Miembros del equipo}
 
-El estudiante Isaac Jiménez Blanco es analista de negocio y documentador primario
+El estudiante Isaac Jiménez Blanco es analista de negocio y documentador primario.
 
-Su participación técnica es muy necesaria porque el proyecto requiere una documentación sumamente clara y coherente que esté alineada con todas las prácticas vistas en el curso universitario además de que apoya directamente el análisis continuo de alcance riesgos calidad comunicaciones adquisiciones y los cambios solicitados.
+Su participación técnica es muy necesaria porque el proyecto requiere una documentación sumamente clara y coherente que esté alineada con todas las prácticas vistas en el curso universitario, además de que apoya directamente el análisis continuo de alcance, riesgos, calidad, comunicaciones, adquisiciones y los cambios solicitados.
 
-Su rol designado es elaborar y revisar los distintos entregables documentales de manera que pueda mantener la coherencia absoluta entre los documentos además de apoyar el registro activo de riesgos y documentar exhaustivamente los procesos de cambio garantizando que toda la información del proyecto sea trazable.
+Su rol designado es elaborar y revisar los distintos entregables documentales, de manera que pueda mantener la coherencia absoluta entre los documentos, además de apoyar el registro activo de riesgos y documentar exhaustivamente los procesos de cambio, garantizando que toda la información del proyecto sea trazable.
 
-El estudiante Mauricio González Prendas es desarrollador web y asegurador de calidad primario
+El estudiante Mauricio González Prendas es desarrollador web y asegurador de calidad primario.
 
-Su participación técnica es requerida porque el proyecto necesita urgentemente un prototipo web navegable y completamente funcional para lo cual también se necesita validar constantemente la calidad final del producto informático mediante continuas revisiones visuales y pruebas manuales estrictas basadas en los criterios de aceptación previamente definidos.
+Su participación técnica es requerida porque el proyecto necesita urgentemente un prototipo web navegable y completamente funcional, para lo cual también se necesita validar constantemente la calidad final del producto informático mediante continuas revisiones visuales y pruebas manuales estrictas basadas en los criterios de aceptación previamente definidos.
 
-Su rol operativo es desarrollar la interfaz visual de usuario y construir con gran cuidado las pantallas principales organizando la navegación del prototipo de esta manera debe realizar pruebas básicas de control y corregir todos los defectos visuales que sean encontrados durante la etapa de revisión por pares.
+Su rol operativo es desarrollar la interfaz visual de usuario y construir con gran cuidado las pantallas principales, organizando la navegación del prototipo, de esta manera, debe realizar pruebas básicas de control y corregir todos los defectos visuales que sean encontrados durante la etapa de revisión por pares.
 
-El estudiante Carlos Sainz Arce es desarrollador web secundario y asegurador de calidad secundario
+El estudiante Carlos Sainz Arce es desarrollador web secundario y asegurador de calidad secundario.
 
-Su participación técnica es necesaria para apoyar decisivamente el rápido desarrollo de un prototipo web funcional y verdaderamente completo debido a que el trabajo es sumamente extenso.
+Su participación técnica es necesaria para apoyar decisivamente el rápido desarrollo de un prototipo web funcional y verdaderamente completo, debido a que el trabajo es sumamente extenso.
 
-Su rol informático es implementar programáticamente los módulos correspondientes al portal financiero y ejecutivo junto con realizar las pruebas de calidad de la interfaz colaborando estrechamente con el primer desarrollador.
+Su rol informático es implementar programáticamente los módulos correspondientes al portal financiero y ejecutivo, junto con realizar las pruebas de calidad de la interfaz, colaborando estrechamente con el primer desarrollador.
 
-El estudiante Jorge Abarca Quiros es analista de negocio secundario y documentador secundario
+El estudiante Jorge Abarca Quiros es analista de negocio secundario y documentador secundario.
 
 Su participación administrativa es necesaria para distribuir de forma equitativa toda la pesada carga de trabajo enfocada en la redacción analítica y la revisión profunda de los documentos entregables.
 
-Su rol intelectual es elaborar y revisar meticulosamente la mitad de los entregables documentales apoyando activamente a la gerencia en la difícil gestión general de riesgos costos operativos y las comunicaciones institucionales.
+Su rol intelectual es elaborar y revisar meticulosamente la mitad de los entregables documentales, apoyando activamente a la gerencia en la difícil gestión general de riesgos, costos operativos y las comunicaciones institucionales.
 
 \subsection{Otros participantes importantes}
 
-La licenciada Patricia Vargas Soto es la directora administrativa
+La licenciada Patricia Vargas Soto es la directora administrativa.
 
-Su participación operativa es importante porque representa íntegramente todas las necesidades específicas del área administrativa de la universidad para lo cual su rol fundamental es validar minuciosamente los procesos que estén relacionados con estudiantes docentes cursos y todos los períodos académicos vigentes.
+Su participación operativa es importante porque representa íntegramente todas las necesidades específicas del área administrativa de la universidad, para lo cual su rol fundamental es validar minuciosamente los procesos que estén relacionados con estudiantes, docentes, cursos y todos los períodos académicos vigentes.
 
-El ingeniero Carlos Brenes Mora es el director de tecnología
+El ingeniero Carlos Brenes Mora es el director de tecnología.
 
-Su participación técnica es muy importante porque debe revisar obligatoriamente la viabilidad tecnológica del prototipo elaborado y de esta manera asegurar que la solución informática sea fácilmente mantenible y coherente con una arquitectura web institucional.
+Su participación técnica es muy importante porque debe revisar obligatoriamente la viabilidad tecnológica del prototipo elaborado, y de esta manera, asegurar que la solución informática sea fácilmente mantenible y coherente con una arquitectura web institucional.
 
-La profesora Andrea Solís Zamora es la representante de los docentes
+La profesora Andrea Solís Zamora es la representante de los docentes.
 
-Su participación académica es importante porque aporta fielmente la perspectiva cotidiana de todos los docentes para lo cual su rol es validar que el nuevo portal educativo permita representar la estructura de los cursos y el control de asistencia junto con el registro de las calificaciones de forma sumamente clara.
+Su participación académica es importante porque aporta fielmente la perspectiva cotidiana de todos los docentes, para lo cual su rol es validar que el nuevo portal educativo permita representar la estructura de los cursos y el control de asistencia, junto con el registro de las calificaciones de forma sumamente clara.
 
-Los estudiantes activos son los usuarios finales del portal
+Los estudiantes activos son los usuarios finales del portal.
 
-Su participación diaria es sumamente importante porque son uno de los principales y más numerosos grupos beneficiados con el proyecto para lo cual su rol consiste en validar empíricamente la facilidad de uso del portal estudiantil y comprobar la claridad de los procesos de matrícula consulta de horarios visualización de calificaciones y estado financiero.
+Su participación diaria es sumamente importante porque son uno de los principales y más numerosos grupos beneficiados con el proyecto, para lo cual su rol consiste en validar empíricamente la facilidad de uso del portal estudiantil y comprobar la claridad de los procesos de matrícula, consulta de horarios, visualización de calificaciones y estado financiero.
 
-El departamento financiero es el área contable
+El departamento financiero es el área contable.
 
-Su participación económica es importante porque este grupo valida directamente todas las necesidades funcionales que están relacionadas con los pagos de la matrícula y los pagos de cursos junto con el historial de pagos de los alumnos y los indicadores financieros de la institución.
+Su participación económica es importante porque este grupo valida directamente todas las necesidades funcionales que están relacionadas con los pagos de la matrícula y los pagos de cursos, junto con el historial de pagos de los alumnos y los indicadores financieros de la institución.
 
-El proveedor de servicios en la nube es un proveedor externo
+El proveedor de servicios en la nube es un proveedor externo.
 
-Su participación técnica puede ser necesaria en el momento en que el prototipo se despliega en un ambiente web público para lo cual su rol es brindar disponibilidad ininterrumpida del servicio y ofrecer un soporte básico de la infraestructura utilizada.
+Su participación técnica puede ser necesaria en el momento en que el prototipo se despliega en un ambiente web público, para lo cual su rol es brindar disponibilidad ininterrumpida del servicio y ofrecer un soporte básico de la infraestructura utilizada.
 
 \section{Alcance}
 
 \subsection{Elementos dentro del alcance}
 
-El proyecto cubrirá completamente el diseño visual y el desarrollo técnico de un prototipo web navegable para la Universidad Tecnológica La Mejor debido a que el alcance fijado incluye los procesos principales del portal estudiantil docente administrativo y financiero junto con un tablero ejecutivo.
+El proyecto cubrirá completamente el diseño visual y el desarrollo técnico de un prototipo web navegable para la Universidad Tecnológica La Mejor, debido a que el alcance fijado incluye los procesos principales del portal estudiantil, docente, administrativo y financiero, junto con un tablero ejecutivo.
 
 El alcance detallado incluye los siguientes aspectos
 
 \begin{itemize}
-    \item Inicio de sesión seguro
-    \item Tablero principal informativo
-    \item Portal estudiantil interactivo
-    \item Perfil del estudiante actualizado
-    \item Matrícula de cursos en línea
-    \item Consulta dinámica de horarios
-    \item Consulta de calificaciones finales
-    \item Estado de cuenta detallado
-    \item Historial académico completo
-    \item Portal docente funcional
-    \item Gestión integral de cursos
-    \item Registro diario de asistencia
-    \item Registro seguro de calificaciones
-    \item Portal administrativo centralizado
-    \item Gestión completa de estudiantes
-    \item Gestión central de docentes
-    \item Gestión estructurada de cursos
-    \item Gestión de períodos académicos
-    \item Portal financiero automatizado
-    \item Pagos en línea de matrícula
-    \item Pagos en línea de cursos
-    \item Historial de pagos realizados
-    \item Tablero ejecutivo institucional
-    \item Cantidad total de estudiantes activos
-    \item Ingresos monetarios por matrícula
-    \item Indicadores académicos globales
-    \item Indicadores financieros consolidados
-    \item Documentación de gestión del proyecto estructurada según los entregables solicitados
-    \item Uso exclusivo de control de versiones web únicamente para el resguardo del código del prototipo
+    \item Inicio de sesión seguro.
+    \item Tablero principal informativo.
+    \item Portal estudiantil interactivo.
+    \item Perfil del estudiante actualizado.
+    \item Matrícula de cursos en línea.
+    \item Consulta dinámica de horarios.
+    \item Consulta de calificaciones finales.
+    \item Estado de cuenta detallado.
+    \item Historial académico completo.
+    \item Portal docente funcional.
+    \item Gestión integral de cursos.
+    \item Registro diario de asistencia.
+    \item Registro seguro de calificaciones.
+    \item Portal administrativo centralizado.
+    \item Gestión completa de estudiantes.
+    \item Gestión central de docentes.
+    \item Gestión estructurada de cursos.
+    \item Gestión de períodos académicos.
+    \item Portal financiero automatizado.
+    \item Pagos en línea de matrícula.
+    \item Pagos en línea de cursos.
+    \item Historial de pagos realizados.
+    \item Tablero ejecutivo institucional.
+    \item Cantidad total de estudiantes activos.
+    \item Ingresos monetarios por matrícula.
+    \item Indicadores académicos globales.
+    \item Indicadores financieros consolidados.
+    \item Documentación de gestión del proyecto estructurada según los entregables solicitados.
+    \item Uso exclusivo de control de versiones web únicamente para el resguardo del código del prototipo.
 \end{itemize}
 
-También se incluye obligatoriamente la elaboración detallada de documentos de gestión bajo el enfoque del curso de administración de proyectos ya que estos documentos deben cubrir metódicamente los grupos de inicio planificación ejecución monitoreo y control junto con el respectivo cierre operativo.
+También se incluye obligatoriamente la elaboración detallada de documentos de gestión bajo el enfoque del curso de administración de proyectos, ya que estos documentos deben cubrir metódicamente los grupos de inicio, planificación, ejecución, monitoreo y control, junto con el respectivo cierre operativo.
 
 \subsection{Elementos fuera del alcance}
 
-Queda estrictamente fuera del alcance el desarrollo técnico de un sistema informático funcional profundo y la construcción lógica de una base de datos real en consecuencia el proyecto tampoco incluye ningún tipo de integración con sistemas reales de la universidad ni tampoco autenticación institucional verdadera ni mucho menos una pasarela de pagos real o la migración manual de datos históricos.
+Queda estrictamente fuera del alcance el desarrollo técnico de un sistema informático funcional profundo y la construcción lógica de una base de datos real, en consecuencia, el proyecto tampoco incluye ningún tipo de integración con sistemas reales de la universidad, ni tampoco autenticación institucional verdadera, ni mucho menos una pasarela de pagos real o la migración manual de datos históricos.
 
-También queda completamente fuera del alcance el desarrollo informático de una aplicación móvil nativa y la automatización completa de los procesos institucionales junto con el despliegue técnico en un ambiente productivo oficial y la operación real del sistema informático después de realizarse el cierre definitivo del proyecto académico.
+También queda completamente fuera del alcance el desarrollo informático de una aplicación móvil nativa y la automatización completa de los procesos institucionales, junto con el despliegue técnico en un ambiente productivo oficial y la operación real del sistema informático después de realizarse el cierre definitivo del proyecto académico.
 
-No se incluye en absoluto la sustitución total de los anticuados sistemas institucionales existentes ni la compra de licencias comerciales de software debido a que el prototipo funcionará exclusivamente como una representación visual y navegable de la plataforma que ha sido propuesta usando datos completamente simulados cuando sea estrictamente necesario.
+No se incluye en absoluto la sustitución total de los anticuados sistemas institucionales existentes ni la compra de licencias comerciales de software, debido a que el prototipo funcionará exclusivamente como una representación visual y navegable de la plataforma que ha sido propuesta, usando datos completamente simulados cuando sea estrictamente necesario.
 
 \section{Hitos}
 
-Asumiendo que el proyecto inicia formalmente el 8 de junio de 2026 y debe entregarse sin falta el 24 de junio de 2026 los hitos principales que deben cumplirse son los mencionados a continuación
+Asumiendo que el proyecto inicia formalmente el 8 de junio de 2026 y debe entregarse sin falta el 24 de junio de 2026, los hitos principales que deben cumplirse son los mencionados a continuación
 
 \begin{enumerate}
     \item \textbf{Aprobación del documento fundacional y confirmación del alcance general}
 
-    La duración estimada es de un solo día específicamente el 8 de junio de 2026
+    La duración estimada es de un solo día, específicamente el 8 de junio de 2026.
 
-    La fecha estimada de cierre es el 8 de junio de 2026
+    La fecha estimada de cierre es el 8 de junio de 2026.
 
     \item \textbf{Finalización de los entregables de inicio y planificación base}
 
-    La duración estimada abarca desde el 8 hasta el 11 de junio de 2026
+    La duración estimada abarca desde el 8 hasta el 11 de junio de 2026.
 
-    La fecha estimada de cierre definitivo es el 11 de junio de 2026
+    La fecha estimada de cierre definitivo es el 11 de junio de 2026.
 
-    \item \textbf{Elaboración de alcance estructura de trabajo organigrama recursos y costos}
+    \item \textbf{Elaboración de alcance, estructura de trabajo, organigrama, recursos y costos}
 
-    La duración estimada comprende los días del 10 al 14 de junio de 2026
+    La duración estimada comprende los días del 10 al 14 de junio de 2026.
 
-    La fecha estimada de cierre máximo es el 14 de junio de 2026
+    La fecha estimada de cierre máximo es el 14 de junio de 2026.
 
-    \item \textbf{Elaboración del cronograma plan de calidad comunicaciones riesgos y adquisiciones}
+    \item \textbf{Elaboración del cronograma, plan de calidad, comunicaciones, riesgos y adquisiciones}
 
-    La duración estimada de esta fase es del 12 al 17 de junio de 2026
+    La duración estimada de esta fase es del 12 al 17 de junio de 2026.
 
-    La fecha estimada de cierre formal es el 17 de junio de 2026
+    La fecha estimada de cierre formal es el 17 de junio de 2026.
 
     \item \textbf{Desarrollo técnico de los módulos principales del prototipo web}
 
-    La duración estimada para el desarrollo es del 12 al 20 de junio de 2026
+    La duración estimada para el desarrollo es del 12 al 20 de junio de 2026.
 
-    La fecha estimada de cierre técnico es el 20 de junio de 2026
+    La fecha estimada de cierre técnico es el 20 de junio de 2026.
 
-    \item \textbf{Elaboración de indicadores control de cambios y evaluación de solicitudes}
+    \item \textbf{Elaboración de indicadores, control de cambios y evaluación de solicitudes}
 
-    La duración estimada para estos documentos es del 17 al 21 de junio de 2026
+    La duración estimada para estos documentos es del 17 al 21 de junio de 2026.
 
-    La fecha estimada de cierre documental es el 21 de junio de 2026
+    La fecha estimada de cierre documental es el 21 de junio de 2026.
 
-    \item \textbf{Tablero ejecutivo informe de cierre acta general y reflexiones}
+    \item \textbf{Tablero ejecutivo, informe de cierre, acta general y reflexiones}
 
-    La duración estimada final es del 20 al 23 de junio de 2026
+    La duración estimada final es del 20 al 23 de junio de 2026.
 
-    La fecha estimada de entrega preliminar es el 23 de junio de 2026
+    La fecha estimada de entrega preliminar es el 23 de junio de 2026.
 
-    \item \textbf{Revisión exhaustiva final correcciones integración y entrega final}
+    \item \textbf{Revisión exhaustiva final, correcciones, integración y entrega final}
 
-    La duración estimada para revisiones es del 23 al 24 de junio de 2026
+    La duración estimada para revisiones es del 23 al 24 de junio de 2026.
 
-    La fecha estimada de cierre absoluto es el 24 de junio de 2026
+    La fecha estimada de cierre absoluto es el 24 de junio de 2026.
 \end{enumerate}
 
 \section{Facilitadores y mitigación de riesgos}
 
-Para que el proyecto avance correctamente y sin atrasos se deben tener condiciones operativas mínimas que permitan controlar estrictamente el trabajo diario para lo cual es necesario reducir los riesgos y mantener perfectamente alineado a todo el equipo de trabajo.
+Para que el proyecto avance correctamente y sin atrasos, se deben tener condiciones operativas mínimas que permitan controlar estrictamente el trabajo diario, para lo cual es necesario reducir los riesgos y mantener perfectamente alineado a todo el equipo de trabajo.
 
 \subsection{Gobernanza clara del proyecto}
 
-Debe existir una estructura sumamente clara de roles con un patrocinador visible una directora de proyecto empoderada junto con miembros del equipo comprometidos y participantes clave informados debido a que esto permite saber exactamente quién aprueba quién ejecuta quién valida y quién debe ser informado en cada etapa.
+Debe existir una estructura sumamente clara de roles con un patrocinador visible, una directora de proyecto empoderada, junto con miembros del equipo comprometidos y participantes clave informados, debido a que esto permite saber exactamente quién aprueba, quién ejecuta, quién valida y quién debe ser informado en cada etapa.
 
 \subsection{Alcance definido desde el inicio}
 
-El alcance del trabajo debe indicar inequívocamente cuáles módulos se construirán y qué elementos quedan totalmente fuera del proyecto ya que esto reduce dramáticamente el riesgo de un incremento descontrolado del alcance y evita por completo que se agreguen funciones que no fueron planificadas.
+El alcance del trabajo debe indicar inequívocamente cuáles módulos se construirán y qué elementos quedan totalmente fuera del proyecto, ya que esto reduce dramáticamente el riesgo de un incremento descontrolado del alcance y evita por completo que se agreguen funciones que no fueron planificadas.
 
 \subsection{Uso de un repositorio seguro para el prototipo}
 
-Se debe utilizar un repositorio de versiones en línea únicamente para resguardar el código fuente del desarrollo web por lo tanto esto ayuda enormemente a mantener un estricto control de versiones y permite organizar los avances además de evitar cualquier pérdida catastrófica del trabajo técnico.
+Se debe utilizar un repositorio de versiones en línea únicamente para resguardar el código fuente del desarrollo web, por lo tanto, esto ayuda enormemente a mantener un estricto control de versiones y permite organizar los avances, además de evitar cualquier pérdida catastrófica del trabajo técnico.
 
 \subsection{Comunicación constante del equipo de trabajo}
 
-El equipo asignado debe mantener reuniones y revisiones muy frecuentes para verificar diariamente el avance las dudas operativas y los cambios requeridos esto implica que se logran evitar los documentos incongruentes y la terrible duplicidad de tareas así como los atrasos en las entregas críticas.
+El equipo asignado debe mantener reuniones y revisiones muy frecuentes para verificar diariamente el avance, las dudas operativas y los cambios requeridos, esto implica que se logran evitar los documentos incongruentes y la terrible duplicidad de tareas, así como los atrasos en las entregas críticas.
 
 \subsection{Criterios de aceptación por cada módulo}
 
-Cada módulo informático debe tener obligatoriamente criterios básicos de aceptación funcional por ejemplo debe existir una navegación muy clara y la información debe ser totalmente visible de esta manera las pantallas resultan coherentes y garantizan el cumplimiento de todas las funciones mínimas solicitadas por el cliente.
+Cada módulo informático debe tener obligatoriamente criterios básicos de aceptación funcional, por ejemplo, debe existir una navegación muy clara y la información debe ser totalmente visible, de esta manera, las pantallas resultan coherentes y garantizan el cumplimiento de todas las funciones mínimas solicitadas por el cliente.
 
 \subsection{Plan riguroso de calidad}
 
-Debe existir una fase estructurada de revisión exhaustiva del producto tecnológico y de todos los documentos administrativos ya que esto incluye invariablemente la realización de pruebas manuales y una revisión visual profunda mediante una lista de verificación de navegación además de validar el sistema directamente contra el alcance aprobado.
+Debe existir una fase estructurada de revisión exhaustiva del producto tecnológico y de todos los documentos administrativos, ya que esto incluye invariablemente la realización de pruebas manuales y una revisión visual profunda mediante una lista de verificación de navegación, además de validar el sistema directamente contra el alcance aprobado.
 
 \subsection{Control formal y documentado de cambios}
 
-Cualquier cambio operativo que afecte el alcance cronograma costo calidad o los riesgos debe documentarse formalmente y sin excepciones por lo tanto esto permite analizar cuidadosamente todo el impacto negativo antes de que se proceda a aprobar las nuevas solicitudes del cliente.
+Cualquier cambio operativo que afecte el alcance, cronograma, costo, calidad o los riesgos debe documentarse formalmente y sin excepciones, por lo tanto, esto permite analizar cuidadosamente todo el impacto negativo antes de que se proceda a aprobar las nuevas solicitudes del cliente.
 
 \subsection{Seguimiento estricto del cronograma}
 
-El cronograma del proyecto debe elaborarse detalladamente en un software especializado y debe incluir exhaustivamente todas las tareas subtareas dependencias duraciones recursos hitos ruta crítica responsables y costos financieros debido a que esto permite controlar rigurosamente el avance diario y ayuda a detectar cualquier atraso incipiente.
+El cronograma del proyecto debe elaborarse detalladamente en un software especializado y debe incluir exhaustivamente todas las tareas, subtareas, dependencias, duraciones, recursos, hitos, ruta crítica, responsables y costos financieros, debido a que esto permite controlar rigurosamente el avance diario y ayuda a detectar cualquier atraso incipiente.
 
 \subsection{Gestión proactiva de riesgos}
 
-Se debe mantener de manera obligatoria un registro vivo de riesgos que indique con precisión la causa probabilidad impacto nivel responsable y la respectiva estrategia de respuesta planificada para lo cual esto permite al equipo anticipar los problemas graves mucho antes de que lleguen a afectar la fecha de entrega.
+Se debe mantener de manera obligatoria un registro vivo de riesgos que indique con precisión la causa, probabilidad, impacto, nivel, responsable y la respectiva estrategia de respuesta planificada, para lo cual esto permite al equipo anticipar los problemas graves mucho antes de que lleguen a afectar la fecha de entrega.
 
 \subsection{Reserva económica de contingencia}
 
-El presupuesto estimado del proyecto debe mantener celosamente una reserva financiera para mitigar posibles imprevistos ya que esta reserva permite responder ágilmente a los necesarios ajustes de calidad o retrasos y las múltiples necesidades técnicas que no fueron previstas desde el puro inicio del trabajo.
+El presupuesto estimado del proyecto debe mantener celosamente una reserva financiera para mitigar posibles imprevistos, ya que esta reserva permite responder ágilmente a los necesarios ajustes de calidad o retrasos y las múltiples necesidades técnicas que no fueron previstas desde el puro inicio del trabajo.
 
 \subsection{Seguimiento frecuente por la corta duración del proyecto}
 
-Debido a que la fecha inamovible de entrega es el 24 de junio de 2026 todo el equipo debe realizar reuniones y revisiones muy frecuentes sobre el avance real de esta manera esto permite detectar los atrasos de forma rápida y lograr corregir todos los documentos incongruentes además de priorizar firmemente los entregables obligatorios antes de que expire la fecha final.
+Debido a que la fecha inamovible de entrega es el 24 de junio de 2026, todo el equipo debe realizar reuniones y revisiones muy frecuentes sobre el avance real, de esta manera, esto permite detectar los atrasos de forma rápida y lograr corregir todos los documentos incongruentes, además de priorizar firmemente los entregables obligatorios antes de que expire la fecha final.
 
 \section{Barreras y riesgos}
 
-Las principales barreras operativas y riesgos sistémicos del proyecto se relacionan estrechamente con el aumento del alcance y el corto tiempo disponible junto con la coordinación interna del equipo y la calidad del prototipo final además de la coherencia documental requerida.
+Las principales barreras operativas y riesgos sistémicos del proyecto se relacionan estrechamente con el aumento del alcance y el corto tiempo disponible, junto con la coordinación interna del equipo y la calidad del prototipo final, además de la coherencia documental requerida.
 
 \subsection{Alcance progresivo y creciente}
 
-Existe un riesgo latente de que se quieran agregar funciones visuales adicionales que definitivamente no estaban contempladas al inicio del trabajo por lo tanto esto puede afectar gravemente el cronograma y aumentar desproporcionadamente el esfuerzo requerido reduciendo así la calidad global.
+Existe un riesgo latente de que se quieran agregar funciones visuales adicionales que definitivamente no estaban contempladas al inicio del trabajo, por lo tanto, esto puede afectar gravemente el cronograma y aumentar desproporcionadamente el esfuerzo requerido, reduciendo así la calidad global.
 
 \subsection{Documentos desactualizados e incongruentes}
 
-Como los numerosos entregables documentales están divididos equitativamente entre los diferentes integrantes del grupo puede existir una preocupante inconsistencia general en los nombres el presupuesto los roles operativos las fechas estipuladas o el mismo alcance esto implica que puede verse afectada seriamente la calidad general del proyecto final al momento de la entrega.
+Como los numerosos entregables documentales están divididos equitativamente entre los diferentes integrantes del grupo, puede existir una preocupante inconsistencia general en los nombres, el presupuesto, los roles operativos, las fechas estipuladas o el mismo alcance, esto implica que puede verse afectada seriamente la calidad general del proyecto final al momento de la entrega.
 
 \subsection{Subestimación del esfuerzo técnico requerido}
 
-El prototipo web incluye obligatoriamente la programación de varios módulos robustos y muchísimas pantallas interactivas debido a que si se subestima groseramente el esfuerzo técnico necesario el desarrollo puede atrasarse irremediablemente o incluso quedar sumamente incompleto.
+El prototipo web incluye obligatoriamente la programación de varios módulos robustos y muchísimas pantallas interactivas, debido a que si se subestima groseramente el esfuerzo técnico necesario, el desarrollo puede atrasarse irremediablemente o incluso quedar sumamente incompleto.
 
 \subsection{Falta de criterios claros de calidad}
 
-Si el equipo de trabajo no logra definir criterios de aceptación que sean meridianamente claros el grupo podría considerar equivocadamente que está listo un módulo que en realidad todavía no cumple debidamente con la navegación diseño gráfico o la funcionalidad mínima requerida por los usuarios.
+Si el equipo de trabajo no logra definir criterios de aceptación que sean meridianamente claros, el grupo podría considerar equivocadamente que está listo un módulo que en realidad todavía no cumple debidamente con la navegación, diseño gráfico o la funcionalidad mínima requerida por los usuarios.
 
 \subsection{Fuerte dependencia de herramientas informáticas}
 
-Los problemas sistémicos con el repositorio de código o el software de gestión de proyectos y las distintas herramientas de diseño o del ambiente de desarrollo pueden generar enormes retrasos operativos o incluso una irrecuperable pérdida de avance si no se manejan con cuidado extremo.
+Los problemas sistémicos con el repositorio de código o el software de gestión de proyectos y las distintas herramientas de diseño o del ambiente de desarrollo, pueden generar enormes retrasos operativos o incluso una irrecuperable pérdida de avance si no se manejan con cuidado extremo.
 
 \subsection{Disponibilidad muy limitada de los integrantes}
 
-El equipo técnico está conformado por muy pocos miembros de trabajo por lo que invariablemente cada persona tiene bajo su responsabilidad varios entregables documentales y de programación ya que esto puede generar fácilmente una severa sobrecarga laboral y afectar negativamente la revisión final del trabajo.
+El equipo técnico está conformado por muy pocos miembros de trabajo por lo que, invariablemente, cada persona tiene bajo su responsabilidad varios entregables documentales y de programación, ya que esto puede generar fácilmente una severa sobrecarga laboral y afectar negativamente la revisión final del trabajo.
 
 \subsection{Cambios solicitados en etapas tardías}
 
-Si el cliente se dispone a solicitar cambios sustanciales cuando la fecha de entrega está muy cerca puede afectarse drásticamente el cumplimiento del cronograma y la calidad del código fuente por esa razón se debe usar invariablemente el proceso formal de control de cambios.
+Si el cliente se dispone a solicitar cambios sustanciales cuando la fecha de entrega está muy cerca, puede afectarse drásticamente el cumplimiento del cronograma y la calidad del código fuente, por esa razón, se debe usar invariablemente el proceso formal de control de cambios.
 
 \subsection{Riesgo constante de baja usabilidad}
 
-El prototipo de software puede llegar a cumplir con todas las pantallas solicitadas contractualmente pero aun así no ser fácil de usar ni intuitivo de esta manera esto afectaría profundamente la experiencia de uso de todos los estudiantes docentes y el personal administrativo.
+El prototipo de software puede llegar a cumplir con todas las pantallas solicitadas contractualmente, pero aun así no ser fácil de usar ni intuitivo, de esta manera, esto afectaría profundamente la experiencia de uso de todos los estudiantes, docentes y el personal administrativo.
 
 \subsection{Riesgo de falta de trazabilidad documental}
 
-Si los entregables escritos no se conectan de manera lógica y secuencial entre sí puede ser excesivamente difícil poder demostrar la relación metodológica existente entre el alcance la estructura de trabajo el cronograma base los riesgos la calidad implementada y el cierre definitivo.
+Si los entregables escritos no se conectan de manera lógica y secuencial entre sí, puede ser excesivamente difícil poder demostrar la relación metodológica existente entre el alcance, la estructura de trabajo, el cronograma base, los riesgos, la calidad implementada y el cierre definitivo.
 
 \subsection{Restricción temporal sumamente fuerte}
 
-El proyecto tecnológico debe entregarse irrevocablemente el 24 de junio de 2026 por lo que el equipo ejecutor cuenta con un periodo temporal sumamente reducido para lograr completar toda la documentación el prototipo visual la revisión de calidad estricta y el cierre formal ya que este riesgo inminente puede afectar la profundidad esperada de algunos entregables si el grupo no prioriza correctamente el volumen de trabajo.
+El proyecto tecnológico debe entregarse irrevocablemente el 24 de junio de 2026, por lo que el equipo ejecutor cuenta con un periodo temporal sumamente reducido para lograr completar toda la documentación, el prototipo visual, la revisión de calidad estricta y el cierre formal, ya que este riesgo inminente puede afectar la profundidad esperada de algunos entregables si el grupo no prioriza correctamente el volumen de trabajo.
 
 \subsection{Supuestos del proyecto}
 
@@ -647,101 +640,101 @@ El proyecto tecnológico debe entregarse irrevocablemente el 24 de junio de 2026
 
 \section{Estimaciones de apoyo}
 
-Para lograr desarrollar exitosamente el proyecto se requiere asegurar un apoyo continuo en materia de personal operativo herramientas tecnológicas conocimientos técnicos específicos tiempo hábil de trabajo y un presupuesto holgado ya que aunque el proyecto no contempla propiamente una solución productiva institucional sí requiere indefectiblemente una planificación muy adecuada y un excelente prototipo web funcional que represente fielmente a la plataforma universitaria esperada.
+Para lograr desarrollar exitosamente el proyecto se requiere asegurar un apoyo continuo en materia de personal operativo, herramientas tecnológicas, conocimientos técnicos específicos, tiempo hábil de trabajo y un presupuesto holgado, ya que aunque el proyecto no contempla propiamente una solución productiva institucional, sí requiere indefectiblemente una planificación muy adecuada y un excelente prototipo web funcional que represente fielmente a la plataforma universitaria esperada.
 
 \subsection{Personal técnico requerido}
 
-El equipo núcleo principal del proyecto estará compuesto exactamente por cinco personas capacitadas logrando así la distribución lógica de las enormes responsabilidades para garantizar un desarrollo metodológico más robusto y ordenado.
+El equipo núcleo principal del proyecto estará compuesto exactamente por cinco personas capacitadas, logrando así la distribución lógica de las enormes responsabilidades para garantizar un desarrollo metodológico más robusto y ordenado.
 
 \begin{itemize}
-    \item Una gerente de proyecto experimentada y líder del grupo
-    \item Dos analistas de negocio expertos que fungirán como documentadores formales
-    \item Dos desarrolladores de interfaces web que también actuarán como aseguradores de calidad
-    \item Un apoyo gerencial de los distintos interesados externos para lograr la validación correcta de todos los procesos de negocio
+    \item Una gerente de proyecto experimentada y líder del grupo.
+    \item Dos analistas de negocio expertos que fungirán como documentadores formales.
+    \item Dos desarrolladores de interfaces web que también actuarán como aseguradores de calidad.
+    \item Un apoyo gerencial de los distintos interesados externos para lograr la validación correcta de todos los procesos de negocio.
 \end{itemize}
 
 \subsection{Roles principales definidos}
 
-Tamara Robles Camacho es la directora del proyecto
+Tamara Robles Camacho es la directora del proyecto.
 
-La directora es la única responsable oficial de coordinar integralmente el proyecto y de lograr revisar todos los avances operativos además de poder gestionar asertivamente las delicadas comunicaciones institucionales y asegurar tenazmente el cumplimiento general de todas las metas establecidas.
+La directora es la única responsable oficial de coordinar integralmente el proyecto y de lograr revisar todos los avances operativos, además de poder gestionar asertivamente las delicadas comunicaciones institucionales y asegurar tenazmente el cumplimiento general de todas las metas establecidas.
 
-Isaac Jiménez Blanco es analista de negocio y documentador primario
+Isaac Jiménez Blanco es analista de negocio y documentador primario.
 
-El documentador es el máximo responsable de apoyar exhaustivamente toda la extensa documentación técnica incluyendo el registro del alcance riesgos calidad operativa comunicaciones eficaces planes de adquisiciones y la gestión metódica de los cambios requeridos por el cliente.
+El documentador es el máximo responsable de apoyar exhaustivamente toda la extensa documentación técnica, incluyendo el registro del alcance, riesgos, calidad operativa, comunicaciones eficaces, planes de adquisiciones y la gestión metódica de los cambios requeridos por el cliente.
 
-Mauricio González Prendas es desarrollador web y asegurador primario de calidad
+Mauricio González Prendas es desarrollador web y asegurador primario de calidad.
 
-El programador es totalmente responsable de construir desde cero los diferentes módulos funcionales del prototipo web navegable además de tener que realizar simultáneamente diversas pruebas técnicas orientadas al estricto control de calidad del código.
+El programador es totalmente responsable de construir desde cero los diferentes módulos funcionales del prototipo web navegable, además de tener que realizar simultáneamente diversas pruebas técnicas orientadas al estricto control de calidad del código.
 
-Carlos Sainz Arce es desarrollador web secundario y asegurador de calidad de apoyo
+Carlos Sainz Arce es desarrollador web secundario y asegurador de calidad de apoyo.
 
-El desarrollador de apoyo es directamente responsable de construir todos los módulos complejos correspondientes al portal financiero de la universidad y al importante tablero ejecutivo para lo cual también debe realizar exigentes pruebas operativas de calidad del entorno visual.
+El desarrollador de apoyo es directamente responsable de construir todos los módulos complejos correspondientes al portal financiero de la universidad y al importante tablero ejecutivo, para lo cual también debe realizar exigentes pruebas operativas de calidad del entorno visual.
 
-Jorge Abarca Quiros es analista de negocio secundario y documentador auxiliar
+Jorge Abarca Quiros es analista de negocio secundario y documentador auxiliar.
 
-El auxiliar documental es firmemente responsable de poder elaborar de forma consistente los distintos entregables documentales exigidos además de apoyar activamente en toda la gestión técnica de evaluación de riesgos costos del proyecto y las fundamentales comunicaciones del equipo con los interesados.
+El auxiliar documental es firmemente responsable de poder elaborar de forma consistente los distintos entregables documentales exigidos, además de apoyar activamente en toda la gestión técnica de evaluación de riesgos, costos del proyecto y las fundamentales comunicaciones del equipo con los interesados.
 
 \subsection{Equipamiento y herramientas informáticas requeridas}
 
 \begin{itemize}
-    \item Computadoras personales portátiles para todo el equipo de trabajo asignado
-    \item Conexión a internet ininterrumpida y de alta velocidad estable
-    \item Repositorio de código en la nube para resguardar el sistema web
-    \item Herramienta especializada de software para diseñar el cronograma completo
-    \item Entornos y herramientas de desarrollo informático orientadas a web
-    \item Un editor moderno de código fuente para programación avanzada
-    \item Múltiples navegadores web de última generación para pruebas de compatibilidad
-    \item Herramientas ofimáticas estandarizadas de procesamiento de texto y hojas de cálculo numéricas
-    \item Herramientas de comunicación inmediata como correo electrónico corporativo o sistemas de mensajería instantánea grupal
+    \item Computadoras personales portátiles para todo el equipo de trabajo asignado.
+    \item Conexión a internet ininterrumpida y de alta velocidad estable.
+    \item Repositorio de código en la nube para resguardar el sistema web.
+    \item Herramienta especializada de software para diseñar el cronograma completo.
+    \item Entornos y herramientas de desarrollo informático orientadas a web.
+    \item Un editor moderno de código fuente para programación avanzada.
+    \item Múltiples navegadores web de última generación para pruebas de compatibilidad.
+    \item Herramientas ofimáticas estandarizadas de procesamiento de texto y hojas de cálculo numéricas.
+    \item Herramientas de comunicación inmediata como correo electrónico corporativo o sistemas de mensajería instantánea grupal.
 \end{itemize}
 
 \subsection{Especialización técnica requerida}
 
 \begin{itemize}
-    \item Experiencia en administración de proyectos estructurada bajo un enfoque metodológico internacional riguroso
-    \item Gran conocimiento en gestión de alcance tiempo costo calidad mitigación de riesgos y comunicaciones asertivas
-    \item Capacidad de desarrollo y programación de interfaces utilizando directamente tecnologías web modernas e interactivas
-    \item Conocimiento fundamental sobre diseño básico de interfaces de usuario eficientes y técnicas de navegación fluida
-    \item Dominio del control de calidad riguroso del software que va a ser entregado
-    \item Experiencia en gestión ágil y ordenada de cambios al alcance original
-    \item Notoria habilidad para la elaboración de documentación técnica y administrativa que sea clara y profesional
+    \item Experiencia en administración de proyectos estructurada bajo un enfoque metodológico internacional riguroso.
+    \item Gran conocimiento en gestión de alcance, tiempo, costo, calidad, mitigación de riesgos y comunicaciones asertivas.
+    \item Capacidad de desarrollo y programación de interfaces utilizando directamente tecnologías web modernas e interactivas.
+    \item Conocimiento fundamental sobre diseño básico de interfaces de usuario eficientes y técnicas de navegación fluida.
+    \item Dominio del control de calidad riguroso del software que va a ser entregado.
+    \item Experiencia en gestión ágil y ordenada de cambios al alcance original.
+    \item Notoria habilidad para la elaboración de documentación técnica y administrativa que sea clara y profesional.
 \end{itemize}
 
 \subsection{Presupuesto financiero estimado}
 
-El presupuesto preliminar asignado para todo el proyecto es de 27200500 colones esto de acuerdo con el caso de negocio original previamente elaborado debido a que la distribución financiera referencial será la presentada a continuación
+El presupuesto preliminar asignado para todo el proyecto es de 27200500 colones, esto de acuerdo con el caso de negocio original previamente elaborado, debido a que la distribución financiera referencial será la presentada a continuación.
 
 \begin{itemize}
-    \item Mano de obra estipulada para el equipo principal del proyecto por 14000000 de colones exactos
-    \item Adquisición de licencias comerciales y distintas herramientas de software por 1700000 colones
-    \item Alquiler de infraestructura de servidores y hosting temporal por 1900000 colones
-    \item Sesiones de capacitación requerida y gestión institucional del cambio por 2300500 colones
-    \item Ejecución de pruebas sistémicas integrales y estricto control de calidad por 3000000 de colones
-    \item Reservas financieras para enfrentar contingencias e imprevistos por 1600000 colones
-    \item Esfuerzo en documentación y gestión administrativa constante del proyecto por 2700000 colones
-    \item Total global estimado para la ejecución total ascendiendo a 27200500 colones exactos
+    \item Mano de obra estipulada para el equipo principal del proyecto por 14000000 de colones exactos.
+    \item Adquisición de licencias comerciales y distintas herramientas de software por 1700000 colones.
+    \item Alquiler de infraestructura de servidores y hosting temporal por 1900000 colones.
+    \item Sesiones de capacitación requerida y gestión institucional del cambio por 2300500 colones.
+    \item Ejecución de pruebas sistémicas integrales y estricto control de calidad por 3000000 de colones.
+    \item Reservas financieras para enfrentar contingencias e imprevistos por 1600000 colones.
+    \item Esfuerzo en documentación y gestión administrativa constante del proyecto por 2700000 colones.
+    \item Total global estimado para la ejecución total ascendiendo a 27200500 colones exactos.
 \end{itemize}
 
-Este amplio presupuesto opera como una base referencial de carácter preliminar ya que cualquier tipo de ajuste financiero que sea importante deberá ser evaluado minuciosamente y revisado siempre mediante un proceso de control de cambios especialmente si este llega a afectar negativamente el alcance cronograma costo calidad o los riesgos estipulados.
+Este amplio presupuesto opera como una base referencial de carácter preliminar, ya que cualquier tipo de ajuste financiero que sea importante deberá ser evaluado minuciosamente y revisado siempre mediante un proceso de control de cambios, especialmente si este llega a afectar negativamente el alcance, cronograma, costo, calidad o los riesgos estipulados.
 
 \section{Acuerdo del contrato}
 
 \subsection{Rol del patrocinador principal}
 
-Yo como patrocinador entiendo perfectamente que mantengo bajo mi responsabilidad formal las siguientes obligaciones con el proyecto
+Yo como patrocinador entiendo perfectamente que mantengo bajo mi responsabilidad formal las siguientes obligaciones con el proyecto.
 
 \begin{itemize}
     \item Brindar completa guía institucional y apoyo directo en la definición del documento fundacional trabajando estrechamente junto con la directora de todo el proyecto asignado.
     \item Comprometerse activamente a revisar sin retrasos los entregables principales y críticos del gran proyecto informático encomendado.
-    \item Ayudar proactivamente a todo el equipo técnico a lograr superar satisfactoriamente las barreras u obstáculos institucionales que puedan llegar a afectar negativamente el alcance tiempo esperado costo operativo o la indispensable calidad final.
+    \item Ayudar proactivamente a todo el equipo técnico a lograr superar satisfactoriamente las barreras u obstáculos institucionales que puedan llegar a afectar negativamente el alcance, tiempo esperado, costo operativo o la indispensable calidad final.
     \item Verificar exhaustivamente que los enormes beneficios que han sido definidos desde un principio sean totalmente coherentes e integrales con las complejas necesidades institucionales más urgentes.
     \item Aprobar y ratificar de manera completamente formal tanto el inicio general del importante proyecto tecnológico como sus eventuales cambios operativos principales que requieran análisis y autorización de muy alto nivel administrativo.
 \end{itemize}
 
 Firmado
 
-Roberto Mora Fallas como patrocinador del proyecto
+Roberto Mora Fallas como patrocinador del proyecto.
 
 Firma \rule{7cm}{0.4pt}
 
@@ -749,20 +742,20 @@ Fecha 8 de junio de 2026
 
 \subsection{Rol de la líder general del proyecto}
 
-Yo como directora de proyecto comprendo con total claridad que tengo bajo mi responsabilidad directa las siguientes tareas primordiales
+Yo como directora de proyecto comprendo con total claridad que tengo bajo mi responsabilidad directa las siguientes tareas primordiales.
 
 \begin{itemize}
     \item Guiar de manera constante y experta a todo el equipo de trabajo durante la complicada planificación estratégica y posterior ejecución meticulosa del proyecto universitario completo.
     \item Organizar las múltiples revisiones internas del propio equipo y brindar así las diversas actualizaciones que sean periódicas sobre el importante avance técnico logrado cada semana operativa.
     \item Coordinar las fundamentales revisiones formales directamente con el patrocinador principal del valioso proyecto en curso para mantener la transparencia administrativa exigida.
-    \item Asegurar rigurosamente mediante el control estricto que todas las acciones asignadas al gran proyecto en verdad sean debidamente completadas en tiempo y forma sin excusas ni excepciones algunas.
-    \item Notificar obligatoriamente y sin demoras al patrocinador institucional si de manera imprevista llega a cambiar de forma drástica el alcance propósito inicial cronograma general estipulado gran presupuesto planificado o el mismísimo equipo técnico asignado al trabajo diario.
-    \item Gestionar de manera muy eficiente y activa todos los diversos riesgos técnicos identificados además de las variadas comunicaciones diarias y los inevitables cambios organizacionales surgidos dentro del alcance general de todo el presente proyecto universitario innovador.
+    \item Asegurar rigurosamente mediante el control estricto que todas las acciones asignadas al gran proyecto en verdad sean debidamente completadas en tiempo y forma, sin excusas ni excepciones algunas.
+    \item Notificar obligatoriamente y sin demoras al patrocinador institucional si de manera imprevista llega a cambiar de forma drástica el alcance, propósito inicial, cronograma general estipulado, gran presupuesto planificado o el mismísimo equipo técnico asignado al trabajo diario.
+    \item Gestionar de manera muy eficiente y activa todos los diversos riesgos técnicos identificados, además de las variadas comunicaciones diarias y los inevitables cambios organizacionales surgidos dentro del alcance general de todo el presente proyecto universitario innovador.
 \end{itemize}
 
 Firmado
 
-Tamara Robles Camacho como gerente de proyecto
+Tamara Robles Camacho como gerente de proyecto.
 
 Firma \rule{7cm}{0.4pt}
 
@@ -770,39 +763,39 @@ Fecha 8 de junio de 2026
 
 \subsection{Rol de los miembros asignados del equipo técnico}
 
-Nosotros como miembros oficiales y activos del grupo de desarrollo comprendemos de forma inequívoca que tenemos asignadas las siguientes responsabilidades operativas e ineludibles obligaciones
+Nosotros como miembros oficiales y activos del grupo de desarrollo comprendemos de forma inequívoca que tenemos asignadas las siguientes responsabilidades operativas e ineludibles obligaciones.
 
 \begin{itemize}
     \item Contribuir fuertemente y con alto compromiso técnico o administrativo al gran objetivo general de la implementación exitosa de este enorme proyecto tecnológico académico en desarrollo activo.
     \item Comprometerse de forma sumamente férrea e incansable con lograr consolidar completamente tanto el ambicioso propósito fundacional como cada una de las grandes metas operativas debidamente definidas y documentadas por la gerencia.
     \item Completar en el tiempo estimado y con la máxima excelencia profesional todos los requeridos entregables individuales que hayan sido asignados específicamente a la carga de trabajo personal de cada colaborador técnico.
-    \item Aportar un inmenso conocimiento técnico y habilidades sólidas de programación o de documentación además de la calidad meticulosa requerida que corresponda según la función asignada por el rol formal que ocupa dentro de la propia estructura metodológica estipulada con base en el cronograma integral.
+    \item Aportar un inmenso conocimiento técnico y habilidades sólidas de programación o de documentación, además de la calidad meticulosa requerida que corresponda según la función asignada por el rol formal que ocupa dentro de la propia estructura metodológica estipulada con base en el cronograma integral.
     \item Mantener en todo momento una gran responsabilidad mutua e inquebrantable que genere un entorno solidario y eficiente dentro del equipo de trabajo colaborativo para así impulsar vigorosamente todos los procesos de negocio.
-    \item Comunicar obligatoriamente y a tiempo con mucha claridad y sin ocultamientos si surgen riesgos inminentes bloqueos paralizantes graves o las diversas y justas preocupaciones personales que pudiesen amenazar gravemente el avance firme del importante proyecto informático y de esta manera perjudicar los entregables críticos planificados a priori.
-    \item Cumplir estricta y fielmente con cada meta temporal impuesta por el riguroso cronograma además de honrar plenamente con las muchas responsabilidades metodológicas previamente definidas y documentadas en el marco constitutivo fundacional de todo el gran proyecto institucional actual que se encuentra en una franca etapa temprana de desarrollo.
+    \item Comunicar obligatoriamente y a tiempo, con mucha claridad y sin ocultamientos, si surgen riesgos inminentes, bloqueos paralizantes graves o las diversas y justas preocupaciones personales que pudiesen amenazar gravemente el avance firme del importante proyecto informático y de esta manera perjudicar los entregables críticos planificados a priori.
+    \item Cumplir estricta y fielmente con cada meta temporal impuesta por el riguroso cronograma, además de honrar plenamente con las muchas responsabilidades metodológicas previamente definidas y documentadas en el marco constitutivo fundacional de todo el gran proyecto institucional actual que se encuentra en una franca etapa temprana de desarrollo.
 \end{itemize}
 
 Firmados por los colaboradores activos
 
-Isaac Jiménez Blanco como analista experto de negocio y documentador primario
+Isaac Jiménez Blanco como analista experto de negocio y documentador primario.
 
 Firma \rule{7cm}{0.4pt}
 
 Fecha 8 de junio de 2026
 
-Mauricio González Prendas como desarrollador informático e ingeniero de control de calidad primario
+Mauricio González Prendas como desarrollador informático e ingeniero de control de calidad primario.
 
 Firma \rule{7cm}{0.4pt}
 
 Fecha 8 de junio de 2026
 
-Carlos Sainz Arce como desarrollador informático de soporte e ingeniero de calidad secundario de apoyo
+Carlos Sainz Arce como desarrollador informático de soporte e ingeniero de calidad secundario de apoyo.
 
 Firma \rule{7cm}{0.4pt}
 
 Fecha 8 de junio de 2026
 
-Jorge Abarca Quiros como auxiliar analista de negocio y documentador secundario de refuerzo estratégico
+Jorge Abarca Quiros como auxiliar analista de negocio y documentador secundario de refuerzo estratégico.
 
 Firma \rule{7cm}{0.4pt}
 

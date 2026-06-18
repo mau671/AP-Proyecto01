@@ -120,7 +120,7 @@
 \fancyhf{}
 \fancyhead[R]{\DocumentoTitulo}
 \renewcommand{\headrulewidth}{0.4pt}
-\fancyfoot[C]{Página \thepage\ de \pageref{LastPage}}
+\fancyfoot[R]{Página \thepage\ de \pageref{LastPage}}
 \renewcommand{\footrulewidth}{0.4pt}
 
 % Estilo equivalente para páginas horizontales.
@@ -128,7 +128,7 @@
     \fancyhf{}%
     \fancyhead[R]{\DocumentoTitulo}%
     \renewcommand{\headrulewidth}{0.4pt}%
-    \fancyfoot[C]{Página \thepage\ de \pageref{LastPage}}%
+    \fancyfoot[R]{Página \thepage\ de \pageref{LastPage}}%
     \renewcommand{\footrulewidth}{0.4pt}%
 }
 
@@ -271,7 +271,9 @@ En la siguiente tabla se muestran las partes interesadas internas del proyecto.
 \begin{widepage}
 {\small
 \setlength{\tabcolsep}{3pt}
+
 \begin{longtable}{p{3.8cm} p{3.8cm} p{5.8cm} p{1.9cm} p{1.4cm} p{5.8cm}}
+\caption{Partes interesadas internas}\label{tab:interesados-internos}\\
 \toprule
 \textbf{Nombre} & \textbf{Cargo} & \textbf{Interés} & \textbf{Influencia} & \textbf{Poder} & \textbf{Estrategia de involucramiento} \\
 \midrule
@@ -297,7 +299,9 @@ En la siguiente tabla se mencionan las partes externas interesadas para este pro
 \begin{widepage}
 {\small
 \setlength{\tabcolsep}{3pt}
+
 \begin{longtable}{p{3.8cm} p{4.3cm} p{5.8cm} p{1.9cm} p{1.4cm} p{5.4cm}}
+\caption{Partes interesadas externas}\label{tab:interesados-externos}\\
 \toprule
 \textbf{Nombre} & \textbf{Cargo} & \textbf{Interés} & \textbf{Influencia} & \textbf{Poder} & \textbf{Estrategia de involucramiento} \\
 \midrule

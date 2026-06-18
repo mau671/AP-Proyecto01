@@ -14,17 +14,14 @@
 \newunicodechar{−}{\(-\)}
 
 % --- Márgenes / papel ---
-\usepackage{geometry}
-\geometry{
-    a4paper,
+\usepackage[
     left=2.5cm,
     right=2.5cm,
     top=2.5cm,
     bottom=2.5cm,
     headsep=0.5cm,
-    footskip=0.8cm,
-    headheight=30pt
-}
+    footskip=0.8cm
+]{geometry}
 
 % --- Matemáticas ---
 \usepackage{amsmath}
@@ -44,10 +41,8 @@
 \usepackage[hidelinks]{hyperref}
 
 % --- Encabezado y pie de página ---
-\usepackage[myheadings]{fancyhdr}
+\usepackage{fancyhdr}
 \usepackage{lastpage}
-\setlength{\headheight}{30pt}
-\setlength{\footskip}{30pt}
 
 % --- Interlineado ---
 \linespread{1.2}
@@ -76,8 +71,8 @@
 
 % Datos que aparecen en el encabezado.
 \newcommand{\DocHeaderLeft}{}
-\newcommand{\DocHeaderRight}{Business Case}
-\newcommand{\DocFooterRight}{Página~\thepage\ de~\pageref{LastPage}}
+\newcommand{\DocHeaderRight}{\DocumentoTitulo}
+\newcommand{\DocFooterRight}{Página \thepage\ de \pageref{LastPage}}
 
 % Metadatos PDF.
 \title{\DocumentoTitulo}
@@ -122,20 +117,18 @@
 % =========================================================
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\DocHeaderLeft}
-\fancyhead[R]{\DocHeaderRight}
+\fancyhead[R]{\DocumentoTitulo}
 \renewcommand{\headrulewidth}{0.4pt}
+\fancyfoot[R]{Página \thepage\ de \pageref{LastPage}}
 \renewcommand{\footrulewidth}{0.4pt}
-\fancyfoot[R]{\DocFooterRight}
 
 % Estilo equivalente para páginas horizontales.
 \fancypagestyle{widefancy}{%
     \fancyhf{}%
-    \fancyhead[L]{\DocHeaderLeft}%
-    \fancyhead[R]{\DocHeaderRight}%
+    \fancyhead[R]{\DocumentoTitulo}%
     \renewcommand{\headrulewidth}{0.4pt}%
+    \fancyfoot[R]{Página \thepage\ de \pageref{LastPage}}%
     \renewcommand{\footrulewidth}{0.4pt}%
-    \fancyfoot[R]{\DocFooterRight}%
 }
 
 % =========================================================
@@ -156,7 +149,7 @@
     \paperheight=210mm
     \pdfpagewidth=297mm
     \pdfpageheight=210mm
-    \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm,headheight=30pt}%
+    \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm}%
     \setlength{\textwidth}{247mm}%
     \setlength{\textheight}{160mm}%
     \setlength{\linewidth}{\textwidth}%
@@ -264,36 +257,36 @@
 
 \section{Situación actual}
 
-La Universidad Tecnológica La Mejor es una institución superior que actualmente presenta muchos problemas a causa de cómo gestionan sus procesos académicos administrativos y financieros ya que esto se hace mediante una serie de sistemas independientes que no se encuentran integrados entre sí debido a que esta segmentación tecnológica representa un obstáculo severo para la eficiencia operativa de toda la institución.
+La Universidad Tecnológica La Mejor es una institución superior que actualmente presenta muchos problemas a causa de cómo gestionan sus procesos académicos, administrativos y financieros, ya que esto se hace mediante una serie de sistemas independientes que no se encuentran integrados entre sí, debido a que esta segmentación tecnológica representa un obstáculo severo para la eficiencia operativa de toda la institución.
 
-Los sistemas actualmente en uso son hojas de cálculo para el registro de calificaciones junto con correo electrónico para la comunicación constante entre departamentos y sistemas propietarios sin conexión para la gestión financiera además de registros físicos o digitales dispersos para el historial académico estudiantil por lo tanto la información no está centralizada para los diferentes actores universitarios.
+Los sistemas actualmente en uso son hojas de cálculo para el registro de calificaciones, junto con correo electrónico para la comunicación constante entre departamentos, y sistemas propietarios sin conexión para la gestión financiera, además de registros físicos o digitales dispersos para el historial académico estudiantil, por lo tanto, la información no está centralizada para los diferentes actores universitarios.
 
 \subsection{Diagnóstico operativo}
 
 El análisis de la situación actual muestra los siguientes hallazgos críticos
 
 \begin{itemize}
-    \item Duplicidad de datos debido a que mucha de la información se registra de manera manual en múltiples sistemas generando así inconsistencias graves y errores operativos constantes.
-    \item Falta de visibilidad ya que las autoridades no disponen de indicadores consolidados en tiempo real para la toma de decisiones estratégicas institucionales.
-    \item Procesos lentos por lo tanto la matrícula estudiantil el registro de calificaciones y los tramites financieros dependen de una exhaustiva intervención manual en cada etapa del proceso diario.
-    \item Comunicación deficiente debido a que la información no fluye de forma automática entre el departamento académico administrativo y financiero.
-    \item Insatisfacción estudiantil esto implica que los estudiantes deben acudir presencialmente o contactar múltiples oficinas para realizar sus gestiones básicas universitarias.
+    \item Duplicidad de datos, debido a que mucha de la información se registra de manera manual en múltiples sistemas, generando así inconsistencias graves y errores operativos constantes.
+    \item Falta de visibilidad, ya que las autoridades no disponen de indicadores consolidados en tiempo real para la toma de decisiones estratégicas institucionales.
+    \item Procesos lentos, por lo tanto, la matrícula estudiantil, el registro de calificaciones y los tramites financieros dependen de una exhaustiva intervención manual en cada etapa del proceso diario.
+    \item Comunicación deficiente, debido a que la información no fluye de forma automática entre el departamento académico, administrativo y financiero.
+    \item Insatisfacción estudiantil, esto implica que los estudiantes deben acudir presencialmente, o contactar múltiples oficinas, para realizar sus gestiones básicas universitarias.
 \end{itemize}
 
 \section{Problema identificado}
 
-El problema central de la Universidad Tecnológica La Mejor se basa en la ausencia de una plataforma integrada que centralice y automatice los procesos académicos administrativos y financieros de la institución ya que esta carencia genera ineficiencias operativas medibles junto con un deterioro notable en la experiencia de todos los usuarios además de limitaciones significativas para la toma de decisiones basada en datos concretos y reportes financieros exactos.
+El problema central de la Universidad Tecnológica La Mejor se basa en la ausencia de una plataforma integrada que centralice y automatice los procesos académicos, administrativos y financieros de la institución, ya que esta carencia genera ineficiencias operativas medibles, junto con un deterioro notable en la experiencia de todos los usuarios, además de limitaciones significativas para la toma de decisiones basada en datos concretos y reportes financieros exactos.
 
 \subsection{Árbol de problemas}
 
 Los efectos identificados como consecuencia directa del problema central son los detallados a continuación
 
 \begin{itemize}
-    \item Incremento en los tiempos de atención al estudiante por procesos manuales repetitivos de esta manera se reduce fuertemente la eficiencia diaria del personal administrativo.
-    \item Alta tasa de errores en registros académicos y financieros debido a la falta de validación automatizada en todos los sistemas actuales del campus.
-    \item Imposibilidad de generar reportes ejecutivos en tiempo real para la toma de decisiones por lo tanto los directivos carecen de información oportuna para evaluar la universidad.
-    \item Carga administrativa excesiva sobre el personal docente y administrativo ya que deben duplicar esfuerzos físicos en múltiples plataformas tecnológicas anticuadas.
-    \item Pérdida de competitividad institucional frente a universidades con sistemas modernos esto implica que los estudiantes prefieran explorar otras opciones educativas de la región.
+    \item Incremento en los tiempos de atención al estudiante por procesos manuales repetitivos, de esta manera, se reduce fuertemente la eficiencia diaria del personal administrativo.
+    \item Alta tasa de errores en registros académicos y financieros, debido a la falta de validación automatizada en todos los sistemas actuales del campus.
+    \item Imposibilidad de generar reportes ejecutivos en tiempo real para la toma de decisiones, por lo tanto, los directivos carecen de información oportuna para evaluar la universidad.
+    \item Carga administrativa excesiva sobre el personal docente y administrativo, ya que deben duplicar esfuerzos físicos en múltiples plataformas tecnológicas anticuadas.
+    \item Pérdida de competitividad institucional frente a universidades con sistemas modernos, esto implica que los estudiantes prefieran explorar otras opciones educativas de la región.
 \end{itemize}
 
 \subsection{Impacto cuantificable}
@@ -301,43 +294,44 @@ Los efectos identificados como consecuencia directa del problema central son los
 Se estima que la situación actual genera los siguientes impactos negativos profundos en la dinámica de la institución
 
 \begin{itemize}
-    \item El tiempo promedio de atención por trámite estudiantil se encuentra entre 45 a 90 minutos presenciales ya que no existen plataformas virtuales adecuadas para los jóvenes.
-    \item El porcentaje de errores en registros académicos manuales es aproximadamente del 8 al 12 por ciento debido a la ausencia total de validaciones automáticas modernas.
-    \item Las horas trabajadas de los funcionarios semanales destinadas a tareas administrativas redundantes representan más de 120 horas por departamento en consecuencia se desperdicia tiempo valioso del personal capacitado.
-    \item El costo de oportunidad estimado por ineficiencias operativas es significativo para la sostenibilidad institucional por lo tanto se deben buscar urgentemente alternativas de mejora eficientes.
+    \item El tiempo promedio de atención por trámite estudiantil se encuentra entre 45 a 90 minutos presenciales, ya que no existen plataformas virtuales adecuadas para los jóvenes.
+    \item El porcentaje de errores en registros académicos manuales es aproximadamente del 8 al 12 por ciento, debido a la ausencia total de validaciones automáticas modernas.
+    \item Las horas trabajadas de los funcionarios semanales destinadas a tareas administrativas redundantes representan más de 120 horas por departamento, en consecuencia, se desperdicia tiempo valioso del personal capacitado.
+    \item El costo de oportunidad estimado por ineficiencias operativas es significativo para la sostenibilidad institucional, por lo tanto, se deben buscar urgentemente alternativas de mejora eficientes.
 \end{itemize}
 
 \section{Oportunidad de mejora}
 
-La modernización tecnológica de la Universidad Tecnológica La Mejor representa una gran oportunidad para transformar su modelo operativo debido a que esto permitirá mejorar sustancialmente la experiencia de todos los funcionarios y estudiantes de la institución además de posicionarla como una universidad de referencia fundamental en gestión educativa dentro de toda la región centroamericana.
+La modernización tecnológica de la Universidad Tecnológica La Mejor representa una gran oportunidad para transformar su modelo operativo, debido a que esto permitirá mejorar sustancialmente la experiencia de todos los funcionarios y estudiantes de la institución, además de posicionarla como una universidad de referencia fundamental en gestión educativa dentro de toda la región centroamericana.
 
 \subsection{Visión de la solución}
 
-El desarrollo de una plataforma universitaria integrada permitirá consolidar en un único punto de acceso seguro todos los procesos académicos administrativos y financieros para lo cual ofrecerá interfaces completamente diferenciadas y adaptadas funcionalmente a estudiantes docentes personal administrativo área financiera y miembros de la alta dirección ejecutiva.
+El desarrollo de una plataforma universitaria integrada permitirá consolidar en un único punto de acceso seguro todos los procesos académicos, administrativos y financieros, para lo cual ofrecerá interfaces completamente diferenciadas y adaptadas funcionalmente a estudiantes, docentes, personal administrativo, área financiera y miembros de la alta dirección ejecutiva.
 
 \subsection{Oportunidades identificadas}
 
-La automatización de procesos permite reducir de forma considerable el tiempo dedicado a tareas manuales y repetitivas logrando beneficios de la siguiente forma
+La automatización de procesos permite reducir de forma considerable el tiempo dedicado a tareas manuales y repetitivas, logrando beneficios de la siguiente forma
 
 \begin{itemize}
-    \item Centralización de la información para garantizar una única fuente de verdad aplicable a todos los datos institucionales ya que esto evita discrepancias molestas y constantes.
-    \item Mejora en la experiencia estudiantil al brindar un portal completamente accesible para realizar trámites en línea por lo tanto se evitan para siempre las filas presenciales en el campus.
-    \item Habilitación de inteligencia institucional para generar tableros ejecutivos con indicadores académicos y financieros en tiempo real debido a que esto apoya fuertemente la toma de decisiones.
-    \item Reducción de errores operativos al implementar validaciones automáticas que eliminen inconsistencias financieras de manera inmediata de esta manera se protege la información contable de la entidad.
-    \item Escalabilidad al diseñar una arquitectura técnica flexible que permita incorporar nuevos módulos o funcionalidades en el futuro esto implica que el nuevo sistema no quedará obsoleto a corto plazo.
+    \item Centralización de la información para garantizar una única fuente de verdad aplicable a todos los datos institucionales, ya que esto evita discrepancias molestas y constantes.
+    \item Mejora en la experiencia estudiantil al brindar un portal completamente accesible para realizar trámites en línea, por lo tanto, se evitan para siempre las filas presenciales en el campus.
+    \item Habilitación de inteligencia institucional para generar tableros ejecutivos con indicadores académicos y financieros en tiempo real, debido a que esto apoya fuertemente la toma de decisiones.
+    \item Reducción de errores operativos al implementar validaciones automáticas que eliminen inconsistencias financieras de manera inmediata, de esta manera, se protege la información contable de la entidad.
+    \item Escalabilidad al diseñar una arquitectura técnica flexible que permita incorporar nuevos módulos o funcionalidades en el futuro, esto implica que el nuevo sistema no quedará obsoleto a corto plazo.
 \end{itemize}
 
 \section{Beneficios esperados}
 
-Para este nuevo sistema informático se esperan múltiples beneficios que mejorarán directamente la experiencia de todos los actores de la institución ya que la novedosa plataforma centralizará la gestión general universitaria.
+Para este nuevo sistema informático se esperan múltiples beneficios que mejorarán directamente la experiencia de todos los actores de la institución, ya que la novedosa plataforma centralizará la gestión general universitaria.
 
 \subsection{Beneficios cuantitativos}
 
-En la siguiente tabla se muestran los beneficios numéricos comparando la situación actual contra la gran meta esperada tras implementar la solución final
+En la siguiente tabla se muestran los beneficios numéricos, comparando la situación actual contra la gran meta esperada tras implementar la solución final
 
 \begin{table}[H]
 \centering
 \small
+\caption{Beneficios esperados}\label{tab:beneficios}
 \begin{tabularx}{\textwidth}{p{5.2cm} p{4.1cm} Y}
 \toprule
 \textbf{Beneficio} & \textbf{Situación actual} & \textbf{Meta esperada} \\
@@ -357,22 +351,24 @@ Acceso a trámites fuera del campus & No disponible del todo & 24/7 desde dispos
 La plataforma también generará grandes ventajas organizacionales de tipo no numérico
 
 \begin{itemize}
-    \item Mejora en la imagen institucional y en la percepción de modernidad por parte de estudiantes y docentes debido a que contarán con un sistema de última generación muy eficiente.
-    \item Mayor transparencia en todos los procesos académicos y financieros para todos los actores por lo tanto existirá muchísima más confianza institucional hacia la administración.
-    \item Fortalecimiento de la cultura organizacional orientada a la eficiencia y la innovación ya que el personal dejará de realizar trabajos rutinarios excesivos en las oficinas.
-    \item Cumplimiento firme de estándares de calidad universitaria y posibilidad real de obtener una acreditación institucional prestigiosa para lo cual el sistema es una herramienta tecnológica clave.
-    \item Retención estudiantil mejorada gracias a una experiencia universitaria mucho más fluida y satisfactoria esto implica que los estudiantes se mantendrán sumamente motivados en sus respectivas carreras.
-    \item Reducción del estrés operativo diario de todo el personal administrativo y del cuerpo docente en consecuencia mejorará de forma sostenida el clima laboral general.
+    \item Mejora en la imagen institucional y en la percepción de modernidad por parte de estudiantes y docentes, debido a que contarán con un sistema de última generación muy eficiente.
+    \item Mayor transparencia en todos los procesos académicos y financieros para todos los actores, por lo tanto, existirá muchísima más confianza institucional hacia la administración.
+    \item Fortalecimiento de la cultura organizacional orientada a la eficiencia y la innovación, ya que el personal dejará de realizar trabajos rutinarios excesivos en las oficinas.
+    \item Cumplimiento firme de estándares de calidad universitaria y posibilidad real de obtener una acreditación institucional prestigiosa, para lo cual el sistema es una herramienta tecnológica clave.
+    \item Retención estudiantil mejorada gracias a una experiencia universitaria mucho más fluida y satisfactoria, esto implica que los estudiantes se mantendrán sumamente motivados en sus respectivas carreras.
+    \item Reducción del estrés operativo diario de todo el personal administrativo y del cuerpo docente, en consecuencia, mejorará de forma sostenida el clima laboral general.
 \end{itemize}
 
 \section{Alternativas evaluadas}
 
-Para atender la problemática identificada se evaluaron cuidadosamente tres alternativas estratégicas con distintos niveles de inversión riesgo y beneficio debido a que la primera alternativa fue mantener el proyecto a como lo están manejando actualmente mientras que la segunda alternativa consistió en un sistema de software comercial que centraliza la gestión operativa de recursos en una única plataforma genérica y finalmente la tercera alternativa correspondió a un desarrollo totalmente a la medida donde se puede adaptar al cien por ciento todo el producto a las necesidades de la institución universitaria. Asimismo a continuación se presenta el análisis comparativo completo
+Para atender la problemática identificada, se evaluaron cuidadosamente tres alternativas estratégicas con distintos niveles de inversión, riesgo y beneficio, debido a que la primera alternativa fue mantener el proyecto a como lo están manejando actualmente, mientras que la segunda alternativa consistió en un sistema de software comercial que centraliza la gestión operativa de recursos en una única plataforma genérica, y finalmente, la tercera alternativa correspondió a un desarrollo totalmente a la medida donde se puede adaptar al cien por ciento todo el producto a las necesidades de la institución universitaria. Asimismo, a continuación se presenta el análisis comparativo completo
 
 \begin{widepage}
 {\small
 \setlength{\tabcolsep}{3pt}
+
 \begin{longtable}{p{4.1cm} p{4.8cm} p{5.8cm} p{7.2cm}}
+\caption{Análisis comparativo de alternativas}\label{tab:analisis-alternativas}\\
 \toprule
 \textbf{Criterio} & \textbf{Alternativa A Status quo} & \textbf{Alternativa B Sistema comercial} & \textbf{Alternativa C Desarrollo a la medida} \\
 \midrule
@@ -396,11 +392,11 @@ Recomendación ejecutiva & No es viable operativamente a futuro & No es viable p
 
 \subsection{Justificación de la alternativa seleccionada}
 
-La alternativa de desarrollo a la medida fue seleccionada indiscutiblemente por ofrecer el mejor balance general entre costo y tiempo de implementación así como también una gran adaptabilidad a los procesos específicos de la universidad y un fuerte potencial de mejora operativa en todos los departamentos ya que a diferencia de un software comercial genérico una solución desarrollada internamente puede ajustarse con gran precisión a todos los flujos de trabajo institucionales permitiendo evitar licencias de uso sumamente costosas y garantizando de esa forma la autonomía tecnológica a largo plazo para toda la organización educativa.
+La alternativa de desarrollo a la medida fue seleccionada indiscutiblemente por ofrecer el mejor balance general entre costo y tiempo de implementación, así como también una gran adaptabilidad a los procesos específicos de la universidad y un fuerte potencial de mejora operativa en todos los departamentos, ya que a diferencia de un software comercial genérico, una solución desarrollada internamente puede ajustarse con gran precisión a todos los flujos de trabajo institucionales, permitiendo evitar licencias de uso sumamente costosas y garantizando de esa forma la autonomía tecnológica a largo plazo para toda la organización educativa.
 
 \section{Justificación económica}
 
-La viabilidad económica de este importante proyecto integral se sustenta sólidamente en el análisis profundo de los costos de implementación versus todos los grandes beneficios operativos y estratégicos que generará la plataforma web a mediano y largo plazo en consecuencia la prestigiosa universidad recuperará rápidamente su gran inversión económica inicial.
+La viabilidad económica de este importante proyecto integral se sustenta sólidamente en el análisis profundo de los costos de implementación versus todos los grandes beneficios operativos y estratégicos que generará la plataforma web a mediano y largo plazo, en consecuencia, la prestigiosa universidad recuperará rápidamente su gran inversión económica inicial.
 
 \subsection{Estimación de costos del proyecto}
 
@@ -409,6 +405,7 @@ En la siguiente tabla se muestra cada categoría de costo con su respectivo valo
 \begin{table}[H]
 \centering
 \small
+\caption{Estimación de costos}\label{tab:costos}
 \begin{tabularx}{\textwidth}{Y p{4.1cm} p{3.2cm}}
 \toprule
 \textbf{Categoría de costo} & \textbf{Costo estimado} & \textbf{Porcentaje del total} \\
@@ -427,11 +424,12 @@ TOTAL ESTIMADO DEL PROYECTO INFORMATICO & ₡27,200,500 & 100\% \\
 
 \subsection{Retorno sobre la inversión}
 
-Considerando los grandes ahorros operativos estimados que serán directamente derivados de la reducción contundente de horas administrativas y la disminución de errores graves en todos los registros contables junto con la eliminación definitiva de procesos manuales redundantes se proyecta un rápido retorno de la alta inversión dentro del mismísimo primer año de operación continua del nuevo sistema informático.
+Considerando los grandes ahorros operativos estimados que serán directamente derivados de la reducción contundente de horas administrativas y la disminución de errores graves en todos los registros contables, junto con la eliminación definitiva de procesos manuales redundantes, se proyecta un rápido retorno de la alta inversión dentro del mismísimo primer año de operación continua del nuevo sistema informático.
 
 \begin{table}[H]
 \centering
 \small
+\caption{Beneficios financieros}\label{tab:beneficios-financieros}
 \begin{tabularx}{\textwidth}{Y p{5cm}}
 \toprule
 \textbf{Fuente de ahorro o de un gran beneficio financiero} & \textbf{Estimación anual en colones} \\
@@ -448,23 +446,24 @@ AHORRO GLOBAL O BENEFICIO ANUAL INSTITUCIONAL ESTIMADO & ₡27,000,000 \\
 
 \subsection{Análisis numérico de costo y beneficio}
 
-En la siguiente tabla se muestra un análisis detallado de la inversión evaluando la estrecha relación entre el costo inicial y el gran beneficio de implementar este proyecto tecnológico vanguardista en la institución así como el beneficio anual estimado junto con el importante periodo temporal de recuperación además del retorno total de la inversión que ha sido calculado cuidadosamente tanto para el primero como para el tercer año operativo del sistema.
+En la siguiente tabla se muestra un análisis detallado de la inversión, evaluando la estrecha relación entre el costo inicial y el gran beneficio de implementar este proyecto tecnológico vanguardista en la institución, así como el beneficio anual estimado, junto con el importante periodo temporal de recuperación, además del retorno total de la inversión que ha sido calculado cuidadosamente tanto para el primero como para el tercer año operativo del sistema.
 
-Las fórmulas financieras que fueron estrictamente usadas para sacar dichos resultados matemáticos tan favorables son las presentadas detalladamente a continuación
+Las fórmulas financieras que fueron estrictamente usadas para sacar dichos resultados matemáticos tan favorables son las presentadas detalladamente a continuación.
 
-La primera fórmula del período de recuperación es la inversión de capital dividida directamente entre el beneficio operativo anual
+La primera fórmula del período de recuperación es la inversión de capital dividida directamente entre el beneficio operativo anual.
 
-La segunda fórmula del retorno sobre la inversión para el primer año es el beneficio financiero del primer año menos la inversión inicial dividido todo ese resultado entre la misma inversión inicial y finalmente multiplicado por cien
+La segunda fórmula del retorno sobre la inversión para el primer año es el beneficio financiero del primer año menos la inversión inicial, dividido todo ese resultado entre la misma inversión inicial y finalmente multiplicado por cien.
 
-La tercera fórmula del retorno sobre la inversión para el tercer año es el beneficio acumulado de tres largos años menos la inversión de inicio dividido todo esto entre la inversión y multiplicado finalmente por cien
+La tercera fórmula del retorno sobre la inversión para el tercer año es el beneficio acumulado de tres largos años menos la inversión de inicio, dividido todo esto entre la inversión y multiplicado finalmente por cien.
 
-La cuarta fórmula correspondiente a la relación entre costo y beneficio es el beneficio monetario anual dividido entre la inversión del primer año o también el beneficio acumulado global dividido entre la misma inversión del tercer periodo anual
+La cuarta fórmula correspondiente a la relación entre costo y beneficio es el beneficio monetario anual dividido entre la inversión del primer año, o también, el beneficio acumulado global dividido entre la misma inversión del tercer periodo anual.
 
 A continuación se presentan de manera sumamente clara todos los resultados correspondientes a las métricas descritas
 
 \begin{table}[H]
 \centering
 \small
+\caption{Resumen de inversión}\label{tab:resumen-inversion}
 \begin{tabularx}{\textwidth}{Y p{5.2cm}}
 \toprule
 \textbf{Inversión total y completa del desarrollo del proyecto web} & ₡27,200,500 \\
@@ -479,18 +478,19 @@ A continuación se presentan de manera sumamente clara todos los resultados corr
 
 \section{Conclusión}
 
-La Universidad Tecnológica La Mejor enfrenta un desafío operativo muy real y apremiante debido a que todos sus complejos procesos académicos administrativos y financieros operan actualmente de forma excesivamente segmentada generando así fuertes ineficiencias medibles y una sobrecarga laboral extrema al personal institucional junto con una experiencia verdaderamente pobre para todos los valiosos estudiantes y docentes de la universidad.
+La Universidad Tecnológica La Mejor enfrenta un desafío operativo muy real y apremiante, debido a que todos sus complejos procesos académicos, administrativos y financieros operan actualmente de forma excesivamente segmentada, generando así fuertes ineficiencias medibles y una sobrecarga laboral extrema al personal institucional, junto con una experiencia verdaderamente pobre para todos los valiosos estudiantes y docentes de la universidad.
 
-El análisis exhaustivo y profundo presentado en este documento de viabilidad técnica y operativa demuestra con total claridad que la gran inversión financiera en una plataforma universitaria web integrada que sea desarrollada totalmente a la medida representa la alternativa estratégica más favorable y también más rentable de todas para resolver definitivamente la añeja problemática identificada ya que las demás opciones alternativas evaluadas que fueron mantener la situación actual deficiente o simplemente adquirir una plataforma comercial costosa y genérica fueron finalmente descartadas por su inviabilidad operativa y económica de manera sumamente respectiva.
+El análisis exhaustivo y profundo presentado en este documento de viabilidad técnica y operativa demuestra con total claridad que la gran inversión financiera en una plataforma universitaria web integrada, que sea desarrollada totalmente a la medida, representa la alternativa estratégica más favorable, y también más rentable de todas, para resolver definitivamente la añeja problemática identificada, ya que las demás opciones alternativas evaluadas, que fueron mantener la situación actual deficiente o simplemente adquirir una plataforma comercial costosa y genérica, fueron finalmente descartadas por su inviabilidad operativa y económica de manera sumamente respectiva.
 
-Los extraordinarios beneficios proyectados que se dividen inteligentemente tanto en aspectos numéricos palpables como en valiosas características cualitativas justifican por completo todo el alto costo financiero de la inversión inicial requerida debido a que se determinó un periodo prudencial de recuperación estimado y muy cercano a los doce meses iniciales junto con un sorprendente retorno de inversión superior al cien por ciento en un estrecho horizonte operativo temporal de solamente tres años además de que la nueva plataforma web posicionará estratégicamente a la institución educativa en un alto nivel competitivo de madurez tecnológica que finalmente le permitirá crecer de forma sostenible y ofrecer estupendos servicios informáticos de máxima calidad técnica a toda su gran comunidad universitaria.
+Los extraordinarios beneficios proyectados, que se dividen inteligentemente tanto en aspectos numéricos palpables como en valiosas características cualitativas, justifican por completo todo el alto costo financiero de la inversión inicial requerida, debido a que se determinó un periodo prudencial de recuperación estimado y muy cercano a los doce meses iniciales, junto con un sorprendente retorno de inversión superior al cien por ciento en un estrecho horizonte operativo temporal de solamente tres años, además de que la nueva plataforma web posicionará estratégicamente a la institución educativa en un alto nivel competitivo de madurez tecnológica que, finalmente, le permitirá crecer de forma sostenible y ofrecer estupendos servicios informáticos de máxima calidad técnica a toda su gran comunidad universitaria.
 
-Por todo el minucioso análisis expuesto con anterioridad se recomienda de manera muy formal y ejecutiva la aprobación inmediata junto con la urgente ejecución directa de este gran e importante proyecto tecnológico de modernización para lo cual se requiere aprobar sin dilación todos los valiosos recursos humanos técnicos y financieros que han sido absolutamente necesarios para su exitoso desarrollo integral dentro del exigente y estrecho plazo temporal previamente establecido por la dirección general de esta misma institución.
+Por todo el minucioso análisis expuesto con anterioridad, se recomienda de manera muy formal y ejecutiva la aprobación inmediata, junto con la urgente ejecución directa de este gran e importante proyecto tecnológico de modernización, para lo cual se requiere aprobar sin dilación todos los valiosos recursos humanos, técnicos y financieros que han sido absolutamente necesarios para su exitoso desarrollo integral dentro del exigente y estrecho plazo temporal previamente establecido por la dirección general de esta misma institución.
 
 \subsection{Firmas de aprobación formal}
 
 \begin{table}[H]
 \centering
+\caption{Aprobaciones del documento}\label{tab:aprobaciones}
 \begin{tabularx}{\textwidth}{Y Y Y}
 \toprule
 \textbf{Elaborado de manera responsable por} & \textbf{Revisado minuciosamente por} & \textbf{Aprobado y autorizado por} \\

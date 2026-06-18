@@ -10,17 +10,14 @@
 \usepackage[utf8]{inputenc}
 
 % --- Márgenes / papel ---
-\usepackage{geometry}
-\geometry{
-    a4paper,
+\usepackage[
     left=2.5cm,
     right=2.5cm,
     top=2.5cm,
     bottom=2.5cm,
     headsep=0.5cm,
-    footskip=0.8cm,
-    headheight=30pt
-}
+    footskip=0.8cm
+]{geometry}
 
 % --- Matemáticas ---
 \usepackage{amsmath}
@@ -40,10 +37,8 @@
 \usepackage[hidelinks]{hyperref}
 
 % --- Encabezado y pie de página ---
-\usepackage[myheadings]{fancyhdr}
+\usepackage{fancyhdr}
 \usepackage{lastpage}
-\setlength{\headheight}{30pt}
-\setlength{\footskip}{30pt}
 
 % --- Interlineado ---
 \linespread{1.2}
@@ -71,8 +66,8 @@
 
 % Datos que aparecen en el encabezado.
 \newcommand{\DocHeaderLeft}{}
-\newcommand{\DocHeaderRight}{Definición del Alcance}
-\newcommand{\DocFooterRight}{Página~\thepage\ de~\pageref{LastPage}}
+\newcommand{\DocHeaderRight}{\DocumentoTitulo}
+\newcommand{\DocFooterRight}{Página \thepage\ de \pageref{LastPage}}
 
 % Metadatos PDF.
 \title{\DocumentoTitulo}
@@ -119,20 +114,18 @@
 % =========================================================
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\DocHeaderLeft}
-\fancyhead[R]{\DocHeaderRight}
+\fancyhead[R]{\DocumentoTitulo}
 \renewcommand{\headrulewidth}{0.4pt}
+\fancyfoot[R]{Página \thepage\ de \pageref{LastPage}}
 \renewcommand{\footrulewidth}{0.4pt}
-\fancyfoot[R]{\DocFooterRight}
 
 % Estilo equivalente para páginas horizontales.
 \fancypagestyle{widefancy}{%
     \fancyhf{}%
-    \fancyhead[L]{\DocHeaderLeft}%
-    \fancyhead[R]{\DocHeaderRight}%
+    \fancyhead[R]{\DocumentoTitulo}%
     \renewcommand{\headrulewidth}{0.4pt}%
+    \fancyfoot[R]{Página \thepage\ de \pageref{LastPage}}%
     \renewcommand{\footrulewidth}{0.4pt}%
-    \fancyfoot[R]{\DocFooterRight}%
 }
 
 % =========================================================
@@ -153,7 +146,7 @@
     \paperheight=210mm
     \pdfpagewidth=297mm
     \pdfpageheight=210mm
-    \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm,headheight=30pt}%
+    \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm}%
     \setlength{\textwidth}{247mm}%
     \setlength{\textheight}{160mm}%
     \setlength{\linewidth}{\textwidth}%

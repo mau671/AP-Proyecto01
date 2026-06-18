@@ -6,14 +6,77 @@
 \usepackage[spanish,es-tabla]{babel}
 
 % Formato general
-\usepackage{geometry}
-\geometry{letterpaper,margin=2.5cm}
+\usepackage[
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headsep=0.5cm,
+    footskip=0.8cm
+]{geometry}
 \usepackage{setspace}
 \setstretch{1.15}
 \usepackage{parskip}
+
+\newcommand{\DocumentoTitulo}{Organigrama del Proyecto}
+
 \usepackage{fancyhdr}
-\setlength{\headheight}{13.6pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\DocumentoTitulo}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyfoot[R]{Página \thepage\ de \pageref{LastPage}}
+\renewcommand{\footrulewidth}{0.4pt}
 \usepackage{lastpage}
+
+\fancypagestyle{widefancy}{%
+    \fancyhf{}%
+    \fancyhead[R]{\DocumentoTitulo}%
+    \renewcommand{\headrulewidth}{0.4pt}%
+    \fancyfoot[R]{Página \thepage\ de \pageref{LastPage}}%
+    \renewcommand{\footrulewidth}{0.4pt}%
+}
+
+\makeatletter
+\newcommand{\SyncPageBuilderDimensions}{%
+    \global\vsize=\textheight
+    \global\@colroom=\textheight
+    \global\@colht=\textheight
+}
+\makeatother
+
+\newenvironment{widepage}{%
+    \clearpage
+    \paperwidth=297mm
+    \paperheight=210mm
+    \pdfpagewidth=297mm
+    \pdfpageheight=210mm
+    \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm}%
+    \setlength{\textwidth}{247mm}%
+    \setlength{\textheight}{160mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \pagestyle{widefancy}%
+}{%
+    \clearpage
+    \paperwidth=210mm
+    \paperheight=297mm
+    \pdfpagewidth=210mm
+    \pdfpageheight=297mm
+    \restoregeometry
+    \setlength{\textwidth}{156mm}%
+    \setlength{\textheight}{243mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \pagestyle{fancy}%
+}
+
 \usepackage{titlesec}
 \usepackage{tocloft}
 \usepackage{xcolor}
@@ -42,14 +105,6 @@
 \definecolor{diagramgreen}{HTML}{B2C19C}
 \definecolor{diagramlight}{HTML}{E5E9DE}
 \definecolor{diagramtext}{HTML}{565A60}
-
-% Encabezado y pie de página
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[R]{\small Organigrama del proyecto}
-\fancyfoot[R]{\small Página~\thepage\ de~\pageref{LastPage}}
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0.4pt}
 
 % Títulos
 \titleformat{\section}
@@ -80,21 +135,23 @@
 
     \vfill
 
-    {\Large\bfseries Organigrama del Proyecto\par}
+    {\Large\bfseries \DocumentoTitulo\par}
 
     \vfill
 
-    {\bfseries Profesora:\par}
+    {\bfseries Profesora\par}
     \vspace{0.15cm}
     {Alicia Marcela Salazar Hernández\par}
 
     \vspace{0.9cm}
 
-    {\bfseries Estudiantes:\par}
+    {\bfseries Estudiantes\par}
     \vspace{0.15cm}
-    {Mauricio González Prendas: 2024143009\par}
-    {Isaac Jiménez Blanco: 2024202804\par}
-    {Tamara Robles Camacho: 2024099342\par}
+    \begin{tabular}{l@{\hspace{1.5cm}}r}
+    Mauricio González Prendas & 2024143009 \\
+    Isaac Jiménez Blanco & 2024202804 \\
+    Tamara Robles Camacho & 2024099342 \\
+    \end{tabular}
 
     \vfill
 
@@ -104,8 +161,10 @@
     {2026\par}
 \end{titlepage}
 
+\pagestyle{empty}
 \tableofcontents
 \newpage
+\pagestyle{fancy}
 
 \section{Información general del documento}
 
@@ -115,7 +174,7 @@
 \toprule
 \textbf{Nombre del proyecto} & Plataforma Universitaria Integrada \\
 \textbf{Organización} & Universidad Tecnológica La Mejor \\
-\textbf{Documento} & Organigrama del Proyecto \\
+\textbf{Documento} & \DocumentoTitulo \\
 \textbf{Project manager} & Tamara Robles Camacho \\
 \textbf{Fecha} & 16 de junio de 2026 \\
 \bottomrule
@@ -124,11 +183,11 @@
 
 \section{Introducción}
 
-El presente documento corresponde al Entregable 8, Organigrama del Proyecto, del proyecto Plataforma Universitaria Integrada, desarrollado para la Universidad Tecnológica La Mejor. Este entregable tiene como finalidad definir la estructura básica del equipo, los roles principales y la relación jerárquica entre las personas que participan en la gestión y desarrollo del proyecto.
+El presente documento detalla el organigrama del proyecto Plataforma Universitaria Integrada desarrollado para la Universidad Tecnológica La Mejor, debido a que este entregable tiene como finalidad definir la estructura básica del equipo, los roles principales y la relación jerárquica entre las personas que participan en la gestión y desarrollo de la iniciativa.
 
-El organigrama permite visualizar quién patrocina el proyecto, quién lo dirige y quiénes ejecutan las actividades principales. También ayuda a evitar confusiones sobre responsabilidades y facilita la comunicación interna del equipo.
+El organigrama permite visualizar quién patrocina el proyecto, quién lo dirige y quiénes ejecutan las actividades principales, de esta manera ayuda a evitar confusiones sobre responsabilidades y facilita la comunicación interna del equipo.
 
-Para este proyecto se consideran los roles: Sponsor, Project Manager, Analistas de Negocio y Documentadores, y Desarrolladores Front-End y QA.
+Para este proyecto se consideran los roles de Sponsor, Project Manager, Analistas de Negocio y Documentadores, además de los Desarrolladores Front-End y QA.
 
 \section{Organigrama del proyecto}
 
@@ -175,15 +234,7 @@ Para este proyecto se consideran los roles: Sponsor, Project Manager, Analistas 
 \end{figure}
 
 \clearpage
-\begin{landscape}
-\thispagestyle{empty}
-
-% Encabezado manual para página horizontal: evita que fancyhdr quede rotado en el borde lateral.
-\noindent\begin{minipage}{\linewidth}
-\raggedleft \small Organigrama del proyecto\\[0.2em]
-\hrule height 0.4pt
-\end{minipage}
-\vspace{0.75em}
+\begin{widepage}
 
 \subsection{Stakeholders de apoyo y validación}
 
@@ -216,8 +267,6 @@ Para este proyecto se consideran los roles: Sponsor, Project Manager, Analistas 
 
 \node[box, text width=3.25cm, minimum height=1.65cm] (hosting) at (10.0,-3.65) {\textbf{Proveedor\\de Hosting}\\[7pt] Soporte externo si se\\requiere despliegue\\del prototipo};
 
-% La línea horizontal se dibuja una sola vez; las bajantes se conectan de forma individual
-% para evitar líneas superpuestas o duplicadas sobre el trazo punteado.
 \draw[connector] (top.south) -- (barcenter);
 \draw[connector] (leftbar) -- (rightbar);
 \draw[connector] (-10.0,-2.0) -- (patricia.north);
@@ -232,21 +281,16 @@ Para este proyecto se consideran los roles: Sponsor, Project Manager, Analistas 
 \caption{Stakeholders externos de apoyo y validación del proyecto.}
 \end{figure}
 
-\vfill
-\noindent\begin{minipage}{\linewidth}
-\hrule height 0.4pt
-\vspace{0.35em}
-\raggedleft \small Página~\thepage\ de~\pageref{LastPage}
-\end{minipage}
-\end{landscape}
+\end{widepage}
 \clearpage
 
 \section{Descripción breve de los roles}
 
-En la siguiente tabla se describen los roles principales definidos para el proyecto.
+En la siguiente tabla se describen los roles principales definidos para el proyecto, para lo cual se detalla la responsabilidad principal de cada integrante.
 
 \begin{table}[H]
 \centering
+\caption{Descripción de roles}\label{tab:roles}
 {\small
 \setlength{\tabcolsep}{5pt}
 \renewcommand{\arraystretch}{1.25}
@@ -258,31 +302,32 @@ Sponsor & Dr. Roberto Mora Fallas & Autorizar el proyecto, brindar apoyo institu
 Project Manager & Tamara Robles Camacho & Coordinar el proyecto, dar seguimiento al avance y comunicar decisiones relevantes \\
 Analista de Negocio y Doc. 1 & Isaac Jiménez Blanco & Apoyar la definición del alcance, documentación y control del proyecto \\
 Analista de Negocio y Doc. 2 & Jorge Abarca Quiros & Elaborar entregables documentales, apoyar gestión de riesgos y costos \\
-Desarrollador Front-End 1 y QA & Mauricio González Prendas & Construir las pantallas estudiantil, docente y admin. Realizar pruebas de calidad \\
-Desarrollador Front-End 2 y QA & Carlos Sainz Arce & Construir el portal financiero y ejecutivo. Realizar pruebas de calidad \\
+Desarrollador Front-End 1 y QA & Mauricio González Prendas & Construir las pantallas estudiantil, docente y admin, y realizar pruebas de calidad \\
+Desarrollador Front-End 2 y QA & Carlos Sainz Arce & Construir el portal financiero y ejecutivo, y realizar pruebas de calidad \\
 \bottomrule
 \end{tabularx}
 }
 \end{table}
 
-El equipo está conformado por cinco integrantes, lo que permite una mayor especialización en las tareas de documentación y desarrollo técnico.
+El equipo está conformado por cinco integrantes, por lo tanto esto permite una mayor especialización en las tareas de documentación y desarrollo técnico.
 
 \section{Explicación del organigrama}
 
-El organigrama se organiza en tres niveles principales. En el primer nivel se encuentra el Sponsor, quien representa la autoridad institucional y tiene la capacidad de aprobar el proyecto, validar entregables importantes y apoyar cuando se presenten decisiones que afecten alcance, tiempo, costo o calidad.
+El organigrama se organiza en tres niveles principales, ya que en el primer nivel se encuentra el Sponsor, quien representa la autoridad institucional y tiene la capacidad de aprobar el proyecto, validar entregables importantes y apoyar cuando se presenten decisiones que afecten el alcance, el tiempo, el costo o la calidad.
 
-En el segundo nivel se ubica la Project Manager. Este rol se encarga de coordinar el trabajo del equipo, revisar avances, mantener comunicación con los interesados y asegurar que los entregables se completen dentro del plazo definido. En este proyecto, la entrega final debe realizarse antes del 24 de junio de 2026, por lo que la coordinación del equipo es un punto clave.
+En el segundo nivel se ubica la Project Manager, debido a que este rol se encarga de coordinar el trabajo del equipo, revisar avances, mantener comunicación con los interesados y asegurar que los entregables se completen dentro del plazo definido. Asimismo, en este proyecto la entrega final debe realizarse antes del 24 de junio de 2026, esto implica que la coordinación del equipo es un punto clave.
 
-En el tercer nivel se encuentra el equipo ejecutor. Los Analistas de Negocio (1 y 2) apoyan la comprensión del problema, la definición del alcance y elaboran la documentación del proyecto. Los Desarrolladores Front-End y QA (1 y 2) se dividen la construcción de los módulos del prototipo web y revisan que el prototipo cumpla los criterios mínimos de calidad y navegación.
+En el tercer nivel se encuentra el equipo ejecutor, en consecuencia los Analistas de Negocio apoyan la comprensión del problema, la definición del alcance y elaboran la documentación del proyecto, mientras que los Desarrolladores Front-End y QA se dividen la construcción de los módulos del prototipo web y revisan que el prototipo cumpla los criterios mínimos de calidad y navegación.
 
-Los stakeholders externos aparecen como apoyo de validación. Estos actores no ejecutan directamente el proyecto, pero pueden aportar información importante sobre procesos administrativos, técnicos, docentes, financieros y estudiantiles. Su participación ayuda a que el prototipo represente mejor las necesidades de la Universidad Tecnológica La Mejor.
+Los stakeholders externos aparecen como apoyo de validación, por lo tanto estos actores no ejecutan directamente el proyecto, pero pueden aportar información importante sobre procesos administrativos, técnicos, docentes, financieros y estudiantiles, ya que su participación ayuda a que el prototipo represente mejor las necesidades de la Universidad Tecnológica La Mejor.
 
 \section{Relación entre roles y entregables}
 
-La siguiente tabla muestra cómo se relacionan los roles del organigrama con los entregables principales del proyecto.
+La siguiente tabla muestra cómo se relacionan los roles del organigrama con los entregables principales del proyecto, de esta manera se define la responsabilidad de cada parte.
 
 \begin{table}[H]
 \centering
+\caption{Relación entre roles y entregables}\label{tab:roles-entregables}
 {\small
 \setlength{\tabcolsep}{5pt}
 \renewcommand{\arraystretch}{1.25}
@@ -299,12 +344,12 @@ Desarrolladores Front-End y QA & Login, dashboard principal, módulos web, dashb
 }
 \end{table}
 
-Esta distribución permite que cada rol tenga una función clara dentro del proyecto. También facilita la creación posterior del cronograma y la asignación de responsables en Microsoft Project.
+Esta distribución permite que cada rol tenga una función clara dentro del proyecto, además de que facilita la creación posterior del cronograma y la asignación de responsables en Microsoft Project.
 
 \section{Conclusión}
 
-El organigrama del proyecto Plataforma Universitaria Integrada permite visualizar de forma clara cómo se organiza el equipo de trabajo. La estructura está compuesta por un Sponsor, una Project Manager y un equipo ejecutor con roles de análisis de negocio, diseño UX/UI, desarrollo Front-End y QA.
+El organigrama del proyecto Plataforma Universitaria Integrada permite visualizar de forma clara cómo se organiza el equipo de trabajo, debido a que la estructura está compuesta por un Sponsor, una Project Manager y un equipo ejecutor con roles de análisis de negocio, diseño de experiencia de usuario, desarrollo Front-End y aseguramiento de la calidad.
 
-La distribución en cinco integrantes responde adecuadamente al alcance académico del proyecto, permitiendo un desarrollo paralelo de la documentación y el prototipo. El esquema permite mantener orden en las responsabilidades, facilitar la comunicación y apoyar la planificación de otros entregables como el cronograma, la matriz RACI, el plan de recursos, el plan de comunicaciones y el plan de calidad.
+La distribución en cinco integrantes responde adecuadamente al alcance académico del proyecto, permitiendo un desarrollo paralelo de la documentación y el prototipo, por lo tanto el esquema permite mantener orden en las responsabilidades, facilitar la comunicación y apoyar la planificación de otros entregables como el cronograma, la matriz RACI, el plan de recursos, el plan de comunicaciones y el plan de calidad.
 
 \end{document}
