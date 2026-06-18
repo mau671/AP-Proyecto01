@@ -11,7 +11,16 @@
 
 % --- Márgenes / papel ---
 \usepackage{geometry}
-\geometry{a4paper, margin=2.7cm}
+\geometry{
+    a4paper,
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headsep=0.5cm,
+    footskip=0.8cm,
+    headheight=30pt
+}
 
 % --- Matemáticas ---
 \usepackage{amsmath}
@@ -46,7 +55,6 @@
 \newcommand{\Institucion}{Instituto Tecnológico de Costa Rica}
 \newcommand{\Campus}{Campus Tecnológico Central Cartago}
 \newcommand{\DocumentoTitulo}{Definición del Alcance}
-\newcommand{\DocumentoSubtitulo}{Plataforma Universitaria Integrada: Modernización y Centralización de Procesos Académicos y Administrativos}
 \newcommand{\Curso}{Administración de proyectos}
 \newcommand{\Profesor}{Alicia Marcela Salazar Hernández}
 \newcommand{\FechaDocumento}{8 de junio de 2026}
@@ -54,9 +62,11 @@
 \newcommand{\AnioDocumento}{2026}
 
 \newcommand{\AutoresPortada}{%
-    Mauricio González Prendas: 2024143009\\
-    Isaac Jiménez Blanco: 2024202804\\
-    Tamara Robles Camacho: 2024099342%
+    \begin{tabular}{l@{\hspace{1.5cm}}r}
+        Mauricio González Prendas & 2024143009\\
+        Isaac Jiménez Blanco & 2024202804\\
+        Tamara Robles Camacho & 2024099342
+    \end{tabular}%
 }
 
 % Datos que aparecen en el encabezado.
@@ -79,7 +89,7 @@
 \setlength{\LTpost}{0.5em}
 \setcounter{tocdepth}{3}
 
-% Imagen segura: si el archivo no existe, muestra un recuadro de marcador.
+% Imagen segura.
 \newcommand{\SafeImage}[2][0.92\textwidth]{%
     \IfFileExists{#2}{%
         \includegraphics[width=#1]{#2}%
@@ -87,7 +97,7 @@
         \fbox{%
             \begin{minipage}[c][4cm][c]{#1}
             \centering
-            Imagen pendiente:\\
+            Imagen pendiente\\
             \texttt{#2}
             \end{minipage}%
         }%
@@ -143,9 +153,9 @@
     \paperheight=210mm
     \pdfpagewidth=297mm
     \pdfpageheight=210mm
-    \newgeometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}%
-    \setlength{\textwidth}{243mm}%
-    \setlength{\textheight}{156mm}%
+    \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm,headheight=30pt}%
+    \setlength{\textwidth}{247mm}%
+    \setlength{\textheight}{160mm}%
     \setlength{\linewidth}{\textwidth}%
     \setlength{\columnwidth}{\textwidth}%
     \hsize=\textwidth
@@ -159,8 +169,8 @@
     \pdfpagewidth=210mm
     \pdfpageheight=297mm
     \restoregeometry
-    \setlength{\textwidth}{156mm}%
-    \setlength{\textheight}{243mm}%
+    \setlength{\textwidth}{160mm}%
+    \setlength{\textheight}{247mm}%
     \setlength{\linewidth}{\textwidth}%
     \setlength{\columnwidth}{\textwidth}%
     \hsize=\textwidth
@@ -185,22 +195,20 @@
 \vfill
 
 {\huge \DocumentoTitulo \par}
-\vspace{0.25cm}
-{\Large \DocumentoSubtitulo \par}
 
 \vfill
 
-{\bfseries \LARGE Profesora: \par}
+{\bfseries \LARGE Profesora \par}
 {\Large \Profesor \par}
 
 \vfill
 
-{\bfseries \LARGE Estudiantes: \par}
+{\bfseries \LARGE Estudiantes \par}
 {\Large \AutoresPortada \par}
 
 \vfill
 
-{\bfseries\LARGE Fecha: \par}
+{\bfseries\LARGE Fecha \par}
 {\Large \FechaDocumento \par}
 
 \vfill
@@ -238,97 +246,84 @@
 % =========================
 \section{Información general del documento}
 
-\begin{table}[H]
-\centering
-\begin{tabularx}{\textwidth}{p{5cm} Y}
+\noindent
+\begin{tabularx}{\textwidth}{L{5cm} Y}
 \toprule
 \textbf{Nombre del proyecto} & Plataforma Universitaria Integrada \\
 \textbf{Organización} & Universidad Tecnológica La Mejor \\
 \textbf{Documento} & \DocumentoTitulo \\
-\textbf{Project manager} & Tamara Robles Camacho \\
+\textbf{Gerente del proyecto} & Tamara Robles Camacho \\
 \textbf{Fecha} & \FechaDocumento \\
 \bottomrule
 \end{tabularx}
-\end{table}
+\vspace{1em}
 
 \section{Introducción}
 
-El presente documento corresponde al Entregable 4, Definición del Alcance, del proyecto Plataforma Universitaria Integrada, desarrollado para la Universidad Tecnológica La Mejor. Este entregable forma parte de la fase de planificación del proyecto y tiene como finalidad establecer de manera clara qué trabajo será incluido, qué elementos quedarán fuera, cuáles condiciones se asumen como verdaderas y qué limitaciones deberán respetarse durante el desarrollo.
-
-La definición del alcance es importante porque permite evitar confusiones entre el equipo de trabajo, el patrocinador y los interesados del proyecto. Además, ayuda a controlar el crecimiento no planificado del alcance, conocido como scope creep, ya que deja por escrito los límites del proyecto desde etapas tempranas.
-
-Este proyecto consiste en diseñar y desarrollar un prototipo Front-End web navegable para representar los principales procesos académicos, administrativos y financieros de la Universidad Tecnológica La Mejor. La solución propuesta no contempla backend funcional ni una base de datos real, ya que el enfoque principal del proyecto es la gestión de proyectos y la construcción de una interfaz navegable que demuestre cómo podría funcionar la plataforma.
-
-La definición del alcance presentada en este documento se basa en el Project Charter, el Business Case y el Registro de Stakeholders realizados previamente, con el fin de mantener coherencia entre los objetivos, los entregables esperados y las necesidades identificadas para la institución.
+El presente documento corresponde a la definición del alcance del proyecto Plataforma Universitaria Integrada desarrollado para la Universidad Tecnológica La Mejor debido a que este entregable forma parte de la fase de planificación y tiene como finalidad establecer de manera clara qué trabajo será incluido y cuáles condiciones se asumen como verdaderas además de las limitaciones que deberán respetarse durante el desarrollo. La definición del alcance es importante porque permite evitar confusiones entre el equipo de trabajo y los interesados del proyecto ya que ayuda a controlar el crecimiento no planificado conocido como corrupción del alcance al dejar por escrito los límites desde etapas tempranas. Este proyecto consiste en diseñar y desarrollar un prototipo de interfaz web navegable para representar los principales procesos académicos y administrativos de la institución por lo tanto la solución propuesta no contempla una programación del lado del servidor funcional ni una base de datos real debido a que el enfoque principal es la gestión de proyectos y la construcción de una interfaz visual. La definición presentada en este documento se basa en el acta de constitución y el caso de negocio además del registro de interesados realizados previamente para lo cual se mantiene coherencia entre los objetivos y las necesidades identificadas.
 
 \section{Propósito de la definición del alcance}
 
-El propósito de este documento es establecer los límites formales del proyecto Plataforma Universitaria Integrada. Para lograrlo, se describen los elementos que sí serán desarrollados, los elementos que no serán considerados durante esta etapa, los supuestos bajo los cuales se planifica el trabajo, las restricciones existentes y los entregables que debe producir el equipo.
-
-La definición del alcance permite responder de forma clara a las siguientes preguntas:
+El propósito de este documento es establecer los límites formales del proyecto Plataforma Universitaria Integrada para lo cual se describen los elementos que serán desarrollados y los que no serán considerados durante esta etapa además de los supuestos bajo los cuales se planifica el trabajo y las restricciones existentes. La definición del alcance permite responder de forma clara a varias preguntas fundamentales.
 
 \begin{itemize}[leftmargin=*]
-    \item ¿Qué se va a desarrollar?
-    \item ¿Qué módulos tendrá el prototipo?
-    \item ¿Qué documentos forman parte del proyecto?
-    \item ¿Qué actividades no serán realizadas?
-    \item ¿Qué condiciones se asumen para poder planificar?
-    \item ¿Qué límites afectan tiempo, costo, tecnología y recursos?
-    \item ¿Qué entregables deben completarse antes del cierre?
+    \item Qué se va a desarrollar
+    \item Qué módulos tendrá el prototipo
+    \item Qué documentos forman parte del proyecto
+    \item Qué actividades no serán realizadas
+    \item Qué condiciones se asumen para poder planificar
+    \item Qué límites afectan el tiempo y los recursos
+    \item Qué entregables deben completarse antes del cierre
 \end{itemize}
 
-Este documento será utilizado como referencia para el WBS, el cronograma, la matriz RACI, la estimación de costos, el plan de calidad, el registro de riesgos y el proceso de control de cambios. Cualquier solicitud que modifique el alcance aquí definido deberá analizarse mediante el procedimiento formal de control de cambios.
+Este documento será utilizado como referencia para la estructura de desglose del trabajo y el cronograma además de la estimación de costos y el plan de calidad de esta manera cualquier solicitud que modifique el alcance aquí definido deberá analizarse mediante el procedimiento formal de control de cambios.
 
 \section{Alcance incluido}
 
-El alcance incluido corresponde a todo el trabajo que será desarrollado dentro del proyecto. En este caso, el proyecto incluye tanto entregables de administración de proyectos como el desarrollo de un prototipo web navegable.
+El alcance incluido corresponde a todo el trabajo que será desarrollado dentro del proyecto debido a que incluye tanto los entregables de administración y gestión como el desarrollo de un prototipo web navegable.
 
 \subsection{Alcance general del proyecto}
 
-El proyecto incluye el diseño y desarrollo de una Plataforma Universitaria Integrada en formato de prototipo Front-End. La plataforma deberá representar los procesos principales de la universidad mediante pantallas navegables y módulos funcionales a nivel de interfaz.
-
-El sistema debe permitir visualizar una estructura centralizada para los siguientes portales:
+El proyecto contempla el diseño y desarrollo de una Plataforma Universitaria Integrada en formato de prototipo visual de esta manera la plataforma deberá representar los procesos principales de la universidad mediante pantallas navegables y módulos funcionales. El sistema debe permitir visualizar una estructura centralizada para los siguientes portales.
 
 \begin{itemize}[leftmargin=*]
-    \item Portal Estudiantil
-    \item Portal Docente
-    \item Portal Administrativo
-    \item Portal Financiero
-    \item Dashboard Ejecutivo
+    \item Portal estudiantil
+    \item Portal docente
+    \item Portal administrativo
+    \item Portal financiero
+    \item Panel ejecutivo
 \end{itemize}
 
-Además, el proyecto incluye la elaboración de los documentos requeridos por el curso de Administración de Proyectos, aplicando los grupos de procesos de inicio, planificación, ejecución, monitoreo y control, y cierre.
+El proyecto también incluye la elaboración de los documentos requeridos aplicando los grupos de procesos de inicio y planificación además de la ejecución y el cierre en consecuencia esto garantiza el cumplimiento metodológico.
 
 \subsection{Módulos incluidos en el prototipo}
 
-En la siguiente tabla se muestra el alcance funcional incluido para el prototipo Front-End.
+En la siguiente tabla se muestra el alcance funcional incluido para el prototipo de la interfaz de usuario.
 
 \begin{table}[H]
 \centering
-\caption{Alcance funcional incluido para el prototipo Front-End}
+\caption{Alcance funcional incluido para el prototipo visual}
 \label{tab:modulos-incluidos}
 {\small
 \begin{tabularx}{\textwidth}{L{4cm} Y}
 \toprule
 \textbf{Módulo} & \textbf{Funcionalidades incluidas} \\
 \midrule
-Login & Pantalla de inicio de sesión para simular el acceso a la plataforma \\
-Dashboard principal & Menú inicial con acceso a los portales principales del sistema \\
-Portal Estudiantil & Perfil del estudiante, matrícula de cursos, horarios, calificaciones, estado de cuenta e historial académico \\
-Portal Docente & Gestión de cursos, registro de asistencia y registro de calificaciones \\
-Portal Administrativo & Gestión de estudiantes, gestión de docentes, gestión de cursos y períodos académicos \\
-Portal Financiero & Pagos de matrícula, pagos de cursos e historial de pagos \\
-Dashboard Ejecutivo & Cantidad de estudiantes activos, ingresos por matrícula, indicadores académicos e indicadores financieros \\
+Inicio de sesión & Pantalla de inicio de sesión para simular el acceso a la plataforma \\
+Panel principal & Menú inicial con acceso a los portales principales del sistema \\
+Portal estudiantil & Perfil del estudiante, matrícula de cursos, horarios, calificaciones, estado de cuenta e historial académico \\
+Portal docente & Gestión de cursos, registro de asistencia y registro de calificaciones \\
+Portal administrativo & Gestión de estudiantes, gestión de docentes, gestión de cursos y períodos académicos \\
+Portal financiero & Pagos de matrícula, pagos de cursos e historial de pagos \\
+Panel ejecutivo & Cantidad de estudiantes activos, ingresos por matrícula, indicadores académicos e indicadores financieros \\
 \bottomrule
 \end{tabularx}
 }
 \end{table}
 
-\subsection{Alcance del Portal Estudiantil}
+\subsection{Alcance del portal estudiantil}
 
-El Portal Estudiantil será diseñado para representar las funciones principales que necesita un estudiante dentro de la plataforma. Este portal debe permitir que el usuario visualice su información académica y financiera desde un único lugar.
-
-Incluye:
+El portal estudiantil será diseñado para representar las funciones principales que necesita un estudiante dentro de la plataforma ya que esto debe permitir que el usuario visualice su información académica y financiera desde un único lugar. Se incluyen las siguientes características.
 
 \begin{itemize}[leftmargin=*]
     \item Inicio de sesión simulado
@@ -340,13 +335,11 @@ Incluye:
     \item Historial académico del estudiante
 \end{itemize}
 
-Este módulo busca representar una experiencia más centralizada para el estudiante, reduciendo la dependencia de varios sistemas o trámites presenciales.
+Este módulo busca representar una experiencia más centralizada para el estudiante debido a que esto reduce la dependencia de varios sistemas o de los diferentes trámites presenciales.
 
-\subsection{Alcance del Portal Docente}
+\subsection{Alcance del portal docente}
 
-El Portal Docente será diseñado para representar las funciones principales que necesita un profesor dentro de la universidad. Su objetivo es facilitar la gestión académica de los cursos asignados.
-
-Incluye:
+El portal docente será diseñado para representar las funciones principales que necesita un profesor dentro de la universidad debido a que su objetivo es facilitar la gestión académica de los cursos asignados. Se contemplan las siguientes funciones.
 
 \begin{itemize}[leftmargin=*]
     \item Visualización de cursos asignados
@@ -356,13 +349,11 @@ Incluye:
     \item Consulta de estudiantes por curso
 \end{itemize}
 
-Este portal no realizará cálculos reales de promedios ni guardará información en una base de datos real. La información mostrada podrá ser simulada para fines de prototipo.
+Este portal no realizará cálculos reales de promedios ni guardará información en una base de datos estructurada por lo tanto la información mostrada podrá ser simulada para fines de prototipo.
 
-\subsection{Alcance del Portal Administrativo}
+\subsection{Alcance del portal administrativo}
 
-El Portal Administrativo será diseñado para representar la gestión interna de la universidad. Este módulo se relaciona con los procesos administrativos que actualmente se encuentran dispersos o se realizan de forma manual.
-
-Incluye:
+El portal administrativo será diseñado para representar la gestión interna de la institución ya que este módulo se relaciona con los procesos que actualmente se encuentran dispersos o se realizan de forma manual. Entre los elementos que abarca se encuentran los siguientes.
 
 \begin{itemize}[leftmargin=*]
     \item Gestión de estudiantes
@@ -372,13 +363,11 @@ Incluye:
     \item Visualización de información administrativa básica
 \end{itemize}
 
-Este portal funcionará como una representación visual de los procesos administrativos principales, sin automatizar completamente los flujos reales de la universidad.
+Este portal funcionará como una representación visual de los procesos principales asimismo esto permite operar sin automatizar completamente los flujos reales de la universidad.
 
-\subsection{Alcance del Portal Financiero}
+\subsection{Alcance del portal financiero}
 
-El Portal Financiero será diseñado para representar los procesos relacionados con pagos y consultas financieras de los estudiantes. Su finalidad es mostrar cómo la universidad podría centralizar la información financiera dentro de la misma plataforma.
-
-Incluye:
+El portal financiero será diseñado para representar los procesos relacionados con pagos y consultas de los estudiantes debido a que su finalidad es mostrar cómo la universidad podría centralizar la información dentro de la plataforma. Las funciones consideradas son las siguientes.
 
 \begin{itemize}[leftmargin=*]
     \item Consulta de pagos de matrícula
@@ -387,13 +376,11 @@ Incluye:
     \item Visualización de estado financiero del estudiante
 \end{itemize}
 
-El módulo financiero no procesará pagos reales, no se conectará con bancos y no utilizará una pasarela de pagos funcional. La información será representativa y podrá ser simulada.
+El módulo no procesará transacciones reales ni se conectará con entidades bancarias por lo tanto la información será netamente representativa y podrá ser simulada.
 
-\subsection{Alcance del Dashboard Ejecutivo}
+\subsection{Alcance del panel ejecutivo}
 
-El Dashboard Ejecutivo será diseñado para apoyar la toma de decisiones de la alta dirección. Este módulo permitirá visualizar indicadores académicos y financieros de manera resumida.
-
-Incluye:
+El panel ejecutivo será diseñado para apoyar la toma de decisiones de la alta dirección en consecuencia este módulo permitirá visualizar indicadores académicos y financieros de manera resumida. Se detallan los siguientes aspectos.
 
 \begin{itemize}[leftmargin=*]
     \item Cantidad de estudiantes activos
@@ -403,48 +390,44 @@ Incluye:
     \item Representación visual de información consolidada
 \end{itemize}
 
-Este dashboard utilizará datos simulados, ya que no existirá conexión con una base de datos real. Su finalidad es demostrar cómo podría presentarse la información para la toma de decisiones.
+Este panel utilizará datos simulados debido a que no existirá conexión con bases de información reales ya que su finalidad es demostrar cómo podría presentarse la información general.
 
 \subsection{Alcance de la documentación del proyecto}
 
-Además del prototipo, el proyecto incluye documentos de administración de proyectos. Estos documentos permiten demostrar que el equipo aplicó procesos de inicio, planificación, ejecución, monitoreo y control, y cierre.
-
-Incluye:
+El proyecto también incluye los respectivos documentos de administración que permiten demostrar que el equipo aplicó los procesos fundamentales de planificación y control además de las etapas de cierre. Se incluyen los siguientes elementos.
 
 \begin{itemize}[leftmargin=*]
-    \item Business Case
-    \item Project Charter
-    \item Registro de Stakeholders
-    \item Definición del Alcance
-    \item WBS
-    \item Cronograma del Proyecto
-    \item Matriz RACI
-    \item Organigrama del Proyecto
-    \item Plan de Recursos
-    \item Estimación de Costos
-    \item Plan de Calidad
-    \item Plan de Comunicaciones
-    \item Plan de Gestión de Riesgos
-    \item Registro de Riesgos
-    \item Matriz Probabilidad e Impacto
-    \item Plan de Adquisiciones
-    \item KPIs del Proyecto
-    \item Desarrollo del Front-End
-    \item Proceso de Control de Cambios
-    \item Solicitud de Cambio 1
-    \item Solicitud de Cambio 2
-    \item Evaluación de Cambios
-    \item Dashboard Ejecutivo del Proyecto
-    \item Informe Ejecutivo
-    \item Acta de Cierre
-    \item Reflexiones y Recomendaciones
+    \item Caso de negocio
+    \item Acta de constitución del proyecto
+    \item Registro de interesados
+    \item Definición del alcance
+    \item Estructura de desglose del trabajo
+    \item Cronograma del proyecto
+    \item Matriz de asignación de responsabilidades
+    \item Organigrama del proyecto
+    \item Plan de recursos
+    \item Estimación de costos
+    \item Plan de calidad
+    \item Plan de comunicaciones
+    \item Plan de gestión de riesgos
+    \item Registro de riesgos
+    \item Matriz de probabilidad e impacto
+    \item Plan de adquisiciones
+    \item Indicadores clave de rendimiento
+    \item Desarrollo de la interfaz de usuario
+    \item Proceso de control de cambios
+    \item Solicitud de cambio primera
+    \item Solicitud de cambio segunda
+    \item Evaluación de los cambios
+    \item Panel ejecutivo del proyecto
+    \item Informe ejecutivo
+    \item Acta de cierre
+    \item Reflexiones y recomendaciones
 \end{itemize}
 
 \section{Alcance excluido}
 
-El alcance excluido corresponde a todo aquello que no será desarrollado en esta etapa del proyecto. Esta sección es necesaria para evitar expectativas incorrectas sobre el producto final.
-
-En la siguiente tabla se presentan los elementos excluidos del alcance.
+El alcance excluido corresponde a todo aquello que no será desarrollado en esta etapa del proyecto por lo tanto esta sección es necesaria para evitar expectativas incorrectas sobre el producto final. En la siguiente tabla se presentan los elementos que no forman parte del trabajo.
 
 \begin{longtable}{L{5.2cm} L{9.2cm}}
 \caption{Elementos excluidos del alcance}\label{tab:alcance-excluido}\\
@@ -456,28 +439,26 @@ En la siguiente tabla se presentan los elementos excluidos del alcance.
 \textbf{Elemento excluido} & \textbf{Justificación} \\
 \midrule
 \endhead
-Backend funcional & El proyecto solicita enfocarse en el Front-End navegable \\
+Programación de servidor & El proyecto solicita enfocarse en la interfaz navegable \\
 Base de datos real & Los datos podrán ser simulados dentro del prototipo \\
-Integración con sistemas reales de la universidad & No se cuenta con acceso a sistemas institucionales reales \\
-Autenticación institucional real & El login será representativo y no validará usuarios reales \\
-Pasarela de pagos real & El módulo financiero no procesará pagos reales \\
+Integración con sistemas reales & No se cuenta con acceso a plataformas institucionales verdaderas \\
+Autenticación real & El inicio de sesión será representativo y no validará usuarios \\
+Pasarela de pagos real & El módulo financiero no procesará transacciones financieras \\
 Migración de datos históricos & No se trabajará con información real de estudiantes o docentes \\
 Aplicación móvil nativa & El alcance solicitado corresponde a una plataforma web \\
-Despliegue en producción & El prototipo será académico y no operará como sistema institucional oficial \\
-Automatización completa de procesos & Se representarán flujos principales, no procesos productivos completos \\
-Compra e implementación de un ERP comercial & El Business Case seleccionó una solución a la medida \\
-Soporte operativo posterior al cierre & El proyecto finaliza con la entrega académica y acta de cierre \\
-Capacitación formal a usuarios reales & Se puede incluir una propuesta de capacitación, pero no una ejecución real \\
+Despliegue en producción & El prototipo será académico y no operará de forma oficial \\
+Automatización de procesos & Se representarán flujos principales en lugar de procesos completos \\
+Compra de un sistema comercial & El caso de negocio seleccionó una solución desarrollada a la medida \\
+Soporte operativo posterior & El proyecto finaliza con la entrega académica y el cierre \\
+Capacitación formal a usuarios & Se puede proponer capacitación pero no una ejecución real \\
 \bottomrule
 \end{longtable}
 
-También queda fuera del alcance cualquier funcionalidad adicional que no esté incluida en los módulos mínimos definidos. Por ejemplo, notificaciones automáticas, reportes avanzados, integración con correo institucional, firma digital, chat interno, expediente académico completo en producción o analítica avanzada.
-
-Si alguno de estos elementos se desea incluir posteriormente, deberá ser gestionado como una solicitud de cambio y evaluarse su impacto en alcance, tiempo, costo, calidad y riesgos.
+También queda fuera del alcance cualquier funcionalidad adicional que no esté incluida en los módulos mínimos definidos ya que no se contemplan notificaciones automáticas o analítica avanzada. Si alguno de estos elementos se desea incluir posteriormente se deberá gestionar como una solicitud de cambio y evaluarse su impacto correspondiente en consecuencia.
 
 \section{Supuestos}
 
-Los supuestos son condiciones que se consideran verdaderas para poder planificar el proyecto. Si alguno de estos supuestos cambia, puede afectar la ejecución o requerir ajustes en el plan.
+Los supuestos son condiciones que se consideran verdaderas para poder planificar el proyecto esto implica que si alguno de ellos cambia se puede afectar la ejecución o requerir ajustes en el plan general.
 
 \begin{longtable}{L{2cm} L{12.4cm}}
 \caption{Supuestos del proyecto}\label{tab:supuestos}\\
@@ -489,26 +470,26 @@ Los supuestos son condiciones que se consideran verdaderas para poder planificar
 \textbf{Código} & \textbf{Supuesto} \\
 \midrule
 \endhead
-S1 & El proyecto será desarrollado como un prototipo académico de Front-End navegable \\
-S2 & No será necesario desarrollar backend ni base de datos funcional \\
+S1 & El proyecto será desarrollado como un prototipo académico web navegable \\
+S2 & No será necesario desarrollar programas de servidor ni bases de datos funcionales \\
 S3 & La información mostrada en el prototipo podrá ser simulada \\
-S4 & El equipo contará con acceso a computadoras, internet y herramientas de desarrollo web \\
-S5 & GitHub será utilizado únicamente para administrar el código del prototipo \\
-S6 & Los documentos del proyecto serán elaborados de forma separada por integrantes del equipo \\
-S7 & Los documentos deberán mantener coherencia en nombres, roles, presupuesto, alcance y fechas \\
-S8 & El presupuesto base será el mismo definido en el Business Case \\
-S9 & El proyecto deberá completarse antes del 24 de junio de 2026 \\
-S10 & El cronograma será elaborado en Microsoft Project \\
-S11 & Los stakeholders estarán disponibles para validaciones generales del proyecto \\
-S12 & Los módulos mínimos definidos serán suficientes para cumplir con la consigna del proyecto final \\
+S4 & El equipo contará con acceso a computadoras e internet además de herramientas de desarrollo \\
+S5 & El repositorio se utilizará únicamente para administrar el código del prototipo \\
+S6 & Los documentos serán elaborados de forma separada por los integrantes del equipo \\
+S7 & Los documentos deberán mantener coherencia en presupuestos y alcances generales \\
+S8 & El presupuesto base será el mismo definido en el caso de negocio \\
+S9 & El proyecto deberá completarse antes del veinticuatro de junio del presente año \\
+S10 & El cronograma será elaborado utilizando una herramienta especializada de gestión \\
+S11 & Los interesados estarán disponibles para validaciones generales del trabajo \\
+S12 & Los módulos definidos serán suficientes para cumplir con la consigna final \\
 S13 & Las revisiones de calidad se realizarán mediante pruebas manuales del prototipo \\
-S14 & Los cambios importantes serán evaluados mediante el proceso formal de control de cambios \\
+S14 & Los cambios importantes serán evaluados mediante el proceso formal de control respectivo \\
 \bottomrule
 \end{longtable}
 
 \section{Restricciones}
 
-Las restricciones son límites que condicionan la ejecución del proyecto. Estas restricciones deben considerarse durante la planificación y el desarrollo.
+Las restricciones son límites que condicionan la ejecución del proyecto debido a que estas normativas deben considerarse obligatoriamente durante toda la planificación y el desarrollo respectivo.
 
 \begin{longtable}{L{2cm} L{12.4cm}}
 \caption{Restricciones del proyecto}\label{tab:restricciones}\\
@@ -520,30 +501,30 @@ Las restricciones son límites que condicionan la ejecución del proyecto. Estas
 \textbf{Código} & \textbf{Restricción} \\
 \midrule
 \endhead
-R1 & El proyecto debe entregarse el 24 de junio de 2026 \\
-R2 & El prototipo debe ser web y navegable \\
-R3 & No se permite presentar únicamente un prototipo en Figma, Canva u otra herramienta similar \\
-R4 & El sistema debe desarrollarse usando tecnologías web permitidas como React, Angular, Vue, HTML, CSS o JavaScript \\
-R5 & No se desarrollará backend funcional \\
-R6 & No se desarrollará base de datos real \\
-R7 & El equipo está compuesto por cinco integrantes, lo que requiere una clara división de responsabilidades y coordinación \\
-R8 & Los entregables documentales deben cumplir los elementos solicitados por la profesora \\
-R9 & El cronograma debe elaborarse en Microsoft Project \\
-R10 & El presupuesto preliminar debe mantenerse alineado con el Business Case \\
+R1 & El proyecto debe entregarse en la fecha acordada a finales de junio \\
+R2 & El prototipo debe ser web y completamente navegable por los usuarios \\
+R3 & No se permite presentar únicamente un prototipo visual estático en herramientas de diseño gráfico \\
+R4 & El sistema debe desarrollarse usando tecnologías web permitidas por las normativas académicas \\
+R5 & No se desarrollará un componente de servidor funcional bajo ninguna circunstancia \\
+R6 & No se implementará una base de datos real con información verificable \\
+R7 & El equipo está compuesto por cinco integrantes lo que requiere una clara división de labores \\
+R8 & Los documentos deben cumplir todos los elementos solicitados por la profesora encargada \\
+R9 & El cronograma debe elaborarse utilizando un software de planificación avanzado \\
+R10 & El presupuesto preliminar debe mantenerse alineado con lo establecido previamente \\
 R11 & Las decisiones relevantes deben ser comunicadas al equipo para evitar documentos incongruentes \\
-R12 & Cualquier cambio que afecte alcance, tiempo, costo, calidad o riesgos debe pasar por control de cambios \\
+R12 & Cualquier cambio fundamental debe pasar por el respectivo control de cambios estipulado \\
 \bottomrule
 \end{longtable}
 
-Estas restricciones hacen que el equipo deba priorizar los elementos obligatorios y evitar agregar funcionalidades no solicitadas. Debido a que el tiempo disponible es corto, se debe controlar especialmente el alcance y mantener el enfoque en los módulos mínimos requeridos.
+Estas restricciones hacen que el equipo deba priorizar los elementos obligatorios y evitar agregar funcionalidades no solicitadas debido a que el tiempo disponible es sumamente corto y se debe controlar estrictamente el avance del trabajo.
 
 \section{Entregables}
 
-Los entregables del proyecto se dividen en dos grupos. El primer grupo corresponde a los entregables de gestión del proyecto y el segundo corresponde al producto técnico desarrollado.
+Los entregables del proyecto se dividen en dos grupos principales ya que el primero corresponde a los documentos de gestión y el segundo incluye el producto técnico desarrollado para la validación funcional.
 
 \subsection{Entregables de gestión del proyecto}
 
-\begin{longtable}{L{1.5cm} L{4.8cm} L{8.1cm}}
+\begin{longtable}{L{1.5cm} L{5.8cm} L{7.1cm}}
 \caption{Entregables de gestión del proyecto}\label{tab:entregables-gestion}\\
 \toprule
 \textbf{Código} & \textbf{Entregable} & \textbf{Descripción} \\
@@ -553,31 +534,31 @@ Los entregables del proyecto se dividen en dos grupos. El primer grupo correspon
 \textbf{Código} & \textbf{Entregable} & \textbf{Descripción} \\
 \midrule
 \endhead
-E1 & Business Case & Documento que justifica la necesidad del proyecto, analiza alternativas y define beneficios esperados \\
-E2 & Project Charter & Documento que autoriza formalmente el proyecto y define sus elementos generales \\
-E3 & Registro de Stakeholders & Documento que identifica interesados, nivel de interés, influencia, poder y estrategia de involucramiento \\
-E4 & Definición del Alcance & Documento que define alcance incluido, excluido, supuestos, restricciones y entregables \\
-E5 & WBS & Estructura de desglose del trabajo hasta nivel de paquete de trabajo \\
-E6 & Cronograma del Proyecto & Cronograma elaborado en Microsoft Project con tareas, dependencias, duración, recursos, hitos y ruta crítica \\
-E7 & Matriz RACI & Matriz que define responsables, aprobadores, consultados e informados \\
-E8 & Organigrama del Proyecto & Representación jerárquica de los roles principales del proyecto \\
-E9 & Plan de Recursos & Documento que define recursos humanos, tecnológicos y materiales \\
-E10 & Estimación de Costos & Documento que estima costos de mano de obra, software, hardware, servicios y contingencias \\
-E11 & Plan de Calidad & Documento que define objetivos, aseguramiento, control, métricas y criterios de aceptación \\
-E12 & Plan de Comunicaciones & Documento que define qué se comunica, frecuencia, medio, responsable y destinatarios \\
-E13 & Plan de Gestión de Riesgos & Documento que define la metodología para identificar y gestionar riesgos \\
-E14 & Registro de Riesgos & Documento con mínimo 10 riesgos, causa, probabilidad, impacto, nivel, responsable y respuesta \\
-E15 & Matriz Probabilidad e Impacto & Representación gráfica de los riesgos identificados \\
-E16 & Plan de Adquisiciones & Documento que define qué se compra, qué se desarrolla internamente y justificación make vs buy \\
-E17 & KPIs del Proyecto & Indicadores de tiempo, costo, calidad, riesgos y productividad \\
-E19 & Proceso de Control de Cambios & Procedimiento formal para gestionar cambios \\
-E20 & Solicitud de Cambio 1 & Simulación de una solicitud de cambio real \\
-E21 & Solicitud de Cambio 2 & Simulación de una segunda solicitud de cambio real \\
-E22 & Evaluación de Cambios & Análisis del impacto de cambios sobre alcance, tiempo, costo, calidad y riesgos \\
-E23 & Dashboard Ejecutivo del Proyecto & Vista de indicadores de desempeño del proyecto \\
-E24 & Informe Ejecutivo & Resumen del proyecto dirigido a la alta gerencia \\
-E25 & Acta de Cierre & Documento formal para cerrar el proyecto \\
-E26 & Reflexiones y Recomendaciones & Análisis crítico sobre gestión, equipo, riesgos, calidad y aprendizajes \\
+E1 & Caso de negocio & Documento que justifica la necesidad del proyecto y analiza alternativas además de definir beneficios \\
+E2 & Acta de constitución del proyecto & Documento que autoriza formalmente el esfuerzo y define sus elementos generales \\
+E3 & Registro de interesados & Documento que identifica participantes y su respectivo nivel de interés e influencia \\
+E4 & Definición del alcance & Documento que define los límites y supuestos además de las restricciones correspondientes \\
+E5 & Estructura de desglose del trabajo & Desglose detallado de las actividades hasta llegar al nivel de paquetes \\
+E6 & Cronograma del proyecto & Archivo con tareas y dependencias además de incluir los recursos e hitos \\
+E7 & Matriz de asignación de responsabilidades & Herramienta que define responsables y aprobadores para cada actividad importante \\
+E8 & Organigrama del proyecto & Representación gráfica y jerárquica de los roles principales establecidos \\
+E9 & Plan de recursos & Archivo que define los componentes humanos y tecnológicos necesarios \\
+E10 & Estimación de costos & Documento que calcula los gastos de mano de obra y recursos informáticos \\
+E11 & Plan de calidad & Estrategia que define objetivos y criterios de aceptación para el cumplimiento \\
+E12 & Plan de comunicaciones & Guía que define la frecuencia y los medios de las comunicaciones internas \\
+E13 & Plan de gestión de riesgos & Metodología detallada para identificar y gestionar adecuadamente las amenazas \\
+E14 & Registro de riesgos & Inventario de posibles amenazas junto a sus respectivas respuestas y responsables \\
+E15 & Matriz de probabilidad e impacto & Representación visual del nivel crítico de los riesgos identificados previamente \\
+E16 & Plan de adquisiciones & Estrategia sobre las compras necesarias y los desarrollos que se harán internamente \\
+E17 & Indicadores clave de rendimiento & Métricas de seguimiento para evaluar el tiempo y los costos del proyecto \\
+E19 & Proceso de control de cambios & Procedimiento formal para gestionar de forma ordenada las modificaciones solicitadas \\
+E20 & Solicitud de cambio primera & Simulación documentada de una solicitud de modificación real para la interfaz \\
+E21 & Solicitud de cambio segunda & Segunda simulación documentada sobre alteraciones en el alcance del proyecto \\
+E22 & Evaluación de los cambios & Análisis del impacto de las modificaciones sobre el tiempo y la calidad general \\
+E23 & Panel ejecutivo del proyecto & Vista consolidada de indicadores de desempeño para el monitoreo adecuado \\
+E24 & Informe ejecutivo & Resumen descriptivo del proyecto dirigido fundamentalmente a la alta gerencia \\
+E25 & Acta de cierre & Archivo formal para dar por finalizado el proyecto de manera oficial \\
+E26 & Reflexiones y recomendaciones & Análisis crítico sobre la gestión del equipo y los aprendizajes logrados \\
 \bottomrule
 \end{longtable}
 
@@ -592,17 +573,17 @@ E26 & Reflexiones y Recomendaciones & Análisis crítico sobre gestión, equipo,
 \toprule
 \textbf{Código} & \textbf{Entregable} & \textbf{Descripción} \\
 \midrule
-E18 & Desarrollo del Front-End & Prototipo web navegable con login, dashboard principal, módulo de matrícula, cursos, horarios, calificaciones, financiero, administrativo y dashboard ejecutivo \\
+E18 & Desarrollo de la interfaz & Prototipo web navegable con diferentes portales y paneles funcionales en la plataforma \\
 \bottomrule
 \end{tabularx}
 }
 \end{table}
 
-El entregable técnico debe permitir la navegación entre las pantallas principales y mostrar visualmente los procesos definidos en el alcance. No se espera una solución productiva completa, sino un prototipo funcional a nivel de interfaz.
+El entregable técnico debe permitir la navegación entre las pantallas principales y mostrar visualmente los procesos definidos debido a que no se espera una solución productiva completa sino un prototipo operativo a nivel de vistas.
 
 \section{Criterios generales de aceptación}
 
-Aunque los criterios específicos se detallarán en el Plan de Calidad y en el WBS, se definen criterios generales para validar que el alcance fue cumplido.
+Aunque los criterios específicos se detallarán en el plan de calidad y en la estructura de desglose del trabajo se definen los parámetros generales para validar que el alcance fue cumplido cabalmente.
 
 \begin{longtable}{L{4.6cm} L{9.8cm}}
 \caption{Criterios generales de aceptación}\label{tab:criterios-aceptacion}\\
@@ -614,27 +595,23 @@ Aunque los criterios específicos se detallarán en el Plan de Calidad y en el W
 \textbf{Área} & \textbf{Criterio de aceptación} \\
 \midrule
 \endhead
-Alcance del producto & El prototipo incluye los módulos mínimos solicitados en la consigna \\
-Navegación & El usuario puede desplazarse entre login, dashboard principal y módulos principales \\
-Portal Estudiantil & Se visualizan perfil, matrícula, horarios, calificaciones, estado de cuenta e historial académico \\
-Portal Docente & Se visualizan cursos, asistencia y calificaciones \\
-Portal Administrativo & Se visualizan estudiantes, docentes, cursos y períodos académicos \\
-Portal Financiero & Se visualizan pagos de matrícula, pagos de cursos e historial de pagos \\
-Dashboard Ejecutivo & Se visualizan indicadores académicos y financieros básicos \\
-Documentación & Los documentos mantienen coherencia con el Business Case, Project Charter y Registro de Stakeholders \\
-Calidad & No existen errores críticos de navegación al momento de la entrega \\
-Tiempo & Los entregables se completan antes del 24 de junio de 2026 \\
+Alcance del producto & El prototipo incluye los módulos mínimos solicitados en la consigna inicial \\
+Navegación & El usuario puede desplazarse entre los módulos principales sin problemas críticos \\
+Portal estudiantil & Se visualizan el perfil y las matrículas además de las calificaciones de forma clara \\
+Portal docente & Se exponen los cursos y la respectiva asistencia además del registro de notas \\
+Portal administrativo & Se presentan los listados de estudiantes y docentes junto con los períodos vigentes \\
+Portal financiero & Se despliegan los pagos de matrícula y los historiales de cancelación \\
+Panel ejecutivo & Se muestran los indicadores académicos y financieros fundamentales \\
+Documentación & Los documentos mantienen coherencia con las versiones anteriores aprobadas \\
+Calidad & No existen errores graves de navegación al momento de realizar la entrega \\
+Tiempo & Los entregables se completan antes de la fecha máxima estipulada \\
 \bottomrule
 \end{longtable}
 
-Estos criterios permiten validar el alcance sin agregar trabajo innecesario. Si un elemento no está incluido en esta definición, no deberá desarrollarse salvo que sea aprobado formalmente mediante control de cambios.
+Estos criterios permiten validar el alcance sin agregar trabajo innecesario de esta manera si un elemento no está incluido en esta definición no deberá desarrollarse salvo que sea aprobado formalmente.
 
 \section{Conclusión}
 
-La definición del alcance del proyecto Plataforma Universitaria Integrada establece una base clara para desarrollar el prototipo Front-End y los documentos de administración de proyectos requeridos. El alcance incluido permite representar los procesos principales de la Universidad Tecnológica La Mejor, mientras que el alcance excluido evita expectativas incorrectas sobre backend, base de datos, pagos reales o integración con sistemas institucionales.
-
-Los supuestos y restricciones muestran que el proyecto debe ejecutarse en un periodo corto y con recursos limitados, por lo que es necesario mantener control sobre las actividades, priorizar lo solicitado y evitar cambios que no sean necesarios. También se establece una lista de entregables que servirá como guía para el seguimiento del proyecto y para la validación final.
-
-Con esta definición, el equipo cuenta con una referencia formal para elaborar el WBS, el cronograma, los planes de calidad, comunicaciones, riesgos, adquisiciones y cambios. Además, permite mantener coherencia con los documentos previos y asegurar que el producto final responda al propósito definido desde el inicio del proyecto.
+La definición del alcance del proyecto establece una base clara para desarrollar el prototipo visual y los documentos requeridos debido a que el trabajo incluido permite representar los procesos principales mientras que lo excluido evita expectativas incorrectas sobre sistemas reales. Los supuestos y restricciones muestran que el proyecto debe ejecutarse en un periodo sumamente corto y con recursos limitados por lo tanto es necesario mantener control sobre las actividades y evitar adiciones innecesarias. Con esta delimitación el equipo cuenta con una referencia formal para elaborar el cronograma y los planes de calidad además de mantener la coherencia con los documentos previos para asegurar que el producto final responda a los objetivos originales del trabajo.
 
 \end{document}

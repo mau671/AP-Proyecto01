@@ -15,8 +15,14 @@
 \usepackage[utf8]{inputenc}
 
 % --- Márgenes / papel ---
-\usepackage{geometry}
-\geometry{a4paper, margin=2.7cm}
+\usepackage[
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headsep=0.5cm,
+    footskip=0.8cm
+]{geometry}
 
 % --- Matemáticas ---
 \usepackage{amsmath}
@@ -36,10 +42,8 @@
 \usepackage[hidelinks]{hyperref}
 
 % --- Encabezado y pie de página ---
-\usepackage[myheadings]{fancyhdr}
+\usepackage{fancyhdr}
 \usepackage{lastpage}
-\setlength{\headheight}{30pt}
-\setlength{\footskip}{30pt}
 
 % --- Interlineado ---
 \linespread{1.2}
@@ -50,28 +54,30 @@
 % =========================================================
 \newcommand{\Institucion}{Instituto Tecnológico de Costa Rica}
 \newcommand{\Campus}{Campus Tecnológico Central Cartago}
-\newcommand{\DocumentoTitulo}{Registro de Stakeholders}
-\newcommand{\DocumentoSubtitulo}{Plataforma Universitaria Integrada: Modernización y Centralización de Procesos Académicos y Administrativos}
+\newcommand{\DocumentoTitulo}{Registro de partes interesadas}
+\newcommand{\DocumentoSubtitulo}{Plataforma Universitaria Integrada Modernización y Centralización de Procesos Académicos y Administrativos}
 \newcommand{\Curso}{Administración de proyectos}
 \newcommand{\Profesor}{Alicia Marcela Salazar Hernández}
 \newcommand{\FechaDocumento}{7 de junio de 2026}
 \newcommand{\PeriodoAcademico}{I Semestre}
 \newcommand{\AnioDocumento}{2026}
 
-\newcommand{\EstudiantesPortada}{%
-    Mauricio González Prendas: 2024143009\\
-    Isaac Jiménez Blanco: 2024202804\\
-    Tamara Robles Camacho: 2024099342%
+\newcommand{\AutoresPortada}{%
+    \begin{tabular}{l@{\hspace{1.5cm}}r}
+        Mauricio González Prendas & 2024143009\\
+        Isaac Jiménez Blanco & 2024202804\\
+        Tamara Robles Camacho & 2024099342
+    \end{tabular}%
 }
 
 % Datos que aparecen en el encabezado.
 \newcommand{\DocHeaderLeft}{}
-\newcommand{\DocHeaderRight}{Registro de Stakeholders}
-\newcommand{\DocFooterRight}{Página~\thepage\ de~\pageref{LastPage}}
+\newcommand{\DocHeaderRight}{\DocumentoTitulo}
+\newcommand{\DocFooterRight}{Página \thepage\ de \pageref{LastPage}}
 
 % Metadatos PDF.
 \title{\DocumentoTitulo}
-\author{\EstudiantesPortada}
+\author{\AutoresPortada}
 \date{\FechaDocumento}
 
 % =========================================================
@@ -82,7 +88,7 @@
 \setlength{\LTpre}{0.5em}
 \setlength{\LTpost}{0.5em}
 
-% Imagen segura: si el archivo no existe, muestra un recuadro de marcador.
+% Imagen segura si el archivo no existe, muestra un recuadro de marcador.
 \newcommand{\SafeImage}[2][0.92\textwidth]{%
     \IfFileExists{#2}{%
         \includegraphics[width=#1]{#2}%
@@ -90,7 +96,7 @@
         \fbox{%
             \begin{minipage}[c][4cm][c]{#1}
             \centering
-            Imagen pendiente:\\
+            Imagen pendiente\\
             \texttt{#2}
             \end{minipage}%
         }%
@@ -112,20 +118,18 @@
 % =========================================================
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\DocHeaderLeft}
-\fancyhead[R]{\DocHeaderRight}
+\fancyhead[R]{\DocumentoTitulo}
 \renewcommand{\headrulewidth}{0.4pt}
+\fancyfoot[C]{Página \thepage\ de \pageref{LastPage}}
 \renewcommand{\footrulewidth}{0.4pt}
-\fancyfoot[R]{\DocFooterRight}
 
 % Estilo equivalente para páginas horizontales.
 \fancypagestyle{widefancy}{%
     \fancyhf{}%
-    \fancyhead[L]{\DocHeaderLeft}%
-    \fancyhead[R]{\DocHeaderRight}%
+    \fancyhead[R]{\DocumentoTitulo}%
     \renewcommand{\headrulewidth}{0.4pt}%
+    \fancyfoot[C]{Página \thepage\ de \pageref{LastPage}}%
     \renewcommand{\footrulewidth}{0.4pt}%
-    \fancyfoot[R]{\DocFooterRight}%
 }
 
 % =========================================================
@@ -146,9 +150,9 @@
     \paperheight=210mm
     \pdfpagewidth=297mm
     \pdfpageheight=210mm
-    \newgeometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}%
-    \setlength{\textwidth}{243mm}%
-    \setlength{\textheight}{156mm}%
+    \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm}%
+    \setlength{\textwidth}{247mm}%
+    \setlength{\textheight}{160mm}%
     \setlength{\linewidth}{\textwidth}%
     \setlength{\columnwidth}{\textwidth}%
     \hsize=\textwidth
@@ -188,22 +192,20 @@
 \vfill
 
 {\huge \DocumentoTitulo \par}
-\vspace{0.25cm}
-{\Large \DocumentoSubtitulo \par}
 
 \vfill
 
-{\bfseries \LARGE Profesora: \par}
+{\bfseries \LARGE Profesora \par}
 {\Large \Profesor \par}
 
 \vfill
 
-{\bfseries \LARGE Estudiantes: \par}
-{\Large \EstudiantesPortada \par}
+{\bfseries \LARGE Estudiantes \par}
+{\Large \AutoresPortada \par}
 
 \vfill
 
-{\bfseries\LARGE Fecha: \par}
+{\bfseries\LARGE Fecha \par}
 {\Large \FechaDocumento \par}
 
 \vfill
@@ -242,32 +244,29 @@
 
 \section{Información general del documento}
 
-\begin{table}[H]
-\centering
+\noindent
 \begin{tabularx}{\textwidth}{p{5cm} Y}
 \toprule
 \textbf{Nombre del proyecto} & Plataforma Universitaria Integrada \\
 \textbf{Organización} & Universidad Tecnológica La Mejor \\
 \textbf{Documento} & \DocumentoTitulo \\
-\textbf{Project manager} & Tamara Robles Camacho \\
+\textbf{Gerente del proyecto} & Tamara Robles Camacho \\
 \textbf{Fecha} & \FechaDocumento \\
 \bottomrule
 \end{tabularx}
-\end{table}
+\vspace{0.5cm}
 
 \section{Introducción}
 
-En este documento corresponde al Registro de Stakeholders (partes interesadas o interesados) del proyecto Plataforma Universitaria Integrada, desarrollado para la Universidad Tecnológica La Mejor. Esta información forma parte del grupo de procesos de Inicio, según el marco metodológico del PMI, y su propósito es identificar, clasificar y definir a las personas que formaran parte de este proyecto y que pueden afectar o verse afectados por el desarrollo y los resultados del mismo.
+Este documento corresponde al registro de partes interesadas del proyecto Plataforma Universitaria Integrada, desarrollado para la Universidad Tecnológica La Mejor, debido a que esta información forma parte del grupo de procesos de inicio según el marco metodológico del PMI, por lo tanto, su propósito es identificar, clasificar y definir a las personas que formarán parte de este proyecto y que pueden afectar o verse afectadas por el desarrollo y los resultados del mismo.
 
+La identificación temprana de las partes interesadas es fundamental para garantizar una buena comunicación, gestionar expectativas y asegurar el apoyo durante el ciclo de vida del proyecto, en consecuencia, estas partes interesadas se dividirán en dos grupos, los internos (miembros del equipo de desarrollo y administración) y los externos (futuros actores de la plataforma), de esta manera, para cada uno se documenta su cargo, nivel de interés, influencia y poder, así como la estrategia más adecuada para mantener su participación acorde con los objetivos del proyecto.
 
-La identificación temprana de los interesados es fundamental para garantizar una buena comunicación, gestionar expectativas y asegurar el apoyo durante el ciclo de vida del proyecto. Los stakeholdes se dividirán en dos partes, los internos (miembros del equipo de desarrollo y administración) y los externos (futuros actores de la plataforma), para cada uno se documenta su cargo, nivel de interés, influencia y poder, así como la estrategia más adecuada para mantener su participación con los objetivos del proyecto.
+La escala de referencia para comprender mejor la tabla indica que la influencia y el poder se valoran del 1 al 5 (donde 1 es muy bajo y 5 es muy alto).
 
+\section{Partes interesadas internas del proyecto}
 
-La estácala de referencia para comprender mejor la tabla es: Influencia y Poder se valoran del 1 al 5 (1= muy bajo, 5= muy alto)
-
-\section{Stakeholders internos del proyecto}
-
-En la siguiente tabla se muestran los stakeholders Internos del proyecto:
+En la siguiente tabla se muestran las partes interesadas internas del proyecto.
 
 \begin{widepage}
 {\small
@@ -281,18 +280,19 @@ En la siguiente tabla se muestran los stakeholders Internos del proyecto:
 \textbf{Nombre} & \textbf{Cargo} & \textbf{Interés} & \textbf{Influencia} & \textbf{Poder} & \textbf{Estrategia de involucramiento} \\
 \midrule
 \endhead
-Tamara Robles Camacho & Project Manager & Garantizar que el proyecto se ejecute dentro del alcance, tiempo y costo definidos & 5 & 5 & Liderar reuniones semanales de seguimiento, tomar decisiones sobre cambios y gestionar comunicaciones con el patrocinador \\
-Mauricio González Prendas & Desarrollador Frontend 1 \& QA & Desarrollar un front-end funcional, navegable y de calidad que cumpla los criterios de aceptación & 5 & 4 & Participar en la definición del alcance técnico, revisiones de código y pruebas de calidad antes de cada entrega \\
-Carlos Sainz Arce & Desarrollador Frontend 2 \& QA & Desarrollar un front-end funcional, navegable y de calidad que cumpla los criterios de aceptación & 5 & 4 & Participar en la definición del alcance técnico, revisiones de código y pruebas de calidad antes de cada entrega junto con el desarrollador 1 \\
-Isaac Jiménez Blanco & Analista de Negocio \& Documentador 1 & Asegurar que todos los entregables documentales estén completos, coherentes y alineados con los estándares PMI & 5 & 4 & Responsable de redactar y revisar entregables, mantener actualizado el registro de riesgos y la documentación del proyecto \\
-Jorge Abarca Quiros & Analista de Negocio \& Documentador 2 & Asegurar, junto con el analista y documentador 1, que todos los entregables documentales estén completos, coherentes y alineados con los estándares PMI & 5 & 4 & Redacta y analiza los entregables, manteniendo actualizado la documentación. \\
+Tamara Robles Camacho & Gerente del proyecto & Garantizar que el proyecto se ejecute dentro del alcance, tiempo y costo definidos & 5 & 5 & Liderar reuniones semanales de seguimiento, tomar decisiones sobre cambios y gestionar comunicaciones con el patrocinador \\
+Mauricio González Prendas & Desarrollador frontend 1 y calidad & Desarrollar una interfaz funcional, navegable y de calidad que cumpla los criterios de aceptación & 5 & 4 & Participar en la definición del alcance técnico, revisiones de código y pruebas de calidad antes de cada entrega \\
+Carlos Sainz Arce & Desarrollador frontend 2 y calidad & Desarrollar una interfaz funcional, navegable y de calidad que cumpla los criterios de aceptación & 5 & 4 & Participar en la definición del alcance técnico, revisiones de código y pruebas de calidad antes de cada entrega junto con el desarrollador 1 \\
+Isaac Jiménez Blanco & Analista de negocio y documentador 1 & Asegurar que todos los entregables documentales estén completos, coherentes y alineados con los estándares del PMI & 5 & 4 & Responsable de redactar y revisar entregables, mantener actualizado el registro de riesgos y la documentación del proyecto \\
+Jorge Abarca Quiros & Analista de negocio y documentador 2 & Asegurar, junto con el analista y documentador 1, que todos los entregables documentales estén completos, coherentes y alineados con los estándares del PMI & 5 & 4 & Redacta y analiza los entregables, manteniendo actualizada la documentación \\
 \bottomrule
 \end{longtable}
 }
 \end{widepage}
-\section{Stakeholders externos}
 
-En la siguiente tabla se mencionan las partes externas interesadas para este proyecto:
+\section{Partes interesadas externas del proyecto}
+
+En la siguiente tabla se mencionan las partes externas interesadas para este proyecto.
 
 \begin{widepage}
 {\small
@@ -306,17 +306,16 @@ En la siguiente tabla se mencionan las partes externas interesadas para este pro
 \textbf{Nombre} & \textbf{Cargo} & \textbf{Interés} & \textbf{Influencia} & \textbf{Poder} & \textbf{Estrategia de involucramiento} \\
 \midrule
 \endhead
-Dr. Roberto Mora Fallas & Rector – Patrocinador del Proyecto & Modernizar la institución, mejorar la imagen universitaria y optimizar los procesos internos & 4 & 5 & Presentarle el Project Charter para aprobación, informes ejecutivos mensuales y acta de cierre \\
-Lic. Patricia Vargas Soto & Directora Administrativa & Reducir la carga operativa del personal y eliminar duplicidad de datos entre departamentos & 4 & 4 & Reuniones de validación de requerimientos administrativos y revisión del módulo de gestión \\
-Ing. Carlos Brenes Mora & Director de TI & Garantizar que la solución sea técnicamente viable, segura y mantenible a futuro & 3 & 4 & Consultas técnicas en la fase de planificación y revisión de la arquitectura del frontend \\
-Prof. Andrea Solís Zamora & Representante Docente & Contar con herramientas digitales que simplifiquen el registro de calificaciones y asistencia & 4 & 3 & Participar en sesiones de validación del portal docente y pruebas de usuario \\
-Estudiantes (colectivo) & Usuarios Finales – Portal Estudiantil & Acceder a matrícula, calificaciones, horarios y pagos de forma rápida y en línea & 5 & 2 & Encuestas de satisfacción y pruebas de usabilidad del portal estudiantil \\
-Depto. Financiero & Área Financiera & Digitalizar los procesos de cobro de matrícula y generación de reportes financieros & 4 & 3 & Validación de requerimientos del módulo financiero y revisión de casos de uso así como las pruebas de usuario para ese modulo. \\
-Proveedor de Hosting & Proveedor Externo & Ofrecer infraestructura confiable para el despliegue del sistema & 2 & 2 & Contrato de servicio con SLA definido, revisión periódica de disponibilidad \\
+Dr. Roberto Mora Fallas & Rector y patrocinador del proyecto & Modernizar la institución, mejorar la imagen universitaria y optimizar los procesos internos & 4 & 5 & Presentarle el acta de constitución del proyecto para aprobación, informes ejecutivos mensuales y acta de cierre \\
+Lic. Patricia Vargas Soto & Directora administrativa & Reducir la carga operativa del personal y eliminar duplicidad de datos entre departamentos & 4 & 4 & Reuniones de validación de requerimientos administrativos y revisión del módulo de gestión \\
+Ing. Carlos Brenes Mora & Director de tecnologías de la información & Garantizar que la solución sea técnicamente viable, segura y mantenible a futuro & 3 & 4 & Consultas técnicas en la fase de planificación y revisión de la arquitectura de la interfaz \\
+Prof. Andrea Solís Zamora & Representante docente & Contar con herramientas digitales que simplifiquen el registro de calificaciones y asistencia & 4 & 3 & Participar en sesiones de validación del portal docente y pruebas de usuario \\
+Estudiantes (colectivo) & Usuarios finales del portal estudiantil & Acceder a matrícula, calificaciones, horarios y pagos de forma rápida y en línea & 5 & 2 & Encuestas de satisfacción y pruebas de usabilidad del portal estudiantil \\
+Departamento financiero & Área financiera & Digitalizar los procesos de cobro de matrícula y generación de reportes financieros & 4 & 3 & Validación de requerimientos del módulo financiero y revisión de casos de uso así como las pruebas de usuario para ese módulo \\
+Proveedor de alojamiento web & Proveedor externo & Ofrecer infraestructura confiable para el despliegue del sistema & 2 & 2 & Contrato de servicio con nivel de servicio definido, revisión periódica de disponibilidad \\
 \bottomrule
 \end{longtable}
 }
 \end{widepage}
 
 \end{document}
-

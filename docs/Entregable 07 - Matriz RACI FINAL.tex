@@ -12,7 +12,16 @@
 
 % --- Márgenes / papel ---
 \usepackage{geometry}
-\geometry{a4paper, margin=2.7cm}
+\geometry{
+    a4paper,
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headsep=0.5cm,
+    footskip=0.8cm,
+    headheight=30pt
+}
 
 % --- Matemáticas ---
 \usepackage{amsmath}
@@ -55,9 +64,11 @@
 \newcommand{\AnioDocumento}{2026}
 
 \newcommand{\AutoresPortada}{%
-    Mauricio González Prendas: 2024143009\\
-    Isaac Jiménez Blanco: 2024202804\\
-    Tamara Robles Camacho: 2024099342%
+    \begin{tabular}{l@{\hspace{1.5cm}}r}
+        Mauricio González Prendas & 2024143009\\
+        Isaac Jiménez Blanco & 2024202804\\
+        Tamara Robles Camacho & 2024099342
+    \end{tabular}%
 }
 
 \newcommand{\DocHeaderLeft}{}
@@ -138,9 +149,9 @@
     \paperheight=210mm
     \pdfpagewidth=297mm
     \pdfpageheight=210mm
-    \newgeometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}%
-    \setlength{\textwidth}{243mm}%
-    \setlength{\textheight}{156mm}%
+    \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm,headheight=30pt}%
+    \setlength{\textwidth}{247mm}%
+    \setlength{\textheight}{160mm}%
     \setlength{\linewidth}{\textwidth}%
     \setlength{\columnwidth}{\textwidth}%
     \hsize=\textwidth
@@ -180,17 +191,15 @@
 \vfill
 
 {\huge \DocumentoTitulo \par}
-\vspace{0.25cm}
-{\Large \DocumentoSubtitulo \par}
 
 \vfill
 
-{\bfseries \LARGE Profesora: \par}
+{\bfseries \LARGE Profesora \par}
 {\Large \Profesor \par}
 
 \vfill
 
-{\bfseries \LARGE Estudiantes: \par}
+{\bfseries \LARGE Estudiantes \par}
 {\Large \AutoresPortada \par}
 
 \vfill
@@ -227,29 +236,28 @@
 % =========================
 \section{Información general del documento}
 
-\begin{table}[H]
-\centering
+\noindent
 \begin{tabularx}{\textwidth}{p{5cm} Y}
 \toprule
 \textbf{Nombre del proyecto} & Plataforma Universitaria Integrada \\
 \textbf{Organización} & Universidad Tecnológica La Mejor \\
 \textbf{Documento} & \DocumentoTitulo \\
-\textbf{Project manager} & Tamara Robles Camacho \\
+\textbf{Director de proyecto} & Tamara Robles Camacho \\
 \textbf{Fecha} & \FechaDocumento \\
 \bottomrule
 \end{tabularx}
-\end{table}
+\vspace{0.5cm}
 
 \section{Introducción}
 
-La Matriz RACI (Responsable, Aprobador, Consultado y Informado) es una herramienta muy importante en la gestión de proyectos que permite definir con claridad las responsabilidades de cada miembro del equipo y stakeholder para cada actividad principal del proyecto. Su correcta aplicación elimina ambigüedades, evita duplicidades de esfuerzo y asegura que cada tarea tenga un único responsable de su ejecución y un único responsable final de su resultado.
+La Matriz RACI (Responsable, Aprobador, Consultado e Informado) es una herramienta muy importante en la gestión de proyectos debido a que permite definir con claridad las responsabilidades de cada miembro del equipo y de los interesados para cada actividad principal, por lo tanto, su correcta aplicación elimina ambigüedades y evita duplicidades de esfuerzo ya que asegura que cada tarea tenga un único responsable de su ejecución y un único responsable final de su resultado.
 
 
-El presente documento define la Matriz RACI del proyecto Plataforma Universitaria Integrada, abarcando todas las actividades principales desde el inicio hasta el cierre del proyecto, en concordancia con los grupos de procesos del PMI.
+Asimismo, el presente documento define la Matriz RACI del proyecto Plataforma Universitaria Integrada, abarcando todas las actividades principales desde el inicio hasta el cierre de este, por lo tanto, se actúa en concordancia con los grupos de procesos del PMI.
 
 \section{Equipo del proyecto}
 
-En la siguiente tabla se muestran los roles del equipo junto con su responsabilidad principal y los entregables asignados.
+En la siguiente tabla se muestran los roles del equipo junto con su responsabilidad principal y los entregables asignados, de esta manera se clarifica la distribución del trabajo.
 
 
 \begin{table}[H]
@@ -258,18 +266,18 @@ En la siguiente tabla se muestran los roles del equipo junto con su responsabili
 \label{tab:equipo-proyecto}
 {\small
 \setlength{\tabcolsep}{3.5pt}
-\begin{tabularx}{\textwidth}{p{3cm} p{3.2cm} Y p{4.2cm}}
+\begin{tabularx}{\textwidth}{p{3.5cm} p{3.2cm} Y p{4.2cm}}
 \toprule
 \textbf{Rol} & \textbf{Nombre} & \textbf{Responsabilidad principal} & \textbf{Entregables asignados} \\
 \midrule
-Project Manager & Tamara Robles Camacho & Dirección general, gestión documental y coordinación del equipo & E2, E20, E21, E23, E25, E26 \\
-Desarrollador Frontend \& QA 1 & Mauricio González Prendas & Desarrollo del front-end navegable, pruebas de calidad & E18 (Portal estudiantil, portal docente y portal administrativo ) \\
-Desarrollador Frontend \& QA 2 & Carlos Sainz Arce & Desarrollo del front-end navegable, pruebas de calidad & E18 (Portal financiero, portal ejecutivo ) \\
-Analista de Negocio \& Documentador 1 & Isaac Jiménez Blanco & Elaboración de entregables documentales PMI & E1, E3–E9, E19 \\
-Analista de Negocio \& Documentador 2 & Jorge Abarca Quiros & Elaboración de entregables documentales PMI & E10-E17, E22, E24 \\
-Rector / Patrocinador & Dr. Roberto Mora Fallas & Aprobación, toma de decisiones estratégicas & Aprobación de entregables clave \\
-Directora Administrativa & Lic. Patricia Vargas Soto & Validación de requerimientos administrativos & Revisión de módulos administrativos \\
-Director de TI & Ing. Carlos Brenes Mora & Revisión técnica y viabilidad de la solución & Revisión técnica del frontend \\
+Director de proyecto & Tamara Robles Camacho & Dirección general, gestión documental y coordinación del equipo & E2, E20, E21, E23, E25, E26 \\
+Desarrollador frontend y pruebas de calidad 1 & Mauricio González Prendas & Desarrollo de la interfaz de usuario navegable y pruebas de calidad & E18 (Portal estudiantil, portal docente y portal administrativo) \\
+Desarrollador frontend y pruebas de calidad 2 & Carlos Sainz Arce & Desarrollo de la interfaz de usuario navegable y pruebas de calidad & E18 (Portal financiero y portal ejecutivo) \\
+Analista de negocio y documentador 1 & Isaac Jiménez Blanco & Elaboración de entregables documentales del PMI & E1, E3 al E9, E19 \\
+Analista de negocio y documentador 2 & Jorge Abarca Quiros & Elaboración de entregables documentales del PMI & E10 al E17, E22, E24 \\
+Rector o patrocinador & Dr. Roberto Mora Fallas & Aprobación y toma de decisiones estratégicas & Aprobación de entregables clave \\
+Directora administrativa & Lic. Patricia Vargas Soto & Validación de los requerimientos administrativos & Revisión de módulos administrativos \\
+Director de TI & Ing. Carlos Brenes Mora & Revisión técnica y viabilidad de la solución & Revisión técnica de la interfaz de usuario \\
 \bottomrule
 \end{tabularx}
 }
@@ -278,7 +286,7 @@ Director de TI & Ing. Carlos Brenes Mora & Revisión técnica y viabilidad de la
 
 \section{Convención RACI}
 
-La siguiente convención aplica a todas las actividades documentadas en la matriz:
+La siguiente convención aplica a todas las actividades documentadas en la matriz ya que es indispensable para su lectura.
 
 
 \begin{table}[H]
@@ -289,9 +297,9 @@ La siguiente convención aplica a todas las actividades documentadas en la matri
 \setlength{\tabcolsep}{4pt}
 \begin{tabularx}{\textwidth}{Y Y Y Y}
 \toprule
-\textbf{R – Responsable} & \textbf{A – Aprobador} & \textbf{C – Consultado} & \textbf{I – Informado} \\
+\textbf{R (Responsable)} & \textbf{A (Aprobador)} & \textbf{C (Consultado)} & \textbf{I (Informado)} \\
 \midrule
-Ejecuta la tarea directamente & Responsable final, toma decisiones & Asesora y valida el resultado & Se le informa del progreso \\
+Ejecuta la tarea directamente & Responsable final y toma decisiones & Asesora y valida el resultado & Se le informa del progreso \\
 \bottomrule
 \end{tabularx}
 }
@@ -302,19 +310,19 @@ Ejecuta la tarea directamente & Responsable final, toma decisiones & Asesora y v
 
 \begin{itemize}[leftmargin=*]
 
-    \item Cada actividad debe tener exactamente un (1) responsable final (A – Accountable).
+    \item Cada actividad debe tener exactamente un responsable final, por lo tanto, esto garantiza el éxito de la tarea.
 
-    \item Puede haber múltiples ejecutores (R – Responsible) en una misma actividad.
+    \item Puede haber múltiples ejecutores o responsables en una misma actividad ya que algunas tareas requieren esfuerzo conjunto.
 
-    \item Los roles C e I no ejecutan la tarea pero participan en el proceso de validación o comunicación.
+    \item Los roles de consultado e informado no ejecutan la tarea, pero participan en el proceso de validación o comunicación, de esta manera se mantienen integrados.
 
-    \item El Project Manager mantiene rol A en todas las actividades de gestión y planificación.
+    \item El director de proyecto mantiene el rol de aprobador en todas las actividades de gestión y planificación debido a que es el líder responsable.
 
 \end{itemize}
 
 \section{Matriz de responsabilidades}
 
-A continuación se muestra la matriz copleta de responsabilidades organizada por fase del proyecto y actividad principal, con la asignación RACI para cada miembro del equipo y stakeholders clave:
+A continuación se muestra la matriz completa de responsabilidades organizada por fase del proyecto y actividad principal con la asignación RACI para cada miembro del equipo e interesados clave debido a que es el núcleo del proyecto.
 
 
 \begin{widepage}
@@ -323,45 +331,45 @@ A continuación se muestra la matriz copleta de responsabilidades organizada por
 \begin{longtable}{p{1.8cm} p{5.8cm} C{1.45cm} C{1.45cm} C{1.45cm} C{1.45cm} C{1.45cm} C{1.45cm} C{1.45cm} C{1.45cm}}
 \caption{Matriz de responsabilidades}\label{tab:matriz-responsabilidades}\\
 \toprule
-\textbf{Fase} & \textbf{Actividad principal} & \textbf{Project Manager (Tamara)} & \textbf{Dev Frontend 2 (Mauricio)} & \textbf{Dev Frontend 2 (Carlos)} & \textbf{Analista Doc. 1 (Isaac)} & \textbf{Analista Doc. 2 (Jorge)} & \textbf{Rector / Sponsor (Dr. Roberto)} & \textbf{Dir. Admin. (Lic. Patricia)} & \textbf{Dir. TI (Ing. Carlos)} \\
+\textbf{Fase} & \textbf{Actividad principal} & \textbf{Dir. de proyecto (Tamara)} & \textbf{Desarrollador 1 (Mauricio)} & \textbf{Desarrollador 2 (Carlos)} & \textbf{Analista 1 (Isaac)} & \textbf{Analista 2 (Jorge)} & \textbf{Patrocinador (Dr. Roberto)} & \textbf{Dir. admin. (Lic. Patricia)} & \textbf{Dir. TI (Ing. Carlos)} \\
 \midrule
 \endfirsthead
 \toprule
-\textbf{Fase} & \textbf{Actividad principal} & \textbf{Project Manager (Tamara)} & \textbf{Dev Frontend 2 (Mauricio)} & \textbf{Dev Frontend 2 (Carlos)} & \textbf{Analista Doc. 1 (Isaac)} & \textbf{Analista Doc. 2 (Jorge)} & \textbf{Rector / Sponsor (Dr. Roberto)} & \textbf{Dir. Admin. (Lic. Patricia)} & \textbf{Dir. TI (Ing. Carlos)} \\
+\textbf{Fase} & \textbf{Actividad principal} & \textbf{Dir. de proyecto (Tamara)} & \textbf{Desarrollador 1 (Mauricio)} & \textbf{Desarrollador 2 (Carlos)} & \textbf{Analista 1 (Isaac)} & \textbf{Analista 2 (Jorge)} & \textbf{Patrocinador (Dr. Roberto)} & \textbf{Dir. admin. (Lic. Patricia)} & \textbf{Dir. TI (Ing. Carlos)} \\
 \midrule
 \endhead
-Inicio & Elaborar Business Case & A & I & I & R & C & C & C & I \\
-Inicio & Desarrollar Project Charter & A & I & I & R & C & C & I & I \\
-Inicio & Identificar y registrar stakeholders & A & I & I & R & C & C & C & C \\
-Planificación & Definir alcance del proyecto & A & C & C & R & C & I & C & C \\
-Planificación & Elaborar WBS con criterios de aceptación & A & C & C & R & C & I & I & I \\
+Inicio & Elaborar caso de negocio & A & I & I & R & C & C & C & I \\
+Inicio & Desarrollar acta de constitución del proyecto & A & I & I & R & C & C & I & I \\
+Inicio & Identificar y registrar a los interesados & A & I & I & R & C & C & C & C \\
+Planificación & Definir el alcance del proyecto & A & C & C & R & C & I & C & C \\
+Planificación & Elaborar la EDT con criterios de aceptación & A & C & C & R & C & I & I & I \\
 Planificación & Desarrollar cronograma (MS Project) & A & C & C & R & C & I & I & I \\
-Planificación & Definir Matriz RACI y organigrama & A & C & C & R & C & I & I & I \\
-Planificación & Elaborar Plan de Recursos & A & C & C & R & C & I & C & I \\
+Planificación & Definir matriz RACI y organigrama & A & C & C & R & C & I & I & I \\
+Planificación & Elaborar plan de recursos & A & C & C & R & C & I & C & I \\
 Planificación & Estimar costos del proyecto & A & C & C & R & R & C & C & I \\
-Planificación & Elaborar Plan de Calidad & A & C & C & R & R & I & I & C \\
-Planificación & Elaborar Plan de Comunicaciones & A & C & C & R & R & C & C & I \\
-Planificación & Elaborar Plan de Gestión de Riesgos & A & C & C & R & R & I & I & C \\
-Planificación & Elaborar Registro de Riesgos (≥10) & A & C & C & R & R & I & I & C \\
-Planificación & Elaborar Matriz Probabilidad e Impacto & A & C & C & R & R & I & I & C \\
-Planificación & Elaborar Plan de Adquisiciones & A & C & C & R & R & C & C & C \\
-Ejecución & Desarrollar Login y Dashboard principal & C & C & R & I & I & I & I & A \\
-Ejecución & Desarrollar Portal Estudiantil & C & R & C & I & I & I & C & A \\
-Ejecución & Desarrollar Portal Docente & C & R & C & I & I & I & C & A \\
-Ejecución & Desarrollar Portal Administrativo & C & R & C & I & I & I & A & C \\
-Ejecución & Desarrollar Portal Financiero & C & C & R & I & I & I & C & A \\
-Ejecución & Desarrollar Dashboard Ejecutivo del sistema & C & C & R & I & I & A & C & C \\
-Ejecución & Realizar pruebas de usabilidad y QA & A & C & R & C & C & I & C & C \\
-Monitoreo & Definir y monitorear KPIs del proyecto & A & I & I & C & R & C & I & I \\
+Planificación & Elaborar plan de calidad & A & C & C & R & R & I & I & C \\
+Planificación & Elaborar plan de comunicaciones & A & C & C & R & R & C & C & I \\
+Planificación & Elaborar plan de gestión de riesgos & A & C & C & R & R & I & I & C \\
+Planificación & Elaborar registro de riesgos (10 o más) & A & C & C & R & R & I & I & C \\
+Planificación & Elaborar matriz probabilidad e impacto & A & C & C & R & R & I & I & C \\
+Planificación & Elaborar plan de adquisiciones & A & C & C & R & R & C & C & C \\
+Ejecución & Desarrollar inicio de sesión y panel principal & C & C & R & I & I & I & I & A \\
+Ejecución & Desarrollar portal estudiantil & C & R & C & I & I & I & C & A \\
+Ejecución & Desarrollar portal docente & C & R & C & I & I & I & C & A \\
+Ejecución & Desarrollar portal administrativo & C & R & C & I & I & I & A & C \\
+Ejecución & Desarrollar portal financiero & C & C & R & I & I & I & C & A \\
+Ejecución & Desarrollar panel de control ejecutivo & C & C & R & I & I & A & C & C \\
+Ejecución & Realizar pruebas de usabilidad y calidad & A & C & R & C & C & I & C & C \\
+Monitoreo & Definir y monitorear los indicadores de rendimiento & A & I & I & C & R & C & I & I \\
 Monitoreo & Gestionar control de cambios & A & C & C & R & C & C & I & I \\
 Monitoreo & Elaborar solicitudes de cambio & A & C & C & C & R & C & I & I \\
-Monitoreo & Evaluar impacto de cambios (alcance/costo) & A & C & C & C & R & C & I & C \\
+Monitoreo & Evaluar impacto de los cambios & A & C & C & C & R & C & I & C \\
 Monitoreo & Dar seguimiento al cronograma & A & C & C & R & R & I & I & I \\
 Monitoreo & Dar seguimiento a riesgos activos & A & C & C & R & C & I & I & C \\
-Monitoreo & Mantener Dashboard Ejecutivo del proyecto & A & C & C & C & R & C & I & I \\
-Cierre & Elaborar Informe Ejecutivo final & A & I & I & C & R & C & C & I \\
-Cierre & Formalizar Acta de Cierre del proyecto & A & I & I & R & C & A & C & I \\
-Cierre & Documentar Reflexiones y Recomendaciones & A & R & R & R & R & I & I & I \\
+Monitoreo & Mantener el panel de control ejecutivo & A & C & C & C & R & C & I & I \\
+Cierre & Elaborar informe ejecutivo final & A & I & I & C & R & C & C & I \\
+Cierre & Formalizar acta de cierre del proyecto & A & I & I & R & C & A & C & I \\
+Cierre & Documentar reflexiones y recomendaciones & A & R & R & R & R & I & I & I \\
 \bottomrule
 \end{longtable}
 }
@@ -370,7 +378,7 @@ Cierre & Documentar Reflexiones y Recomendaciones & A & R & R & R & R & I & I & 
 
 \section{Análisis de carga por rol}
 
-En la siguiente tabla se observan cuántas veces aparece cada persona como R,A y C.
+En la siguiente tabla se observan cuántas veces aparece cada persona como responsable, aprobador y consultado, de esta manera se evalúa la distribución del trabajo.
 
 
 \begin{table}[H]
@@ -383,14 +391,14 @@ En la siguiente tabla se observan cuántas veces aparece cada persona como R,A y
 \toprule
 \textbf{Rol} & \textbf{\# como R} & \textbf{\# como A} & \textbf{\# como C} & \textbf{Observación} \\
 \midrule
-Project Manager (Tamara) & 0 & 26 & 6 & Lidera toda la gestión del proyecto \\
-Dev Frontend 1 (Mauricio) & 4 & 0 & 22 & Foco en ejecución técnica del frontend \\
-Dev Frontend 2 (Carlos) & 4 & 0 & 21 & Foco en ejecución técnica del frontend \\
-Analista Doc. 1 (Isaac) & 18 & 0 & 6 & Principal ejecutor de documentación PMI \\
-Analista Doc. 2 (Jorge) & 14 & 0 & 11 & Principal ejecutor de documentación PMI \\
-Rector / Patrocinador & 0 & 2 & 9 & Toma decisiones estratégicas y aprueba \\
-Directora Administrativa & 0 & 1 & 14 & Valida requerimientos administrativos \\
-Director de TI & 0 & 4 & 12 & Revisa viabilidad técnica \\
+Director de proyecto (Tamara) & 0 & 26 & 6 & Lidera toda la gestión del proyecto \\
+Desarrollador 1 (Mauricio) & 4 & 0 & 22 & Foco en la ejecución técnica de la interfaz de usuario \\
+Desarrollador 2 (Carlos) & 4 & 0 & 21 & Foco en la ejecución técnica de la interfaz de usuario \\
+Analista 1 (Isaac) & 18 & 0 & 6 & Principal ejecutor de la documentación del PMI \\
+Analista 2 (Jorge) & 14 & 0 & 11 & Principal ejecutor de la documentación del PMI \\
+Rector o patrocinador & 0 & 2 & 9 & Toma decisiones estratégicas y aprueba procesos \\
+Directora administrativa & 0 & 1 & 14 & Valida los requerimientos administrativos \\
+Director de TI & 0 & 4 & 12 & Revisa la viabilidad técnica \\
 \bottomrule
 \end{tabularx}
 }
@@ -399,9 +407,9 @@ Director de TI & 0 & 4 & 12 & Revisa viabilidad técnica \\
 
 \section{Observaciones finales}
 
-La presente Matriz RACI fue elaborada en concordancia con los roles definidos en el organigrama del proyecto y es coherente con los paquetes de trabajo identificados en el WBS. Cualquier modificación en el equipo del proyecto o en el alcance deberá reflejarse en una actualización de este documento mediante el proceso formal de control de cambios.
+La presente Matriz RACI fue elaborada en concordancia con los roles definidos en el organigrama del proyecto y es coherente con los paquetes de trabajo identificados en la EDT, por lo tanto, cualquier modificación en el equipo o en el alcance deberá reflejarse en una actualización de este documento mediante el proceso formal de control de cambios.
 
 
-Se recomienda revisar esta matriz al inicio de cada fase del proyecto para verificar que las asignaciones siguen siendo vigentes y que la carga de trabajo por rol se mantiene balanceada.
+Se recomienda revisar esta matriz al inicio de cada fase del proyecto para verificar que las asignaciones siguen siendo vigentes, ya que esto asegura que la carga de trabajo por rol se mantenga balanceada.
 
 \end{document}

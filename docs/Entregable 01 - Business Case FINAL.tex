@@ -15,7 +15,16 @@
 
 % --- Márgenes / papel ---
 \usepackage{geometry}
-\geometry{a4paper, margin=2.7cm}
+\geometry{
+    a4paper,
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headsep=0.5cm,
+    footskip=0.8cm,
+    headheight=30pt
+}
 
 % --- Matemáticas ---
 \usepackage{amsmath}
@@ -58,9 +67,11 @@
 \newcommand{\AnioDocumento}{2026}
 
 \newcommand{\AutoresPortada}{%
-    Mauricio González Prendas: 2024143009\\
-    Isaac Jiménez Blanco: 2024202804\\
-    Tamara Robles Camacho: 2024099342%
+    \begin{tabular}{l@{\hspace{1.5cm}}r}
+        Mauricio González Prendas & 2024143009\\
+        Isaac Jiménez Blanco & 2024202804\\
+        Tamara Robles Camacho & 2024099342
+    \end{tabular}%
 }
 
 % Datos que aparecen en el encabezado.
@@ -89,7 +100,7 @@
         \fbox{%
             \begin{minipage}[c][4cm][c]{#1}
             \centering
-            Imagen pendiente:\\
+            Imagen pendiente\\
             \texttt{#2}
             \end{minipage}%
         }%
@@ -145,9 +156,9 @@
     \paperheight=210mm
     \pdfpagewidth=297mm
     \pdfpageheight=210mm
-    \newgeometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}%
-    \setlength{\textwidth}{243mm}%
-    \setlength{\textheight}{156mm}%
+    \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm,headheight=30pt}%
+    \setlength{\textwidth}{247mm}%
+    \setlength{\textheight}{160mm}%
     \setlength{\linewidth}{\textwidth}%
     \setlength{\columnwidth}{\textwidth}%
     \hsize=\textwidth
@@ -187,22 +198,20 @@
 \vfill
 
 {\huge \DocumentoTitulo \par}
-\vspace{0.25cm}
-{\Large \DocumentoSubtitulo \par}
 
 \vfill
 
-{\bfseries \LARGE Profesora: \par}
+{\bfseries \LARGE Profesora \par}
 {\Large \Profesor \par}
 
 \vfill
 
-{\bfseries \LARGE Estudiantes: \par}
+{\bfseries \LARGE Estudiantes \par}
 {\Large \AutoresPortada \par}
 
 \vfill
 
-{\bfseries\LARGE Fecha: \par}
+{\bfseries\LARGE Fecha \par}
 {\Large \FechaDocumento \par}
 
 \vfill
@@ -255,129 +264,131 @@
 
 \section{Situación actual}
 
-La Universidad Tecnológica La Mejor es una institución superior que actualmente presenta muchos problemas a causa de como gestionan sus procesos académicos, administrativos y financieros, ya que es mediante una serie de sistemas independientes que no se encuentran integrados entre sí. Esta segmentación tecnológica representa un obstáculo para la eficiencia operativa de la institución.
+La Universidad Tecnológica La Mejor es una institución superior que actualmente presenta muchos problemas a causa de cómo gestionan sus procesos académicos administrativos y financieros ya que esto se hace mediante una serie de sistemas independientes que no se encuentran integrados entre sí debido a que esta segmentación tecnológica representa un obstáculo severo para la eficiencia operativa de toda la institución.
 
-Los sistemas actualmente en uso son: hojas de cálculo para el registro de calificaciones, correo electrónico para la comunicación entre departamentos, sistemas propietarios sin conexión para la gestión financiera y registros físicos o digitales dispersas para el historial académico estudiantil.
+Los sistemas actualmente en uso son hojas de cálculo para el registro de calificaciones junto con correo electrónico para la comunicación constante entre departamentos y sistemas propietarios sin conexión para la gestión financiera además de registros físicos o digitales dispersos para el historial académico estudiantil por lo tanto la información no está centralizada para los diferentes actores universitarios.
 
-\subsection{Diagnostico operativo}
+\subsection{Diagnóstico operativo}
 
-El análisis de la situación actual muestra los siguientes hallazgos críticos:
+El análisis de la situación actual muestra los siguientes hallazgos críticos
 
-\begin{itemize}[leftmargin=*]
-    \item Duplicidad de datos: Mucha de la información se registra de manera manual en múltiples sistemas, generando inconsistencias y errores.
-    \item Falta de visibilidad: Las autoridades no disponen de indicadores consolidados en tiempo real para la toma de decisiones estratégicas.
-    \item Procesos lentos: La matrícula estudiantil, el registro de calificaciones y los tramites financieros dependen de intervención manual en cada etapa.
-    \item Comunicación deficiente: La información no fluye de forma automática entre el departamento académico, administrativo y financiero.
-    \item Insatisfacción estudiantil: los estudiantes deben acudir presencialmente o contactar múltiples oficinas para realizar gestiones básicas.
+\begin{itemize}
+    \item Duplicidad de datos debido a que mucha de la información se registra de manera manual en múltiples sistemas generando así inconsistencias graves y errores operativos constantes.
+    \item Falta de visibilidad ya que las autoridades no disponen de indicadores consolidados en tiempo real para la toma de decisiones estratégicas institucionales.
+    \item Procesos lentos por lo tanto la matrícula estudiantil el registro de calificaciones y los tramites financieros dependen de una exhaustiva intervención manual en cada etapa del proceso diario.
+    \item Comunicación deficiente debido a que la información no fluye de forma automática entre el departamento académico administrativo y financiero.
+    \item Insatisfacción estudiantil esto implica que los estudiantes deben acudir presencialmente o contactar múltiples oficinas para realizar sus gestiones básicas universitarias.
 \end{itemize}
 
 \section{Problema identificado}
 
-El problema central de la Universidad Tecnológica La Mejor se basa en la ausencia de una plataforma integrada que centralice y automatice los procesos académicos, administrativos y financieros de la institución. Esta carencia genera ineficiencias operativas medibles, deterioro en la experiencia del usuario y limitaciones significativas para la toma de decisiones basada en datos.
+El problema central de la Universidad Tecnológica La Mejor se basa en la ausencia de una plataforma integrada que centralice y automatice los procesos académicos administrativos y financieros de la institución ya que esta carencia genera ineficiencias operativas medibles junto con un deterioro notable en la experiencia de todos los usuarios además de limitaciones significativas para la toma de decisiones basada en datos concretos y reportes financieros exactos.
 
 \subsection{Árbol de problemas}
 
-Los efectos identificados como consecuencia directa del problema central son:
+Los efectos identificados como consecuencia directa del problema central son los detallados a continuación
 
-\begin{itemize}[leftmargin=*]
-    \item Incremento en los tiempos de atención al estudiante por procesos manuales repetitivos.
-    \item Alta tasa de errores en registros académicos y financieros por falta de validación automatizada.
-    \item Imposibilidad de generar reportes ejecutivos en tiempo real para la toma de decisiones.
-    \item Carga administrativa excesiva sobre el personal docente y administrativo.
-    \item Pérdida de competitividad institucional frente a universidades con sistemas modernos.
+\begin{itemize}
+    \item Incremento en los tiempos de atención al estudiante por procesos manuales repetitivos de esta manera se reduce fuertemente la eficiencia diaria del personal administrativo.
+    \item Alta tasa de errores en registros académicos y financieros debido a la falta de validación automatizada en todos los sistemas actuales del campus.
+    \item Imposibilidad de generar reportes ejecutivos en tiempo real para la toma de decisiones por lo tanto los directivos carecen de información oportuna para evaluar la universidad.
+    \item Carga administrativa excesiva sobre el personal docente y administrativo ya que deben duplicar esfuerzos físicos en múltiples plataformas tecnológicas anticuadas.
+    \item Pérdida de competitividad institucional frente a universidades con sistemas modernos esto implica que los estudiantes prefieran explorar otras opciones educativas de la región.
 \end{itemize}
 
 \subsection{Impacto cuantificable}
 
-Se estima que la situación actual genera los siguientes impactos negativos:
+Se estima que la situación actual genera los siguientes impactos negativos profundos en la dinámica de la institución
 
-\begin{itemize}[leftmargin=*]
-    \item Tiempo promedio de atención por tramite estudiantil: 45 a 90 minutos presenciales.
-    \item Porcentaje de errores en registros académicos manuales: aproximadamente 8-12\%.
-    \item Horas trabajadas de los funcionarios semanales destinadas a tareas administrativas redundantes: más de 120 horas por departamento.
-    \item Costo de oportunidad estimado por ineficiencias operativas: significativo para la sostenibilidad institucional.
+\begin{itemize}
+    \item El tiempo promedio de atención por trámite estudiantil se encuentra entre 45 a 90 minutos presenciales ya que no existen plataformas virtuales adecuadas para los jóvenes.
+    \item El porcentaje de errores en registros académicos manuales es aproximadamente del 8 al 12 por ciento debido a la ausencia total de validaciones automáticas modernas.
+    \item Las horas trabajadas de los funcionarios semanales destinadas a tareas administrativas redundantes representan más de 120 horas por departamento en consecuencia se desperdicia tiempo valioso del personal capacitado.
+    \item El costo de oportunidad estimado por ineficiencias operativas es significativo para la sostenibilidad institucional por lo tanto se deben buscar urgentemente alternativas de mejora eficientes.
 \end{itemize}
 
 \section{Oportunidad de mejora}
 
-La modernización tecnológica de la Universidad Tecnológica La Mejor representa una oportunidad para transformar su modelo operativo mejorar la experiencia de todos los funcionarios y estudiantes de la institución y posicionarse como una institución de referencia en gestión universitaria en la región.
+La modernización tecnológica de la Universidad Tecnológica La Mejor representa una gran oportunidad para transformar su modelo operativo debido a que esto permitirá mejorar sustancialmente la experiencia de todos los funcionarios y estudiantes de la institución además de posicionarla como una universidad de referencia fundamental en gestión educativa dentro de toda la región centroamericana.
 
 \subsection{Visión de la solución}
 
-El desarrollo de una Plataforma Universitaria Integrada permitirá consolidar en un único punto de acceso todos los procesos académicos, administrativos y financieros, ofreciendo interfaces diferenciadas para estudiantes, docentes, personal administrativo, área financiera y alta dirección.
+El desarrollo de una plataforma universitaria integrada permitirá consolidar en un único punto de acceso seguro todos los procesos académicos administrativos y financieros para lo cual ofrecerá interfaces completamente diferenciadas y adaptadas funcionalmente a estudiantes docentes personal administrativo área financiera y miembros de la alta dirección ejecutiva.
 
 \subsection{Oportunidades identificadas}
 
-Automatización de procesos: reducir de forma considerable el tiempo dedicado a tareas manuales y repetitivas:
+La automatización de procesos permite reducir de forma considerable el tiempo dedicado a tareas manuales y repetitivas logrando beneficios de la siguiente forma
 
-\begin{itemize}[leftmargin=*]
-    \item Centralización de la información: garantizar una única fuente de verdad para todos los datos institucionales.
-    \item Mejora en la experiencia estudiantil: brindar un portal accesible para realizar trámites en línea.
-    \item Habilitación de inteligencia institucional: generar dashboards ejecutivos con indicadores académicos y financieros en tiempo real.
-    \item Reducción de errores operativos: implementar validaciones automáticas que eliminen inconsistencias financieras en tiempo real.
-    \item Escalabilidad: diseñar una arquitectura que permita incorporar nuevos módulos o funcionalidades en el futuro.
+\begin{itemize}
+    \item Centralización de la información para garantizar una única fuente de verdad aplicable a todos los datos institucionales ya que esto evita discrepancias molestas y constantes.
+    \item Mejora en la experiencia estudiantil al brindar un portal completamente accesible para realizar trámites en línea por lo tanto se evitan para siempre las filas presenciales en el campus.
+    \item Habilitación de inteligencia institucional para generar tableros ejecutivos con indicadores académicos y financieros en tiempo real debido a que esto apoya fuertemente la toma de decisiones.
+    \item Reducción de errores operativos al implementar validaciones automáticas que eliminen inconsistencias financieras de manera inmediata de esta manera se protege la información contable de la entidad.
+    \item Escalabilidad al diseñar una arquitectura técnica flexible que permita incorporar nuevos módulos o funcionalidades en el futuro esto implica que el nuevo sistema no quedará obsoleto a corto plazo.
 \end{itemize}
 
 \section{Beneficios esperados}
 
-Para este nuevo sistema, se espera varios beneficios que mejorarán la experiencia de todos los actores de la institución.
+Para este nuevo sistema informático se esperan múltiples beneficios que mejorarán directamente la experiencia de todos los actores de la institución ya que la novedosa plataforma centralizará la gestión general universitaria.
 
 \subsection{Beneficios cuantitativos}
 
-En la siguiente tabla se muestra los beneficios junto con la situación actual y la meta esperada:
+En la siguiente tabla se muestran los beneficios numéricos comparando la situación actual contra la gran meta esperada tras implementar la solución final
 
 \begin{table}[H]
 \centering
 \small
 \begin{tabularx}{\textwidth}{p{5.2cm} p{4.1cm} Y}
 \toprule
-\textbf{Beneficio} & \textbf{Situación Actual} & \textbf{Meta Esperada} \\
+\textbf{Beneficio} & \textbf{Situación actual} & \textbf{Meta esperada} \\
 \midrule
-Tiempo promedio por trámite estudiantil & 45 - 90 min presenciales & 5 - 10 min en línea \\
-Tasa de error en registros académicos & 8\% - 12\% & \textless{} 1\% \\
-Horas administrativas por semana & \textgreater{} 120 horas/departamento & \textless{} 40 horas/departamento \\
-Satisfacción estudiantil (encuesta) & No medida / baja & \textgreater{} 85\% satisfacción \\
-Disponibilidad de reportes ejecutivos & 72 hrs promedio & Tiempo real \\
-Acceso a trámites fuera del campus & No disponible & 24/7 desde dispositivos inteligentes \\
+Tiempo promedio por trámite estudiantil & 45 a 90 min presenciales & 5 a 10 min en línea \\
+Tasa de error en registros académicos & 8\% a 12\% & Menor al 1\% \\
+Horas administrativas por semana & Mayor a 120 horas por departamento & Menor a 40 horas por departamento \\
+Satisfacción estudiantil según encuestas & No medida o es muy baja & Mayor al 85\% de satisfacción general \\
+Disponibilidad de reportes ejecutivos & 72 horas en promedio & Tiempo real inmediato \\
+Acceso a trámites fuera del campus & No disponible del todo & 24/7 desde dispositivos inteligentes \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 \subsection{Beneficios cualitativos}
 
-\begin{itemize}[leftmargin=*]
-    \item Mejora en la imagen institucional y percepción de modernidad por parte de estudiantes y docentes.
-    \item Mayor transparencia en los procesos académicos y financieros para todos los actores.
-    \item Fortalecimiento de la cultura organizacional orientada a la eficiencia y la innovación.
-    \item Cumplimiento de estándares de calidad universitaria y posibilidad de acreditación institucional.
-    \item Retención estudiantil mejorada gracias a una experiencia universitaria más fluida y satisfactoria.
-    \item Reducción del estrés operativo del personal administrativo y docente.
+La plataforma también generará grandes ventajas organizacionales de tipo no numérico
+
+\begin{itemize}
+    \item Mejora en la imagen institucional y en la percepción de modernidad por parte de estudiantes y docentes debido a que contarán con un sistema de última generación muy eficiente.
+    \item Mayor transparencia en todos los procesos académicos y financieros para todos los actores por lo tanto existirá muchísima más confianza institucional hacia la administración.
+    \item Fortalecimiento de la cultura organizacional orientada a la eficiencia y la innovación ya que el personal dejará de realizar trabajos rutinarios excesivos en las oficinas.
+    \item Cumplimiento firme de estándares de calidad universitaria y posibilidad real de obtener una acreditación institucional prestigiosa para lo cual el sistema es una herramienta tecnológica clave.
+    \item Retención estudiantil mejorada gracias a una experiencia universitaria mucho más fluida y satisfactoria esto implica que los estudiantes se mantendrán sumamente motivados en sus respectivas carreras.
+    \item Reducción del estrés operativo diario de todo el personal administrativo y del cuerpo docente en consecuencia mejorará de forma sostenida el clima laboral general.
 \end{itemize}
 
 \section{Alternativas evaluadas}
 
-Para atender la problemática identificada, se evaluaron tres alternativas estratégicas con distintos niveles de inversión, riesgo y beneficio. La primera alternativa fue a status quo, es decir, dejar el proyecto a como lo están manejando actualmente, la segunda alternativa fue un sistema ERP (Planificación de Recursos Empresariales) Comercial que centraliza la gestión de los procesos operativos, financieros y de recursos humanos de una empresa en una única plataforma y la última alternativa fue un desarrollo a la medida donde se puede adaptar 100\% el software a la medida de la institución. A continuación, se presenta el análisis comparativo:
+Para atender la problemática identificada se evaluaron cuidadosamente tres alternativas estratégicas con distintos niveles de inversión riesgo y beneficio debido a que la primera alternativa fue mantener el proyecto a como lo están manejando actualmente mientras que la segunda alternativa consistió en un sistema de software comercial que centraliza la gestión operativa de recursos en una única plataforma genérica y finalmente la tercera alternativa correspondió a un desarrollo totalmente a la medida donde se puede adaptar al cien por ciento todo el producto a las necesidades de la institución universitaria. Asimismo a continuación se presenta el análisis comparativo completo
 
 \begin{widepage}
 {\small
 \setlength{\tabcolsep}{3pt}
 \begin{longtable}{p{4.1cm} p{4.8cm} p{5.8cm} p{7.2cm}}
 \toprule
-\textbf{Criterio} & \textbf{Alternativa A Status Quo} & \textbf{Alternativa B Sistema ERP Comercial} & \textbf{Alternativa C Desarrollo a la Medida (Recomendada)} \\
+\textbf{Criterio} & \textbf{Alternativa A Status quo} & \textbf{Alternativa B Sistema comercial} & \textbf{Alternativa C Desarrollo a la medida} \\
 \midrule
 \endfirsthead
 \toprule
-\textbf{Criterio} & \textbf{Alternativa A Status Quo} & \textbf{Alternativa B Sistema ERP Comercial} & \textbf{Alternativa C Desarrollo a la Medida (Recomendada)} \\
+\textbf{Criterio} & \textbf{Alternativa A Status quo} & \textbf{Alternativa B Sistema comercial} & \textbf{Alternativa C Desarrollo a la medida} \\
 \midrule
 \endhead
-Costo de implementación & Ninguno & Muy alto (más de 65 millones) & Moderado (según alcance) \\
-Tiempo de implementación & Inmediato & 12 - 24 meses & 4 - 6 meses \\
-Adaptación a la institución & Alta (actual) & Baja (genérico) & Muy alta (personalizado) \\
-Escalabilidad & Nula & Media & Alta \\
-Mantenimiento & Complejo & Dependencia del proveedor & Autonomía interna \\
-Mejora operativa esperada & Ninguna & Alta & Muy alta \\
-Riesgo de adopción & Bajo & Alto & Medio \\
-Recomendación & No viable & No viable (costo) & Opción Seleccionada \\
+Costo de implementación & Ninguno & Muy alto de más de 65 millones & Moderado según el alcance definido \\
+Tiempo de implementación & Inmediato & 12 a 24 meses de trabajo profundo & 4 a 6 meses de trabajo ágil \\
+Adaptación a la institución & Alta porque es la configuración actual & Baja por ser un producto genérico y cerrado & Muy alta porque es absolutamente personalizado \\
+Escalabilidad técnica & Nula & Media y dependiente de terceros & Alta y autónoma \\
+Mantenimiento posterior & Sumamente complejo de ejecutar & Alta dependencia del proveedor externo & Gran autonomía interna institucional \\
+Mejora operativa esperada & Ninguna mejora perceptible & Alta capacidad de mejora & Muy alta capacidad de mejora global \\
+Riesgo de adopción final & Bajo & Alto & Medio \\
+Recomendación ejecutiva & No es viable operativamente a futuro & No es viable por el alto costo financiero asociado & Esta es la excelente opción seleccionada \\
 \bottomrule
 \end{longtable}
 }
@@ -385,106 +396,106 @@ Recomendación & No viable & No viable (costo) & Opción Seleccionada \\
 
 \subsection{Justificación de la alternativa seleccionada}
 
-La Alternativa C - Desarrollo a la Medida: fue seleccionada por ofrecer el mejor balance entre costo, tiempo de implementación, adaptabilidad a los procesos específicos de la Universidad y potencial de mejora operativa. A diferencia de un ERP comercial genérico, una solución desarrollada internamente puede ajustarse con precisión a los flujos de trabajo institucionales, evitar licencias costosas y garantizar la autonomía tecnológica a largo plazo.
+La alternativa de desarrollo a la medida fue seleccionada indiscutiblemente por ofrecer el mejor balance general entre costo y tiempo de implementación así como también una gran adaptabilidad a los procesos específicos de la universidad y un fuerte potencial de mejora operativa en todos los departamentos ya que a diferencia de un software comercial genérico una solución desarrollada internamente puede ajustarse con gran precisión a todos los flujos de trabajo institucionales permitiendo evitar licencias de uso sumamente costosas y garantizando de esa forma la autonomía tecnológica a largo plazo para toda la organización educativa.
 
 \section{Justificación económica}
 
-La posibilidad económica del proyecto se sustenta en el análisis de costos de implementación versus los beneficios operativos y estratégicos que generará la plataforma a mediano y largo plazo.
+La viabilidad económica de este importante proyecto integral se sustenta sólidamente en el análisis profundo de los costos de implementación versus todos los grandes beneficios operativos y estratégicos que generará la plataforma web a mediano y largo plazo en consecuencia la prestigiosa universidad recuperará rápidamente su gran inversión económica inicial.
 
 \subsection{Estimación de costos del proyecto}
 
-En la siguiente tabla se muestra la categoría de costo con su respectivo costo estimado y el porcentaje del total del costo final:
+En la siguiente tabla se muestra cada categoría de costo con su respectivo valor financiero estimado y el porcentaje exacto respecto al gran total del costo del desarrollo
 
 \begin{table}[H]
 \centering
 \small
-\begin{tabularx}{\textwidth}{Y p{4.1cm} p{2.7cm}}
+\begin{tabularx}{\textwidth}{Y p{4.1cm} p{3.2cm}}
 \toprule
-\textbf{Categoría de Costo} & \textbf{Costo Estimado} & \textbf{\% del Total} \\
+\textbf{Categoría de costo} & \textbf{Costo estimado} & \textbf{Porcentaje del total} \\
 \midrule
-Mano de obra (equipo de proyecto) & ₡14,000,000 millones & 51\% \\
-Licencias y herramientas de software & ₡1,700,000 millones & 6\% \\
-Infraestructura y hosting & ₡1,900,000 millones & 7\% \\
-Capacitación y gestión del cambio & ₡2,300,500 millones & 9\% \\
-Pruebas y control de calidad & ₡3,000,000 millones & 11\% \\
-Contingencias (10\%) & ₡1,600,000 millones & 6\% \\
-Documentación y gestión del proyecto & ₡2,700,000 millones & 10\% \\
-TOTAL ESTIMADO & ₡27,200,500 millones & 100\% \\
+Mano de obra del equipo de proyecto experto & ₡14,000,000 & 51\% \\
+Licencias comerciales y herramientas de software & ₡1,700,000 & 6\% \\
+Infraestructura tecnológica en la nube y hosting & ₡1,900,000 & 7\% \\
+Capacitación general al usuario y gestión del cambio & ₡2,300,500 & 9\% \\
+Pruebas operativas exhaustivas y control de calidad & ₡3,000,000 & 11\% \\
+Contingencias financieras estimadas del diez por ciento & ₡1,600,000 & 6\% \\
+Documentación técnica y gestión completa del proyecto & ₡2,700,000 & 10\% \\
+TOTAL ESTIMADO DEL PROYECTO INFORMATICO & ₡27,200,500 & 100\% \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 \subsection{Retorno sobre la inversión}
 
-Considerando los ahorros operativos estimados derivados de la reducción de horas administrativas, la disminución de errores en registros y la eliminación de procesos manuales redundantes, se proyecta un retorno de la inversión dentro del primer año de operación del sistema.
+Considerando los grandes ahorros operativos estimados que serán directamente derivados de la reducción contundente de horas administrativas y la disminución de errores graves en todos los registros contables junto con la eliminación definitiva de procesos manuales redundantes se proyecta un rápido retorno de la alta inversión dentro del mismísimo primer año de operación continua del nuevo sistema informático.
 
 \begin{table}[H]
 \centering
 \small
 \begin{tabularx}{\textwidth}{Y p{5cm}}
 \toprule
-\textbf{Fuente de Ahorro / Beneficio} & \textbf{Estimación Anual (USD)} \\
+\textbf{Fuente de ahorro o de un gran beneficio financiero} & \textbf{Estimación anual en colones} \\
 \midrule
-Reducción de horas administrativas redundantes & ₡9,000,000 millones \\
-Eliminación de errores y correcciones manuales & ₡4,000,000 millones \\
-Reducción de costos en materiales físicos e impresión & ₡2,500,000 millones \\
-Mejora en retención estudiantil (estimado) & ₡8,000,000 millones \\
-Reducción de tiempo de atención al estudiante & ₡3,500,000 millones \\
-AHORRO / BENEFICIO ANUAL ESTIMADO & ₡27,000,000 millones \\
+Reducción contundente de horas administrativas redundantes & ₡9,000,000 \\
+Eliminación definitiva de errores de cobro y correcciones manuales & ₡4,000,000 \\
+Reducción de todos los costos en materiales físicos e impresión de papel & ₡2,500,000 \\
+Mejora general en la retención de toda la población estudiantil universitaria & ₡8,000,000 \\
+Reducción de los tiempos prolongados de atención presencial al estudiante & ₡3,500,000 \\
+AHORRO GLOBAL O BENEFICIO ANUAL INSTITUCIONAL ESTIMADO & ₡27,000,000 \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-\subsection{Análisis costo-beneficio}
+\subsection{Análisis numérico de costo y beneficio}
 
-En la siguiente tabla se muestra un análisis de la inversión entre el costo y el beneficio de implementar este proyecto en la institución, beneficio estimado, periodo de recuperación y el retorno de la inversión estimado en 1 y 3 años.
+En la siguiente tabla se muestra un análisis detallado de la inversión evaluando la estrecha relación entre el costo inicial y el gran beneficio de implementar este proyecto tecnológico vanguardista en la institución así como el beneficio anual estimado junto con el importante periodo temporal de recuperación además del retorno total de la inversión que ha sido calculado cuidadosamente tanto para el primero como para el tercer año operativo del sistema.
 
-Las fórmulas usadas para sacar dichos resultados son las siguientes:
+Las fórmulas financieras que fueron estrictamente usadas para sacar dichos resultados matemáticos tan favorables son las presentadas detalladamente a continuación
 
-Período de recuperación: Inversión ÷ Beneficio anual
+La primera fórmula del período de recuperación es la inversión de capital dividida directamente entre el beneficio operativo anual
 
-ROI año 1: (Beneficio año 1 − Inversión) ÷ Inversión × 100
+La segunda fórmula del retorno sobre la inversión para el primer año es el beneficio financiero del primer año menos la inversión inicial dividido todo ese resultado entre la misma inversión inicial y finalmente multiplicado por cien
 
-ROI año 3: (Beneficio acumulado 3 años − Inversión) ÷ Inversión × 100
+La tercera fórmula del retorno sobre la inversión para el tercer año es el beneficio acumulado de tres largos años menos la inversión de inicio dividido todo esto entre la inversión y multiplicado finalmente por cien
 
-Relación B/C: Beneficio anual ÷ Inversión (año 1), o Beneficio acumulado ÷ Inversión (año 3)
+La cuarta fórmula correspondiente a la relación entre costo y beneficio es el beneficio monetario anual dividido entre la inversión del primer año o también el beneficio acumulado global dividido entre la misma inversión del tercer periodo anual
 
-A continuación, los resultados:
+A continuación se presentan de manera sumamente clara todos los resultados correspondientes a las métricas descritas
 
 \begin{table}[H]
 \centering
 \small
 \begin{tabularx}{\textwidth}{Y p{5.2cm}}
 \toprule
-Inversión total del proyecto & ₡27,200,500 millones \\
-Beneficio anual estimado & ₡27,000,000 millones \\
-Período de recuperación de la inversión & $\approx$ 12 meses \\
-Retorno sobre la Inversión proyectado (año 1) & -0.7\% \\
-Retorno sobre la Inversión proyectado (año 3) & \textgreater{}197\% \\
-Relación Costo-Beneficio (B/C) & 0.99 (primer año) / \textgreater{}2.97 (año 3) \\
+\textbf{Inversión total y completa del desarrollo del proyecto web} & ₡27,200,500 \\
+\textbf{Beneficio económico anual estimado para la toda la entidad} & ₡27,000,000 \\
+\textbf{Período estimado temporal de recuperación de la alta inversión} & Aproximadamente doce meses \\
+\textbf{Retorno porcentual sobre la inversión que ha sido proyectado para el año uno} & Un negativo 0.7\% \\
+\textbf{Retorno porcentual sobre la inversión que ha sido proyectado para el año tres} & Mayor al 197\% \\
+\textbf{Métrica de la relación final obtenida entre el alto costo y el enorme beneficio} & Es de 0.99 para el primer año y \textgreater{}2.97 para el tercer periodo anual \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 \section{Conclusión}
 
-La Universidad Tecnológica La Mejor enfrenta un desafío operativo real y urgente: sus procesos académicos, administrativos y financieros operan de forma segmentada, generando ineficiencias medibles, sobrecarga al personal y una experiencia pobre para estudiantes y docentes.
+La Universidad Tecnológica La Mejor enfrenta un desafío operativo muy real y apremiante debido a que todos sus complejos procesos académicos administrativos y financieros operan actualmente de forma excesivamente segmentada generando así fuertes ineficiencias medibles y una sobrecarga laboral extrema al personal institucional junto con una experiencia verdaderamente pobre para todos los valiosos estudiantes y docentes de la universidad.
 
-El análisis presentado en este Business Case demuestra con claridad que la inversión en una Plataforma Universitaria Integrada desarrollada a la medida representa la alternativa más favorable, estratégica y rentable para resolver la problemática identificada. Las demás alternativas evaluadas, tanto el mantenimiento del status quo como la adquisición de un ERP comercial, fueron descartadas por su inviabilidad operativa y económica respectivamente.
+El análisis exhaustivo y profundo presentado en este documento de viabilidad técnica y operativa demuestra con total claridad que la gran inversión financiera en una plataforma universitaria web integrada que sea desarrollada totalmente a la medida representa la alternativa estratégica más favorable y también más rentable de todas para resolver definitivamente la añeja problemática identificada ya que las demás opciones alternativas evaluadas que fueron mantener la situación actual deficiente o simplemente adquirir una plataforma comercial costosa y genérica fueron finalmente descartadas por su inviabilidad operativa y económica de manera sumamente respectiva.
 
-Los beneficios proyectados, tanto cuantitativos como cualitativos, justifican el costo de la inversión inicial, con un período de recuperación estimado cercano a los doce meses y un retorno sobre la inversión superior al 197\% en un horizonte de tres años. Además, la plataforma posicionará a la institución en un nivel de madurez tecnológica que le permitirá competir, crecer y ofrecer servicios de calidad a su comunidad universitaria.
+Los extraordinarios beneficios proyectados que se dividen inteligentemente tanto en aspectos numéricos palpables como en valiosas características cualitativas justifican por completo todo el alto costo financiero de la inversión inicial requerida debido a que se determinó un periodo prudencial de recuperación estimado y muy cercano a los doce meses iniciales junto con un sorprendente retorno de inversión superior al cien por ciento en un estrecho horizonte operativo temporal de solamente tres años además de que la nueva plataforma web posicionará estratégicamente a la institución educativa en un alto nivel competitivo de madurez tecnológica que finalmente le permitirá crecer de forma sostenible y ofrecer estupendos servicios informáticos de máxima calidad técnica a toda su gran comunidad universitaria.
 
-Por lo anterior, se recomienda formalmente la aprobación y ejecución del proyecto Plataforma Universitaria Integrada, autorizando los recursos humanos, tecnológicos y financieros necesarios para su desarrollo en el plazo establecido.
+Por todo el minucioso análisis expuesto con anterioridad se recomienda de manera muy formal y ejecutiva la aprobación inmediata junto con la urgente ejecución directa de este gran e importante proyecto tecnológico de modernización para lo cual se requiere aprobar sin dilación todos los valiosos recursos humanos técnicos y financieros que han sido absolutamente necesarios para su exitoso desarrollo integral dentro del exigente y estrecho plazo temporal previamente establecido por la dirección general de esta misma institución.
 
-\subsection{Firmas de aprobación}
+\subsection{Firmas de aprobación formal}
 
 \begin{table}[H]
 \centering
 \begin{tabularx}{\textwidth}{Y Y Y}
 \toprule
-\textbf{Elaborado por} & \textbf{Revisado por} & \textbf{Aprobado por} \\
+\textbf{Elaborado de manera responsable por} & \textbf{Revisado minuciosamente por} & \textbf{Aprobado y autorizado por} \\
 \midrule
-\begin{tabular}[c]{@{}l@{}}Equipo de Proyecto\\Firma y fecha\end{tabular} & \begin{tabular}[c]{@{}l@{}}Project Manager\\Firma y fecha\end{tabular} & \begin{tabular}[c]{@{}l@{}}Rector / Patrocinador\\Firma y fecha\end{tabular} \\
+Equipo de trabajo del proyecto & Líder Project Manager de la iniciativa & Funcionario Rector Patrocinador de la universidad \\
 \bottomrule
 \end{tabularx}
 \end{table}
