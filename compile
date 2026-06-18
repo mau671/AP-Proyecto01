@@ -1,0 +1,86 @@
+#!/bin/bash
+
+# Directorio que contiene los entregables
+DOCS_DIR="docs"
+
+# Verificar si tectonic está instalado
+if ! command -v tectonic &> /dev/null; then
+    echo "Error: tectonic no está instalado o no está en el PATH."
+    exit 1
+fi
+
+# Si no se proveen argumentos, mostrar el uso y listar los entregables
+if [ -z "$1" ]; then
+    echo "Uso: $0 <número_de_entregable> o $0 all"
+    echo "Ejemplo: $0 1   (compila el Entregable 01)"
+    echo ""
+    echo "Entregables disponibles en '$DOCS_DIR':"
+    for f in "$DOCS_DIR"/Entregable\ [0-9][0-9]\ *\ FINAL.tex; do
+        if [ -f "$f" ]; then
+            # Extraer número y nombre para mostrar
+            basename=$(basename "$f" " FINAL.tex")
+            num=$(echo "$basename" | cut -d' ' -f2)
+            name=$(echo "$basename" | cut -d'-' -f2-)
+            echo "  [$num] -$name"
+        fi
+    done
+    exit 0
+fi
+
+compile_file() {
+    local tex_file="$1"
+    if [ ! -f "$tex_file" ]; then
+        echo "Error: El archivo '$tex_file' no existe."
+        return 1
+    fi
+
+    echo "Compilando: $(basename "$tex_file")..."
+    
+    # Ejecutar tectonic
+    if tectonic "$tex_file"; then
+        # El PDF generado originalmente por tectonic
+        local pdf_output="${tex_file%.tex}.pdf"
+        
+        # El PDF final deseado (reemplazando ' FINAL.pdf' por '.pdf')
+        local target_pdf="${pdf_output% FINAL.pdf}.pdf"
+        
+        if [ "$pdf_output" != "$target_pdf" ] && [ -f "$pdf_output" ]; then
+            mv "$pdf_output" "$target_pdf"
+            echo "¡Éxito! PDF generado en: $target_pdf"
+        elif [ -f "$pdf_output" ]; then
+            echo "¡Éxito! PDF generado en: $pdf_output"
+        else
+            echo "Error: No se encontró el archivo PDF generado '$pdf_output'."
+            return 1
+        fi
+    else
+        echo "Error al compilar con tectonic."
+        return 1
+    fi
+}
+
+if [ "$1" = "all" ]; then
+    echo "Compilando todos los entregables..."
+    for f in "$DOCS_DIR"/Entregable\ [0-9][0-9]\ *\ FINAL.tex; do
+        if [ -f "$f" ]; then
+            compile_file "$f"
+            echo "----------------------------------------"
+        fi
+    done
+else
+    # Validar y formatear el número de entrada (ej: '1' -> '01')
+    if [[ "$1" =~ ^[0-9]+$ ]]; then
+        padded_num=$(printf "%02d" "$1")
+        # Buscar el archivo .tex correspondiente
+        match=$(find "$DOCS_DIR" -maxdepth 1 -name "Entregable ${padded_num} * FINAL.tex" | head -n 1)
+        if [ -n "$match" ] && [ -f "$match" ]; then
+            compile_file "$match"
+        else
+            echo "Error: No se encontró ningún entregable con el número '$padded_num'."
+            exit 1
+        fi
+    else
+        echo "Error: Argumento no válido. Debe ser un número (ej: 1, 02) o 'all'."
+        exit 1
+    fi
+fi
