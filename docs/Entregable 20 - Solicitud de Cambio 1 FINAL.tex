@@ -1,0 +1,272 @@
+\documentclass[11pt,spanish]{article}
+
+% =========================================================
+% PLANTILLA BASE PARA INFORMES ACADÉMICOS / TÉCNICOS
+% =========================================================
+
+% --- Idioma y codificación ---
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{newunicodechar}
+\newunicodechar{₡}{\textcolonmonetary}
+
+% --- Márgenes / papel ---
+\usepackage{geometry}
+\geometry{a4paper, margin=2.7cm}
+
+% --- Matemáticas ---
+\usepackage{amsmath}
+
+% --- Tablas, enlaces y elementos visuales ---
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes.geometric,arrows.meta,calc}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage[hidelinks]{hyperref}
+
+% --- Encabezado y pie de página ---
+\usepackage[myheadings]{fancyhdr}
+\usepackage{lastpage}
+\setlength{\headheight}{30pt}
+\setlength{\footskip}{30pt}
+
+% --- Interlineado ---
+\linespread{1.2}
+\sloppy
+
+% =========================================================
+% DATOS DEL DOCUMENTO
+% =========================================================
+\newcommand{\Institucion}{Instituto Tecnológico de Costa Rica}
+\newcommand{\Campus}{Campus Tecnológico Central Cartago}
+\newcommand{\DocumentoTitulo}{Solicitud de Cambio 1}
+\newcommand{\DocumentoSubtitulo}{}
+\newcommand{\Curso}{Administración de proyectos}
+\newcommand{\Profesor}{Alicia Marcela Salazar Hernández}
+\newcommand{\FechaDocumento}{18 de junio de 2026}
+\newcommand{\PeriodoAcademico}{I Semestre}
+\newcommand{\AnioDocumento}{2026}
+
+\newcommand{\AutoresPortada}{%
+    Mauricio González Prendas 2024143009\\
+    Isaac Jiménez Blanco 2024202804\\
+    Tamara Robles Camacho 2024099342%
+}
+
+% Datos que aparecen en el encabezado.
+\newcommand{\DocHeaderLeft}{}
+\newcommand{\DocHeaderRight}{Solicitud de Cambio 1}
+\newcommand{\DocFooterRight}{Página~\thepage\ de~\pageref{LastPage}}
+
+% Metadatos PDF.
+\title{\DocumentoTitulo}
+\author{\AutoresPortada}
+\date{\FechaDocumento}
+
+% =========================================================
+% CONFIGURACIÓN DE TABLAS Y UTILIDADES
+% =========================================================
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\renewcommand{\arraystretch}{1.22}
+\setlength{\LTpre}{0.5em}
+\setlength{\LTpost}{0.5em}
+
+% Imagen segura si el archivo no existe, muestra un recuadro de marcador.
+\newcommand{\SafeImage}[2][0.92\textwidth]{%
+    \IfFileExists{#2}{%
+        \includegraphics[width=#1]{#2}%
+    }{%
+        \fbox{%
+            \begin{minipage}[c][4cm][c]{#1}
+            \centering
+            Imagen pendiente\\
+            \texttt{#2}
+            \end{minipage}%
+        }%
+    }%
+}
+
+% Figura reutilizable.
+\newcommand{\EvidenceFigure}[3]{%
+    \begin{figure}[H]
+    \centering
+    \SafeImage{#1}
+    \caption{#2}
+    \label{#3}
+    \end{figure}%
+}
+
+% =========================================================
+% ENCABEZADO Y PIE
+% =========================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\DocHeaderLeft}
+\fancyhead[R]{\DocHeaderRight}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[R]{\DocFooterRight}
+
+% Estilo equivalente para páginas horizontales.
+\fancypagestyle{widefancy}{%
+    \fancyhf{}%
+    \fancyhead[L]{\DocHeaderLeft}%
+    \fancyhead[R]{\DocHeaderRight}%
+    \renewcommand{\headrulewidth}{0.4pt}%
+    \renewcommand{\footrulewidth}{0.4pt}%
+    \fancyfoot[R]{\DocFooterRight}%
+}
+
+% =========================================================
+% PÁGINAS HORIZONTALES PARA TABLAS ANCHAS
+% =========================================================
+\makeatletter
+\newcommand{\SyncPageBuilderDimensions}{%
+    \global\vsize=\textheight
+    \global\@colroom=\textheight
+    \global\@colht=\textheight
+}
+\makeatother
+
+\newenvironment{widepage}{%
+    \clearpage
+    \hypersetup{pageanchor=false}%
+    \paperwidth=297mm
+    \paperheight=210mm
+    \pdfpagewidth=297mm
+    \pdfpageheight=210mm
+    \newgeometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}%
+    \setlength{\textwidth}{243mm}%
+    \setlength{\textheight}{156mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \pagestyle{widefancy}%
+}{%
+    \clearpage
+    \paperwidth=210mm
+    \paperheight=297mm
+    \pdfpagewidth=210mm
+    \pdfpageheight=297mm
+    \restoregeometry
+    \setlength{\textwidth}{156mm}%
+    \setlength{\textheight}{243mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \hypersetup{pageanchor=true}%
+    \pagestyle{fancy}%
+}
+
+% =========================================================
+% PORTADA
+% =========================================================
+\newcommand{\MakeCover}{%
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+
+{\bfseries \huge \Institucion \par}
+\vspace{0.25cm}
+{\LARGE \Campus \par}
+
+\vfill
+
+{\huge \DocumentoTitulo \par}
+
+\vfill
+
+{\bfseries \LARGE Profesora \par}
+{\Large \Profesor \par}
+
+\vfill
+
+{\bfseries \LARGE Estudiantes \par}
+{\Large \AutoresPortada \par}
+
+\vfill
+
+{\bfseries\LARGE Fecha \par}
+{\Large \FechaDocumento \par}
+
+\vfill
+
+{\LARGE \PeriodoAcademico \par}
+{\LARGE \AnioDocumento \par}
+
+\end{titlepage}%
+}
+
+% =========================================================
+% DOCUMENTO
+% =========================================================
+\begin{document}
+\hypersetup{pageanchor=false}
+
+\MakeCover
+
+\pagenumbering{roman}
+\pagestyle{empty}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+\pagestyle{fancy}
+
+\section{Información general del cambio}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{p{5cm} Y}
+\toprule
+\textbf{Número de solicitud} & SC-01 \\
+\textbf{Fecha de solicitud} & 18 de junio de 2026 \\
+\textbf{Solicitante} & Lic. Patricia Vargas Soto y Prof. Andrea Solís Zamora \\
+\textbf{Categoría del cambio} & Alcance y cronograma \\
+\textbf{Prioridad} & Alta \\
+\textbf{Descripción breve} & Adición de módulo para solicitar certificados académicos en el portal estudiantil \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Descripción detallada del cambio solicitado}
+
+La presente solicitud propone integrar una funcionalidad de solicitud de certificados académicos dentro del Portal Estudiantil debido a que los estudiantes requieren generar y descargar certificaciones de notas así como la carga académica y el orden de matrícula de manera centralizada. Esto implica agregar una nueva sección específica en el portal junto con una pantalla de seguimiento de las solicitudes para lo cual se requiere actualizar el diseño del Front-End y asegurar que la navegación permita acceder a esta nueva herramienta. Asimismo el cambio afecta directamente el alcance del proyecto ya que se introduce un módulo no contemplado inicialmente y requiere ajustar la arquitectura visual de la aplicación.
+
+\section{Justificación del cambio}
+
+El proyecto busca modernizar y centralizar los procesos académicos por lo tanto es necesario ofrecer a los estudiantes herramientas de autogestión que reduzcan la carga operativa de la administración universitaria. De esta manera el beneficio esperado se refleja en una disminución importante del tiempo de atención presencial en las ventanillas de servicio al estudiante ya que los usuarios podrán obtener sus comprobantes oficiales desde la misma plataforma web en cualquier momento. En consecuencia esta nueva funcionalidad incrementa el valor del producto final y mejora directamente la percepción de los usuarios sobre la eficiencia institucional.
+
+\section{Análisis de impacto preliminar}
+
+El impacto en el alcance se considera directo debido a que el equipo de desarrollo debe construir las pantallas de solicitud y el historial de certificaciones dentro del portal estudiantil. Esto implica que el cronograma debe ajustarse para incluir días adicionales de desarrollo y de pruebas de calidad para este nuevo módulo ya que la fecha de entrega original tiene un margen de contingencia limitado. Por lo tanto el costo estimado del proyecto presenta un incremento en el esfuerzo de la mano de obra del equipo de desarrollo y esto requiere usar una parte de la reserva de contingencia presupuestada inicialmente. Además de estos factores el riesgo asociado a la restricción de tiempo aumenta debido a que se añade carga de trabajo a los desarrolladores Mauricio González Prendas y Carlos Sainz Arce para lo cual se deberá gestionar de manera cuidadosa el tiempo disponible antes del 24 de junio de 2026.
+
+\section{Aprobaciones}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{Y Y Y}
+\toprule
+\textbf{Solicitado por} & \textbf{Revisado por} & \textbf{Aprobado por} \\
+\midrule
+& & \\
+& & \\
+Lic. Patricia Vargas Soto & Tamara Robles Camacho & Dr. Roberto Mora Fallas \\
+Directora Administrativa & Project Manager & Sponsor \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\end{document}

@@ -1,0 +1,272 @@
+\documentclass[11pt,spanish]{article}
+
+% =========================================================
+% PLANTILLA BASE PARA INFORMES ACADÉMICOS / TÉCNICOS
+% =========================================================
+
+% --- Idioma y codificación ---
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{newunicodechar}
+\newunicodechar{₡}{\textcolonmonetary}
+
+% --- Márgenes / papel ---
+\usepackage{geometry}
+\geometry{a4paper, margin=2.7cm}
+
+% --- Matemáticas ---
+\usepackage{amsmath}
+
+% --- Tablas, enlaces y elementos visuales ---
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes.geometric,arrows.meta,calc}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage[hidelinks]{hyperref}
+
+% --- Encabezado y pie de página ---
+\usepackage[myheadings]{fancyhdr}
+\usepackage{lastpage}
+\setlength{\headheight}{30pt}
+\setlength{\footskip}{30pt}
+
+% --- Interlineado ---
+\linespread{1.2}
+\sloppy
+
+% =========================================================
+% DATOS DEL DOCUMENTO
+% =========================================================
+\newcommand{\Institucion}{Instituto Tecnológico de Costa Rica}
+\newcommand{\Campus}{Campus Tecnológico Central Cartago}
+\newcommand{\DocumentoTitulo}{Solicitud de Cambio 2}
+\newcommand{\DocumentoSubtitulo}{}
+\newcommand{\Curso}{Administración de proyectos}
+\newcommand{\Profesor}{Alicia Marcela Salazar Hernández}
+\newcommand{\FechaDocumento}{19 de junio de 2026}
+\newcommand{\PeriodoAcademico}{I Semestre}
+\newcommand{\AnioDocumento}{2026}
+
+\newcommand{\AutoresPortada}{%
+    Mauricio González Prendas 2024143009\\
+    Isaac Jiménez Blanco 2024202804\\
+    Tamara Robles Camacho 2024099342%
+}
+
+% Datos que aparecen en el encabezado.
+\newcommand{\DocHeaderLeft}{}
+\newcommand{\DocHeaderRight}{Solicitud de Cambio 2}
+\newcommand{\DocFooterRight}{Página~\thepage\ de~\pageref{LastPage}}
+
+% Metadatos PDF.
+\title{\DocumentoTitulo}
+\author{\AutoresPortada}
+\date{\FechaDocumento}
+
+% =========================================================
+% CONFIGURACIÓN DE TABLAS Y UTILIDADES
+% =========================================================
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\renewcommand{\arraystretch}{1.22}
+\setlength{\LTpre}{0.5em}
+\setlength{\LTpost}{0.5em}
+
+% Imagen segura si el archivo no existe, muestra un recuadro de marcador.
+\newcommand{\SafeImage}[2][0.92\textwidth]{%
+    \IfFileExists{#2}{%
+        \includegraphics[width=#1]{#2}%
+    }{%
+        \fbox{%
+            \begin{minipage}[c][4cm][c]{#1}
+            \centering
+            Imagen pendiente\\
+            \texttt{#2}
+            \end{minipage}%
+        }%
+    }%
+}
+
+% Figura reutilizable.
+\newcommand{\EvidenceFigure}[3]{%
+    \begin{figure}[H]
+    \centering
+    \SafeImage{#1}
+    \caption{#2}
+    \label{#3}
+    \end{figure}%
+}
+
+% =========================================================
+% ENCABEZADO Y PIE
+% =========================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\DocHeaderLeft}
+\fancyhead[R]{\DocHeaderRight}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[R]{\DocFooterRight}
+
+% Estilo equivalente para páginas horizontales.
+\fancypagestyle{widefancy}{%
+    \fancyhf{}%
+    \fancyhead[L]{\DocHeaderLeft}%
+    \fancyhead[R]{\DocHeaderRight}%
+    \renewcommand{\headrulewidth}{0.4pt}%
+    \renewcommand{\footrulewidth}{0.4pt}%
+    \fancyfoot[R]{\DocFooterRight}%
+}
+
+% =========================================================
+% PÁGINAS HORIZONTALES PARA TABLAS ANCHAS
+% =========================================================
+\makeatletter
+\newcommand{\SyncPageBuilderDimensions}{%
+    \global\vsize=\textheight
+    \global\@colroom=\textheight
+    \global\@colht=\textheight
+}
+\makeatother
+
+\newenvironment{widepage}{%
+    \clearpage
+    \hypersetup{pageanchor=false}%
+    \paperwidth=297mm
+    \paperheight=210mm
+    \pdfpagewidth=297mm
+    \pdfpageheight=210mm
+    \newgeometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}%
+    \setlength{\textwidth}{243mm}%
+    \setlength{\textheight}{156mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \pagestyle{widefancy}%
+}{%
+    \clearpage
+    \paperwidth=210mm
+    \paperheight=297mm
+    \pdfpagewidth=210mm
+    \pdfpageheight=297mm
+    \restoregeometry
+    \setlength{\textwidth}{156mm}%
+    \setlength{\textheight}{243mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \hypersetup{pageanchor=true}%
+    \pagestyle{fancy}%
+}
+
+% =========================================================
+% PORTADA
+% =========================================================
+\newcommand{\MakeCover}{%
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+
+{\bfseries \huge \Institucion \par}
+\vspace{0.25cm}
+{\LARGE \Campus \par}
+
+\vfill
+
+{\huge \DocumentoTitulo \par}
+
+\vfill
+
+{\bfseries \LARGE Profesora \par}
+{\Large \Profesor \par}
+
+\vfill
+
+{\bfseries \LARGE Estudiantes \par}
+{\Large \AutoresPortada \par}
+
+\vfill
+
+{\bfseries\LARGE Fecha \par}
+{\Large \FechaDocumento \par}
+
+\vfill
+
+{\LARGE \PeriodoAcademico \par}
+{\LARGE \AnioDocumento \par}
+
+\end{titlepage}%
+}
+
+% =========================================================
+% DOCUMENTO
+% =========================================================
+\begin{document}
+\hypersetup{pageanchor=false}
+
+\MakeCover
+
+\pagenumbering{roman}
+\pagestyle{empty}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+\pagestyle{fancy}
+
+\section{Información general del cambio}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{p{5cm} Y}
+\toprule
+\textbf{Número de solicitud} & SC-02 \\
+\textbf{Fecha de solicitud} & 19 de junio de 2026 \\
+\textbf{Solicitante} & Tamara Robles Camacho \\
+\textbf{Categoría del cambio} & Alcance y cronograma \\
+\textbf{Prioridad} & Media \\
+\textbf{Descripción breve} & Reducción del alcance del Dashboard Ejecutivo para compensar el esfuerzo de la solicitud SC-01 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Descripción detallada del cambio solicitado}
+
+Esta solicitud surge como una medida compensatoria derivada de la aprobación de la solicitud de cambio anterior debido a que el equipo requiere liberar carga de trabajo en el cronograma para asegurar la entrega final a tiempo. De esta manera se propone reducir el alcance visual del Dashboard Ejecutivo eliminando los indicadores financieros detallados y los indicadores académicos históricos ya que su desarrollo requiere un esfuerzo considerable que ahora se ha destinado al portal estudiantil. Por lo tanto el sistema mantendrá solamente los indicadores de estudiantes activos y los ingresos por matrícula en el dashboard principal para lo cual se ajustará el diseño visual y se simplificará la interfaz gráfica sin afectar el funcionamiento del resto de los portales.
+
+\section{Justificación del cambio}
+
+El proyecto mantiene una restricción fuerte de tiempo por lo tanto es fundamental equilibrar el esfuerzo de desarrollo y las expectativas de los stakeholders para evitar atrasos críticos en el ciclo de vida. Asimismo la eliminación de los indicadores históricos y financieros complejos permite que el equipo se enfoque en estabilizar los módulos principales y garantice la calidad de las funcionalidades que tienen un mayor impacto en la experiencia diaria de los estudiantes. En consecuencia el beneficio esperado de esta reducción es la optimización del tiempo de los desarrolladores ya que se libera la capacidad necesaria para completar las pantallas nuevas sin poner en peligro la fecha de cierre planificada para el 24 de junio de 2026.
+
+\section{Análisis de impacto preliminar}
+
+El impacto en el alcance se presenta como una reducción directa de las funcionalidades del dashboard ejecutivo debido a que solamente se mostrarán los datos de estudiantes activos y los ingresos por matrícula. Esto implica que el cronograma recupera días valiosos de desarrollo y de revisión de calidad ya que se elimina la necesidad de programar gráficos complejos y tablas de datos de años anteriores. Asimismo el costo total del proyecto se mantiene sin alteraciones debido a que el esfuerzo de trabajo simplemente se transfiere desde el dashboard hacia la construcción del nuevo módulo de certificados del portal estudiantil. Además de esto el cambio influye positivamente en el registro de riesgos debido a que disminuye la prioridad de los riesgos R-04 relacionado con la subestimación del esfuerzo del desarrollo y R-10 referente a los cambios tardíos cerca de la entrega final.
+
+\section{Aprobaciones}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{Y Y Y}
+\toprule
+\textbf{Solicitado por} & \textbf{Revisado por} & \textbf{Aprobado por} \\
+\midrule
+& & \\
+& & \\
+Tamara Robles Camacho & Isaac Jiménez Blanco & Dr. Roberto Mora Fallas \\
+Project Manager & Analista de Negocio & Sponsor \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\end{document}

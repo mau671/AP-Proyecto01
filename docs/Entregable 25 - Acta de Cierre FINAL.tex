@@ -1,0 +1,343 @@
+\documentclass[11pt,spanish]{article}
+
+% =========================================================
+% PLANTILLA BASE PARA INFORMES ACADÉMICOS / TÉCNICOS
+% =========================================================
+
+% --- Idioma y codificación ---
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{newunicodechar}
+\newunicodechar{₡}{\textcolonmonetary}
+
+% --- Márgenes / papel ---
+\usepackage{geometry}
+\geometry{a4paper, margin=2.7cm}
+
+% --- Matemáticas ---
+\usepackage{amsmath}
+
+% --- Tablas, enlaces y elementos visuales ---
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes.geometric,arrows.meta,calc}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage[hidelinks]{hyperref}
+
+% --- Encabezado y pie de página ---
+\usepackage[myheadings]{fancyhdr}
+\usepackage{lastpage}
+\setlength{\headheight}{30pt}
+\setlength{\footskip}{30pt}
+
+% --- Interlineado ---
+\linespread{1.2}
+\sloppy
+
+% =========================================================
+% DATOS DEL DOCUMENTO
+% =========================================================
+\newcommand{\Institucion}{Instituto Tecnológico de Costa Rica}
+\newcommand{\Campus}{Campus Tecnológico Central Cartago}
+\newcommand{\DocumentoTitulo}{Acta de Cierre}
+\newcommand{\DocumentoSubtitulo}{}
+\newcommand{\Curso}{Administración de proyectos}
+\newcommand{\Profesor}{Alicia Marcela Salazar Hernández}
+\newcommand{\FechaDocumento}{23 de junio de 2026}
+\newcommand{\PeriodoAcademico}{I Semestre}
+\newcommand{\AnioDocumento}{2026}
+
+\newcommand{\AutoresPortada}{%
+    Mauricio González Prendas 2024143009\\
+    Isaac Jiménez Blanco 2024202804\\
+    Tamara Robles Camacho 2024099342%
+}
+
+% Datos que aparecen en el encabezado.
+\newcommand{\DocHeaderLeft}{}
+\newcommand{\DocHeaderRight}{Acta de Cierre}
+\newcommand{\DocFooterRight}{Página~\thepage\ de~\pageref{LastPage}}
+
+% Metadatos PDF.
+\title{\DocumentoTitulo}
+\author{\AutoresPortada}
+\date{\FechaDocumento}
+
+% =========================================================
+% CONFIGURACIÓN DE TABLAS Y UTILIDADES
+% =========================================================
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.22}
+\setlength{\LTpre}{0.5em}
+\setlength{\LTpost}{0.5em}
+
+% Imagen segura si el archivo no existe, muestra un recuadro de marcador.
+\newcommand{\SafeImage}[2][0.92\textwidth]{%
+    \IfFileExists{#2}{%
+        \includegraphics[width=#1]{#2}%
+    }{%
+        \fbox{%
+            \begin{minipage}[c][4cm][c]{#1}
+            \centering
+            Imagen pendiente\\
+            \texttt{#2}
+            \end{minipage}%
+        }%
+    }%
+}
+
+% Figura reutilizable.
+\newcommand{\EvidenceFigure}[3]{%
+    \begin{figure}[H]
+    \centering
+    \SafeImage{#1}
+    \caption{#2}
+    \label{#3}
+    \end{figure}%
+}
+
+% =========================================================
+% ENCABEZADO Y PIE
+% =========================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\DocHeaderLeft}
+\fancyhead[R]{\DocHeaderRight}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[R]{\DocFooterRight}
+
+% Estilo equivalente para páginas horizontales.
+\fancypagestyle{widefancy}{%
+    \fancyhf{}%
+    \fancyhead[L]{\DocHeaderLeft}%
+    \fancyhead[R]{\DocHeaderRight}%
+    \renewcommand{\headrulewidth}{0.4pt}%
+    \renewcommand{\footrulewidth}{0.4pt}%
+    \fancyfoot[R]{\DocFooterRight}%
+}
+
+% =========================================================
+% PÁGINAS HORIZONTALES PARA TABLAS ANCHAS
+% =========================================================
+\makeatletter
+\newcommand{\SyncPageBuilderDimensions}{%
+    \global\vsize=\textheight
+    \global\@colroom=\textheight
+    \global\@colht=\textheight
+}
+\makeatother
+
+\newenvironment{widepage}{%
+    \clearpage
+    \hypersetup{pageanchor=false}%
+    \paperwidth=297mm
+    \paperheight=210mm
+    \pdfpagewidth=297mm
+    \pdfpageheight=210mm
+    \newgeometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}%
+    \setlength{\textwidth}{243mm}%
+    \setlength{\textheight}{156mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \pagestyle{widefancy}%
+}{%
+    \clearpage
+    \paperwidth=210mm
+    \paperheight=297mm
+    \pdfpagewidth=210mm
+    \pdfpageheight=297mm
+    \restoregeometry
+    \setlength{\textwidth}{156mm}%
+    \setlength{\textheight}{243mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \hypersetup{pageanchor=true}%
+    \pagestyle{fancy}%
+}
+
+% =========================================================
+% PORTADA
+% =========================================================
+\newcommand{\MakeCover}{%
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+
+{\bfseries \huge \Institucion \par}
+\vspace{0.25cm}
+{\LARGE \Campus \par}
+
+\vfill
+
+{\huge \DocumentoTitulo \par}
+
+\vfill
+
+{\bfseries \LARGE Profesora \par}
+{\Large \Profesor \par}
+
+\vfill
+
+{\bfseries \LARGE Estudiantes \par}
+{\Large \AutoresPortada \par}
+
+\vfill
+
+{\bfseries\LARGE Fecha \par}
+{\Large \FechaDocumento \par}
+
+\vfill
+
+{\LARGE \PeriodoAcademico \par}
+{\LARGE \AnioDocumento \par}
+
+\end{titlepage}%
+}
+
+% =========================================================
+% DOCUMENTO
+% =========================================================
+\begin{document}
+\hypersetup{pageanchor=false}
+
+\MakeCover
+
+\pagenumbering{roman}
+\pagestyle{empty}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+\pagestyle{fancy}
+
+\section{Información del proyecto}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{p{5cm} Y}
+\toprule
+\textbf{Nombre del proyecto} & Plataforma Universitaria Integrada \\
+\textbf{Sponsor} & Dr. Roberto Mora Fallas \\
+\textbf{Project Manager} & Tamara Robles Camacho \\
+\textbf{Fecha de inicio} & 8 de junio de 2026 \\
+\textbf{Fecha de cierre} & 23 de junio de 2026 \\
+\textbf{Presupuesto asignado} & ₡27,200,500 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Resumen de ejecución del proyecto}
+
+La ejecución del proyecto logró cumplir con los objetivos principales establecidos en el inicio debido a que el equipo completó el desarrollo del prototipo Front-End navegable y generó toda la documentación de gestión requerida por el estándar evaluado. De esta manera se entregó una solución visual que incluye el inicio de sesión y los portales estudiantil docente administrativo y financiero con los ajustes realizados durante el control de cambios. Por lo tanto el desempeño general del equipo permitió abarcar las expectativas de los stakeholders ya que se aplicaron adecuadamente los procesos de planificación y ejecución en un margen de tiempo sumamente reducido.
+
+\begin{longtable}{L{2cm} L{9cm} L{3cm}}
+\caption{Estado de los entregables del proyecto}\label{tab:estado-entregables}\\
+\toprule
+\textbf{Código} & \textbf{Nombre del entregable} & \textbf{Estado} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Código} & \textbf{Nombre del entregable} & \textbf{Estado} \\
+\midrule
+\endhead
+E-01 & Business Case & Completado \\
+E-02 & Project Charter & Completado \\
+E-03 & Registro de Stakeholders & Completado \\
+E-04 & Definición del Alcance & Completado \\
+E-05 & WBS del proyecto & Completado \\
+E-06 & Cronograma en Microsoft Project & Completado \\
+E-07 & Matriz RACI & Completado \\
+E-08 & Organigrama del Proyecto & Completado \\
+E-09 & Plan de Recursos & Completado \\
+E-10 & Estimación de Costos & Completado \\
+E-11 & Plan de Calidad & Completado \\
+E-12 & Plan de Comunicaciones & Completado \\
+E-13 & Matriz de probabilidad e impacto & Completado \\
+E-14 & Registro de Riesgos & Completado \\
+E-15 & Plan de Adquisiciones & Completado \\
+E-16 & KPIs del proyecto & Completado \\
+E-17 & Proceso de control de cambios & Completado \\
+E-18 & Prototipo Front-End navegable & Completado \\
+E-19 & Plantilla de Solicitud de Cambio & Completado \\
+E-20 & Solicitud de Cambio 1 & Completado \\
+E-21 & Solicitud de Cambio 2 & Completado \\
+E-22 & Evaluación de Cambios & Completado \\
+E-23 & Dashboard ejecutivo del proyecto & Completado \\
+E-24 & Informe ejecutivo & Completado \\
+E-25 & Acta de Cierre & Completado \\
+E-26 & Reflexiones y Recomendaciones & Completado \\
+\bottomrule
+\end{longtable}
+
+\section{Verificación del alcance}
+
+El equipo de proyecto confirma que el alcance aprobado y documentado fue entregado en su totalidad mediante el prototipo web funcional y los artefactos de administración de proyectos. Asimismo los elementos que se definieron como fuera del alcance tales como el backend funcional y la base de datos real se mantuvieron efectivamente excluidos durante toda la ejecución técnica. Esto implica que la navegación y las pantallas cumplen con los criterios de aceptación acordados para lo cual se realizaron las pruebas de calidad correspondientes antes de formalizar la entrega de los productos finales al patrocinador.
+
+\section{Desviaciones y cambios aprobados durante el proyecto}
+
+Durante el transcurso del trabajo se presentaron desviaciones controladas que fueron procesadas y aprobadas mediante el sistema formal de gestión de cambios institucionales. Por lo tanto se aprobó la Solicitud de Cambio 1 para incluir el módulo de solicitud de certificados en el portal estudiantil ya que esto representaba un valor agregado importante para los usuarios y la administración. En consecuencia para balancear el cronograma y mantener el control del esfuerzo se aprobó la Solicitud de Cambio 2 que redujo el alcance de los indicadores históricos en el dashboard ejecutivo. De esta manera el impacto neto sobre el proyecto resultó equilibrado debido a que el incremento en el trabajo de desarrollo del portal estudiantil se compensó con la disminución de funciones en el área ejecutiva manteniendo intacto el presupuesto global y cumpliendo la fecha final establecida.
+
+\section{Presupuesto ejecutado versus planificado}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{p{5cm} Y Y Y}
+\toprule
+\textbf{Categoría} & \textbf{Planificado Business Case} & \textbf{Planificado PERT} & \textbf{Ejecutado Real Estimado} \\
+\midrule
+Mano de obra y desarrollo & ₡14,000,000 & ₡8,500,000 & ₡9,200,000 \\
+Licencias e infraestructura & ₡3,600,000 & ₡2,100,000 & ₡2,100,000 \\
+Pruebas y calidad & ₡3,000,000 & ₡2,500,000 & ₡2,800,000 \\
+Gestión y documentación & ₡5,000,500 & ₡3,525,200 & ₡3,525,200 \\
+Contingencias & ₡1,600,000 & ₡1,000,000 & ₡0 \\
+\midrule
+\textbf{Total general} & \textbf{₡27,200,500} & \textbf{₡17,625,200} & \textbf{₡17,625,200} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+El presupuesto ejecutado real estimado refleja los ajustes realizados tras la aprobación de los cambios en el proyecto ya que se reasignaron los esfuerzos de desarrollo sin incrementar el costo total y se absorbió el margen operativo planificado de manera exitosa. 
+
+\section{Lecciones aprendidas}
+
+La principal lección del proyecto indica que definir un alcance claro desde el primer día resulta fundamental para manejar las expectativas de todos los involucrados debido a que un límite bien documentado evita que se soliciten funciones complejas que no pueden ser atendidas en el corto plazo. Asimismo la gestión de riesgos demostró que mantener un monitoreo constante sobre la disponibilidad del equipo y sobre las subestimaciones del esfuerzo de desarrollo permite aplicar medidas correctivas a tiempo ya que las acciones de mitigación salvaron la entrega final al reducir la carga del dashboard ejecutivo. Además de esto la documentación compartida y estandarizada es vital para conservar la coherencia entre los múltiples archivos generados por lo tanto el uso de herramientas centralizadas y revisiones cruzadas disminuye significativamente las contradicciones en fechas y presupuestos.
+
+Por otro lado el trabajo técnico requiere de revisiones de usabilidad continuas para garantizar que el producto final sea valioso para el estudiante ya que un buen diseño de interfaz compensa la ausencia de funcionalidades avanzadas como la conexión a bases de datos en los ambientes controlados. Finalmente la comunicación abierta y constante mediante plataformas ágiles como WhatsApp y GitHub se consolidó como un factor determinante para el éxito del proyecto debido a que la rápida resolución de dudas evitó bloqueos técnicos y permitió avanzar con los entregables documentales sin perder el ritmo de trabajo exigido por el cronograma inicial.
+
+\section{Formalización del cierre}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{Y Y Y}
+\toprule
+\textbf{Project Manager} & \textbf{Analista de Negocio} & \textbf{Desarrollador Front-End} \\
+\midrule
+& & \\
+& & \\
+Tamara Robles Camacho & Isaac Jiménez Blanco & Mauricio González Prendas \\
+\midrule
+& & \\
+& & \\
+Dr. Roberto Mora Fallas & Jorge Abarca Quiros & Carlos Sainz Arce \\
+\textbf{Sponsor} & \textbf{Analista de Negocio} & \textbf{Desarrollador Front-End} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\end{document}
