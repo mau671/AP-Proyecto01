@@ -314,69 +314,7 @@ Cada riesgo incluirá los siguientes elementos:
 
 \section{Escala de probabilidad e impacto}
 
-Para mantener una evaluación uniforme, se definen las siguientes escalas:
-
-\subsection{Escala de probabilidad}
-
-\begin{table}[H]
-\centering
-\caption{Escala de probabilidad}
-\label{tab:escala-probabilidad}
-{\small
-\begin{tabularx}{\textwidth}{p{2.2cm} p{3cm} Y}
-\toprule
-\textbf{Valor} & \textbf{Nivel} & \textbf{Descripción} \\
-\midrule
-1 & Muy baja & Es poco probable que ocurra \\
-2 & Baja & Puede ocurrir, pero no se espera que suceda \\
-3 & Media & Existe una posibilidad razonable de ocurrencia \\
-4 & Alta & Es probable que ocurra si no se controla \\
-5 & Muy alta & Es muy probable que ocurra durante el proyecto \\
-\bottomrule
-\end{tabularx}
-}
-\end{table}
-
-\subsection{Escala de impacto}
-
-\begin{table}[H]
-\centering
-\caption{Escala de impacto}
-\label{tab:escala-impacto}
-{\small
-\begin{tabularx}{\textwidth}{p{2.2cm} p{3cm} Y}
-\toprule
-\textbf{Valor} & \textbf{Nivel} & \textbf{Descripción} \\
-\midrule
-1 & Muy bajo & Afecta de forma mínima y se corrige fácilmente \\
-2 & Bajo & Genera un ajuste menor en tareas o documentos \\
-3 & Medio & Puede afectar calidad, tiempo o coordinación \\
-4 & Alto & Puede afectar entregables importantes del proyecto \\
-5 & Muy alto & Puede afectar la entrega final o el cumplimiento del alcance \\
-\bottomrule
-\end{tabularx}
-}
-\end{table}
-
-\subsection{Clasificación del nivel de riesgo}
-
-\begin{table}[H]
-\centering
-\caption{Clasificación del nivel de riesgo}
-\label{tab:clasificacion-riesgo}
-{\small
-\begin{tabularx}{\textwidth}{p{4cm} Y}
-\toprule
-\textbf{Resultado} & \textbf{Clasificación} \\
-\midrule
-1 a 5 & Bajo \\
-6 a 10 & Medio \\
-11 a 15 & Alto \\
-16 a 25 & Crítica \\
-\bottomrule
-\end{tabularx}
-}
-\end{table}
+La evaluación de probabilidad e impacto utilizada en este Registro de Riesgos se encuentra alineada con el documento Matriz de Probabilidad e Impacto. En dicho documento se presenta la escala de referencia, la matriz 5x5 y la ubicación visual de los 16 riesgos identificados. Para mantener coherencia entre ambos documentos, este registro conserva los mismos valores de probabilidad, impacto, nivel y clasificación utilizados en la matriz.
 
 \section{Estrategias de respuesta ante riesgos}
 
@@ -434,22 +372,22 @@ Estas fuentes permitieron identificar riesgos relacionados con tiempo, alcance, 
 \textbf{Código} & \textbf{Categoría} & \textbf{Riesgo} & \textbf{Causa} & \textbf{Impacto en el proyecto} & \textbf{Probabilidad} & \textbf{Impacto} & \textbf{Nivel} & \textbf{Clasificación} & \textbf{Responsable} & \textbf{Estrategia} & \textbf{Acción de respuesta} & \textbf{Estado} \\
 \midrule
 \endhead
-R-01 & Cronograma & Restricción fuerte de tiempo & El proyecto debe entregarse antes del 24 de junio de 2026 y contiene varios entregables documentales y técnicos & Atraso en documentos, reducción de calidad o entrega incompleta & 5 & 5 & 25 & Crítico & Tamara Robles Camacho & Mitigar & Dar seguimiento frecuente al cronograma, priorizar tareas críticas y redistribuir trabajo si una actividad se atrasa & Abierto \\
+R-01 & Cronograma & Restricción fuerte de tiempo & El proyecto debe entregarse antes del 24 de junio de 2026 y contiene varios entregables documentales y técnicos & Atraso en documentos, reducción de calidad o entrega incompleta & 4 & 5 & 20 & Crítico & Tamara Robles Camacho & Mitigar & Dar seguimiento frecuente al cronograma, priorizar tareas críticas y redistribuir trabajo si una actividad se atrasa & Abierto \\
 R-02 & Alcance & Alcance creciente o scope creep & Se pueden proponer funcionalidades fuera del alcance, como backend, base de datos real o pagos reales & Aumento del trabajo, atraso del Front-End y contradicción con la Definición del Alcance & 4 & 5 & 20 & Crítico & Tamara Robles Camacho e Isaac Jiménez Blanco & Evitar & Revisar toda nueva solicitud contra el alcance aprobado y aplicar control formal de cambios & Abierto \\
-R-03 & Documentación & Inconsistencias entre documentos & Los entregables están divididos entre varios integrantes y pueden tener diferencias en nombres, fechas, roles o presupuesto & Pérdida de coherencia del proyecto y observaciones en la evaluación final & 4 & 4 & 16 & Crítico & Isaac Jiménez Blanco y Jorge Abarca Quiros & Mitigar & Revisar documentos contra una lista común de datos base: nombre del proyecto, roles, presupuesto, fecha final y alcance & Abierto \\
-R-04 & Desarrollo & Subestimación del esfuerzo del Front-End & El prototipo incluye varios módulos, pantallas y navegación entre portales & El prototipo puede quedar incompleto o con navegación limitada & 4 & 5 & 20 & Crítico & Mauricio González Prendas y Carlos Sainz Arce & Mitigar & Priorizar primero los módulos obligatorios y dejar mejoras visuales no esenciales para el final & Abierto \\
-R-05 & Recursos humanos & Disponibilidad limitada del equipo & El equipo es pequeño y cada integrante tiene varios entregables asignados & Sobrecarga de trabajo, atrasos y poca revisión entre compañeros & 4 & 4 & 16 & Crítico & Tamara Robles Camacho & Mitigar & Coordinar revisiones cortas, definir prioridades y reasignar tareas cuando sea necesario & Abierto \\
-R-06 & Calidad & Errores críticos de navegación en el prototipo & Falta de pruebas manuales suficientes o cambios rápidos en pantallas & El usuario no podría entrar a módulos principales o continuar el flujo de navegación & 3 & 5 & 15 & Alto & Mauricio González Prendas y Carlos Sainz Arce & Mitigar & Ejecutar checklist de navegación en Login, Dashboard y portales principales antes de la entrega & Abierto \\
+R-03 & Documentación & Inconsistencias entre documentos & Los entregables están divididos entre varios integrantes y pueden tener diferencias en nombres, fechas, roles o presupuesto & Pérdida de coherencia del proyecto y observaciones en la evaluación final & 4 & 4 & 16 & Muy alto & Isaac Jiménez Blanco y Jorge Abarca Quiros & Mitigar & Revisar documentos contra una lista común de datos base: nombre del proyecto, roles, presupuesto, fecha final y alcance & Abierto \\
+R-04 & Desarrollo & Subestimación del esfuerzo del Front-End & El prototipo incluye varios módulos, pantallas y navegación entre portales & El prototipo puede quedar incompleto o con navegación limitada & 3 & 4 & 12 & Alto & Mauricio González Prendas y Carlos Sainz Arce & Mitigar & Priorizar primero los módulos obligatorios y dejar mejoras visuales no esenciales para el final & Abierto \\
+R-05 & Recursos humanos & Disponibilidad limitada del equipo & El equipo es pequeño y cada integrante tiene varios entregables asignados & Sobrecarga de trabajo, atrasos y poca revisión entre compañeros & 4 & 4 & 16 & Muy alto & Tamara Robles Camacho & Mitigar & Coordinar revisiones cortas, definir prioridades y reasignar tareas cuando sea necesario & Abierto \\
+R-06 & Calidad & Errores críticos de navegación en el prototipo & Falta de pruebas manuales suficientes o cambios rápidos en pantallas & El usuario no podría entrar a módulos principales o continuar el flujo de navegación & 3 & 5 & 15 & Muy alto & Mauricio González Prendas y Carlos Sainz Arce & Mitigar & Ejecutar checklist de navegación en Login, Dashboard y portales principales antes de la entrega & Abierto \\
 R-07 & Usabilidad & Baja usabilidad del prototipo & El prototipo puede tener pantallas completas pero poco claras para el usuario & Dificultad para entender el flujo de uso por parte de estudiantes, docentes o administrativos & 3 & 4 & 12 & Alto & Mauricio González Prendas y Carlos Sainz Arce & Mitigar & Revisar claridad de menús, botones, textos y distribución visual antes del cierre & Abierto \\
-R-08 & Herramientas & Problemas con Microsoft Project & Error al abrir el archivo, pérdida del .mpp o dificultad para exportar evidencias & Pérdida de evidencia del cronograma, ruta crítica, recursos o costos & 3 & 4 & 12 & Alto & Isaac Jiménez Blanco y Jorge Abarca Quiros & Mitigar & Mantener copia local del archivo, exportar PDFs de evidencia y respaldar el .mpp en GitHub & Abierto \\
-R-09 & Herramientas & Problemas con GitHub o pérdida de versiones & Uso incorrecto del repositorio, archivos mal subidos o falta de commits claros & Pérdida de trazabilidad del prototipo o documentos finales & 3 & 4 & 12 & Alto & Mauricio González Prendas y Carlos Sainz Arce & Mitigar & Usar nombres claros, commits descriptivos y respaldos locales de documentos y código & Abierto \\
-R-10 & Cambios & Cambios tardíos cerca de la entrega & Stakeholders o integrantes pueden solicitar ajustes cuando el proyecto ya está avanzado & Afectación del cronograma, calidad y revisión final & 3 & 4 & 12 & Alto & Tamara Robles Camacho e Isaac Jiménez Blanco & Mitigar & Definir fecha límite para cambios importantes y evaluar toda solicitud mediante control de cambios & Abierto \\
+R-08 & Herramientas & Problemas con Microsoft Project & Error al abrir el archivo, pérdida del .mpp o dificultad para exportar evidencias & Pérdida de evidencia del cronograma, ruta crítica, recursos o costos & 2 & 4 & 8 & Medio & Isaac Jiménez Blanco y Jorge Abarca Quiros & Mitigar & Mantener copia local del archivo, exportar PDFs de evidencia y respaldar el .mpp en GitHub & Abierto \\
+R-09 & Herramientas & Problemas con GitHub o pérdida de versiones & Uso incorrecto del repositorio, archivos mal subidos o falta de commits claros & Pérdida de trazabilidad del prototipo o documentos finales & 4 & 3 & 12 & Alto & Mauricio González Prendas y Carlos Sainz Arce & Mitigar & Usar nombres claros, commits descriptivos y respaldos locales de documentos y código & Abierto \\
+R-10 & Cambios & Cambios tardíos cerca de la entrega & Stakeholders o integrantes pueden solicitar ajustes cuando el proyecto ya está avanzado & Afectación del cronograma, calidad y revisión final & 4 & 3 & 12 & Alto & Tamara Robles Camacho, Isaac Jiménez Blanco y Jorge Abarca Quiros & Mitigar & Definir fecha límite para cambios importantes y evaluar toda solicitud mediante control de cambios & Abierto \\
 R-11 & Calidad documental & Falta de criterios claros de aceptación & Si los criterios no se revisan, el equipo puede considerar listo un módulo incompleto & Entregables aceptados internamente sin cumplir navegación, contenido mínimo o coherencia & 3 & 4 & 12 & Alto & Isaac Jiménez Blanco y Jorge Abarca Quiros & Mitigar & Usar los criterios del Plan de Calidad y revisar cada módulo contra el alcance aprobado & Abierto \\
 R-12 & Comunicación & Mala comunicación entre integrantes & Uso excesivo de mensajes informales sin registrar acuerdos importantes & Duplicidad de tareas, pérdida de decisiones o documentos incongruentes & 3 & 4 & 12 & Alto & Tamara Robles Camacho & Mitigar & Usar WhatsApp para avisos rápidos, pero documentar decisiones importantes en GitHub, correo o minuta & Abierto \\
 R-13 & Presupuesto & Inconsistencia en el presupuesto del proyecto & Diferentes documentos pueden usar montos distintos o no coincidir con el cronograma & Contradicción entre Business Case, cronograma y entregables financieros & 2 & 4 & 8 & Medio & Isaac Jiménez Blanco, Tamara Robles Camacho y Jorge Abarca Quiros & Mitigar & Mantener el presupuesto total de ₡27,200,500 en todos los documentos que lo mencionen & Abierto \\
-R-14 & Stakeholders & Baja validación de stakeholders externos & Por tiempo limitado puede no consultarse a todos los interesados externos & El prototipo podría representar de forma incompleta algunos procesos docentes, financieros o administrativos & 3 & 3 & 9 & Medio & Tamara Robles Camacho & Aceptar y mitigar & Priorizar validaciones internas y consultar stakeholders externos solo cuando sea necesario & Abierto \\
-R-15 & Alcance técnico & Expectativa de funcionalidades no incluidas & Puede asumirse que el sistema tendrá backend, datos reales, autenticación o pagos reales & Confusión sobre lo que realmente será entregado & 3 & 4 & 12 & Alto & Isaac Jiménez Blanco y Jorge Abarca Quiros & Evitar & Repetir en documentos y revisiones que el entregable técnico es un prototipo Front-End navegable con datos simulados & Abierto \\
-R-16 & Evidencia & Falta de evidencia final organizada & Los archivos pueden quedar dispersos entre WhatsApp, equipo local y repositorio & Dificultad para demostrar el cumplimiento de entregables y cronograma & 3 & 4 & 12 & Alto & Isaac Jiménez Blanco, Jorge Abarca Quiros, Mauricio González Prendas y Carlos Sainz Arce & Mitigar & Organizar documentos, PDFs, capturas, .mpp y código en GitHub con nombres claros & Abierto \\
+R-14 & Stakeholders & Baja validación de stakeholders externos & Por tiempo limitado puede no consultarse a todos los interesados externos & El prototipo podría representar de forma incompleta algunos procesos docentes, financieros o administrativos & 3 & 4 & 12 & Alto & Tamara Robles Camacho & Aceptar y mitigar & Priorizar validaciones internas y consultar stakeholders externos solo cuando sea necesario & Abierto \\
+R-15 & Alcance técnico & Expectativa de funcionalidades no incluidas & Puede asumirse que el sistema tendrá backend, datos reales, autenticación o pagos reales & Confusión sobre lo que realmente será entregado & 3 & 3 & 9 & Medio & Isaac Jiménez Blanco y Jorge Abarca Quiros & Evitar & Repetir en documentos y revisiones que el entregable técnico es un prototipo Front-End navegable con datos simulados & Abierto \\
+R-16 & Evidencia & Falta de evidencia final organizada & Los archivos pueden quedar dispersos entre WhatsApp, equipo local y repositorio & Dificultad para demostrar el cumplimiento de entregables y cronograma & 3 & 3 & 9 & Medio & Isaac Jiménez Blanco, Jorge Abarca Quiros, Mauricio González Prendas y Carlos Sainz Arce & Mitigar & Organizar documentos, PDFs, capturas, .mpp y código en GitHub con nombres claros & Abierto \\
 \bottomrule
 \end{longtable}
 }
@@ -464,22 +402,26 @@ A partir de la evaluación realizada, los riesgos se resumen de la siguiente man
 \caption{Resumen de riesgos por nivel}
 \label{tab:resumen-riesgos}
 {\small
-\begin{tabularx}{\textwidth}{p{3.2cm} p{3.2cm} Y}
+\begin{tabularx}{\textwidth}{p{3.5cm} p{3.2cm} Y}
 \toprule
 \textbf{Clasificación} & \textbf{Cantidad de riesgos} & \textbf{Códigos} \\
 \midrule
-Crítico & 5 & R-01, R-02, R-03, R-04, R-05 \\
-Alto & 9 & R-06, R-07, R-08, R-09, R-10, R-11, R-12, R-15, R-16 \\
-Medio & 2 & R-13, R-14 \\
+Crítico & 2 & R-01, R-02 \\
+Muy alto & 3 & R-03, R-05, R-06 \\
+Alto & 7 & R-04, R-07, R-09, R-10, R-11, R-12, R-14 \\
+Medio & 4 & R-08, R-13, R-15, R-16 \\
 Bajo & 0 & Ninguno \\
+Muy bajo & 0 & Ninguno \\
 \bottomrule
 \end{tabularx}
 }
 \end{table}
 
-Los riesgos críticos requieren mayor atención porque pueden afectar directamente la entrega final del proyecto. Estos riesgos se relacionan principalmente con tiempo, alcance, documentación, desarrollo Front-End y disponibilidad del equipo. Por esta razón, deben revisarse con mayor frecuencia durante las reuniones de seguimiento.
+Los riesgos críticos requieren mayor atención porque pueden afectar directamente la entrega final del proyecto. En este caso, los riesgos críticos corresponden a la restricción fuerte de tiempo y al alcance creciente, ya que ambos pueden impactar el cronograma, la calidad del trabajo y el cumplimiento del alcance aprobado.
 
-Los riesgos altos también deben monitorearse, ya que pueden afectar la calidad del prototipo, la trazabilidad, las herramientas, la comunicación y la evidencia final. Los riesgos medios no se consideran urgentes, pero deben mantenerse visibles para evitar que aumenten su nivel durante el proyecto.
+Los riesgos clasificados como muy altos también deben monitorearse con prioridad, debido a que se relacionan con la coherencia entre documentos, la disponibilidad del equipo y los errores críticos de navegación en el prototipo. Estos riesgos no se ubican en el nivel máximo de la matriz, pero pueden generar retrabajo o afectar entregables importantes si no se controlan.
+
+Los riesgos altos se relacionan principalmente con desarrollo Front-End, usabilidad, herramientas, comunicación, cambios, criterios de aceptación y validación de stakeholders. Los riesgos medios no se consideran urgentes, pero deben mantenerse visibles durante el seguimiento del proyecto para evitar que aumenten su nivel.
 
 \section{Seguimiento y actualización de riesgos}
 
@@ -543,7 +485,7 @@ Carlos Sainz Arce & Desarrollador Front-End 2, QA, pruebas de calidad y navegaci
 
 El Registro de Riesgos del proyecto Plataforma Universitaria Integrada permite identificar y priorizar las amenazas que podrían afectar el cumplimiento del proyecto. Este documento ayuda al equipo a anticipar problemas relacionados con tiempo, alcance, calidad, documentación, comunicación, herramientas, desarrollo Front-End, presupuesto y cierre.
 
-Los riesgos más importantes del proyecto se relacionan con la restricción fuerte de tiempo, el alcance creciente, la coherencia entre documentos, la subestimación del esfuerzo del Front-End y la disponibilidad limitada del equipo. Estos riesgos fueron clasificados como críticos porque pueden afectar directamente la entrega final antes del 24 de junio de 2026.
+Los riesgos más importantes del proyecto se relacionan con la restricción fuerte de tiempo, el alcance creciente, la coherencia entre documentos, la disponibilidad limitada del equipo, los errores críticos de navegación y la subestimación del esfuerzo del Front-End. Según la evaluación realizada, la restricción de tiempo y el alcance creciente fueron clasificados como críticos, mientras que la documentación, la disponibilidad del equipo y los errores de navegación quedaron clasificados como muy altos. Por esta razón, estos riesgos deben recibir seguimiento prioritario durante la ejecución y cierre del proyecto.
 
 El registro también permite asignar responsables claros para cada riesgo. La Project Manager dará seguimiento a los riesgos de coordinación, comunicación, cronograma y stakeholders. Los Analistas de Negocio y Documentadores darán seguimiento a los riesgos relacionados con alcance, documentación, calidad, presupuesto, trazabilidad y cambios. Los Desarrolladores Front-End y QA darán seguimiento a los riesgos asociados con el prototipo, navegación, usabilidad, errores técnicos y control de versiones.
 
