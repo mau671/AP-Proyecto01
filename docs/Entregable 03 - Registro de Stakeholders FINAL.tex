@@ -166,12 +166,6 @@
     \pdfpagewidth=210mm
     \pdfpageheight=297mm
     \restoregeometry
-    \setlength{\textwidth}{156mm}%
-    \setlength{\textheight}{243mm}%
-    \setlength{\linewidth}{\textwidth}%
-    \setlength{\columnwidth}{\textwidth}%
-    \hsize=\textwidth
-    \setlength{\headwidth}{\textwidth}%
     \SyncPageBuilderDimensions
     \hypersetup{pageanchor=true}%
     \pagestyle{fancy}%
@@ -232,6 +226,7 @@
 % =========================
 \pagenumbering{roman}
 \pagestyle{empty}
+\addtocontents{toc}{\protect\thispagestyle{empty}}
 \tableofcontents
 \clearpage
 \pagenumbering{arabic}
@@ -244,7 +239,8 @@
 
 \section{Información general del documento}
 
-\noindent
+\begin{table}[H]
+\centering
 \begin{tabularx}{\textwidth}{p{5cm} Y}
 \toprule
 \textbf{Nombre del proyecto} & Plataforma Universitaria Integrada \\
@@ -254,7 +250,7 @@
 \textbf{Fecha} & \FechaDocumento \\
 \bottomrule
 \end{tabularx}
-\vspace{0.5cm}
+\end{table}
 
 \section{Introducción}
 
@@ -273,7 +269,7 @@ En la siguiente tabla se muestran las partes interesadas internas del proyecto.
 \setlength{\tabcolsep}{3pt}
 
 \begin{longtable}{p{3.8cm} p{3.8cm} p{5.8cm} p{1.9cm} p{1.4cm} p{5.8cm}}
-\caption{Partes interesadas internas}\label{tab:interesados-internos}\\
+\caption{Partes interesadas internas}\label{tab:interesados-internos}\\[-0.5em]
 \toprule
 \textbf{Nombre} & \textbf{Cargo} & \textbf{Interés} & \textbf{Influencia} & \textbf{Poder} & \textbf{Estrategia de involucramiento} \\
 \midrule
@@ -301,7 +297,7 @@ En la siguiente tabla se mencionan las partes externas interesadas para este pro
 \setlength{\tabcolsep}{3pt}
 
 \begin{longtable}{p{3.8cm} p{4.3cm} p{5.8cm} p{1.9cm} p{1.4cm} p{5.4cm}}
-\caption{Partes interesadas externas}\label{tab:interesados-externos}\\
+\caption{Partes interesadas externas}\label{tab:interesados-externos}\\[-0.5em]
 \toprule
 \textbf{Nombre} & \textbf{Cargo} & \textbf{Interés} & \textbf{Influencia} & \textbf{Poder} & \textbf{Estrategia de involucramiento} \\
 \midrule

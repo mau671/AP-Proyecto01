@@ -158,12 +158,6 @@
     \pdfpagewidth=210mm
     \pdfpageheight=297mm
     \restoregeometry
-    \setlength{\textwidth}{156mm}%
-    \setlength{\textheight}{243mm}%
-    \setlength{\linewidth}{\textwidth}%
-    \setlength{\columnwidth}{\textwidth}%
-    \hsize=\textwidth
-    \setlength{\headwidth}{\textwidth}%
     \SyncPageBuilderDimensions
     \hypersetup{pageanchor=true}%
     \pagestyle{fancy}%
@@ -197,7 +191,7 @@
 
 \vfill
 
-{\bfseries\LARGE Fecha: \par}
+{\bfseries\LARGE Fecha \par}
 {\Large \FechaDocumento \par}
 
 \vfill
@@ -229,7 +223,8 @@
 % =========================
 \section{Información general del documento}
 
-\noindent
+\begin{table}[H]
+\centering
 \begin{tabularx}{\textwidth}{p{5cm} Y}
 \toprule
 \textbf{Nombre del proyecto} & Plataforma Universitaria Integrada \\
@@ -239,7 +234,7 @@
 \textbf{Fecha} & \FechaDocumento \\
 \bottomrule
 \end{tabularx}
-\vspace{0.5cm}
+\end{table}
 
 \section{Introducción}
 
@@ -321,8 +316,8 @@ A continuación se muestra la matriz completa de responsabilidades organizada po
 \begin{widepage}
 {\scriptsize
 \setlength{\tabcolsep}{2pt}
-\begin{longtable}{p{1.8cm} p{5.8cm} C{1.45cm} C{1.45cm} C{1.45cm} C{1.45cm} C{1.45cm} C{1.45cm} C{1.45cm} C{1.45cm}}
-\caption{Matriz de responsabilidades}\label{tab:matriz-responsabilidades}\\
+\begin{longtable}{p{1.8cm} p{5.0cm} C{2.0cm} C{2.0cm} C{2.0cm} C{2.0cm} C{2.0cm} C{2.0cm} C{2.0cm} C{2.0cm}}
+\caption{Matriz de responsabilidades}\label{tab:matriz-responsabilidades}\\[-0.5em]
 \toprule
 \textbf{Fase} & \textbf{Actividad principal} & \textbf{Dir. de proyecto (Tamara)} & \textbf{Desarrollador 1 (Mauricio)} & \textbf{Desarrollador 2 (Carlos)} & \textbf{Analista 1 (Isaac)} & \textbf{Analista 2 (Jorge)} & \textbf{Patrocinador (Dr. Roberto)} & \textbf{Dir. admin. (Lic. Patricia)} & \textbf{Dir. TI (Ing. Carlos)} \\
 \midrule

@@ -162,12 +162,6 @@
     \pdfpagewidth=210mm
     \pdfpageheight=297mm
     \restoregeometry
-    \setlength{\textwidth}{156mm}%
-    \setlength{\textheight}{243mm}%
-    \setlength{\linewidth}{\textwidth}%
-    \setlength{\columnwidth}{\textwidth}%
-    \hsize=\textwidth
-    \setlength{\headwidth}{\textwidth}%
     \SyncPageBuilderDimensions
     \hypersetup{pageanchor=true}%
     \pagestyle{fancy}%
@@ -239,7 +233,8 @@
 % =========================
 \section{Información general del documento}
 
-\begin{center}
+\begin{table}[H]
+\centering
 \begin{tabularx}{\textwidth}{p{5cm} Y}
 \toprule
 \textbf{Nombre del proyecto} & Plataforma Universitaria Integrada \\
@@ -251,7 +246,7 @@
 \textbf{Fecha} & \FechaDocumento \\
 \bottomrule
 \end{tabularx}
-\end{center}
+\end{table}
 
 \section{Definición del problema y propósito}
 

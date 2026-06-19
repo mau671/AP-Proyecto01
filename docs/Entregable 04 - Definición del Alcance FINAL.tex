@@ -162,12 +162,6 @@
     \pdfpagewidth=210mm
     \pdfpageheight=297mm
     \restoregeometry
-    \setlength{\textwidth}{160mm}%
-    \setlength{\textheight}{247mm}%
-    \setlength{\linewidth}{\textwidth}%
-    \setlength{\columnwidth}{\textwidth}%
-    \hsize=\textwidth
-    \setlength{\headwidth}{\textwidth}%
     \SyncPageBuilderDimensions
     \hypersetup{pageanchor=true}%
     \pagestyle{fancy}%
@@ -228,6 +222,7 @@
 % =========================
 \pagenumbering{roman}
 \pagestyle{empty}
+\addtocontents{toc}{\protect\thispagestyle{empty}}
 \tableofcontents
 \clearpage
 \pagenumbering{arabic}
@@ -239,7 +234,8 @@
 % =========================
 \section{Información general del documento}
 
-\noindent
+\begin{table}[H]
+\centering
 \begin{tabularx}{\textwidth}{L{5cm} Y}
 \toprule
 \textbf{Nombre del proyecto} & Plataforma Universitaria Integrada \\
@@ -249,7 +245,7 @@
 \textbf{Fecha} & \FechaDocumento \\
 \bottomrule
 \end{tabularx}
-\vspace{1em}
+\end{table}
 
 \section{Introducción}
 
@@ -423,7 +419,7 @@ El proyecto también incluye los respectivos documentos de administración que p
 El alcance excluido corresponde a todo aquello que no será desarrollado en esta etapa del proyecto por lo tanto esta sección es necesaria para evitar expectativas incorrectas sobre el producto final. En la siguiente tabla se presentan los elementos que no forman parte del trabajo.
 
 \begin{longtable}{L{5.2cm} L{9.2cm}}
-\caption{Elementos excluidos del alcance}\label{tab:alcance-excluido}\\
+\caption{Elementos excluidos del alcance}\label{tab:alcance-excluido}\\[-0.5em]
 \toprule
 \textbf{Elemento excluido} & \textbf{Justificación} \\
 \midrule
@@ -454,7 +450,7 @@ También queda fuera del alcance cualquier funcionalidad adicional que no esté 
 Los supuestos son condiciones que se consideran verdaderas para poder planificar el proyecto esto implica que si alguno de ellos cambia se puede afectar la ejecución o requerir ajustes en el plan general.
 
 \begin{longtable}{L{2cm} L{12.4cm}}
-\caption{Supuestos del proyecto}\label{tab:supuestos}\\
+\caption{Supuestos del proyecto}\label{tab:supuestos}\\[-0.5em]
 \toprule
 \textbf{Código} & \textbf{Supuesto} \\
 \midrule
@@ -485,7 +481,7 @@ S14 & Los cambios importantes serán evaluados mediante el proceso formal de con
 Las restricciones son límites que condicionan la ejecución del proyecto debido a que estas normativas deben considerarse obligatoriamente durante toda la planificación y el desarrollo respectivo.
 
 \begin{longtable}{L{2cm} L{12.4cm}}
-\caption{Restricciones del proyecto}\label{tab:restricciones}\\
+\caption{Restricciones del proyecto}\label{tab:restricciones}\\[-0.5em]
 \toprule
 \textbf{Código} & \textbf{Restricción} \\
 \midrule
@@ -518,7 +514,7 @@ Los entregables del proyecto se dividen en dos grupos principales ya que el prim
 \subsection{Entregables de gestión del proyecto}
 
 \begin{longtable}{L{1.5cm} L{5.8cm} L{7.1cm}}
-\caption{Entregables de gestión del proyecto}\label{tab:entregables-gestion}\\
+\caption{Entregables de gestión del proyecto}\label{tab:entregables-gestion}\\[-0.5em]
 \toprule
 \textbf{Código} & \textbf{Entregable} & \textbf{Descripción} \\
 \midrule
@@ -579,7 +575,7 @@ El entregable técnico debe permitir la navegación entre las pantallas principa
 Aunque los criterios específicos se detallarán en el plan de calidad y en la estructura de desglose del trabajo se definen los parámetros generales para validar que el alcance fue cumplido cabalmente.
 
 \begin{longtable}{L{4.6cm} L{9.8cm}}
-\caption{Criterios generales de aceptación}\label{tab:criterios-aceptacion}\\
+\caption{Criterios generales de aceptación}\label{tab:criterios-aceptacion}\\[-0.5em]
 \toprule
 \textbf{Área} & \textbf{Criterio de aceptación} \\
 \midrule

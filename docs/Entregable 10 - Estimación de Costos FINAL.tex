@@ -16,8 +16,14 @@
 \newunicodechar{–}{--}
 
 % --- Márgenes / papel ---
-\usepackage{geometry}
-\geometry{a4paper, margin=2.7cm}
+\usepackage[
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headsep=0.5cm,
+    footskip=0.8cm
+]{geometry}
 
 % --- Matemáticas ---
 \usepackage{amsmath}
@@ -30,6 +36,13 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{xcolor}
+\usepackage{colortbl}
+\definecolor{tecblue}{HTML}{0B2F5B}
+\definecolor{teclightblue}{HTML}{EAF1F8}
+\definecolor{tablegray}{HTML}{F4F6F8}
+\definecolor{diagramgreen}{HTML}{B2C19C}
+\definecolor{diagramlight}{HTML}{E5E9DE}
+\definecolor{diagramtext}{HTML}{565A60}
 \usepackage{tikz}
 \usetikzlibrary{positioning,shapes.geometric,arrows.meta,calc}
 \usepackage{enumitem}
@@ -37,10 +50,8 @@
 \usepackage[hidelinks]{hyperref}
 
 % --- Encabezado y pie de página ---
-\usepackage[myheadings]{fancyhdr}
+\usepackage{fancyhdr}
 \usepackage{lastpage}
-\setlength{\headheight}{30pt}
-\setlength{\footskip}{30pt}
 
 % --- Interlineado ---
 \linespread{1.2}
@@ -60,9 +71,11 @@
 \newcommand{\AnioDocumento}{2026}
 
 \newcommand{\AutoresPortada}{%
-    Mauricio González Prendas: 2024143009\\
-    Isaac Jiménez Blanco: 2024202804\\
-    Tamara Robles Camacho: 2024099342%
+    \begin{tabular}{l@{\hspace{1.5cm}}r}
+        Mauricio González Prendas & 2024143009\\
+        Isaac Jiménez Blanco & 2024202804\\
+        Tamara Robles Camacho & 2024099342
+    \end{tabular}%
 }
 
 % Datos que aparecen en el encabezado.
@@ -80,6 +93,7 @@
 % =========================================================
 \newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
 \newcolumntype{P}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
 \renewcommand{\arraystretch}{1.22}
 \setlength{\LTpre}{0.5em}
 \setlength{\LTpost}{0.5em}
@@ -146,7 +160,7 @@
     \paperheight=210mm
     \pdfpagewidth=297mm
     \pdfpageheight=210mm
-    \newgeometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}%
+    \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm}%
     \setlength{\textwidth}{243mm}%
     \setlength{\textheight}{156mm}%
     \setlength{\linewidth}{\textwidth}%
@@ -162,12 +176,6 @@
     \pdfpagewidth=210mm
     \pdfpageheight=297mm
     \restoregeometry
-    \setlength{\textwidth}{156mm}%
-    \setlength{\textheight}{243mm}%
-    \setlength{\linewidth}{\textwidth}%
-    \setlength{\columnwidth}{\textwidth}%
-    \hsize=\textwidth
-    \setlength{\headwidth}{\textwidth}%
     \SyncPageBuilderDimensions
     \hypersetup{pageanchor=true}%
     \pagestyle{fancy}%
@@ -228,6 +236,7 @@
 % =========================
 \pagenumbering{roman}
 \pagestyle{empty}
+\addtocontents{toc}{\protect\thispagestyle{empty}}
 \tableofcontents
 \clearpage
 \pagenumbering{arabic}
@@ -281,102 +290,121 @@ En la siguiente tabla se muestra la estimación de costos detallada para cada ta
 \begin{widepage}
 {\footnotesize
 \setlength{\tabcolsep}{3pt}
-\begin{longtable}{P{7.9cm} P{3.0cm} P{3.2cm} P{3.0cm} P{4.8cm}}
-\caption{Estimación PERT del proyecto}\label{tab:estimacion-pert}\\
+\begin{longtable}{P{7.9cm} R{3.0cm} R{3.2cm} R{3.0cm} R{4.8cm}}
+\caption{Estimación PERT del proyecto}\label{tab:estimacion-pert}\\[-0.5em]
 \toprule
-\multicolumn{5}{P{22.5cm}}{\textbf{Estimación PERT – Plataforma Universitaria Integrada}} \\
-\multicolumn{5}{P{22.5cm}}{Universidad Tecnológica La Mejor  |  I Semestre 2026  |  Plazo: 3 meses  |  Equipo: 5 personas  |  Moneda: Colones (₡)} \\
+\rowcolor{tecblue}
+\multicolumn{5}{c}{\textcolor{white}{\textbf{Estimación PERT – Plataforma Universitaria Integrada}}} \\
+\rowcolor{teclightblue}
+\multicolumn{5}{c}{Universidad Tecnológica La Mejor  |  I Semestre 2026  |  Plazo: 3 meses  |  Equipo: 5 personas  |  Moneda: Colones (₡)} \\
 \midrule
-\textbf{Tareas} & \textbf{Optimista} & \textbf{Más probable} & \textbf{Pesimista} & \textbf{Costo estimado (O + 4M + P) / 6} \\
+\rowcolor{tablegray}
+\textbf{Tareas} & \textbf{Optimista} & \textbf{Más probable} & \textbf{Pesimista} & \textbf{Costo estimado} \par \textbf{(O + 4M + P) / 6} \\
 \midrule
 \endfirsthead
 \toprule
-\textbf{Tareas} & \textbf{Optimista} & \textbf{Más probable} & \textbf{Pesimista} & \textbf{Costo estimado (O + 4M + P) / 6} \\
+\rowcolor{tablegray}
+\textbf{Tareas} & \textbf{Optimista} & \textbf{Más probable} & \textbf{Pesimista} & \textbf{Costo estimado} \par \textbf{(O + 4M + P) / 6} \\
 \midrule
 \endhead
-\multicolumn{5}{P{22.5cm}}{\textbf{Fase 1: Inicio (Semanas 1–2)}} \\
-\multicolumn{5}{P{22.5cm}}{\textbf{Gestión de Inicio (Business Case, Charter, Stakeholders)}} \\
-Elaborar Business Case completo & ₡480.000 & ₡700.000 & ₡900.000 & ₡696.667 \\
-Desarrollar Project Charter & ₡300.000 & ₡450.000 & ₡600.000 & ₡450.000 \\
-Registrar y analizar stakeholders & ₡200.000 & ₡280.000 & ₡420.000 & ₡290.000 \\
-Coordinación y gestión del PM (Inicio) & ₡300.000 & ₡450.000 & ₡600.000 & ₡450.000 \\
-\textbf{SUBTOTAL FASE 1 – INICIO} &  &  &  & \textbf{₡1.886.667} \\
+\rowcolor{diagramlight}
+\multicolumn{5}{l}{\textbf{Fase 1: Inicio (Semanas 1–2)}} \\
+\multicolumn{5}{l}{\textbf{\textit{Gestión de Inicio (Business Case, Charter, Stakeholders)}}} \\
+\hspace{0.5cm}Elaborar Business Case completo & ₡480.000 & ₡700.000 & ₡900.000 & ₡696.667 \\
+\hspace{0.5cm}Desarrollar Project Charter & ₡300.000 & ₡450.000 & ₡600.000 & ₡450.000 \\
+\hspace{0.5cm}Registrar y analizar stakeholders & ₡200.000 & ₡280.000 & ₡420.000 & ₡290.000 \\
+\hspace{0.5cm}Coordinación y gestión del PM (Inicio) & ₡300.000 & ₡450.000 & ₡600.000 & ₡450.000 \\
+\midrule
+\textbf{Subtotal} &  &  &  & \textbf{₡1.886.667} \\
 \addlinespace[0.35em]
-\multicolumn{5}{P{22.5cm}}{\textbf{Fase 2: Planificación (Semanas 2–5)}} \\
-\multicolumn{5}{P{22.5cm}}{\textbf{Documentación PMI – Alcance, WBS, Cronograma}} \\
-Definir alcance incluido/excluido & ₡200.000 & ₡280.000 & ₡420.000 & ₡290.000 \\
-Elaborar WBS con criterios de aceptación & ₡280.000 & ₡360.000 & ₡540.000 & ₡376.667 \\
-Cronograma en MS Project (tareas, hitos) & ₡350.000 & ₡480.000 & ₡720.000 & ₡498.333 \\
-\multicolumn{5}{P{22.5cm}}{\textbf{Documentación PMI – Recursos, Costos, Calidad}} \\
-RACI, organigrama y Plan de Recursos & ₡200.000 & ₡280.000 & ₡420.000 & ₡290.000 \\
-Estimación de costos (PERT) & ₡180.000 & ₡240.000 & ₡360.000 & ₡250.000 \\
-Plan de Recursos & ₡110.000 & ₡220.000 & ₡330.000 & ₡220.000 \\
-Plan de Calidad con métricas & ₡160.000 & ₡220.000 & ₡330.000 & ₡228.333 \\
-\multicolumn{5}{P{22.5cm}}{\textbf{Documentación PMI – Comunicaciones, Riesgos, Adquisiciones}} \\
-Plan de Comunicaciones & ₡140.000 & ₡200.000 & ₡300.000 & ₡206.667 \\
-Plan Gestión de Riesgos + Registro & ₡280.000 & ₡380.000 & ₡570.000 & ₡395.000 \\
-Matriz de Probabilidad e Impacto & ₡120.000 & ₡180.000 & ₡270.000 & ₡185.000 \\
-Plan de Adquisiciones & ₡120.000 & ₡180.000 & ₡270.000 & ₡185.000 \\
-Gestión y coordinación del PM (Planif.) & ₡400.000 & ₡540.000 & ₡810.000 & ₡561.667 \\
-\textbf{SUBTOTAL FASE 2 – PLANIFICACIÓN} &  &  &  & \textbf{₡3.686.667} \\
+\rowcolor{diagramlight}
+\multicolumn{5}{l}{\textbf{Fase 2: Planificación (Semanas 2–5)}} \\
+\multicolumn{5}{l}{\textbf{\textit{Documentación PMI – Alcance, WBS, Cronograma}}} \\
+\hspace{0.5cm}Definir alcance incluido/excluido & ₡200.000 & ₡280.000 & ₡420.000 & ₡290.000 \\
+\hspace{0.5cm}Elaborar WBS con criterios de aceptación & ₡280.000 & ₡360.000 & ₡540.000 & ₡376.667 \\
+\hspace{0.5cm}Cronograma en MS Project (tareas, hitos) & ₡350.000 & ₡480.000 & ₡720.000 & ₡498.333 \\
+\multicolumn{5}{l}{\textbf{\textit{Documentación PMI – Recursos, Costos, Calidad}}} \\
+\hspace{0.5cm}RACI, organigrama y Plan de Recursos & ₡200.000 & ₡280.000 & ₡420.000 & ₡290.000 \\
+\hspace{0.5cm}Estimación de costos (PERT) & ₡180.000 & ₡240.000 & ₡360.000 & ₡250.000 \\
+\hspace{0.5cm}Plan de Recursos & ₡110.000 & ₡220.000 & ₡330.000 & ₡220.000 \\
+\hspace{0.5cm}Plan de Calidad con métricas & ₡160.000 & ₡220.000 & ₡330.000 & ₡228.333 \\
+\multicolumn{5}{l}{\textbf{\textit{Documentación PMI – Comunicaciones, Riesgos, Adquisiciones}}} \\
+\hspace{0.5cm}Plan de Comunicaciones & ₡140.000 & ₡200.000 & ₡300.000 & ₡206.667 \\
+\hspace{0.5cm}Plan Gestión de Riesgos + Registro & ₡280.000 & ₡380.000 & ₡570.000 & ₡395.000 \\
+\hspace{0.5cm}Matriz de Probabilidad e Impacto & ₡120.000 & ₡180.000 & ₡270.000 & ₡185.000 \\
+\hspace{0.5cm}Plan de Adquisiciones & ₡120.000 & ₡180.000 & ₡270.000 & ₡185.000 \\
+\hspace{0.5cm}Gestión y coordinación del PM (Planif.) & ₡400.000 & ₡540.000 & ₡810.000 & ₡561.667 \\
+\midrule
+\textbf{Subtotal} &  &  &  & \textbf{₡3.686.667} \\
 \addlinespace[0.35em]
-\multicolumn{5}{P{22.5cm}}{\textbf{Fase 3: Ejecución – Desarrollo Frontend (Semanas 4–10)}} \\
-\multicolumn{5}{P{22.5cm}}{\textbf{Módulos del Sistema – Dev Frontend 1 (Mauricio)}} \\
-Login y Dashboard Principal & ₡580.000 & ₡640.000 & ₡980.000 & ₡686.667 \\
-Portal Estudiantil – Matrícula y Horarios & ₡670.000 & ₡890.000 & ₡1.280.000 & ₡918.333 \\
-Portal Estudiantil – Calificaciones e Historial & ₡490.000 & ₡660.000 & ₡980.000 & ₡685.000 \\
-Portal Docente – Gestión cursos y asistencia & ₡500.000 & ₡700.000 & ₡960.000 & ₡710.000 \\
-Portal Docente – Registro de calificaciones & ₡360.000 & ₡490.000 & ₡720.000 & ₡506.667 \\
-Portal Administrativo – CRUD completo & ₡690.000 & ₡890.000 & ₡1.270.000 & ₡920.000 \\
-\multicolumn{5}{P{22.5cm}}{\textbf{Módulos del Sistema – Dev Frontend 2 (Carlos)}} \\
-Portal Financiero – Pagos e historial & ₡480.000 & ₡700.000 & ₡960.000 & ₡706.667 \\
-Dashboard Ejecutivo del sistema & ₡480.000 & ₡640.000 & ₡960.000 & ₡666.667 \\
-\multicolumn{5}{P{22.5cm}}{\textbf{Módulos Compartidos – Ambos Devs}} \\
-Integración entre módulos y navegación & ₡320.000 & ₡500.000 & ₡660.000 & ₡496.667 \\
-Pruebas de usabilidad y QA (ambos devs) & ₡480.000 & ₡710.000 & ₡960.000 & ₡713.333 \\
-\textbf{SUBTOTAL FASE 3 – EJECUCIÓN} &  &  &  & \textbf{₡7.010.000} \\
+\rowcolor{diagramlight}
+\multicolumn{5}{l}{\textbf{Fase 3: Ejecución – Desarrollo Frontend (Semanas 4–10)}} \\
+\multicolumn{5}{l}{\textbf{\textit{Módulos del Sistema – Dev Frontend 1 (Mauricio)}}} \\
+\hspace{0.5cm}Login y Dashboard Principal & ₡580.000 & ₡640.000 & ₡980.000 & ₡686.667 \\
+\hspace{0.5cm}Portal Estudiantil – Matrícula y Horarios & ₡670.000 & ₡890.000 & ₡1.280.000 & ₡918.333 \\
+\hspace{0.5cm}Portal Estudiantil – Calificaciones e Historial & ₡490.000 & ₡660.000 & ₡980.000 & ₡685.000 \\
+\hspace{0.5cm}Portal Docente – Gestión cursos y asistencia & ₡500.000 & ₡700.000 & ₡960.000 & ₡710.000 \\
+\hspace{0.5cm}Portal Docente – Registro de calificaciones & ₡360.000 & ₡490.000 & ₡720.000 & ₡506.667 \\
+\hspace{0.5cm}Portal Administrativo – CRUD completo & ₡690.000 & ₡890.000 & ₡1.270.000 & ₡920.000 \\
+\multicolumn{5}{l}{\textbf{\textit{Módulos del Sistema – Dev Frontend 2 (Carlos)}}} \\
+\hspace{0.5cm}Portal Financiero – Pagos e historial & ₡480.000 & ₡700.000 & ₡960.000 & ₡706.667 \\
+\hspace{0.5cm}Dashboard Ejecutivo del sistema & ₡480.000 & ₡640.000 & ₡960.000 & ₡666.667 \\
+\multicolumn{5}{l}{\textbf{\textit{Módulos Compartidos – Ambos Devs}}} \\
+\hspace{0.5cm}Integración entre módulos y navegación & ₡320.000 & ₡500.000 & ₡660.000 & ₡496.667 \\
+\hspace{0.5cm}Pruebas de usabilidad y QA (ambos devs) & ₡480.000 & ₡710.000 & ₡960.000 & ₡713.333 \\
+\midrule
+\textbf{Subtotal} &  &  &  & \textbf{₡7.010.000} \\
 \addlinespace[0.35em]
-\multicolumn{5}{P{22.5cm}}{\textbf{Fase 4: Monitoreo y Control (Semanas 1–12, continuo)}} \\
-\multicolumn{5}{P{22.5cm}}{\textbf{Seguimiento y Control}} \\
-Definir y monitorear KPIs del proyecto & ₡200.000 & ₡350.000 & ₡420.000 & ₡336.667 \\
-Control de cambios + Solicitudes \#1 y \#2 & ₡240.000 & ₡320.000 & ₡480.000 & ₡333.333 \\
-Evaluación de impacto de cambios & ₡160.000 & ₡270.000 & ₡330.000 & ₡261.667 \\
-Seguimiento cronograma y riesgos activos & ₡200.000 & ₡280.000 & ₡420.000 & ₡290.000 \\
-Dashboard Ejecutivo del proyecto & ₡200.000 & ₡350.000 & ₡420.000 & ₡336.667 \\
-Gestión PM (reuniones, reportes, coordinación) & ₡480.000 & ₡710.000 & ₡960.000 & ₡713.333 \\
-\textbf{SUBTOTAL FASE 4 – MONITOREO Y CONTROL} &  &  &  & \textbf{₡2.271.667} \\
+\rowcolor{diagramlight}
+\multicolumn{5}{l}{\textbf{Fase 4: Monitoreo y Control (Semanas 1–12, continuo)}} \\
+\multicolumn{5}{l}{\textbf{\textit{Seguimiento y Control}}} \\
+\hspace{0.5cm}Definir y monitorear KPIs del proyecto & ₡200.000 & ₡350.000 & ₡420.000 & ₡336.667 \\
+\hspace{0.5cm}Control de cambios + Solicitudes \#1 y \#2 & ₡240.000 & ₡320.000 & ₡480.000 & ₡333.333 \\
+\hspace{0.5cm}Evaluación de impacto de cambios & ₡160.000 & ₡270.000 & ₡330.000 & ₡261.667 \\
+\hspace{0.5cm}Seguimiento cronograma y riesgos activos & ₡200.000 & ₡280.000 & ₡420.000 & ₡290.000 \\
+\hspace{0.5cm}Dashboard Ejecutivo del proyecto & ₡200.000 & ₡350.000 & ₡420.000 & ₡336.667 \\
+\hspace{0.5cm}Gestión PM (reuniones, reportes, coordinación) & ₡480.000 & ₡710.000 & ₡960.000 & ₡713.333 \\
+\midrule
+\textbf{Subtotal} &  &  &  & \textbf{₡2.271.667} \\
 \addlinespace[0.35em]
-\multicolumn{5}{P{22.5cm}}{\textbf{Fase 5: Cierre (Semana 12)}} \\
-\multicolumn{5}{P{22.5cm}}{\textbf{Entregables de Cierre}} \\
-Informe Ejecutivo final & ₡120.000 & ₡220.000 & ₡270.000 & ₡211.667 \\
-Acta de Cierre formal & ₡100.000 & ₡190.000 & ₡210.000 & ₡178.333 \\
-Reflexiones y Recomendaciones del equipo & ₡120.000 & ₡200.000 & ₡270.000 & ₡198.333 \\
-\textbf{SUBTOTAL FASE 5 – CIERRE} &  &  &  & \textbf{₡588.333} \\
+\rowcolor{diagramlight}
+\multicolumn{5}{l}{\textbf{Fase 5: Cierre (Semana 12)}} \\
+\multicolumn{5}{l}{\textbf{\textit{Entregables de Cierre}}} \\
+\hspace{0.5cm}Informe Ejecutivo final & ₡120.000 & ₡220.000 & ₡270.000 & ₡211.667 \\
+\hspace{0.5cm}Acta de Cierre formal & ₡100.000 & ₡190.000 & ₡210.000 & ₡178.333 \\
+\hspace{0.5cm}Reflexiones y Recomendaciones del equipo & ₡120.000 & ₡200.000 & ₡270.000 & ₡198.333 \\
+\midrule
+\textbf{Subtotal} &  &  &  & \textbf{₡588.333} \\
 \addlinespace[0.35em]
-\multicolumn{5}{P{22.5cm}}{\textbf{Rubros Adicionales (Software, Hardware, Servicios)}} \\
-\multicolumn{5}{P{22.5cm}}{\textbf{Software}} \\
-MS Project licencia comercial (3 meses) & ₡30.000 & ₡70.000 & ₡90.000 & ₡66.667 \\
-Office 365 – 5 usuarios (3 meses) & ₡90.000 & ₡130.000 & ₡180.000 & ₡131.667 \\
-Herramientas premium opcionales & ₡0 & ₡20.000 & ₡60.000 & ₡23.333 \\
-\multicolumn{5}{P{22.5cm}}{\textbf{Hardware}} \\
-USB / almacenamiento externo (5 unidades) & ₡10.000 & ₡20.000 & ₡25.000 & ₡19.167 \\
-Periféricos complementarios & ₡5.000 & ₡15.000 & ₡20.000 & ₡14.167 \\
-\multicolumn{5}{P{22.5cm}}{\textbf{Servicios}} \\
-Internet (5 personas x 3 meses x ₡25,000) & ₡225.000 & ₡370.000 & ₡450.000 & ₡359.167 \\
-Impresiones y material físico & ₡6.000 & ₡10.000 & ₡17.000 & ₡10.500 \\
-Transporte a reuniones presenciales & ₡20.000 & ₡42.000 & ₡60.000 & ₡41.333 \\
-\textbf{SUBTOTAL RUBROS ADICIONALES} &  &  &  & \textbf{₡666.000} \\
+\rowcolor{diagramlight}
+\multicolumn{5}{l}{\textbf{Rubros Adicionales (Software, Hardware, Servicios)}} \\
+\multicolumn{5}{l}{\textbf{\textit{Software}}} \\
+\hspace{0.5cm}MS Project licencia comercial (3 meses) & ₡30.000 & ₡70.000 & ₡90.000 & ₡66.667 \\
+\hspace{0.5cm}Office 365 – 5 usuarios (3 meses) & ₡90.000 & ₡130.000 & ₡180.000 & ₡131.667 \\
+\hspace{0.5cm}Herramientas premium opcionales & ₡0 & ₡20.000 & ₡60.000 & ₡23.333 \\
+\multicolumn{5}{l}{\textbf{\textit{Hardware}}} \\
+\hspace{0.5cm}USB / almacenamiento externo (5 unidades) & ₡10.000 & ₡20.000 & ₡25.000 & ₡19.167 \\
+\hspace{0.5cm}Periféricos complementarios & ₡5.000 & ₡15.000 & ₡20.000 & ₡14.167 \\
+\multicolumn{5}{l}{\textbf{\textit{Servicios}}} \\
+\hspace{0.5cm}Internet (5 personas x 3 meses x ₡25,000) & ₡225.000 & ₡370.000 & ₡450.000 & ₡359.167 \\
+\hspace{0.5cm}Impresiones y material físico & ₡6.000 & ₡10.000 & ₡17.000 & ₡10.500 \\
+\hspace{0.5cm}Transporte a reuniones presenciales & ₡20.000 & ₡42.000 & ₡60.000 & ₡41.333 \\*
+\midrule
+\textbf{Subtotal} &  &  &  & \textbf{₡666.000} \\*
+\midrule
+Subtotal antes de contingencias &  &  &  & \textbf{₡16.109.333} \\*
+Reserva para contingencias (10 \%) &  &  &  & \textbf{₡1.515.867} \\*
+\midrule
+\rowcolor{teclightblue}
+\multicolumn{4}{l}{\textbf{Presupuesto total del proyecto (PERT + contingencias)}} & \textbf{₡17.625.200} \\*
 \addlinespace[0.35em]
-Subtotal antes de contingencias &  &  &  & \textbf{₡16.109.333} \\
-Reserva para Contingencias (10\%) &  &  &  & \textbf{₡1.515.867} \\
-\textbf{PRESUPUESTO TOTAL DEL PROYECTO (PERT + Contingencias)} &  &  &  & \textbf{₡17.625.200} \\
-\addlinespace[0.35em]
-\multicolumn{5}{P{22.5cm}}{\textbf{Notas:}} \\
-\multicolumn{5}{P{22.5cm}}{• Fórmula PERT: Costo Estimado = (Optimista + 4 × Más Probable + Pesimista) / 6} \\
-\multicolumn{5}{P{22.5cm}}{• El escenario Optimista asume todo sale bien; el Pesimista incluye retrasos, correcciones y sobrecostos.} \\
-\multicolumn{5}{P{22.5cm}}{• Equipo: Tamara Robles (PM), Mauricio González (Dev Frontend 1), Dev Frontend 2 (Carlos Sainz Arce), Isaac Jiménez (Analista 1), Analista 2 (Jorge Abarca Quiros).} \\
-\multicolumn{5}{P{22.5cm}}{• Plazo total del proyecto: 3 meses (12 semanas). Moneda: Colones Costarricenses (₡).} \\
-\multicolumn{5}{P{22.5cm}}{• Los costos de mano de obra se basan en tarifas de mercado TI Costa Rica para perfiles junior-medio (₡8,000–₡10,000/hr).} \\
+\rowcolor{tablegray}
+\multicolumn{5}{l}{\textbf{Notas:}} \\
+\multicolumn{5}{p{22.74cm}}{\scriptsize • Fórmula PERT: Costo Estimado = (Optimista + 4 × Más Probable + Pesimista) / 6} \\
+\multicolumn{5}{p{22.74cm}}{\scriptsize • El escenario Optimista asume todo sale bien; el Pesimista incluye retrasos, correcciones y sobrecostos.} \\
+\multicolumn{5}{p{22.74cm}}{\scriptsize • Equipo: Tamara Robles (PM), Mauricio González (Dev Frontend 1), Dev Frontend 2 (Carlos Sainz Arce), Isaac Jiménez (Analista 1), Analista 2 (Jorge Abarca Quiros).} \\
+\multicolumn{5}{p{22.74cm}}{\scriptsize • Plazo total del proyecto: 3 meses (12 semanas). Moneda: Colones Costarricenses (₡).} \\
+\multicolumn{5}{p{22.74cm}}{\scriptsize • Los costos de mano de obra se basan en tarifas de mercado TI Costa Rica para perfiles junior-medio (₡8,000–₡10,000/hr).} \\
 \bottomrule
 \end{longtable}
 }
@@ -400,9 +428,9 @@ Subtotal – Fase 3 (Desarrollo Frontend) & ₡7 010 000 \\
 Subtotal – Fase 4 (Monitoreo y Control) & ₡2 271 667 \\
 Subtotal – Fase 5 (Cierre) & ₡588 333 \\
 Subtotal – Rubros Adicionales (Software, Hardware y Servicios) & ₡666 000 \\
-SUBTOTAL ANTES DE CONTINGENCIAS & ₡16 109 333 \\
-Reserva para Contingencias (10\%) & ₡1 515 867 \\
-PRESUPUESTO TOTAL DEL PROYECTO & ₡17 625 200 \\
+Subtotal antes de contingencias & ₡16 109 333 \\
+Reserva para contingencias (10 \%) & ₡1 515 867 \\
+Presupuesto total del proyecto & ₡17 625 200 \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -426,7 +454,7 @@ Fase 4 (Monitoreo y Control) & ₡2 271 667 & 12.89\% & PERT \\
 Fase 5 (Cierre) & ₡588 333 & 3.34\% & PERT \\
 Subtotal – Rubros Adicionales (Software, Hardware y Servicios) & ₡666 000 & 3.34\% & PERT \\
 Contingencias (10\%) & ₡1 515 867 & 8.60\% & \% sobre subtotal \\
-PRESUPUESTO TOTAL DEL PROYECTO & 100\% & ₡17 625 200 \\
+Presupuesto total del proyecto & 100\% & ₡17 625 200 \\
 \bottomrule
 \end{tabularx}
 \end{table}
