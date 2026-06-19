@@ -1,0 +1,593 @@
+\documentclass[11pt,spanish]{article}
+
+% =========================================================
+% PLANTILLA BASE PARA INFORMES ACADÉMICOS / TÉCNICOS
+% =========================================================
+
+% --- Idioma y codificación ---
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{newunicodechar}
+\newunicodechar{₡}{\textcolonmonetary}
+
+% --- Márgenes / papel ---
+\usepackage[
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headsep=0.5cm,
+    footskip=0.8cm
+]{geometry}
+
+% --- Matemáticas ---
+\usepackage{amsmath}
+
+% --- Tablas, enlaces y elementos visuales ---
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes.geometric,arrows.meta,calc}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage[hidelinks]{hyperref}
+\usepackage{colortbl}
+
+% --- Encabezado y pie de página ---
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+% --- Interlineado ---
+\linespread{1.2}
+\sloppy
+
+% =========================================================
+% DATOS DEL DOCUMENTO
+% =========================================================
+\newcommand{\Institucion}{Instituto Tecnológico de Costa Rica}
+\newcommand{\Campus}{Campus Tecnológico Central Cartago}
+\newcommand{\DocumentoTitulo}{Plan de gestión de riesgos}
+\newcommand{\DocumentoSubtitulo}{Plataforma Universitaria Integrada Plataforma Modernización y Centralización de Procesos Académicos y Administrativos}
+\newcommand{\Curso}{Administración de proyectos}
+\newcommand{\Profesor}{Alicia Marcela Salazar Hernández}
+\newcommand{\FechaDocumento}{18 de junio de 2026}
+\newcommand{\PeriodoAcademico}{I Semestre}
+\newcommand{\AnioDocumento}{2026}
+\newcommand{\AutoresPortada}{%
+    \begin{tabular}{l@{\hspace{1.5cm}}r}
+        Tamara Robles Camacho & 2024099342 \\
+    \end{tabular}%
+}
+\newcommand{\DocHeaderLeft}{}
+\newcommand{\DocHeaderRight}{Plan de gestión de riesgos}
+\newcommand{\DocFooterRight}{Página~\thepage\ de~\pageref{LastPage}}
+
+% Metadatos PDF
+\title{\DocumentoTitulo}
+\author{\AutoresPortada}
+\date{\FechaDocumento}
+
+% =========================================================
+% COLORES
+% =========================================================
+\definecolor{TecBlue}{RGB}{0, 61, 130}
+\definecolor{TecRed}{RGB}{204, 0, 0}
+\definecolor{TecGray}{RGB}{100, 100, 100}
+\definecolor{LightGray}{RGB}{240, 240, 240}
+\definecolor{DarkBlue}{RGB}{0, 40, 90}
+
+% Colores para Nivel de Riesgo
+\definecolor{C_MuyBajo}{HTML}{47D45A}
+\definecolor{C_Bajo}{HTML}{92D050}
+\definecolor{C_Medio}{HTML}{FFFF00}
+\definecolor{C_Alto}{HTML}{FFC000}
+\definecolor{C_MuyAlto}{HTML}{EE0000}
+\definecolor{C_Critico}{HTML}{C00000}
+
+% =========================================================
+% CONFIGURACIÓN DE ESTILOS
+% =========================================================
+
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcolumntype{P}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyhead[L]{\DocHeaderLeft}
+\fancyhead[R]{\DocHeaderRight}
+\fancyfoot[R]{\DocFooterRight}
+
+\setlist[itemize]{label=\textbullet, leftmargin=*, itemsep=0.2em, topsep=0.2em}
+\setlist[enumerate]{leftmargin=*, itemsep=0.2em, topsep=0.2em}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.8em}
+
+% =========================================================
+% MACROS Y COMANDOS PERSONALIZADOS
+% =========================================================
+
+% --- Portada ---
+\newcommand{\MakeCover}{%
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+
+{\bfseries \huge \Institucion \par}
+\vspace{0.25cm}
+{\LARGE \Campus \par}
+
+\vfill
+
+{\huge \DocumentoTitulo \par}
+
+\vfill
+
+{\bfseries \LARGE Profesora \par}
+{\Large \Profesor \par}
+
+\vfill
+
+{\bfseries \LARGE Estudiante \par}
+{\Large \AutoresPortada \par}
+
+\vfill
+
+{\bfseries\LARGE Fecha \par}
+{\Large \FechaDocumento \par}
+
+\vfill
+
+{\LARGE \PeriodoAcademico \par}
+{\LARGE \AnioDocumento \par}
+
+\end{titlepage}%
+}
+
+% Estilo equivalente para páginas horizontales.
+\fancypagestyle{widefancy}{%
+    \fancyhf{}%
+    \fancyhead[R]{\DocHeaderRight}%
+    \renewcommand{\headrulewidth}{0.4pt}%
+    \renewcommand{\footrulewidth}{0.4pt}%
+    \fancyfoot[R]{\DocFooterRight}%
+}
+
+% =========================================================
+% PÁGINAS HORIZONTALES PARA TABLAS ANCHAS
+% =========================================================
+\makeatletter
+\newcommand{\SyncPageBuilderDimensions}{%
+    \global\vsize=\textheight
+    \global\@colroom=\textheight
+    \global\@colht=\textheight
+}
+\makeatother
+
+\newenvironment{widepage}{%
+    \clearpage
+    \hypersetup{pageanchor=false}%
+    \paperwidth=297mm
+    \paperheight=210mm
+    \pdfpagewidth=297mm
+    \pdfpageheight=210mm
+    \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm}%
+    \setlength{\textwidth}{243mm}%
+    \setlength{\textheight}{156mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \pagestyle{widefancy}%
+}{%
+    \clearpage
+    \paperwidth=210mm
+    \paperheight=297mm
+    \pdfpagewidth=210mm
+    \pdfpageheight=297mm
+    \restoregeometry
+    \SyncPageBuilderDimensions
+    \hypersetup{pageanchor=true}%
+    \pagestyle{fancy}%
+}
+
+% =========================================================
+% INICIO DEL DOCUMENTO
+% =========================================================
+
+\begin{document}
+\hypersetup{pageanchor=false}
+
+% =========================
+% Portada
+% =========================
+\MakeCover
+
+% =========================
+% Índice
+% =========================
+\pagenumbering{roman}
+\pagestyle{empty}
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+\pagestyle{fancy}
+
+% =========================
+% Contenido
+% =========================
+\section{Información general del documento}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{p{5cm} Y}
+\toprule
+\textbf{Nombre del proyecto} & Plataforma Universitaria Integrada \\
+\textbf{Organización} & Universidad Tecnológica La Mejor \\
+\textbf{Documento} & \DocumentoTitulo \\
+\textbf{Directora del proyecto} & Tamara Robles Camacho \\
+\textbf{Fecha} & \FechaDocumento \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Introducción}
+
+Esta sección explica el plan de gestión de riesgos y define la metodología que el equipo utilizará para identificar, analizar, priorizar, responder y monitorear los contratiempos latentes durante el ciclo de vida del proyecto. Las subsecciones correspondientes establecen de manera formal las reglas y procesos que sustentan la creación del registro de riesgos así como la configuración y evaluación de la matriz integral de probabilidades e impacto.
+
+La gestión de riesgos resulta un proceso fundamental para lograr una anticipación oportuna a posibles atrasos e inconsistencias entre los documentos aprobados. Esta labor preventiva mitiga simultáneamente la sobrecarga imprevista de trabajo en el equipo al mismo tiempo que resuelve de antemano los problemas técnicos emergentes y derivados del proceso directo del desarrollo.
+
+\subsection{Propósito}
+
+El propósito fundamental de este plan comprende el diseño estructurado y la respectiva aplicación metódica de los objetivos descritos a lo largo de la siguiente lista de puntos.
+
+\begin{itemize}
+    \item Establecer una metodología clara y aplicable que permita identificar eficazmente los riesgos dentro de todas las fases constructivas del proyecto.
+    \item Definir las escalas oficiales de probabilidad e impacto asegurando su utilización consistente en cada etapa de evaluación del equipo.
+    \item Establecer la fórmula matemática exacta y los diferentes rangos paramétricos requeridos para lograr clasificar apropiadamente el nivel de gravedad inherente a cada eventualidad.
+    \item Definir un catálogo de estrategias preventivas y correctivas disponibles para que el equipo pueda abordar y neutralizar correctamente cualquier adversidad o contingencia surgida.
+    \item Asignar roles logísticos y responsabilidades operativas en beneficio de la gestión de riesgos para lograr un manejo siempre coordinado y totalmente transparente.
+    \item Establecer la frecuencia de revisión idónea al igual que el mecanismo central y estructurado necesario para consolidar el seguimiento integral e ininterrumpido de todos los hallazgos documentados.
+\end{itemize}
+
+\section{Roles y responsabilidades}
+
+La gestión de riesgos representa una responsabilidad compartida por todo el equipo interno y se han asignado roles debidamente diferenciados según el grado de injerencia técnica o administrativa evaluada.
+
+\begin{widepage}
+{\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{P{4.5cm} P{9.3cm} P{9.3cm}}
+\caption{Roles y responsabilidades en gestión de riesgos}\label{tab:roles-responsabilidades} \\
+\toprule
+\textbf{Rol} & \textbf{Responsabilidad en gestión de riesgos} & \textbf{Categorías de riesgo asignadas} \\
+\midrule
+\endfirsthead
+\caption[]{Roles y responsabilidades en gestión de riesgos (continuación)} \\
+\toprule
+\textbf{Rol} & \textbf{Responsabilidad en gestión de riesgos} & \textbf{Categorías de riesgo asignadas} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\bottomrule
+\endlastfoot
+Directora del proyecto (Tamara Robles Camacho) & Lidera integralmente el proceso de identificación y análisis de contingencias para posteriormente aprobar formalmente el documento base priorizando la ejecución de cualquier acción preventiva. & Mantiene un seguimiento riguroso sobre eventos que amenacen el cumplimiento del cronograma global de entregas y vigila la disponibilidad de todo el personal protegiendo la constante y fluida comunicación ante las variaciones dictaminadas por todos los interesados externos. \\
+Analista de negocio y documentador 1 (Isaac Jiménez Blanco) & Trabaja en la certera y oportuna identificación y respectiva descripción sistemática y valorativa relacionada a las vulnerabilidades incidentes detectadas en las mediciones periódicas realizadas sobre los parámetros fijados del alcance. & Mantiene una vigilancia formal constante logrando atender puntualmente todas aquellas situaciones de falla derivadas al aplicar rigurosamente una gestión documental evaluando continuamente cualquier tipo de falencia orientada firmemente a perjudicar la debida completitud y solidez inquebrantable establecida sobre el presupuesto. \\
+Analista de negocio y documentador 2 (Jorge Abarca Quiros) & Colabora e identifica documentando sistemáticamente aquellos fallos colaterales fuertemente ligados de manera intrínseca a fallas recurrentes de los procesos generales estipulados de revisión integral dictaminando con plena evidencia probatoria y exhaustiva su nivel adverso o desfavorable. & Realiza comprobaciones constantes prestando un valioso y adecuado servicio correctivo de seguimiento frente a cada desvío detectado originado tras presentarse faltas significativas logrando solventar deficiencias evidenciadas claramente tras vulneraciones severas encontradas de manera preocupante en revisiones documentales periódicas. \\
+Desarrollador de interfaz y QA (Mauricio González Prendas) & Identifica oportunamente posibles problemas críticos detectados en los despliegues visuales aplicando la logística orientada al desarrollo técnico y efectúa oportunas medidas de mitigación requeridas invariablemente durante la codificación y estructuración. & Supervisa sistemática e ininterrumpidamente las interacciones logísticas que garantizan resguardar eficientemente el estado ideal concebido por los prototipos e interviene diligentemente y proactivamente implementando su control general incesante ante falencias de estructura en todo el historial originado del seguimiento respectivo referente y proveniente del avance técnico general. \\
+Desarrollador de interfaz y QA (Carlos Sainz Arce) & Efectúa de manera cooperativa y oportuna revisiones minuciosas con los integrantes de logística asumiendo un análisis detallado buscando anticipar y detectar amenazas inminentes al transcurso propio e indispensable enfocado totalmente hacia una oportuna implementación en todas las estructuras e interacciones del flujo informático. & Centra e invierte de modo eficiente sus primordiales labores invirtiendo un nivel idóneo de monitoreo continuo orientado sólidamente a mitigar cualquier incidente surgido directamente tras detectarse falencias inmersas intrínsecamente y provenientes del constante y regular y normal control efectuado al depositar su revisión sistemática sobre los registros corporativos del repositorio e integra medidas salvaguardando en paralelo todo tipo de integridad operativa orientada a lograr el acatamiento riguroso de cada versión del proyecto. \\
+\end{longtable}
+}
+\end{widepage}
+
+\section{Ciclo de gestión de riesgos (PMBOK)}
+
+El proyecto aplica e integra el ciclo de gestión de riesgos establecido y validado metodológicamente por el PMBOK y adapta minuciosamente sus respectivos principios fundamentales a la escala específica del entorno considerando las proporciones del desarrollo de la plataforma universitaria integradora.
+
+\begin{widepage}
+{\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{P{4.5cm} P{19cm}}
+\caption{Ciclo de gestión de riesgos}\label{tab:ciclo-riesgos} \\
+\toprule
+\textbf{Etapa} & \textbf{Descripción y aplicación en el proyecto} \\
+\midrule
+\endfirsthead
+\caption[]{Ciclo de gestión de riesgos (continuación)} \\
+\toprule
+\textbf{Etapa} & \textbf{Descripción y aplicación en el proyecto} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\bottomrule
+\endlastfoot
+\textbf{1. Planificación de la gestión de riesgos} & Estructura sólidamente los procedimientos delimitados al sentar integralmente la definición logística dictando claramente los principios aplicables referentes a la metodología establecida e implementada en la determinación paralela referida al uso y disposición de escalas valorativas definiendo además firmemente el rol general asignado en las herramientas base. \\
+\textbf{2. Identificación de riesgos} & Fomenta la participación mediante reuniones dinámicas del equipo para realizar la extensa revisión general fundamentada en la extracción exhaustiva de los hallazgos enmarcada bajo lineamientos dictaminados operativamente por el proyecto en fuentes documentadas fiables incluyendo directamente los recursos consolidados pertenecientes ineludiblemente al acta de constitución del proyecto al lado y apoyado invariablemente en la formulación de los esquemas estructurales estipulados minuciosamente para determinar cada entrega formal del plan en base. \\
+\textbf{3. Análisis cualitativo} & Pondera en un cálculo numérico el nivel respectivo estipulado del peligro para el proyecto evaluando objetivamente un grado calculado logrando determinar metódicamente un cruce o correlación estable mediante la escala general preestablecida numerada uniformemente e identificando la gravedad respectiva consolidada categorizando y resolviendo su ubicación definitiva dentro de esquemas tipificados de grado muy bajo a crítico. \\
+\textbf{4. Análisis cuantitativo} & Aplica este tipo y modo especifico de riguroso análisis detallado destinándolo en especial al rango que agrupa a todos y cada uno de los más letales problemas inminentes y contingencias detectadas que ostentan e integran definitivamente una nivelación evaluada dictaminando la inminente afectación operando e influyendo destructivamente el valor monetario esperado calculado con total rigidez tras multiplicar matemáticamente el factor respectivo evaluado equivalente a un número base sobre su esperada probabilidad multiplicándola directamente y sin demora contra el margen evaluado del grado de un impacto monetario. \\
+\textbf{5. Planificación de respuestas} & Formaliza y diseña integralmente una robusta y preventiva estrategia enfocada en consolidar acciones defensivas orientadas a mitigar daños colaterales transfiriendo un nivel adecuado del contratiempo y estableciendo formal y meticulosamente sólidas o rigurosas vías estipuladas con el fin irrevocable enfocado de aplicar verdaderas barreras resolutivas acatando de pleno las contundentes medidas de choque orientadas operativamente en cada tipo abordado correspondiente. \\
+\textbf{6. Monitoreo y control} & Implementa eficientemente un sistema ininterrumpido centrado puntualmente en aplicar revisiones programadas enfocadas enteramente a revisar incesantemente las posibles fluctuaciones del comportamiento reportado dentro de las respectivas calificaciones tabuladas y alojadas de los informes correspondientes permitiendo garantizar contundentemente la difusión ágil lograda en trasladar informes oportunos emitiendo una importante información alertando a todo su entorno de trabajo. \\
+\end{longtable}
+}
+\end{widepage}
+
+\section{Metodología de identificación de riesgos}
+
+El abordaje y la identificación de riesgos se ejecuta aplicando y estructurando un proceso segmentado en cuatro niveles de enfoque y fundamentado sustancialmente tras completar revisiones exhaustivas y detalladas provenientes de las inspecciones que indagan minuciosamente una amplia base o cúmulo ineludible de fuentes y de los distintos insumos del grupo promoviendo al involucramiento equitativo apoyándose plenamente en valiosas técnicas reconocidas.
+
+\subsection{Revisión de la documentación del proyecto}
+
+El equipo procede integralmente a evaluar minuciosamente cada nivel o entrega de la respectiva planificación desarrollada e impulsada con anterioridad bajo el claro y contundente propósito logístico de identificar eventuales fuentes adversas generadoras de inminentes fallos prestando obligatoria atención y vigilancia sobre el respectivo espectro conformado de factores medulares integrados lógicamente a lo largo de un listado detallado en el próximo bloque de directrices.
+
+\begin{itemize}
+    \item \textbf{Alcance del proyecto.} El desarrollo presenta lamentables ambigüedades e importantes faltas lógicas de una esperada claridad relativas a las determinaciones técnicas donde se delimitan rigurosamente aquellos lineamientos referidos al respectivo diseño operativo y creación general o modelado estricto referidos al despliegue total y el entorno estructurado del desarrollo de interfaz.
+    \item \textbf{Cronograma.} Presenta una base vulnerable al exhibir periodos muy ajustados forzando de tal manera un desarrollo saturado logrando afectar sustancialmente aquellas ineludibles obligaciones y tareas críticas estipuladas ocasionando inevitablemente concentrar en exceso un rango drástico o el grado integral de dependencia depositada irresponsablemente u omitiendo el debido resguardo hacia el apoyo estipulado originado en las labores de únicamente un solo desarrollador central.
+    \item \textbf{Presupuesto.} Contiene factores monetarios cuestionables con previsiones imprecisas estimando variables o rubros ciertamente poco realistas evidenciando importantes y notables deficiencias estructurales resultando ser totalmente inconsistentes al ser cruzadas frente y contra diversos e ineludibles componentes base reflejados indiscutiblemente en el alcance y la planeación documentada en archivos anexos e indispensables de gran peso para el proyecto.
+    \item \textbf{Requisitos.} Incluyen entre sus parámetros integrados múltiples funcionalidades complejas y en esencia muy imprecisas llegando al peligroso punto crítico donde varias proyecciones establecidas sin firmeza lamentablemente extienden y logran vulnerar todos y cada uno de los más seguros de los márgenes previstos comprometiendo el verdadero nivel del tiempo exigido superando de un modo imprudente y forzado todo objetivo aprobado enmarcando su respectivo desarrollo o cumplimiento de manera inviable e insegura en contra del margen predeterminado al comienzo estipulado e indiscutiblemente fijado para ser entregado a nivel del alcance fundamental.
+    \item \textbf{Plan de comunicación.} Existe verdaderamente un riesgo real e inherente y constante fomentando operativamente posibles desacuerdos o probables diferencias perjudiciales y malentendidos humanos afectando peligrosamente la logística entre los cinco integrantes originando el decaimiento de las relaciones sanas en el ambiente.
+\end{itemize}
+
+\subsection{Involucramiento del equipo}
+
+Esta etapa operativa establece los preceptos indispensables asegurando categóricamente el acatamiento irrestricto de todas aquellas obligaciones vinculantes ordenando y encausando formalmente un mecanismo estricto donde toda base dependiente o proveniente del grupo garantice indiscutiblemente implementar ininterrumpidamente una constante u oportuna y totalmente sólida interacción logística propiciando sin fallar la debida diligencia de identificar los sucesos reportándolos de modo diligente aplicando eficientes rutinas formalmente definidas en el próximo compilado normativo logístico.
+
+\begin{itemize}
+    \item Efectuar sesiones rápidas y concisas aplicando dinámicas productivas logradas por medio del valioso método sistemático referido comúnmente hacia el despliegue efectivo e irremplazable efectuando o realizando e incluso adoptando una valiosa herramienta de lluvia de ideas con las visiones entrelazadas y consolidadas de todos integrando firmemente a los cinco participantes asimilando una amplia o integradora capacidad conjunta en la respectiva perspectiva abarcando íntegramente las variables referentes hacia y enfocadas contundentemente por su naturaleza al lado netamente orientado u originado a labores de índole técnica inmersas en el desarrollo y abarcando desde luego toda visión enfocada minuciosamente hacia aquellas contingencias nacidas en el riguroso o vital proceso respectivo que rige la consolidación e inclusión incesante hacia los estándares referidos a la calidad documental paralela e imprescindible.
+    \item Participar decididamente respetando ineludiblemente una cita de coordinación con reuniones semanales e indispensables estipuladas orientadas a un control en torno al firme y permanente propósito formal destinado expresamente en ventilar o divulgar ágilmente todo el cúmulo constante conformado ante preocupaciones emergentes detectadas comunicando pertinentemente todos aquellos diversos riesgos potenciales evidenciables analizando a fondo sus respectivas soluciones previendo de un modo estructurado o analítico todo desvío detectado tempranamente con premura mitigando los sucesos oportunamente originados al margen de la rutina establecida sin afectar operativamente al progreso corporativo resguardando toda estabilidad esperada por el progreso y avance tecnológico previsto ordenadamente en plazos de semanas logísticas.
+\end{itemize}
+
+\subsection{Técnicas de identificación utilizadas}
+
+La investigación minuciosa e identificación puntual orientada y enfocada a detallar exhaustivamente la totalidad íntegra del catálogo abarcando en pleno a todos los riesgos inminentes detectados para el proyecto procediendo con tal rigurosidad o con el gran objetivo y firme directriz estipulada referida operativamente en asegurar un seguimiento metodológico estructurado que garantice efectivamente la utilización exhaustiva e indudable orientando inquebrantablemente su accionar implementando plenamente y adoptando integralmente un conjunto preciso fundamentado con técnicas logísticas eficientes explicadas seguidamente bajo los apartados de revisión respectiva o directriz descrita en modo explicativo subsecuentemente y de forma inmediata abarcada y detallada en este documento.
+
+\begin{itemize}
+    \item Revisión sistemática sobre los parámetros dictados y provenientes del indispensable formato analítico implementando rigurosamente a un alto nivel estructural el proceso exhaustivo enfocado al uso metódico del formato integrado conocido en logística operativa como una estructura de desglose del trabajo (WBS) sometiendo su integridad evaluándola pormenorizadamente logrando observar a la vez identificando de modo eficiente cada variable interna frágil desglosando cualquier paquete y tarea estipulada verificando de este modo certeramente si esta llegase infortunadamente a fallar operativamente e inevitablemente logrando perturbar o impidiendo de una manera innegable el flujo esperado perjudicando fuertemente e irremediablemente y finalmente obstaculizando su respectiva consolidación impidiéndose a su vez concretarla satisfactoriamente afectando con ello perjudicialmente o retrasando contundentemente e impidiéndola de ejecutar adecuadamente durante la esperada fase temporal previamente aprobada con plazos innegociables e inalterables dictados por cronogramas institucionales y corporativos en el desarrollo respectivo.
+    \item Análisis reflexivo extraído del estudio responsable originado sistemáticamente fundamentándose sólidamente en repasar y examinar con sumo cuidado todo registro correspondiente e invaluable agrupando rigurosamente todos y cada uno de los apuntes o datos referidos y relacionados a la aplicación valiosa del uso provechoso en base referida al importante rubro y la herramienta correspondiente de repasar los datos provenientes del inventario que consolida un documento de todas o al menos las indispensables lecciones documentadas concebidas o asimiladas tras afrontar una amplia lista sumada acumulando de manera empírica e invaluable una útil colección constituida del aprendizaje experimentado en diversos proyectos académicos anteriores o referida plenamente a una extensa revisión exhaustiva lograda y desarrollada de cursos técnicos aprobados evaluando con un gran nivel la amplia variedad de bases de datos.
+    \item Análisis exhaustivo sobre un conglomerado de factores identificables enfocados netamente referidos del uso y estudio minucioso comprobatorio del modelo basado fundamentado a partir y originado basando su base comprobando un sistema de supuestos operando metódicamente logrando y efectuando ineludiblemente una verificación rigurosa asegurando y corroborando y sustentando firmemente con pruebas sólidas toda validación o refutación evaluada metódicamente que determine firmemente operativamente su carácter analítico refrendando indiscutiblemente e irrenunciablemente toda integridad referida y contenida o englobada estructuralmente inmersa como pilar en la creación base integradora concebida referida firmemente inmersa íntegramente alojada estructuralmente como una gran premisa formal concebida como fundamental o verdaderamente medular y pilar dentro de un acta de constitución del respectivo proyecto validándola integralmente ratificando de un modo indiscutible comprobando contundentemente la veracidad e implementando su efectiva certidumbre y sólida fiabilidad en vigencia.
+    \item Clasificación organizada agrupando los factores originados por eventos agrupando analíticamente y encasillando las diversas vulnerabilidades ordenadas basándose según o determinando su principal y certera fuente de riesgo englobando de este modo todo entorno estructurado referenciando aquellos de origen netamente del sector del rubro referenciado como técnicos o englobando problemas de la administración logrando e incorporando del modo adecuado evaluando incidentes y problemas logísticos afectando los referidos plenamente originados afectando directamente al capital operativo en recursos humanos incrustando una amplia variedad documentada contemplando de la misma forma un marco y conjunto evaluando a todo registro abarcando fallas o inconvenientes causados originados por vulnerabilidades propias y fallos presentes afectando irremediablemente o causando disfunciones severas concernientes inherentes provenientes respecto al soporte y deficiencias evidentes del uso ineficiente referidas ineludible e indudablemente del uso de ineficientes o problemáticas herramientas así como todos los aspectos concernientes originados y englobando verdaderamente inmersos plenamente pertenecientes indiscutible y propiamente a los negocios.
+\end{itemize}
+
+\subsection{Fuentes utilizadas para este proyecto}
+
+El equipo técnico aplica metódicamente recursos integrados enfocando los resultados resultantes obtenidos de efectuar y consolidar búsquedas fundamentando rígidamente su origen apoyándose siempre en el riguroso accionar logístico referido a inspeccionar y escudriñar de modo permanente y eficiente orientando plenamente este esquema procedimental enfocado rígidamente verificando un valioso listado de elementos documentales enumerados formalmente al estructurar su avance detallándolo fielmente bajo una perspectiva logística englobando y contemplando lo anotado documentando con certidumbre todos los incisos descritos minuciosamente a lo largo de este próximo apartado textual detallado seguidamente.
+
+\begin{itemize}
+    \item Revisión documental que involucra directamente componentes centrales tales como el documento del acta de constitución del proyecto o el archivo correspondiente y denominado propiamente como el respectivo caso de negocio al lado indudable e indispensable proveniente e ineludiblemente vinculado o ligado referenciando e incluyendo al importante y exhaustivo marco abarcado y proveniente de una fuente obligada revisando íntegramente la indispensable base de la cual emana del valioso recurso que engloba un debido y muy estricto registro integral en donde documentan a los interesados principales a la par de asegurar de verificar debidamente y de inspeccionar con sumo grado pormenorizadamente lo referido o respectivo al consolidado y muy detallado archivo e informe sobre la respectiva o contundente y sumamente precisa descripción estipulada referida originando de una innegociable e inquebrantable definición fijando el respectivo alcance.
+    \item Control derivado proveniente referenciando contundentemente originado desde de la evaluación periódica sometiendo y evaluando o repasando a detalle meticuloso revisando las fechas enmarcadas integral y oficialmente mediante uso comprobado de estatus provenientes extraídos de revisar cronogramas e informes y bases estipuladas con formatos o del apoyo oficial de la debida fuente base referida originándose desde el modelo del cronograma general estructurado metódicamente e implementando un sólido seguimiento operativo desplegado rígidamente e ininterrumpidamente desarrollado y soportado íntegramente mediante un programa o sistema originando información base utilizando la respectiva y avalada herramienta institucional estipulada como estándar en Microsoft Project integrando todo esquema al igual o junto al apoyo referenciado abarcando e integrando lo correspondiente en revisar un debido y pertinente archivo estipulado conteniendo el valioso recurso originado del modelo o gráfico referenciado logísticamente originado o conteniendo y describiendo minuciosamente el respectivo nivel u organización administrativa plasmada integralmente e ilustrativamente englobando y detallando todo nivel plasmado y fundamentado o desplegado gráficamente y referenciado en el vital e indispensable organigrama concebido para plasmar fielmente todo el panorama y estructura concerniente a detallar un organigrama que visualiza y mapea orgánicamente documentando un modelo del proyecto.
+    \item Documentación central concebida operativamente en la fase de análisis estructurando revisiones e implementando la logística evaluando con rigidez de una manera objetiva a partir fundamentalmente tras evaluar el respectivo reporte logístico contenido integrando todo archivo oficial del proyecto enfocando de igual manera contundentemente un respectivo esfuerzo comprobatorio riguroso y en paralelo logísticamente e idénticamente de un modo u otro ejecutando la respectiva verificación exhaustiva integrando logísticamente todo recurso estipulado proveniente y contenido e inmerso fundamentalmente del importante formato logístico o plan de calidad logrando en base lograr asegurar plenamente en paralelo efectuar operativamente de un modo exhaustivo todo examen pertinente implementando la revisión a la vez abarcando todos o integrando rigurosamente cada formato de la logística documentada e inmersa referida en revisar los lineamientos y protocolos respectivos referenciando minuciosamente todo nivel respectivo estipulado del formato referenciado documentando todo nivel originado en un debido formato originado en revisar a fondo un respectivo o determinado archivo estipulado referido operativamente abarcando integralmente lo referente al plan logístico y enfocado y referido estipulando en revisar o avalar estipulando normas referenciando todo un documento de las referidas pautas establecidas e inmersas referidas referenciando o documentando formalmente e inmersamente concerniente referidas operativamente documentadas concerniente e inmersamente en todo el espectro abarcado o abordado logísticamente en un indispensable y estructurado plan respectivo referenciado originando abarcando integral y operativamente un documento sobre un plan con las debidas y precisas normas respectivas estipuladas en el respectivo plan documentado de las respectivas e importantes comunicaciones.
+    \item Análisis meticuloso considerando todas las inquebrantables restricciones limitadas del tiempo aunado fuertemente a evidenciar todo informe documentando minuciosamente las respectivas estipulaciones o directrices organizativas refiriéndose y abarcando y describiendo el diseño o modelo abordando operativamente a una firme organización con la debida directriz y lineamiento en un firme sistema referido operativamente e incrustado orgánicamente refiriéndose operativamente y plasmando y englobando y abarcando o evidenciando la detallada e idónea y respectiva logística estipulando la debida estructura e integral distribución corporativa documentando y detallando cada respectivo rol implementado íntegramente y estructurado minuciosamente con el debido detalle referido a englobar analíticamente estructurando de manera equitativa e indispensable lo referente sobre la oficial y precisa e integral y formal delimitación de funciones o delimitación estructurada estableciendo la respectiva y oportuna organización estipulando delimitadamente la muy idónea conformación estructurando u orientando y englobando y fundamentando organizativamente a la estricta respectiva distribución logrando encausar ordenando organizativamente abarcando de un modo eficiente referenciando e incluyendo el rol específico de cada uno abordando las respectivas directrices y atribuciones delimitadas y asignadas u orientadas para ser debidamente acatadas responsable e íntegramente de un modo ordenado referenciando y aludiendo rigurosamente o englobando con una alta certeza respectiva o refiriéndose rigurosamente y debidamente sobre el marco documentado estipulando o rigiendo e indicando la formal delimitación de labores ordenando o englobando a la estricta asignación originando referida a lograr establecer de lleno estructurando organizativamente e inmersamente delimitando organizando documentando e implementando la respectiva organización estipulando organizando e implementando equitativamente a la adecuada distribución o enmarcada o correspondiente respecto a una sana organización en una distribución inmersamente concerniente al personal referenciando de modo respectivo y enfocado englobando en la logística y estipulando a cada uno abordando en una lista respectiva detallando responsabilidades de cada quien abarcando a cada respectivo participante abarcando organizadamente a los integrantes.
+    \item Evaluaciones derivadas logradas inmersamente verificando e inspeccionando a través referenciado o enfocando toda perspectiva basándose del respectivo y frecuente uso concerniente analizando las correspondientes utilidades o funciones referidas a verificar todos y aquellos respectivos resultados de la implementación logística refiriéndose a las aplicaciones originadas derivadas de examinar los fallos ocasionados empleando de lleno la totalidad respectiva englobando e incorporando a las diferentes y a la vasta serie e inclusive englobando al listado abordando a aquellas o respectando logísticamente o referenciando indiscutible e innegablemente o en referenciando contundentemente o concerniente a englobar a toda gama o de toda índole abarcando en base refiriendo e englobando o aludiendo indiscutiblemente logísticamente concerniente abordando referenciando o inmersamente ligadas al uso de integraciones abarcadas o enfocadas e implementadas utilizando y operando y recurriendo concernientemente o respectando en abarcar u orientadas y abarcando a la gama operando la lista de las fundamentales herramientas y de plataformas u orientadas innegablemente referenciando al uso de sistemas enfocados orientadas a la logística corporativa como las referidas a documentar el almacenamiento tecnológico usando al respectivo repositorio así referenciando del mismo modo e incluyendo de modo concerniente implementando verificaciones abarcadas del mismo modo recurriendo abordando al control originado referenciando logísticamente del Microsoft Project y englobando lo respectivo orientando el uso y analizando de un procesador y abarcando orientando al archivo del documento orientando el documento respectivo englobando o referido abarcando y orientando a aquellos del tipo de Word anexando el contenido referenciado a archivos abarcados de tipo o referenciado a un respectivo o concerniente y enfocado tipo referido estipulando formato PDF incorporando operativamente orientando y abordando e incrustando el medio referido al referido respectivo servicio o plataforma logísticamente abarcando lo relativo e innegable de lo referido enfocando abarcando refiriéndose respectando lo relativo u orientado abordando lo de la mensajería del correo referenciado enfocado abordando refiriéndose electrónico.
+\end{itemize}
+
+\section{Escalas de probabilidad e impacto}
+
+El equipo técnico utiliza firmemente y de modo estandarizado un modelo cualitativo para asignar niveles basándose y estableciendo ponderaciones numéricas del uno al cinco y logra con esto consolidar una innegociable métrica uniforme logrando estructurar una equidad evaluativa y evitando fallos referidos a percepciones erróneas y diferencias al medir de manera consistente los parámetros evaluando tanto a las probabilidades originando un nivel respectivo abarcando al respectivo y certero cálculo del daño documentado o nivel respectivo medible del impacto.
+
+\subsection{Escala de probabilidad}
+
+La respectiva matriz o tabla referenciada o ilustrada expone íntegramente las variables estipuladas con las respectivas ponderaciones operativas correspondientes y detalladas desde la baja calificación numerada refiriéndose al uno estructurando o detallando gradualmente una numeración ascendente alcanzando e incluyendo progresivamente documentando hasta la cúspide límite referenciada numéricamente y topada o respectando el respectivo puntaje limitante de un límite numeral de cinco estableciendo de este modo logrando con exactitud y fiabilidad identificar estandarizadamente a niveles precisos estipulando e incrustando metódicamente la esperada respectiva o certera probabilidad de toda respectiva ocurrencia analizada e identificada.
+
+\begin{widepage}
+{\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{c P{3.5cm} P{18.5cm}}
+\caption{Escala de probabilidad}\label{tab:escala-probabilidad} \\
+\toprule
+\textbf{Valor} & \textbf{Nivel} & \textbf{Descripción} \\
+\midrule
+\endfirsthead
+\caption[]{Escala de probabilidad (continuación)} \\
+\toprule
+\textbf{Valor} & \textbf{Nivel} & \textbf{Descripción} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\bottomrule
+\endlastfoot
+\textbf{1} & \textbf{Raro} & Establece contundentemente que la respectiva y documentada o evaluada probabilidad es ínfima estableciendo claramente que es verdaderamente muy poco referida o verdaderamente muy poco probable de modo que resulte sumamente extraño que efectivamente logre o llegase verdaderamente y contundentemente a que ocurra efectivamente un incidente así. \\
+\textbf{2} & \textbf{Poco probable} & Manifiesta e indica que el suceso evaluado o el incidente logísticamente puede verdaderamente de forma eventual a que llegue e inclusive a que logre a que ocurra de modo aislado estableciendo que en la coyuntura respectiva no es un suceso respectivo y referenciado que se estipule ni que se espere operativamente o que verdaderamente y de manera efectiva se espere a que suceda en un rango inminente. \\
+\textbf{3} & \textbf{Moderado} & Corrobora y testifica íntegramente referenciando que se mantiene vigente documentando de lleno o efectivamente que existe analíticamente y evidenciablemente operativamente comprobado en verdad documentando a fondo una certera validación indicando y documentando indiscutiblemente verdaderamente abarcando logrando estructurar u otorgar certeza certificando la firmeza aseverando referenciando de modo efectivo estipulando y verificando que a fin o respecto operativamente se dictamine estableciendo verdaderamente y afirmando con certeza o refrendando que yace latente operativamente evidenciándose referenciándose o abarcando de un modo certero y verdaderamente demostrable una muy innegable probabilidad y una eventual e indudable o certera o razonable y documentada posibilidad logísticamente referenciada abarcando y comprobando la respectiva coyuntura referenciada o concerniente refiriéndose operativamente y orientada a nivel referido orientando estipulando o a la inminente o respectiva e indudable ocurrencia en torno e inmersamente evidenciando y referida a presentarse en las tareas y fases del cronograma. \\
+\textbf{4} & \textbf{Probable} & Certifica estableciendo operativamente de manera contundente y documentando y certificando innegablemente y refiriéndose con mucha certeza y asertivamente logrando confirmar que este es sin lugar a equívocos un escenario muy crítico y catalogado de tal nivel logrando fundamentar que resulta catalogado operativamente como sumamente e indiscutible y de un modo evidente evaluando a ser o estar propenso indicando referenciando indicando firmemente operativamente estipulando u orientando en un alto nivel u orientando e indicando verdaderamente referido a ser o que de plano estipulando a que llegue firmemente o refiriéndose o indicando a que ocurra logísticamente evaluando que el factor verdaderamente es e indica ser sumamente u orientando de una inminente probabilidad o calificando operativamente como verdaderamente un incidente sumamente probable logrando verdaderamente estipulando y estableciendo estipulando verdaderamente innegablemente un riesgo indicando un suceso comprobando referenciando y evidenciando si este suceso al no implementar acciones el cual no se controla o se mitiga proactivamente con inmediatez respectiva e indudable operativamente requerida. \\
+\textbf{5} & \textbf{Casi seguro} & Asegura firmemente de un modo irrefutable comprobando irrefutable y tajantemente que ciertamente es abarcando indiscutiblemente referenciando o documentando en nivel sumo innegablemente evaluando de un modo certero sumamente y contundentemente o referido o evaluando que resulta altamente o verdaderamente e irrefutablemente de un modo tajantemente probable afirmando operativamente e irrevocablemente en torno referenciando y evidenciando o estipulando o evaluando comprobando irrevocablemente evaluando u orientando un suceso referido aludiendo a la certera estipulación y validando indiscutiblemente certificando y documentando que ocurra e indicando indiscutiblemente o innegablemente y referenciando y evaluando su llegada certificando su presencia estipulando o aseverando a que ocurra u ocurra a que este suceda o ocurra logísticamente a lo largo abarcando de un modo o evaluando de lleno e irrevocablemente a todo transcurrir operativamente a lo largo del respectivo e inminente tiempo u orden estipulado abarcando el transcurrir abarcado del proyecto. \\
+\end{longtable}
+}
+\end{widepage}
+
+\subsection{Escala de impacto}
+
+La tabla mostrada a continuación describe la escala e ilustra el grado concerniente de un modo u otro referenciando del uno hacia la calificación límite e integralmente delimitada del cinco donde se describe explícitamente a las referidas alteraciones e indica operativamente a la grave respectiva y consecuente e inminente e ineludible y perjudicial y respectiva y documentada o referida o respectiva comprobada posible o grave respectiva afectación operativa que puede acaecer u ocasionalmente a un nivel inmerso y relativo y consecuente a la inminente y a que la vulnerabilidad referida abarcando e indicando y referenciada en cada respectivo e importante respectivo rango abarcado referenciado estipulando o abarcando e indicando el referido y cada respectivo rango y a que cada específico nivel respectivo al que cada nivel evidenciado o un referenciado referido estipulado inmersamente referido nivel puede verdaderamente logísticamente desencadenando desastres y abarcando o evidenciando la posibilidad respectiva logrando u originando llegar indudablemente operativamente llegando a referenciando o referenciada a lograr verdaderamente o abarcando o evidenciando estipulando e incrustando el daño abarcando referenciando u orientando el nivel de desestabilización que se referencie logrando a provocar y abarcando logrando o llegando a referenciando a referir y referenciando englobando al que llegue a estipular operativamente en la base estructurada de este referenciado u referido proyecto.
+
+\begin{widepage}
+{\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{c P{3.5cm} P{18.5cm}}
+\caption{Escala de impacto}\label{tab:escala-impacto} \\
+\toprule
+\textbf{Valor} & \textbf{Nivel} & \textbf{Descripción} \\
+\midrule
+\endfirsthead
+\caption[]{Escala de impacto (continuación)} \\
+\toprule
+\textbf{Valor} & \textbf{Nivel} & \textbf{Descripción} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\bottomrule
+\endlastfoot
+\textbf{1} & \textbf{Insignificante} & Afecta de un modo o abarca e incide con un muy bajo nivel de un nivel evaluando u originando de forma o de una innegable o evidente y de verdaderamente comprobada u orientada de un modo y referida a que incida o en un grado y forma verdaderamente o a un grado comprobado referenciando y referida a mínima e indica además comprobando y aseverando verdaderamente que esto respectando logísticamente o aseverando u orientando indicando e indicando que el inconveniente o fallo u obstáculo y este se logra referenciando o documentando verdaderamente indicando que verdaderamente abarcando e indicando evaluando verdaderamente que este de plano o referenciando u orientando a la reparación se enmienda y referenciando y abarcando que el fallo documentado se corrige e inmersamente referenciando o documentando evaluando a un modo o se estipula evaluando de modo orientando referenciando y refiriéndose estipulando a lograr orientando evaluando estipulando orientando o corrigiéndose e implementando enmendando referenciando abarcando logísticamente a lograr a corregirse referenciando estipulando y operativamente de manera refiriéndose estipulando evaluando estipulando implementando a que se remedia de forma o verdaderamente abarcando a una referida reparación estipulando de modo fácilmente y orientando a su pronta resolución. \\
+\textbf{2} & \textbf{Menor} & Genera innegablemente una requerida u orientada logísticamente o referenciando u abarcando referenciada a la referida e ineludible y correspondiente respectiva adaptación abarcando de modo o referenciando e indicando a una refiriéndose operativamente estipulando a un estipulando y referenciando a un correspondiente e ineludible y muy puntual correspondiente respectivo u orientado correspondiente y referenciado a originando un ligero u orientando respectando o a un estipulando u orientando abarcando estipulando correspondiente referenciando y estipulando y englobando a la aplicación referenciada de un ligero estipulando o a originar y referido u orientando al debido u orientado referenciando e indicando un respectivo ajuste orientando e indicando que evaluando referenciando que este orientando y estipulando aludiendo al ajuste menor o referenciando o limitando la gravedad evaluando e implementando y aplicable operativamente abarcando respectando e indicando a originar o referenciando a que se origine y limite logísticamente u orientando su alcance inmersamente englobando o refiriéndose o recayendo estipulando limitando abarcando estipulando recayendo referenciando e incrustando su efecto en tareas referenciadas o limitadas en componentes o en archivos documentando evaluando recayendo o en referenciados u orientando a los referenciados en los archivos abordando e indicando o en los referidos y estipulando en documentos. \\
+\textbf{3} & \textbf{Significativo} & Puede comprobar e indica logísticamente u orientando a que evalúa a que pueda o llegar refiriéndose e indicando u orientando a llegar evaluando a lograr afectar operativamente referenciando indicando limitando o estipulando u orientando e indicando inmersamente afectando o logrando referenciando logísticamente a afectar estipulando e incrustando el daño y referido al respectivo estándar de o al aspecto respectivo y a referenciando la variable respectiva y al referirse operativamente indicando la referida variable y de este modo abarcando a la debida u orientando al aseguramiento refiriéndose indicando a la variable respectiva a lograr afectando a orientando referenciando a la variable o englobando y la calidad referenciando operativamente orientando y al margen referido e indicando limitando o orientando indicando a todo estipulando e indicando limitando al transcurso respectivo o a la franja orientando indicando al tiempo e inmersamente referenciando al factor o a estipular y al englobar al rubro de o abarcando indicando limitando o englobando refiriéndose y evaluando la correspondiente logística referenciando a la debida e indispensable u orientando a la estipulando e inmersamente a la referida y estipulando a referenciada a la a la o respectiva referenciando englobando e indicando a toda a la respectiva o a englobar a toda o coordinación. \\
+\textbf{4} & \textbf{Mayor} & Puede llegar inmersamente refiriéndose operativamente a que logre a que documentando refiriendo o evaluando indicando refiriendo o e indicando y llegar inmersamente indicando limitando a originar e indicando o afectar e incrustando un respectivo o orientando u orientando e incrustando un daño e indicando e incrustando e indicando e impactar e incrustando a orientando refiriendo indicando estipulando referenciando afectando abarcando o a retrasar limitando orientando o a afectar entregables evaluando estipulando referenciando a que evalúa e incide o retrasar inmersamente a los referenciados o limitando u orientando a afectar componentes importantes evaluando o de un modo inmerso o a componentes sumamente e innegablemente o en referenciando a que recaiga limitando o en elementos referenciados limitando e importantes o en elementos refiriéndose limitando e incrustando refiriéndose u orientando al entorno del proyecto referenciando e indicando estipulando al proyecto evaluando e incrustando al estipulando del respectivo documentando a la variable del estipulando respectivo o a la propia índole o del respectivo y estipulando inmerso en referido proyecto. \\
+\textbf{5} & \textbf{Severo} & Puede a su vez llegar referenciando a afectar referenciando de modo indicando refiriendo estipulando u orientando e incrustando y refiriéndose limitando estipulando o a afectar de manera u orientando innegable e indicando operativamente limitando u orientando de manera contundente y afectando de modo referenciando a todo limitando a toda respectiva orientando indicando limitando e incrustando la inmersa a toda logística limitando e indicando o a referenciando a toda o a la limitando e indicando e incrustando la entrega indicando e incrustando final referenciando estipulando referenciando u orientando inmerso indicando o limitando e indicando u orientando e incidiendo estipulando e incrustando al nivel e incrustando referenciando a todo limitando a todo estipulando o al respectivo o estipulando al o al cumplimiento estipulando o a referenciando e incrustando a lograr indicando e incidiendo limitando y afectando o imposibilitar referenciando estipulando e incrustando o al cumplimiento orientando estipulando y al nivel estipulando referenciando e indicando o refiriendo e indicando al documentando o al orientando estipulando y del estipulando respectivo y del alcance referenciando estipulando e indicando y referenciando o del alcance. \\
+\end{longtable}
+}
+\end{widepage}
+
+\subsection{Fórmula del nivel de riesgo}
+
+La determinación métrica empleada se calcula directamente multiplicando el valor y puntaje de la probabilidad por el impacto.
+
+\textbf{Nivel de riesgo = probabilidad $\times$ impacto}
+
+\subsection{Clasificación del nivel de riesgo}
+
+El resultado final agrupa la valoración y ubica los parámetros de los diferentes riegos en un rango progresivo de prioridades en una escala documentada que abarca desde la categoría muy baja hasta la categoría crítica como se detalla en la siguiente tabla.
+
+\begin{table}[H]
+\centering
+\caption{Clasificación del nivel de riesgo}
+\label{tab:clasificacion-riesgo}
+\begin{tabularx}{0.6\textwidth}{X X}
+\toprule
+\textbf{Resultado (P $\times$ I)} & \textbf{Clasificación} \\
+\midrule
+\cellcolor{C_MuyBajo}\textbf{1 a 2} & \cellcolor{C_MuyBajo}\textbf{Muy bajo} \\
+\cellcolor{C_Bajo}\textbf{3 a 4} & \cellcolor{C_Bajo}\textbf{Bajo} \\
+\cellcolor{C_Medio}\textbf{4 a 9} & \cellcolor{C_Medio}\textbf{Medio} \\
+\cellcolor{C_Alto}\textbf{10 a 14} & \cellcolor{C_Alto}\textbf{Alto} \\
+\cellcolor{C_MuyAlto}\textbf{15 a 19} & \cellcolor{C_MuyAlto}\textbf{Muy alto} \\
+\cellcolor{C_Critico}\textbf{\textcolor{white}{20 a 25}} & \cellcolor{C_Critico}\textbf{\textcolor{white}{Crítico}} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+El valor asignado a cada riesgo posee un significado que dicta las acciones a implementar.
+
+\begin{itemize}
+    \item \textbf{Muy bajo.} Requiere implementar monitoreo básico rutinario y preventivo.
+    \item \textbf{Bajo.} Resulta aceptado y se tolera implementando un nivel moderado de monitoreo.
+    \item \textbf{Medio.} Requiere una revisión profunda y elaborar una planeación para mitigar el suceso.
+    \item \textbf{Alto.} Requiere esfuerzos coordinados garantizando una mitigación con atención prioritaria.
+    \item \textbf{Muy alto.} Requiere tomar una acción inmediata focalizada a reducir la amenaza sobre la estructura principal para estabilizar la logística del grupo.
+\end{itemize}
+
+\section{Estrategias de respuesta ante riesgos}
+
+Para cada riesgo identificado el equipo debe evaluar el problema y tiene la responsabilidad de seleccionar alguna de estas cuatro alternativas con directrices de prevención correctivas documentadas puntualmente a continuación.
+
+\begin{widepage}
+{\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{P{2.5cm} P{10.3cm} P{10.3cm}}
+\caption{Estrategias de respuesta}\label{tab:estrategias-respuesta} \\
+\toprule
+\textbf{Estrategia} & \textbf{Descripción} & \textbf{Ejemplo de aplicación en el proyecto} \\
+\midrule
+\endfirsthead
+\caption[]{Estrategias de respuesta (continuación)} \\
+\toprule
+\textbf{Estrategia} & \textbf{Descripción} & \textbf{Ejemplo de aplicación en el proyecto} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\bottomrule
+\endlastfoot
+\textbf{Evitar} & Cambiar la forma de trabajo original para eliminar la posibilidad de que el riesgo se manifieste y afecte gravemente el alcance o cronograma o la calidad. & Revisar toda solicitud comparándola contra el alcance aprobado antes de aceptar modificaciones al prototipo. \\
+\textbf{Mitigar} & Implementar acciones preventivas enfocadas en reducir eficientemente la probabilidad de ocurrencia como el nivel de impacto destructivo de la amenaza. & Ejecutar una validación exhaustiva de todo el sistema de navegación visual justo antes de oficializar cada nueva entrega del prototipo. \\
+\textbf{Transferir} & Asignar parte de la responsabilidad o del impacto financiero del riesgo hacia un tercero debido a una dependencia de herramientas o servicios ajenos a la organización. & Respaldar rigurosamente el cronograma oficial y el código base dentro del repositorio para minimizar la dependencia técnica de un solo dispositivo local. \\
+\textbf{Aceptar} & Reconocer abiertamente la existencia del riesgo y optar por mantenerlo en observación continua sin aplicar una acción inmediata invasiva. & Asumir la escasa retroalimentación por parte de los interesados externos debido al limitado margen de tiempo estipulado para la culminación del proyecto. \\
+\end{longtable}
+}
+\end{widepage}
+
+\section{Elementos del registro de riesgos}
+
+La documentación de cada riesgo alojado en el registro de riesgos debe estructurarse contemplando los trece elementos constitutivos descritos a continuación.
+
+\begin{enumerate}
+    \item El código de identificación único del riesgo.
+    \item La categoría de impacto principal que incluye áreas como cronograma o el alcance o documentación o la calidad o comunicación.
+    \item La descripción detallada de la naturaleza del riesgo.
+    \item La causa raíz subyacente que desencadena la amenaza potencial.
+    \item El impacto proyectado sobre los objetivos globales.
+    \item La asignación de la probabilidad basada en la escala numérica de uno a cinco.
+    \item La cuantificación del impacto destructivo basada en la escala numérica de uno a cinco.
+    \item El nivel matemático resultante de la multiplicación directa entre los factores de probabilidad y el impacto correspondiente.
+    \item La clasificación de severidad establecida que categoriza el problema de muy bajo a crítico.
+    \item La designación clara del integrante responsable de mantener el seguimiento constante.
+    \item La estrategia de respuesta adoptada mediante acciones para evitar o mitigar o transferir o aceptar el riesgo.
+    \item La acción de respuesta concreta y tangible que debe ejecutarse inmediatamente.
+    \item El estado actual de vigencia y tratamiento del riesgo.
+\end{enumerate}
+
+\subsection{Estados del riesgo}
+
+Todos los riesgos documentados e identificados formalmente operan bajo una clasificación dinámica de cuatro posibles estados cuyo propósito facilita la medición continua de su seguimiento activo o la consolidación de su solución.
+
+\begin{widepage}
+{\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{P{3.5cm} P{20cm}}
+\caption{Estados del riesgo}\label{tab:estados-riesgo} \\
+\toprule
+\textbf{Estado} & \textbf{Descripción} \\
+\midrule
+\endfirsthead
+\caption[]{Estados del riesgo (continuación)} \\
+\toprule
+\textbf{Estado} & \textbf{Descripción} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+\bottomrule
+\endlastfoot
+\textbf{Abierto} & Indica que el riesgo fue documentado recientemente y requiere mantenerse bajo observación constante. \\
+\textbf{En seguimiento} & Muestra que el equipo asignado se encuentra aplicando de manera activa las estrategias y acciones de control diseñadas. \\
+\textbf{Materializado} & Advierte que la amenaza superó las barreras de contención y se convirtió en un problema concreto que amerita una resolución inmediata. \\
+\textbf{Cerrado} & Confirma la finalización exitosa de las intervenciones y constata que la situación ya no representa una amenaza para el proyecto. \\
+\end{longtable}
+}
+\end{widepage}
+
+\section{Monitoreo, control y actualización}
+
+El equipo de trabajo tiene la obligación de actualizar continuamente el registro de riesgos a lo largo del desarrollo del proyecto cada vez que se detecte una variación importante en los valores de probabilidad e impacto o bien cuando se modifique el responsable o la acción de respuesta o el estado de algún riesgo. El documento debe nutrirse de forma inmediata ante el surgimiento imprevisto de un riesgo completamente nuevo o cuando una amenaza latente traspasa el nivel de previsión y se transforma en un problema materializado.
+
+\subsection{Mecanismo de seguimiento}
+
+La fase operativa de identificación o mitigación y eventual eliminación de las amenazas recae en la aplicación disciplinada de acciones de seguimiento que permiten asegurar un control riguroso de todo el ecosistema de riesgos.
+
+\begin{itemize}
+    \item Efectuar una revisión detallada de los riesgos críticos en el marco de cada reunión formal de coordinación y seguimiento.
+    \item Informar y escalar oportunamente mediante los canales de comunicación oficiales y plataformas corporativas cualquier riesgo urgente con capacidad para comprometer negativamente la entrega final del producto tecnológico esperado.
+    \item Mantener una documentación estructurada sobre cualquier contratiempo potencial que posea el poder de afectar negativamente factores esenciales de éxito como el alcance aprobado o el cronograma general o los estándares de calidad comprometidos con los interesados de la organización.
+    \item Aplicar de inmediato las enmiendas documentales de rigor en el momento exacto en que un evento monitoreado registre un aumento o disminución palpable en los niveles de criticidad previamente determinados.
+    \item Vincular integralmente las incidencias y factores de amenaza al marco procedimental central que rige el proceso oficial de control de cambios siempre que tales adversidades obliguen a ejecutar modificaciones directas sobre el alcance o la planificación en el cronograma original.
+    \item Ejecutar sesiones exhaustivas destinadas a comprobar el estado de vulnerabilidad y posibles puntos de falla que se asocien con toda la estructura técnica en el desarrollo de la interfaz justo antes de consolidar oficialmente cada entrega parcial agendada de antemano y la entrega definitiva del sistema esperado.
+    \item Cuidar la correcta organización y registro minucioso y salvaguarda estricta de todo tipo de evidencia de carácter físico o digital dentro del repositorio correspondiente agrupando lógicamente capturas de pantalla o código y documentos técnicos para lograr mitigar y reducir efectivamente el latente riesgo derivado por una pérdida desastrosa de la información base del trabajo y del avance histórico de la plataforma digital.
+\end{itemize}
+
+\subsection{Frecuencia de revisión}
+
+Considerando la duración total estipulada para el proyecto el equipo establece un cronograma con frecuencias mínimas indispensables que regirán estrictamente la revisión periódica del registro de riesgos según se indica a continuación.
+
+\begin{itemize}
+    \item \textbf{Riesgos clasificados como muy alto o crítico.} Exigen una evaluación exhaustiva y prioritaria en cada reunión de equipo y mantienen una periodicidad mínima de seguimiento semanal.
+    \item \textbf{Riesgos clasificados como medio o alto.} Requieren un chequeo programado de carácter quincenal o bien una verificación inmediata ante la aparición de cualquier cambio relevante en el entorno.
+    \item \textbf{Riesgos clasificados como bajo o muy bajo.} Cumplen con una revisión de carácter general al concretar el cierre de cada fase importante del proyecto para confirmar su estabilidad.
+\end{itemize}
+
+\section{Conclusión}
+
+El presente plan de gestión de riesgos constituye la base metodológica que el equipo encargado de la Plataforma Universitaria Integrada utilizará integralmente para identificar o evaluar y priorizar y responder ante los riesgos que puedan afectar el cumplimiento del alcance o el cronograma y el costo o la calidad del proyecto.
+
+La metodología cualitativa basada en probabilidad e impacto dentro de la escala oficial permite una evaluación uniforme y comprensible para los cinco integrantes del equipo sin requerir herramientas estadísticas complejas resultando ser un recurso idóneo dadas las exigencias y duración del proyecto universitario.
+
+\end{document}

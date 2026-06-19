@@ -1,0 +1,363 @@
+\documentclass[11pt,spanish]{article}
+
+% =========================================================
+% PLANTILLA BASE PARA INFORMES ACADÉMICOS / TÉCNICOS
+% =========================================================
+
+% --- Idioma y codificación ---
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{newunicodechar}
+\newunicodechar{₡}{\textcolonmonetary}
+
+% --- Márgenes / papel ---
+\usepackage[
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headsep=0.5cm,
+    footskip=0.8cm
+]{geometry}
+
+% --- Matemáticas ---
+\usepackage{amsmath}
+
+% --- Tablas, enlaces y elementos visuales ---
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes.geometric,arrows.meta,calc}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage[hidelinks]{hyperref}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{hhline}
+
+% --- Encabezado y pie de página ---
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+% --- Interlineado ---
+\linespread{1.2}
+\sloppy
+
+% =========================================================
+% DATOS DEL DOCUMENTO
+% =========================================================
+\newcommand{\Institucion}{Instituto Tecnológico de Costa Rica}
+\newcommand{\Campus}{Campus Tecnológico Central Cartago}
+\newcommand{\DocumentoTitulo}{Matriz de Probabilidad e Impacto}
+\newcommand{\DocumentoSubtitulo}{Plataforma Universitaria Integrada Plataforma Modernización y Centralización de Procesos Académicos y Administrativos}
+\newcommand{\Curso}{Administración de proyectos}
+\newcommand{\Profesor}{Alicia Marcela Salazar Hernández}
+\newcommand{\FechaDocumento}{18 de junio de 2026}
+\newcommand{\PeriodoAcademico}{I Semestre}
+\newcommand{\AnioDocumento}{2026}
+\newcommand{\AutoresPortada}{%
+    \begin{tabular}{l@{\hspace{1.5cm}}r}
+        Tamara Robles Camacho & 2024099342 \\
+    \end{tabular}%
+}
+\newcommand{\DocHeaderLeft}{}
+\newcommand{\DocHeaderRight}{Matriz de Probabilidad e Impacto}
+\newcommand{\DocFooterRight}{Página~\thepage\ de~\pageref{LastPage}}
+
+% Metadatos PDF
+\title{\DocumentoTitulo}
+\author{\AutoresPortada}
+\date{\FechaDocumento}
+
+% =========================================================
+% COLORES
+% =========================================================
+\definecolor{TecBlue}{RGB}{0, 61, 130}
+\definecolor{TecRed}{RGB}{204, 0, 0}
+\definecolor{TecGray}{RGB}{100, 100, 100}
+\definecolor{LightGray}{RGB}{240, 240, 240}
+\definecolor{DarkBlue}{RGB}{0, 40, 90}
+
+% Colores para Nivel de Riesgo
+\definecolor{C_MuyBajo}{HTML}{47D45A}
+\definecolor{C_Bajo}{HTML}{92D050}
+\definecolor{C_Medio}{HTML}{FFFF00}
+\definecolor{C_Alto}{HTML}{FFC000}
+\definecolor{C_MuyAlto}{HTML}{EE0000}
+\definecolor{C_Critico}{HTML}{C00000}
+
+% =========================================================
+% CONFIGURACIÓN DE ESTILOS
+% =========================================================
+
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcolumntype{P}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyhead[L]{\DocHeaderLeft}
+\fancyhead[R]{\DocHeaderRight}
+\fancyfoot[R]{\DocFooterRight}
+
+\setlist[itemize]{label=\textbullet, leftmargin=*, itemsep=0.2em, topsep=0.2em}
+\setlist[enumerate]{leftmargin=*, itemsep=0.2em, topsep=0.2em}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.8em}
+
+% =========================================================
+% MACROS Y COMANDOS PERSONALIZADOS
+% =========================================================
+
+% --- Portada ---
+\newcommand{\MakeCover}{%
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+
+{\bfseries \huge \Institucion \par}
+\vspace{0.25cm}
+{\LARGE \Campus \par}
+
+\vfill
+
+{\huge \DocumentoTitulo \par}
+
+\vfill
+
+{\bfseries \LARGE Profesora \par}
+{\Large \Profesor \par}
+
+\vfill
+
+{\bfseries \LARGE Estudiante \par}
+{\Large \AutoresPortada \par}
+
+\vfill
+
+{\bfseries\LARGE Fecha \par}
+{\Large \FechaDocumento \par}
+
+\vfill
+
+{\LARGE \PeriodoAcademico \par}
+{\LARGE \AnioDocumento \par}
+
+\end{titlepage}%
+}
+
+% Estilo equivalente para páginas horizontales.
+\fancypagestyle{widefancy}{%
+    \fancyhf{}%
+    \fancyhead[R]{\DocHeaderRight}%
+    \renewcommand{\headrulewidth}{0.4pt}%
+    \renewcommand{\footrulewidth}{0.4pt}%
+    \fancyfoot[R]{\DocFooterRight}%
+}
+
+% =========================================================
+% PÁGINAS HORIZONTALES PARA TABLAS ANCHAS
+% =========================================================
+\makeatletter
+\newcommand{\SyncPageBuilderDimensions}{%
+    \global\vsize=\textheight
+    \global\@colroom=\textheight
+    \global\@colht=\textheight
+}
+\makeatother
+
+\newenvironment{widepage}{%
+    \clearpage
+    \hypersetup{pageanchor=false}%
+    \paperwidth=297mm
+    \paperheight=210mm
+    \pdfpagewidth=297mm
+    \pdfpageheight=210mm
+    \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm}%
+    \setlength{\textwidth}{243mm}%
+    \setlength{\textheight}{156mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \pagestyle{widefancy}%
+}{%
+    \clearpage
+    \paperwidth=210mm
+    \paperheight=297mm
+    \pdfpagewidth=210mm
+    \pdfpageheight=297mm
+    \restoregeometry
+    \SyncPageBuilderDimensions
+    \hypersetup{pageanchor=true}%
+    \pagestyle{fancy}%
+}
+
+% =========================================================
+% INICIO DEL DOCUMENTO
+% =========================================================
+
+\begin{document}
+\hypersetup{pageanchor=false}
+
+% =========================
+% Portada
+% =========================
+\MakeCover
+
+% =========================
+% Índice
+% =========================
+\pagenumbering{roman}
+\pagestyle{empty}
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+\pagestyle{fancy}
+
+% =========================
+% Contenido
+% =========================
+\section{Información general del documento}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{p{5cm} Y}
+\toprule
+\textbf{Nombre del proyecto} & Plataforma Universitaria Integrada \\
+\textbf{Organización} & Universidad Tecnológica La Mejor \\
+\textbf{Documento} & \DocumentoTitulo \\
+\textbf{Directora del proyecto} & Tamara Robles Camacho \\
+\textbf{Fecha} & \FechaDocumento \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Introducción}
+
+La matriz de probabilidad e impacto es la representación gráfica que nos permite visualizar de forma inmediata el nivel de criticidad de cada riesgo identificado en el proyecto Plataforma Universitaria Integrada. Esta matriz combina la escala de probabilidad en el eje vertical con la escala de impacto en el eje horizontal y sigue la metodología establecida en el plan de gestión de riesgos.
+
+Cada celda de la matriz representa el resultado de multiplicar probabilidad por impacto y se colorea según el rango de clasificación correspondiente. Los rangos son Bajo en verde o Medio en amarillo o Alto en naranja o Crítico en rojo y los 16 riesgos documentados en el registro de riesgos se ubican dentro de la matriz según su evaluación específica.
+
+\section{Escalas de referencia}
+
+La matriz se elabora a partir de las escalas definidas en el plan de gestión de riesgos donde la probabilidad e impacto son evaluados de 1 a 5 y el nivel de riesgo resulta de la fórmula matemática donde el nivel es igual a la probabilidad multiplicada por el impacto.
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{0.8\textwidth}{c c c Y}
+\toprule
+\textbf{Resultado (P $\times$ I)} & \textbf{Clasificación} & \textbf{Color} & \textbf{Acción requerida} \\
+\midrule
+1 a 5 & \cellcolor{C_Bajo} Bajo & Verde & Monitoreo básico \\
+6 a 10 & \cellcolor{C_Medio} Medio & Amarillo & Revisión periódica \\
+11 a 15 & \cellcolor{C_Alto} Alto & Naranja & Plan de mitigación prioritario \\
+16 a 25 & \cellcolor{C_Critico}\textcolor{white}{\textbf{Crítico}} & Rojo & Acción inmediata \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Matriz de probabilidad e impacto}
+
+La siguiente matriz de 5 por 5 ubica los 16 riesgos del proyecto según su evaluación de probabilidad e impacto y está coloreada según el nivel resultante.
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{2}
+\setlength{\tabcolsep}{4pt}
+\makebox[\textwidth][c]{
+\begin{tabular}{|c|l|P{3.2cm}|P{2.5cm}|P{3cm}|P{3cm}|P{2.8cm}|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{}} & \multicolumn{5}{c|}{\multirow{1}{*}{\textbf{Impacto}}} \\ \cline{3-7}
+\multicolumn{2}{|c|}{} & \centering\textbf{Insignificante} \newline \textbf{1} & \centering\textbf{Menor} \newline \textbf{2} & \centering\textbf{Significativo} \newline \textbf{3} & \centering\textbf{Mayor} \newline \textbf{4} & \centering\arraybackslash\textbf{Severo} \newline \textbf{5} \\ \hline
+\multirow{5}{*}[-3em]{\rotatebox{90}{\textbf{Probabilidad}}} 
+& \textbf{5 Casi seguro} & \cellcolor{C_Medio}\centering Medio 5 & \cellcolor{C_Alto}\centering Alto 10 & \cellcolor{C_MuyAlto}\centering Muy alto 15 & \cellcolor{C_Critico}\centering\textcolor{white}{\textbf{Crítico 20}} & \cellcolor{C_Critico}\centering\arraybackslash\textcolor{white}{\textbf{Crítico 25}} \\ \hhline{~|-|-|-|-|-|-|}
+& \textbf{4 Probable} & \cellcolor{C_Medio}\centering medio 4 & \cellcolor{C_Medio}\centering Medio 8 & \cellcolor{C_Alto}\centering Alto 12 (R-09, R-10) & \cellcolor{C_MuyAlto}\centering Muy alto 16 (R-03, R-05) & \cellcolor{C_Critico}\centering\arraybackslash\textcolor{white}{\textbf{Crítico 20 (R-01, R-02)}} \\ \hhline{~|-|-|-|-|-|-|}
+& \textbf{3 Moderado} & \cellcolor{C_Bajo}\centering Bajo 3 & \cellcolor{C_Medio}\centering Medio 6 & \cellcolor{C_Medio}\centering Medio 9 (R-15, R-16) & \cellcolor{C_Alto}\centering Alto 12 (R-04, R-07, R-11, R-12, R-14) & \cellcolor{C_MuyAlto}\centering\arraybackslash Muy alto 15 (R-06) \\ \hhline{~|-|-|-|-|-|-|}
+& \textbf{2 Poco probable} & \cellcolor{C_MuyBajo}\centering Muy Bajo 2 & \cellcolor{C_Bajo}\centering Bajo 4 & \cellcolor{C_Medio}\centering Medio 6 & \cellcolor{C_Medio}\centering Medio 8 (R-08, R-13) & \cellcolor{C_Alto}\centering\arraybackslash Alto 10 \\ \hhline{~|-|-|-|-|-|-|}
+& \textbf{1 Raro} & \cellcolor{C_MuyBajo}\centering Muy bajo 1 & \cellcolor{C_MuyBajo}\centering Muy Bajo 2 & \cellcolor{C_Bajo}\centering Bajo 3 & \cellcolor{C_Medio}\centering Medio 4 & \cellcolor{C_Medio}\centering\arraybackslash Medio 5 \\ \hline
+\end{tabular}
+}
+\end{table}
+
+\textbf{Leyenda de colores}
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\makebox[\textwidth][c]{
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\cellcolor{C_MuyBajo} Muy bajo (1-2) & \cellcolor{C_Bajo} Bajo (3-4) & \cellcolor{C_Medio} Medio (4-9) & \cellcolor{C_Alto} Alto (10-14) & \cellcolor{C_MuyAlto} Muy alto (15-19) & \cellcolor{C_Critico}\textcolor{white}{Crítico (20-25)} \\ \hline
+\end{tabular}
+}
+\end{table}
+
+\section{Tabla de ubicación de riesgos}
+
+La siguiente tabla detalla la posición exacta de cada riesgo dentro de la matriz.
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{c Y c c c c}
+\toprule
+\textbf{Código} & \textbf{Riesgo} & \textbf{Prob.} & \textbf{Imp.} & \textbf{Nivel} & \textbf{Clasificación} \\
+\midrule
+R-01 & Restricción fuerte de tiempo & 4 & 5 & 25 & \cellcolor{C_Critico}\textcolor{white}{\textbf{Crítico}} \\
+R-02 & Alcance creciente o scope creep & 4 & 5 & 20 & \cellcolor{C_Critico}\textcolor{white}{\textbf{Crítico}} \\
+R-03 & Inconsistencias entre documentos & 4 & 4 & 16 & \cellcolor{C_MuyAlto} Muy alto \\
+R-04 & Subestimación del esfuerzo de la interfaz & 3 & 4 & 12 & \cellcolor{C_Alto} Alto \\
+R-05 & Disponibilidad limitada del equipo & 4 & 4 & 16 & \cellcolor{C_MuyAlto} Muy alto \\
+R-06 & Errores críticos de navegación en el prototipo & 3 & 5 & 15 & \cellcolor{C_MuyAlto} Muy alto \\
+R-07 & Baja usabilidad del prototipo & 3 & 4 & 12 & \cellcolor{C_Alto} Alto \\
+R-08 & Problemas con Microsoft Project & 2 & 4 & 8 & \cellcolor{C_Medio} Medio \\
+R-09 & Problemas con el repositorio o pérdida de versiones & 4 & 3 & 12 & \cellcolor{C_Alto} Alto \\
+R-10 & Cambios tardíos cerca de la entrega & 4 & 3 & 12 & \cellcolor{C_Alto} Alto \\
+R-11 & Falta de criterios claros de aceptación & 3 & 4 & 12 & \cellcolor{C_Alto} Alto \\
+R-12 & Mala comunicación entre integrantes & 3 & 4 & 12 & \cellcolor{C_Alto} Alto \\
+R-13 & Inconsistencia en el presupuesto del proyecto & 2 & 4 & 8 & \cellcolor{C_Medio} Medio \\
+R-14 & Baja validación de stakeholders externos & 3 & 4 & 12 & \cellcolor{C_Alto} Alto \\
+R-15 & Expectativa de funcionalidades no incluidas & 3 & 3 & 9 & \cellcolor{C_Medio} Medio \\
+R-16 & Falta de evidencia final organizada & 3 & 3 & 9 & \cellcolor{C_Medio} Medio \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Análisis de concentración de riesgos}
+
+La distribución de los 16 riesgos dentro de la matriz revela un patrón de concentración importante para la toma de decisiones del equipo.
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{c c Y}
+\toprule
+\textbf{Clasificación} & \textbf{Cantidad} & \textbf{Observación} \\
+\midrule
+\cellcolor{C_Critico}\textcolor{white}{\textbf{Crítico}} & 2 & Concentrados en el cuadrante superior derecho de la matriz y relacionados con tiempo y alcance. \\
+\cellcolor{C_MuyAlto} Muy alto & 3 & Se posicionan en la celda Probabilidad 4 con Impacto 4 y relacionados con documentación además de desarrollo de la interfaz y disponibilidad del equipo. \\
+\cellcolor{C_Alto} Alto & 7 & La mayoría se agrupa en la celda Probabilidad 3 con Impacto 4 y Probabilidad 4 con Impacto 4 vinculados a calidad así como esfuerzo de la interfaz y herramientas y comunicación y cambios. \\
+\cellcolor{C_Medio} Medio & 4 & Relacionados con presupuesto y posibilidad de fallas en herramientas o falta de evidencia final y funcionalidad no incluidas siendo no urgentes pero deben mantenerse visibles. \\
+\cellcolor{C_Bajo} Bajo & 0 & No se identificaron riesgos de nivel bajo. \\
+\cellcolor{C_MuyBajo} Muy bajo & 0 & No se identificaron riesgos de nivel muy bajo y esto refleja un proyecto con restricciones reales de tiempo y alcance. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+La ausencia de riesgos clasificados como bajos y muy bajos confirma que el proyecto opera bajo condiciones de presión real y un plazo fijo de entrega y múltiples entregables documentales y un prototipo técnico que debe completarse en paralelo. Esto refuerza la importancia de dar seguimiento constante a los dos riesgos críticos y los tres muy altos durante toda la ejecución del proyecto.
+
+\section{Conclusión}
+
+La matriz de probabilidad e impacto permite visualizar de manera inmediata que el proyecto Plataforma Universitaria Integrada concentra su mayor riesgo en la combinación de alta probabilidad y alto impacto particularmente en los riesgos asociados al cronograma o alcance o documentación o la disponibilidad del equipo y errores de navegación críticos. Esta representación gráfica proporciona al equipo una herramienta visual rápida para priorizar la atención durante las reuniones de seguimiento.
+
+\end{document}
