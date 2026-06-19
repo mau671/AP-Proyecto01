@@ -12,8 +12,14 @@
 \newunicodechar{₡}{\textcolonmonetary}
 
 % --- Márgenes / papel ---
-\usepackage{geometry}
-\geometry{a4paper, margin=2.7cm}
+\usepackage[
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headsep=0.5cm,
+    footskip=0.8cm
+]{geometry}
 
 % --- Matemáticas ---
 \usepackage{amsmath}
@@ -33,10 +39,8 @@
 \usepackage[hidelinks]{hyperref}
 
 % --- Encabezado y pie de página ---
-\usepackage[myheadings]{fancyhdr}
+\usepackage{fancyhdr}
 \usepackage{lastpage}
-\setlength{\headheight}{30pt}
-\setlength{\footskip}{30pt}
 
 % --- Interlineado ---
 \linespread{1.2}
@@ -56,9 +60,11 @@
 \newcommand{\AnioDocumento}{2026}
 
 \newcommand{\AutoresPortada}{%
-    Mauricio González Prendas 2024143009\\
-    Isaac Jiménez Blanco 2024202804\\
-    Tamara Robles Camacho 2024099342%
+    \begin{tabular}{l@{\hspace{1.5cm}}r}
+        Mauricio González Prendas & 2024143009\\
+        Isaac Jiménez Blanco & 2024202804\\
+        Tamara Robles Camacho & 2024099342
+    \end{tabular}%
 }
 
 % Datos que aparecen en el encabezado.
@@ -144,9 +150,9 @@
     \paperheight=210mm
     \pdfpagewidth=297mm
     \pdfpageheight=210mm
-    \newgeometry{left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm}%
-    \setlength{\textwidth}{243mm}%
-    \setlength{\textheight}{156mm}%
+    \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm}%
+    \setlength{\textwidth}{247mm}%
+    \setlength{\textheight}{160mm}%
     \setlength{\linewidth}{\textwidth}%
     \setlength{\columnwidth}{\textwidth}%
     \hsize=\textwidth
