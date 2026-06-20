@@ -1,0 +1,400 @@
+
+\documentclass[11pt,spanish]{article}
+
+% =========================================================
+% PLANTILLA BASE PARA INFORMES ACADÉMICOS / TÉCNICOS
+% =========================================================
+
+% --- Idioma y codificación ---
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{newunicodechar}
+\newunicodechar{₡}{\textcolonmonetary}
+
+% --- Márgenes / papel ---
+\usepackage[
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headsep=0.5cm,
+    footskip=0.8cm
+]{geometry}
+
+% --- Matemáticas ---
+\usepackage{amsmath}
+
+% --- Tablas, enlaces y elementos visuales ---
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes.geometric,arrows.meta,calc}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage[hidelinks]{hyperref}
+
+% --- Encabezado y pie de página ---
+\usepackage{fancyhdr}
+\setlength{\headheight}{14pt}
+\usepackage{lastpage}
+
+% --- Interlineado ---
+\linespread{1.2}
+\sloppy
+
+% =========================================================
+% DATOS DEL DOCUMENTO
+% =========================================================
+\newcommand{\Institucion}{Instituto Tecnológico de Costa Rica}
+\newcommand{\Campus}{Campus Tecnológico Central Cartago}
+\newcommand{\DocumentoTitulo}{Plan de Adquisiciones}
+\newcommand{\Curso}{Administración de proyectos}
+\newcommand{\Profesor}{Alicia Marcela Salazar Hernández}
+\newcommand{\FechaDocumento}{17 de junio de 2026}
+\newcommand{\PeriodoAcademico}{I Semestre}
+\newcommand{\AnioDocumento}{2026}
+\newcommand{\AutoresPortada}{%
+    \begin{tabular}{l@{\hspace{1.5cm}}r}
+        Mauricio González Prendas & 2024143009 \\
+        Isaac Jiménez Blanco & 2024202804 \\
+        Tamara Robles Camacho & 2024099342 \\
+    \end{tabular}%
+}
+\newcommand{\DocHeaderLeft}{}
+\newcommand{\DocHeaderRight}{Plan de Adquisiciones}
+\newcommand{\DocFooterRight}{Página~\thepage\ de~\pageref{LastPage}}
+
+% Metadatos PDF.
+\title{\DocumentoTitulo}
+\author{\AutoresPortada}
+\date{\FechaDocumento}
+
+% =========================================================
+% CONFIGURACIÓN DE TABLAS Y UTILIDADES
+% =========================================================
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.22}
+\setlength{\LTpre}{0.5em}
+\setlength{\LTpost}{0.5em}
+
+% Imagen segura: si el archivo no existe, muestra un recuadro de marcador.
+\newcommand{\SafeImage}[2][0.92\textwidth]{%
+    \IfFileExists{#2}{%
+        \includegraphics[width=#1]{#2}%
+    }{%
+        \fbox{%
+            \begin{minipage}[c][4cm][c]{#1}
+            \centering
+            Imagen pendiente:\\
+            \texttt{#2}
+            \end{minipage}%
+        }%
+    }%
+}
+
+% Figura reutilizable.
+\newcommand{\EvidenceFigure}[3]{%
+    \begin{figure}[H]
+    \centering
+    \SafeImage{#1}
+    \caption{#2}
+    \label{#3}
+    \end{figure}%
+}
+
+% =========================================================
+% ENCABEZADO Y PIE
+% =========================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\DocHeaderLeft}
+\fancyhead[R]{\DocHeaderRight}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[R]{\DocFooterRight}
+
+% Estilo equivalente para páginas horizontales.
+\fancypagestyle{widefancy}{%
+    \fancyhf{}%
+    \fancyhead[L]{\DocHeaderLeft}%
+    \fancyhead[R]{\DocHeaderRight}%
+    \renewcommand{\headrulewidth}{0.4pt}%
+    \renewcommand{\footrulewidth}{0.4pt}%
+    \fancyfoot[R]{\DocFooterRight}%
+}
+
+% =========================================================
+% PÁGINAS HORIZONTALES PARA TABLAS ANCHAS
+% =========================================================
+\makeatletter
+\newcommand{\SyncPageBuilderDimensions}{%
+    \global\vsize=\textheight
+    \global\@colroom=\textheight
+    \global\@colht=\textheight
+}
+\makeatother
+
+\newenvironment{widepage}{%
+    \clearpage
+    \hypersetup{pageanchor=false}%
+    \paperwidth=297mm
+    \paperheight=210mm
+    \pdfpagewidth=297mm
+    \pdfpageheight=210mm
+    \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm}%
+    \setlength{\textwidth}{243mm}%
+    \setlength{\textheight}{156mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \pagestyle{widefancy}%
+}{%
+    \clearpage
+    \paperwidth=210mm
+    \paperheight=297mm
+    \pdfpagewidth=210mm
+    \pdfpageheight=297mm
+    \restoregeometry
+    \SyncPageBuilderDimensions
+    \hypersetup{pageanchor=true}%
+    \pagestyle{fancy}%
+}
+
+% =========================================================
+% PORTADA
+% =========================================================
+\newcommand{\MakeCover}{%
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+
+{\bfseries \huge \Institucion \par}
+\vspace{0.25cm}
+{\LARGE \Campus \par}
+
+\vfill
+
+{\huge \DocumentoTitulo \par}
+
+\vfill
+
+{\bfseries \LARGE Profesora \par}
+{\Large \Profesor \par}
+
+\vfill
+
+{\bfseries \LARGE Estudiantes \par}
+{\Large \AutoresPortada \par}
+
+\vfill
+
+{\bfseries\LARGE Fecha \par}
+{\Large \FechaDocumento \par}
+
+\vfill
+
+{\LARGE \PeriodoAcademico \par}
+{\LARGE \AnioDocumento \par}
+
+\end{titlepage}%
+}
+
+% =========================================================
+% DOCUMENTO
+% =========================================================
+\begin{document}
+\hypersetup{pageanchor=false}
+
+% =========================
+% Portada
+% =========================
+\MakeCover
+
+% =========================
+% Índice
+% =========================
+\pagenumbering{roman}
+\pagestyle{empty}
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+\pagestyle{fancy}
+
+% =========================
+% Contenido
+% =========================
+
+\section{Información general del documento}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{p{5cm} Y}
+\toprule
+\textbf{Nombre del proyecto} & Plataforma Universitaria Integrada \\
+\textbf{Organización} & Universidad Tecnológica La Mejor \\
+\textbf{Documento} & \DocumentoTitulo \\
+\textbf{Directora del proyecto} & Tamara Robles Camacho \\
+\textbf{Fecha} & \FechaDocumento \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Introducción}
+
+El presente documento corresponde al Plan de Adquisiciones del proyecto Plataforma Universitaria Integrada, desarrollado para la Universidad Tecnológica La Mejor. Este plan forma parte de la planificación del proyecto y tiene como finalidad definir los recursos externos, herramientas, servicios, materiales y apoyos operativos que deben considerarse para ejecutar el trabajo de manera ordenada durante el periodo planificado de tres meses.
+
+El proyecto consiste en la elaboración de un prototipo web navegable y de un conjunto de documentos de administración de proyectos. Debido a que el alcance aprobado excluye el desarrollo de backend funcional, base de datos real, autenticación institucional, pasarela de pagos real y despliegue productivo obligatorio, las adquisiciones no se orientan a comprar una solución empresarial completa, sino a sostener la elaboración del prototipo, la documentación, la comunicación del equipo, el cronograma, las pruebas y las evidencias finales.
+
+El plan se relaciona directamente con el cronograma elaborado en Microsoft Project, el plan de recursos, la estimación de costos y el plan de calidad. En consecuencia, las adquisiciones se manejan de manera controlada para evitar gastos innecesarios y asegurar que el presupuesto total del proyecto se mantenga en ₡17,625,200. El enfoque utilizado prioriza herramientas disponibles, licencias temporales, servicios de bajo costo y recursos ya existentes, ya que el proyecto tiene naturaleza académica y no requiere una contratación institucional completa.
+
+\section{Propósito del plan de adquisiciones}
+
+El propósito de este documento es establecer qué elementos deben adquirirse, contratarse, utilizarse o reservarse para apoyar el desarrollo del proyecto. Asimismo, permite definir criterios básicos para seleccionar recursos, asignar responsables, controlar costos y mantener trazabilidad entre las necesidades del proyecto y el presupuesto aprobado.
+
+Este plan busca cumplir los siguientes objetivos:
+
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Identificar los recursos externos o complementarios requeridos por el proyecto.
+    \item Diferenciar entre recursos ya disponibles y recursos que podrían representar un costo.
+    \item Establecer criterios simples para seleccionar herramientas, servicios y materiales.
+    \item Relacionar las adquisiciones con el cronograma, el presupuesto y el alcance aprobado.
+    \item Evitar compras innecesarias o elementos fuera del alcance del prototipo académico.
+    \item Asignar responsables para la revisión, aprobación y seguimiento de cada adquisición.
+\end{itemize}
+
+\section{Alcance de las adquisiciones}
+
+Las adquisiciones consideradas en este proyecto se limitan a recursos de apoyo para la gestión, documentación, desarrollo y presentación final. No se contempla la compra de un ERP universitario, contratación de servidores productivos definitivos, licencias empresariales de gran escala ni servicios profesionales externos para desarrollar el prototipo.
+
+\begin{table}[H]
+\centering
+\caption{Alcance de las adquisiciones}
+\label{tab:alcance-adquisiciones}
+{\small
+\begin{tabularx}{\textwidth}{p{4cm} Y}
+\toprule
+\textbf{Tipo de recurso} & \textbf{Alcance definido} \\
+\midrule
+Software y herramientas & Licencias temporales o herramientas de apoyo para cronograma, documentación, diseño, desarrollo y control de versiones. \\
+Hardware y materiales & Recursos físicos mínimos, almacenamiento externo y periféricos complementarios si fueran requeridos. \\
+Servicios operativos & Conexión a internet, impresiones, transporte a reuniones o servicios básicos de apoyo al trabajo del equipo. \\
+Hosting o infraestructura & Uso de alternativas gratuitas o de bajo costo para respaldo, repositorio y posible demostración del prototipo. \\
+Contingencia & Reserva para atender imprevistos relacionados con herramientas, materiales, conectividad o necesidades menores de ejecución. \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+\section{Criterios de selección}
+
+Para seleccionar cualquier recurso o servicio se utilizarán criterios simples y coherentes con la naturaleza del proyecto. Estos criterios permiten mantener el control financiero y evitar que una adquisición altere el alcance o genere dependencia innecesaria.
+
+\begin{table}[H]
+\centering
+\caption{Criterios de selección de adquisiciones}
+\label{tab:criterios-adquisiciones}
+{\small
+\begin{tabularx}{\textwidth}{p{4cm} Y}
+\toprule
+\textbf{Criterio} & \textbf{Aplicación en el proyecto} \\
+\midrule
+Costo razonable & La adquisición debe mantenerse dentro del presupuesto aprobado y preferiblemente utilizar opciones gratuitas o temporales. \\
+Necesidad para el alcance & Solo se aceptan recursos relacionados con documentación, cronograma, prototipo Front-End, pruebas o evidencias finales. \\
+Facilidad de uso & La herramienta o servicio debe poder ser utilizado por el equipo sin capacitación extensa. \\
+Disponibilidad inmediata & Se priorizan recursos que puedan ser utilizados durante el ciclo del proyecto sin procesos largos de contratación. \\
+Compatibilidad técnica & Las herramientas deben ser compatibles con tecnologías web, repositorio de versiones, PDF, Microsoft Project o documentación académica. \\
+Trazabilidad & Las decisiones relevantes deben quedar documentadas en el repositorio, minuta, correo o archivo de seguimiento cuando corresponda. \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+\section{Plan de adquisiciones del proyecto}
+
+La siguiente tabla presenta el plan principal de adquisiciones. Los montos se mantienen alineados con la estimación PERT y con el presupuesto actualizado del proyecto.
+
+\begin{table}[H]
+\centering
+\caption{Plan de adquisiciones}
+\label{tab:plan-adquisiciones}
+{\scriptsize
+\begin{tabularx}{\textwidth}{p{2.6cm} p{3.3cm} Y p{2.4cm} p{2.1cm}}
+\toprule
+\textbf{Categoría} & \textbf{Recurso} & \textbf{Uso previsto} & \textbf{Responsable} & \textbf{Costo estimado} \\
+\midrule
+Software & Microsoft Project & Elaborar cronograma, tareas, dependencias, hitos, recursos, costos y ruta crítica. & Isaac Jiménez Blanco & ₡66,667 \\
+Software & Office 365 o herramientas equivalentes & Elaboración y revisión de documentos, tablas, evidencias y archivos finales en PDF. & Equipo interno & ₡131,667 \\
+Software & Herramientas premium opcionales & Apoyo visual o utilidades menores en caso de requerirse durante la documentación o presentación. & Tamara Robles Camacho & ₡23,333 \\
+Hardware & Almacenamiento externo & Respaldo local de archivos finales, cronograma, evidencias y documentos importantes. & Isaac Jiménez Blanco & ₡19,167 \\
+Hardware & Periféricos complementarios & Apoyo operativo mínimo para trabajo local, revisiones o entrega de evidencias. & Equipo interno & ₡14,167 \\
+Servicios & Conexión a internet & Comunicación, repositorio, reuniones virtuales, investigación, desarrollo y carga de evidencias. & Cada integrante & ₡359,167 \\
+Servicios & Impresiones y material físico & Material de apoyo o evidencias impresas si la entrega académica lo solicita. & Tamara Robles Camacho & ₡10,500 \\
+Servicios & Transporte a reuniones presenciales & Traslados mínimos en caso de reuniones de coordinación o revisión presencial. & Equipo interno & ₡41,333 \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+El subtotal de rubros adicionales asociados a software, hardware y servicios corresponde a ₡666,000. Además, el proyecto considera una reserva de contingencia de ₡1,515,867 para atender imprevistos sin modificar el presupuesto total autorizado.
+
+\section{Responsables y aprobación}
+
+Las adquisiciones menores podrán ser revisadas por el equipo interno, pero cualquier gasto que afecte el presupuesto total, el alcance, el cronograma o la calidad deberá ser validado por la directora del proyecto. Si una adquisición representa un cambio relevante o genera una variación presupuestaria, deberá tratarse mediante el proceso formal de control de cambios.
+
+\begin{table}[H]
+\centering
+\caption{Responsables del plan de adquisiciones}
+\label{tab:responsables-adquisiciones}
+{\small
+\begin{tabularx}{\textwidth}{p{4cm} Y}
+\toprule
+\textbf{Rol} & \textbf{Responsabilidad} \\
+\midrule
+Tamara Robles Camacho & Validar necesidades de adquisición, controlar que los gastos se mantengan dentro del presupuesto y aprobar ajustes relevantes. \\
+Isaac Jiménez Blanco & Mantener trazabilidad documental de herramientas, costos, evidencias y relación con el cronograma del proyecto. \\
+Jorge Abarca Quiros & Apoyar la revisión de costos, adquisiciones menores y coherencia con la estimación PERT. \\
+Mauricio González Prendas & Informar necesidades técnicas del desarrollo Front-End, repositorio, pruebas y herramientas relacionadas con los portales asignados. \\
+Carlos Sainz Arce & Informar necesidades técnicas del portal financiero, dashboard ejecutivo y pruebas de calidad del prototipo. \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+\section{Gestión y seguimiento de adquisiciones}
+
+El seguimiento de las adquisiciones se realizará durante la planificación, ejecución y cierre del proyecto. Para ello se verificará que los recursos se utilicen únicamente para apoyar las tareas definidas en el cronograma y que no generen nuevas obligaciones fuera del alcance aprobado.
+
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Revisar que las herramientas utilizadas estén disponibles antes de iniciar las tareas críticas.
+    \item Confirmar que Microsoft Project permita generar evidencias del cronograma y la ruta crítica.
+    \item Mantener respaldos de documentos, código y archivos finales en el repositorio del proyecto.
+    \item Registrar cualquier gasto relevante para mantener coherencia con la estimación de costos.
+    \item Usar alternativas gratuitas siempre que cumplan con los requisitos del proyecto.
+    \item Evitar contrataciones o compras que impliquen backend, base de datos real o operación productiva del sistema.
+\end{itemize}
+
+\section{Riesgos asociados a las adquisiciones}
+
+Las adquisiciones del proyecto se relacionan con riesgos moderados debido a que dependen de herramientas tecnológicas y servicios disponibles durante el periodo de trabajo. Los principales riesgos son pérdida de acceso a herramientas, problemas con Microsoft Project, dificultad para exportar evidencias, fallos en el repositorio o inconsistencias entre costos documentados.
+
+Para controlar estos riesgos, el equipo mantendrá copias locales de los archivos importantes, respaldos en GitHub, exportaciones en PDF y revisión cruzada de los montos reportados en documentos como cronograma, plan de calidad, registro de riesgos y estimación de costos.
+
+\section{Conclusión}
+
+El Plan de Adquisiciones de la Plataforma Universitaria Integrada establece una guía simple y suficiente para identificar, controlar y justificar los recursos requeridos durante el proyecto. Debido a que el trabajo se centra en un prototipo académico Front-End y en documentos de gestión, las adquisiciones se enfocan en herramientas de planificación, documentación, desarrollo, conectividad, respaldo y evidencias finales.
+
+La estrategia adoptada permite mantener el presupuesto total de ₡17,625,200, aprovechar recursos ya disponibles y evitar compras innecesarias que puedan alterar el alcance aprobado. Asimismo, el plan facilita la coordinación entre la directora del proyecto, los analistas documentadores y los desarrolladores, de manera que cualquier necesidad adicional pueda revisarse de forma ordenada y, si corresponde, gestionarse mediante control formal de cambios.
+
+\end{document}

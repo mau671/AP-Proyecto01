@@ -1,0 +1,430 @@
+
+\documentclass[11pt,spanish]{article}
+
+% =========================================================
+% PLANTILLA BASE PARA INFORMES ACADÉMICOS / TÉCNICOS
+% =========================================================
+
+% --- Idioma y codificación ---
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{newunicodechar}
+\newunicodechar{₡}{\textcolonmonetary}
+
+% --- Márgenes / papel ---
+\usepackage[
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headsep=0.5cm,
+    footskip=0.8cm
+]{geometry}
+
+% --- Matemáticas ---
+\usepackage{amsmath}
+
+% --- Tablas, enlaces y elementos visuales ---
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes.geometric,arrows.meta,calc}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage[hidelinks]{hyperref}
+
+% --- Encabezado y pie de página ---
+\usepackage{fancyhdr}
+\setlength{\headheight}{14pt}
+\usepackage{lastpage}
+
+% --- Interlineado ---
+\linespread{1.2}
+\sloppy
+
+% =========================================================
+% DATOS DEL DOCUMENTO
+% =========================================================
+\newcommand{\Institucion}{Instituto Tecnológico de Costa Rica}
+\newcommand{\Campus}{Campus Tecnológico Central Cartago}
+\newcommand{\DocumentoTitulo}{Evaluación de Cambios}
+\newcommand{\Curso}{Administración de proyectos}
+\newcommand{\Profesor}{Alicia Marcela Salazar Hernández}
+\newcommand{\FechaDocumento}{20 de junio de 2026}
+\newcommand{\PeriodoAcademico}{I Semestre}
+\newcommand{\AnioDocumento}{2026}
+\newcommand{\AutoresPortada}{%
+    \begin{tabular}{l@{\hspace{1.5cm}}r}
+        Mauricio González Prendas & 2024143009 \\
+        Isaac Jiménez Blanco & 2024202804 \\
+        Tamara Robles Camacho & 2024099342 \\
+    \end{tabular}%
+}
+\newcommand{\DocHeaderLeft}{}
+\newcommand{\DocHeaderRight}{Evaluación de Cambios}
+\newcommand{\DocFooterRight}{Página~\thepage\ de~\pageref{LastPage}}
+
+% Metadatos PDF.
+\title{\DocumentoTitulo}
+\author{\AutoresPortada}
+\date{\FechaDocumento}
+
+% =========================================================
+% CONFIGURACIÓN DE TABLAS Y UTILIDADES
+% =========================================================
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.22}
+\setlength{\LTpre}{0.5em}
+\setlength{\LTpost}{0.5em}
+
+% Imagen segura: si el archivo no existe, muestra un recuadro de marcador.
+\newcommand{\SafeImage}[2][0.92\textwidth]{%
+    \IfFileExists{#2}{%
+        \includegraphics[width=#1]{#2}%
+    }{%
+        \fbox{%
+            \begin{minipage}[c][4cm][c]{#1}
+            \centering
+            Imagen pendiente:\\
+            \texttt{#2}
+            \end{minipage}%
+        }%
+    }%
+}
+
+% Figura reutilizable.
+\newcommand{\EvidenceFigure}[3]{%
+    \begin{figure}[H]
+    \centering
+    \SafeImage{#1}
+    \caption{#2}
+    \label{#3}
+    \end{figure}%
+}
+
+% =========================================================
+% ENCABEZADO Y PIE
+% =========================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\DocHeaderLeft}
+\fancyhead[R]{\DocHeaderRight}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[R]{\DocFooterRight}
+
+% Estilo equivalente para páginas horizontales.
+\fancypagestyle{widefancy}{%
+    \fancyhf{}%
+    \fancyhead[L]{\DocHeaderLeft}%
+    \fancyhead[R]{\DocHeaderRight}%
+    \renewcommand{\headrulewidth}{0.4pt}%
+    \renewcommand{\footrulewidth}{0.4pt}%
+    \fancyfoot[R]{\DocFooterRight}%
+}
+
+% =========================================================
+% PÁGINAS HORIZONTALES PARA TABLAS ANCHAS
+% =========================================================
+\makeatletter
+\newcommand{\SyncPageBuilderDimensions}{%
+    \global\vsize=\textheight
+    \global\@colroom=\textheight
+    \global\@colht=\textheight
+}
+\makeatother
+
+\newenvironment{widepage}{%
+    \clearpage
+    \hypersetup{pageanchor=false}%
+    \paperwidth=297mm
+    \paperheight=210mm
+    \pdfpagewidth=297mm
+    \pdfpageheight=210mm
+    \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm}%
+    \setlength{\textwidth}{243mm}%
+    \setlength{\textheight}{156mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \pagestyle{widefancy}%
+}{%
+    \clearpage
+    \paperwidth=210mm
+    \paperheight=297mm
+    \pdfpagewidth=210mm
+    \pdfpageheight=297mm
+    \restoregeometry
+    \SyncPageBuilderDimensions
+    \hypersetup{pageanchor=true}%
+    \pagestyle{fancy}%
+}
+
+% =========================================================
+% PORTADA
+% =========================================================
+\newcommand{\MakeCover}{%
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+
+{\bfseries \huge \Institucion \par}
+\vspace{0.25cm}
+{\LARGE \Campus \par}
+
+\vfill
+
+{\huge \DocumentoTitulo \par}
+
+\vfill
+
+{\bfseries \LARGE Profesora \par}
+{\Large \Profesor \par}
+
+\vfill
+
+{\bfseries \LARGE Estudiantes \par}
+{\Large \AutoresPortada \par}
+
+\vfill
+
+{\bfseries\LARGE Fecha \par}
+{\Large \FechaDocumento \par}
+
+\vfill
+
+{\LARGE \PeriodoAcademico \par}
+{\LARGE \AnioDocumento \par}
+
+\end{titlepage}%
+}
+
+% =========================================================
+% DOCUMENTO
+% =========================================================
+\begin{document}
+\hypersetup{pageanchor=false}
+
+% =========================
+% Portada
+% =========================
+\MakeCover
+
+% =========================
+% Índice
+% =========================
+\pagenumbering{roman}
+\pagestyle{empty}
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+\pagestyle{fancy}
+
+% =========================
+% Contenido
+% =========================
+
+\section{Información general del documento}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{p{5cm} Y}
+\toprule
+\textbf{Nombre del proyecto} & Plataforma Universitaria Integrada \\
+\textbf{Organización} & Universidad Tecnológica La Mejor \\
+\textbf{Documento} & \DocumentoTitulo \\
+\textbf{Directora del proyecto} & Tamara Robles Camacho \\
+\textbf{Fecha} & \FechaDocumento \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Introducción}
+
+El presente documento corresponde a la Evaluación de Cambios del proyecto Plataforma Universitaria Integrada. Su finalidad es analizar las solicitudes de cambio registradas durante la ejecución y determinar su efecto sobre el alcance, el cronograma, los costos, la calidad, los riesgos, los recursos y los entregables del proyecto.
+
+La evaluación de cambios permite comprobar que las modificaciones solicitadas no se ejecuten de manera informal ni generen contradicciones con la documentación aprobada. En este caso, se analizan dos solicitudes principales: la incorporación de un módulo de certificados académicos en el Portal Estudiantil y la reducción del alcance del Dashboard Ejecutivo del sistema como medida compensatoria.
+
+El análisis se realiza bajo el proceso de control de cambios definido para el proyecto, tomando como referencia el alcance aprobado, el cronograma en Microsoft Project, el presupuesto total de ₡17,625,200, el registro de riesgos, la matriz de probabilidad e impacto y las solicitudes de cambio documentadas.
+
+\section{Propósito de la evaluación}
+
+El propósito de este documento es revisar de forma estructurada el impacto de las solicitudes de cambio y dejar evidencia de la decisión tomada. La evaluación busca determinar si los cambios son viables, si generan valor para los usuarios, si pueden implementarse sin afectar la calidad del prototipo y si requieren ajustes en otros entregables.
+
+Los objetivos específicos son los siguientes:
+
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Identificar las solicitudes de cambio evaluadas.
+    \item Analizar su impacto en alcance, tiempo, costo, calidad, riesgos y recursos.
+    \item Determinar si cada cambio debe aprobarse, rechazarse o aprobarse con condiciones.
+    \item Definir acciones de seguimiento para mantener el control del proyecto.
+    \item Mantener coherencia entre solicitudes, cronograma, presupuesto y documentación final.
+\end{itemize}
+
+\section{Metodología de evaluación}
+
+La metodología utilizada consiste en revisar cada solicitud contra los criterios definidos en el proceso de control de cambios. Para cada cambio se analiza su justificación, impacto, prioridad, responsables afectados, riesgos asociados y decisión final. Este análisis es cualitativo y se adapta al alcance académico del proyecto.
+
+\begin{table}[H]
+\centering
+\caption{Criterios utilizados para evaluar los cambios}
+\label{tab:criterios-evaluacion}
+{\small
+\begin{tabularx}{\textwidth}{p{3.5cm} Y}
+\toprule
+\textbf{Criterio} & \textbf{Descripción de la revisión} \\
+\midrule
+Alcance & Determina si el cambio agrega, reduce o modifica funcionalidades, pantallas o entregables. \\
+Cronograma & Evalúa si el cambio afecta tareas, dependencias, hitos, ruta crítica o fecha final. \\
+Costo & Revisa si el cambio incrementa costos, utiliza contingencia o se absorbe con reasignación interna. \\
+Calidad & Determina si el cambio mejora o afecta la usabilidad, navegación, estabilidad o criterios de aceptación. \\
+Riesgos & Analiza si el cambio aumenta o reduce riesgos identificados en el registro. \\
+Recursos & Revisa si el cambio sobrecarga a los desarrolladores, analistas o directora del proyecto. \\
+Decisión & Define si el cambio se aprueba, rechaza, pospone o aprueba con condiciones. \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+\section{Solicitudes de cambio evaluadas}
+
+Durante la ejecución se documentaron dos solicitudes de cambio principales. Ambas se relacionan con el alcance del prototipo Front-End navegable y con la necesidad de mantener equilibrio entre valor agregado, tiempo disponible y calidad final.
+
+\begin{table}[H]
+\centering
+\caption{Resumen de solicitudes de cambio evaluadas}
+\label{tab:solicitudes-evaluadas}
+{\small
+\begin{tabularx}{\textwidth}{p{1.6cm} p{3cm} Y p{2.2cm}}
+\toprule
+\textbf{Código} & \textbf{Solicitante} & \textbf{Descripción resumida} & \textbf{Prioridad} \\
+\midrule
+SC-01 & Lic. Patricia Vargas Soto y Prof. Andrea Solís Zamora & Incorporar un módulo de solicitud de certificados académicos en el Portal Estudiantil. & Alta \\
+SC-02 & Tamara Robles Camacho & Reducir el alcance del Dashboard Ejecutivo del sistema para compensar el esfuerzo agregado por SC-01. & Media \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+\section{Evaluación de la Solicitud de Cambio 1}
+
+La solicitud SC-01 propone agregar una funcionalidad de solicitud de certificados académicos dentro del Portal Estudiantil. Esta funcionalidad permitiría representar la solicitud y consulta de certificaciones académicas, como constancias de notas, carga académica u otros comprobantes relacionados con el estudiante.
+
+\begin{table}[H]
+\centering
+\caption{Evaluación de impacto de SC-01}
+\label{tab:evaluacion-sc01}
+{\small
+\begin{tabularx}{\textwidth}{p{3.2cm} Y}
+\toprule
+\textbf{Área evaluada} & \textbf{Impacto identificado} \\
+\midrule
+Alcance & Aumenta el alcance del Portal Estudiantil al agregar una nueva sección no contemplada inicialmente. \\
+Cronograma & Requiere ajustar tareas de desarrollo y pruebas del portal estudiantil, principalmente para diseño visual, navegación y revisión de calidad. \\
+Costo & El cambio no modifica el presupuesto total si el esfuerzo se compensa con una reducción equivalente en otro módulo. \\
+Calidad & Puede aumentar el valor percibido del prototipo para estudiantes, pero también exige revisar que la navegación siga siendo clara. \\
+Riesgos & Incrementa temporalmente riesgos relacionados con restricción de tiempo, subestimación del esfuerzo de interfaz y cambios tardíos. \\
+Recursos & Afecta principalmente a Mauricio González Prendas y Carlos Sainz Arce, con apoyo documental de Isaac Jiménez Blanco y Jorge Abarca Quiros. \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+\subsection{Decisión sobre SC-01}
+
+La solicitud SC-01 se aprueba con condiciones, debido a que aporta valor al Portal Estudiantil y se relaciona con la necesidad institucional de reducir trámites presenciales. Sin embargo, su implementación debe limitarse a una representación visual navegable con datos simulados, sin conexión a base de datos, sin generación real de documentos oficiales y sin firma digital.
+
+La condición principal es compensar el esfuerzo adicional mediante una reducción controlada en otra parte del alcance, para no aumentar el presupuesto total ni extender innecesariamente el cronograma.
+
+\section{Evaluación de la Solicitud de Cambio 2}
+
+La solicitud SC-02 propone reducir el alcance del Dashboard Ejecutivo del sistema. La reducción consiste en eliminar indicadores financieros detallados e indicadores académicos históricos, manteniendo únicamente indicadores generales como estudiantes activos e ingresos por matrícula.
+
+\begin{table}[H]
+\centering
+\caption{Evaluación de impacto de SC-02}
+\label{tab:evaluacion-sc02}
+{\small
+\begin{tabularx}{\textwidth}{p{3.2cm} Y}
+\toprule
+\textbf{Área evaluada} & \textbf{Impacto identificado} \\
+\midrule
+Alcance & Reduce el alcance funcional del Dashboard Ejecutivo del sistema al simplificar la cantidad de indicadores representados. \\
+Cronograma & Libera tiempo de desarrollo, integración y pruebas para compensar el esfuerzo adicional del módulo de certificados. \\
+Costo & No reduce ni aumenta el presupuesto total, ya que funciona como una reasignación interna de esfuerzo. \\
+Calidad & Favorece la estabilidad del prototipo porque permite concentrar el trabajo en módulos principales y evita gráficos innecesarios. \\
+Riesgos & Disminuye riesgos asociados a subestimación del esfuerzo técnico y cambios tardíos cerca del cierre. \\
+Recursos & Reduce carga sobre Carlos Sainz Arce y Mauricio González Prendas en el dashboard ejecutivo, permitiendo priorizar integración y QA. \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+\subsection{Decisión sobre SC-02}
+
+La solicitud SC-02 se aprueba debido a que compensa de forma razonable el incremento de alcance producido por SC-01. Esta decisión permite mantener el cronograma dentro del periodo planificado de tres meses y protege el presupuesto total de ₡17,625,200.
+
+El cambio no elimina por completo el Dashboard Ejecutivo del sistema, sino que reduce su profundidad. Por lo tanto, el módulo sigue cumpliendo su objetivo visual básico, pero con menor detalle histórico y financiero.
+
+\section{Impacto neto de los cambios}
+
+El impacto conjunto de SC-01 y SC-02 se considera controlado. La primera solicitud aumenta el valor del Portal Estudiantil, mientras que la segunda reduce el esfuerzo en el Dashboard Ejecutivo. En consecuencia, el balance permite conservar el alcance general del prototipo y mantener la coherencia con el cronograma, el presupuesto y los criterios de calidad.
+
+\begin{table}[H]
+\centering
+\caption{Impacto neto de los cambios evaluados}
+\label{tab:impacto-neto}
+{\small
+\begin{tabularx}{\textwidth}{p{3.5cm} Y}
+\toprule
+\textbf{Área} & \textbf{Resultado neto} \\
+\midrule
+Alcance & Se agrega una sección de certificados académicos y se simplifica el Dashboard Ejecutivo del sistema. \\
+Cronograma & El esfuerzo adicional se compensa, por lo que la fecha final del proyecto se mantiene dentro de los tres meses planificados. \\
+Costo & El presupuesto total se mantiene en ₡17,625,200 sin incremento adicional. \\
+Calidad & Se priorizan módulos de mayor valor para usuarios finales y se reducen elementos visuales complejos no esenciales. \\
+Riesgos & Se controla el riesgo de alcance creciente mediante una reducción compensatoria y seguimiento formal. \\
+Recursos & Se mantiene la asignación general del equipo sin agregar nuevos integrantes ni contratar recursos externos. \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+\section{Actualizaciones requeridas}
+
+Después de aprobar las solicitudes se deben actualizar los documentos y evidencias afectadas. En particular, el alcance, el cronograma, el plan de calidad, el registro de riesgos y los documentos de cierre deben reflejar que el módulo de certificados se incorpora de manera representativa y que el Dashboard Ejecutivo del sistema queda simplificado.
+
+\begin{itemize}[leftmargin=*, label={\textbullet}]
+    \item Ajustar el alcance del Portal Estudiantil para incluir la sección de certificados académicos.
+    \item Ajustar el alcance del Dashboard Ejecutivo para mantener solo indicadores generales.
+    \item Verificar que el cronograma mantenga la fecha final dentro del periodo planificado.
+    \item Revisar riesgos R-01, R-04 y R-10 para confirmar que el cambio quedó controlado.
+    \item Mantener el presupuesto total en ₡17,625,200.
+    \item Documentar evidencia de aprobación y comunicar el resultado al equipo.
+\end{itemize}
+
+\section{Seguimiento posterior}
+
+El seguimiento de los cambios aprobados será responsabilidad de la directora del proyecto, con apoyo de los analistas documentadores y los desarrolladores Front-End. Durante las revisiones finales se deberá verificar que el módulo agregado no genere errores críticos de navegación y que la reducción del Dashboard Ejecutivo no contradiga los criterios de aceptación del prototipo.
+
+La comunicación de la decisión se realizará al equipo interno mediante el canal de coordinación definido y se dejará evidencia en los documentos finales. Si durante las pruebas se detecta que el cambio genera nuevos problemas, estos deberán registrarse como defectos o riesgos activos según corresponda.
+
+\section{Conclusión}
+
+La evaluación de cambios demuestra que las solicitudes SC-01 y SC-02 pueden gestionarse de manera controlada dentro del proyecto Plataforma Universitaria Integrada. La incorporación del módulo de certificados académicos agrega valor al Portal Estudiantil, mientras que la reducción del Dashboard Ejecutivo del sistema permite compensar el esfuerzo adicional y proteger el cronograma.
+
+Ambas solicitudes se consideran viables porque no incrementan el presupuesto total, no requieren backend real, no modifican la naturaleza académica del prototipo y mantienen la solución dentro del alcance Front-End navegable. En consecuencia, la aprobación conjunta permite conservar el equilibrio entre valor para el usuario, control del esfuerzo técnico, calidad final y cumplimiento de la planificación del proyecto.
+
+\end{document}
