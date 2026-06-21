@@ -1,0 +1,406 @@
+\documentclass[11pt,spanish]{article}
+
+% =========================================================
+% PLANTILLA BASE PARA INFORMES ACADÉMICOS / TÉCNICOS
+% =========================================================
+
+% --- Idioma y codificación ---
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{newunicodechar}
+\newunicodechar{₡}{\textcolonmonetary}
+\newunicodechar{÷}{\(\div\)}
+\newunicodechar{×}{\(\times\)}
+\newunicodechar{−}{\(-\)}
+
+% --- Márgenes / papel ---
+\usepackage[
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headsep=0.5cm,
+    footskip=0.8cm
+]{geometry}
+
+% --- Matemáticas ---
+\usepackage{amsmath}
+
+% --- Tablas, enlaces y elementos visuales ---
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes.geometric,arrows.meta,calc}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage[hidelinks]{hyperref}
+
+% --- Encabezado y pie de página ---
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+% --- Interlineado ---
+\linespread{1.2}
+\sloppy
+
+% =========================================================
+% DATOS DEL DOCUMENTO
+% =========================================================
+\newcommand{\Institucion}{Instituto Tecnológico de Costa Rica}
+\newcommand{\Campus}{Campus Tecnológico Central Cartago}
+\newcommand{\DocumentoTitulo}{KPIs del Proyecto}
+\newcommand{\DocumentoSubtitulo}{Plataforma Universitaria Integrada: Modernización y Centralización de Procesos Académicos y Administrativos}
+\newcommand{\Curso}{Administración de proyectos}
+\newcommand{\Profesor}{Alicia Marcela Salazar Hernández}
+\newcommand{\FechaDocumento}{19 de junio de 2026}
+\newcommand{\PeriodoAcademico}{I Semestre}
+\newcommand{\AnioDocumento}{2026}
+
+\newcommand{\AutoresPortada}{%
+    \begin{tabular}{l@{\hspace{1.5cm}}r}
+        Mauricio González Prendas & 2024143009\\
+        Isaac Jiménez Blanco & 2024202804\\
+        Tamara Robles Camacho & 2024099342
+    \end{tabular}%
+}
+
+% Datos que aparecen en el encabezado.
+\newcommand{\DocHeaderLeft}{}
+\newcommand{\DocHeaderRight}{\DocumentoTitulo}
+\newcommand{\DocFooterRight}{Página \thepage\ de \pageref{LastPage}}
+
+% Metadatos PDF.
+\title{\DocumentoTitulo}
+\author{\AutoresPortada}
+\date{\FechaDocumento}
+
+% =========================================================
+% CONFIGURACIÓN DE TABLAS Y UTILIDADES
+% =========================================================
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\renewcommand{\arraystretch}{1.22}
+\setlength{\LTpre}{0.5em}
+\setlength{\LTpost}{0.5em}
+
+% Imagen segura: si el archivo no existe, muestra un recuadro de marcador.
+\newcommand{\SafeImage}[2][0.92\textwidth]{%
+    \IfFileExists{#2}{%
+        \includegraphics[width=#1]{#2}%
+    }{%
+        \fbox{%
+            \begin{minipage}[c][4cm][c]{#1}
+            \centering
+            Imagen pendiente\\
+            \texttt{#2}
+            \end{minipage}%
+        }%
+    }%
+}
+
+% Figura reutilizable.
+\newcommand{\EvidenceFigure}[3]{%
+    \begin{figure}[H]
+    \centering
+    \SafeImage{#1}
+    \caption{#2}
+    \label{#3}
+    \end{figure}%
+}
+
+% =========================================================
+% ENCABEZADO Y PIE
+% =========================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\DocumentoTitulo}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyfoot[R]{Página \thepage\ de \pageref{LastPage}}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Estilo equivalente para páginas horizontales.
+\fancypagestyle{widefancy}{%
+    \fancyhf{}%
+    \fancyhead[R]{\DocumentoTitulo}%
+    \renewcommand{\headrulewidth}{0.4pt}%
+    \fancyfoot[R]{Página \thepage\ de \pageref{LastPage}}%
+    \renewcommand{\footrulewidth}{0.4pt}%
+}
+
+% =========================================================
+% PÁGINAS HORIZONTALES PARA TABLAS ANCHAS
+% =========================================================
+\makeatletter
+\newcommand{\SyncPageBuilderDimensions}{%
+    \global\vsize=\textheight
+    \global\@colroom=\textheight
+    \global\@colht=\textheight
+}
+\makeatother
+
+\newenvironment{widepage}{%
+    \clearpage
+    \hypersetup{pageanchor=false}%
+    \paperwidth=297mm
+    \paperheight=210mm
+    \pdfpagewidth=297mm
+    \pdfpageheight=210mm
+    \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm}%
+    \setlength{\textwidth}{247mm}%
+    \setlength{\textheight}{160mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \pagestyle{widefancy}%
+}{%
+    \clearpage
+    \paperwidth=210mm
+    \paperheight=297mm
+    \pdfpagewidth=210mm
+    \pdfpageheight=297mm
+    \restoregeometry
+    \SyncPageBuilderDimensions
+    \hypersetup{pageanchor=true}%
+    \pagestyle{fancy}%
+}
+
+% =========================================================
+% PORTADA
+% =========================================================
+\newcommand{\MakeCover}{%
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+
+{\bfseries \huge \Institucion \par}
+\vspace{0.25cm}
+{\LARGE \Campus \par}
+
+\vfill
+
+{\huge \DocumentoTitulo \par}
+
+\vfill
+
+{\bfseries \LARGE Profesora \par}
+{\Large \Profesor \par}
+
+\vfill
+
+{\bfseries \LARGE Estudiantes \par}
+{\Large \AutoresPortada \par}
+
+\vfill
+
+{\bfseries\LARGE Fecha \par}
+{\Large \FechaDocumento \par}
+
+\vfill
+
+{\LARGE \PeriodoAcademico \par}
+{\LARGE \AnioDocumento \par}
+
+\end{titlepage}%
+}
+
+% =========================================================
+% DOCUMENTO
+% =========================================================
+\begin{document}
+\hypersetup{pageanchor=false}
+
+% =========================
+% Portada
+% =========================
+\MakeCover
+
+% =========================
+% Índice
+% =========================
+\pagenumbering{roman}
+\pagestyle{empty}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+\pagestyle{fancy}
+
+% =========================
+% Contenido
+% =========================
+\section{Información general del documento}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{p{5cm} Y}
+\toprule
+\textbf{Nombre del proyecto} & Plataforma Universitaria Integrada \\
+\textbf{Organización} & Universidad Tecnológica La Mejor \\
+\textbf{Documento} & \DocumentoTitulo \\
+\textbf{Project manager} & Tamara Robles Camacho \\
+\textbf{Fecha} & \FechaDocumento \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Introducción}
+
+En esta sección se desglosan los indicadores clave de desempeño (KPI, por sus siglas en ingles), estos ayudan a medir de forma objetiva el avance y la salud del proyecto Plataforma Universitaria Integrada a lo largo de sus cinco fases. En las siguientes partes de esta sección se definen los indicadores distribuidos en las cinco categorías exigidas: tiempo, costo, calidad, riesgos y productividad, siguiendo el criterio SMART para garantizar que cada KPI sea medible y útil para la toma de decisiones del equipo.
+
+\subsection{Criterio SMART aplicado a los KPIs}
+
+Cada indicador clave de desempeño descritos cumple con las siguientes cinco características:
+
+\begin{table}[H]
+\centering
+\small
+\caption{Criterio SMART}\label{tab:criterio-smart}
+\begin{tabularx}{\textwidth}{p{4.5cm} Y}
+\toprule
+\textbf{Criterio} & \textbf{Descripción} \\
+\midrule
+\textbf{Específico (Specific)} & El KPI está claramente definido y enfocado en un aspecto particular del proyecto. \\
+\textbf{Medible (Measurable)} & Es posible cuantificar el KPI utilizando datos concretos del cronograma, presupuesto o registro de riesgos. \\
+\textbf{Alcanzable (Achievable)} & La meta del KPI es realista dentro del contexto de un proyecto académico de 3 meses con 5 integrantes. \\
+\textbf{Relevante (Relevant)} & El KPI está directamente relacionado con los objetivos del proyecto y es importante para su éxito. \\
+\textbf{Temporal (Time-bound)} & Existe un marco de tiempo específico para la medición y el logro del KPI (semanal, por fase o al cierre). \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Indicadores de tiempo}
+
+Los siguientes indicadores miden el cumplimiento del cronograma y la eficiencia en el uso del tiempo planificado del proyecto.
+
+El Valor Planificado (PV) es el valor del trabajo que se debería haber completado en un momento dato, sale del cronograma y el presupuesto, por ejemplo: si una tarea vale ₡100,000 y según el cronograma se debe ir al 50\%, entonces el PV =100,000 $\times$ 0.5= ₡50,000.
+
+En el caso del Valor Ganado (EV), sale del trabajo que realmente se ha terminado, pero expresado en dinero, por ejemplo: si la tarea vale ₡100,000 y en realidad solo se lleve el 40\%, entonces el EV= 100,000 $\times$ 0,4 =₡40,000.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Indicadores de tiempo}\label{tab:indicadores-tiempo}
+\begin{tabularx}{\textwidth}{p{4.5cm} Y c c}
+\toprule
+\textbf{KPI} & \textbf{Qué mide / Fórmula} & \textbf{Meta} & \textbf{Frecuencia} \\
+\midrule
+\textbf{KPI-01 Cumplimiento del cronograma} & Mide el porcentaje de tareas que se completan dentro del plazo previsto. Fórmula: (Tareas completadas a tiempo $\div$ Total de tareas) $\times$ 100 & $\geq$ 90\% & Semanal \\
+\textbf{KPI-02 Índice de Desempeño del Cronograma (SPI)} & Evalúa la eficiencia en el uso del tiempo del proyecto. Fórmula: SPI = Valor Ganado (EV) $\div$ Valor Planificado (PV) & $\geq$ 0.95 & Quincenal \\
+\textbf{KPI-03 Variación del cronograma (SV)} & Calcula la diferencia entre el trabajo planificado y el trabajo realizado en términos de tiempo. Fórmula: SV = Valor Ganado (EV) $-$ PV(Valor Planificado) & SV $\geq$ 0 & Por fase \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Indicadores de costo}
+
+Estos indicadores controlan que el gasto real del proyecto se mantenga alineado con el presupuesto planificado de ₡17,625,200.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Indicadores de costo}\label{tab:indicadores-costo}
+\begin{tabularx}{\textwidth}{p{4.5cm} Y c c}
+\toprule
+\textbf{KPI} & \textbf{Qué mide / Fórmula} & \textbf{Meta} & \textbf{Frecuencia} \\
+\midrule
+\textbf{KPI-04 Cumplimiento del presupuesto} & Mide el porcentaje del presupuesto que se ha gastado en relación con lo planificado. Fórmula: (Costo Real $\div$ Presupuesto Planificado) $\times$ 100 & $\leq$ 100\% & Por fase \\
+\textbf{KPI-05 Índice de Desempeño de Costos (CPI)} & Mide la relación entre el valor ganado y el costo real del proyecto. Fórmula: CPI = Valor Ganado (EV) $\div$ Costo Real (AC) & $\geq$ 1.0 & Quincenal \\
+\textbf{KPI-06 Variación del costo (CV)} & Calcula la diferencia entre el costo presupuestado del trabajo realizado y el costo real. Fórmula: CV = Valor Ganado (EV) $-$ Costo Real (AC) & CV $\geq$ 0 & Por fase \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Indicadores de calidad}
+
+Los indicadores de calidad evalúan la calidad técnica del prototipo Front-End y la coherencia de los entregables que se documentan.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Indicadores de calidad}\label{tab:indicadores-calidad}
+\begin{tabularx}{\textwidth}{p{4.5cm} Y p{3cm} p{2.5cm}}
+\toprule
+\textbf{KPI} & \textbf{Qué mide / Fórmula} & \textbf{Meta} & \textbf{Frecuencia} \\
+\midrule
+\textbf{KPI-07 Defectos encontrados por módulo} & Mide la cantidad de errores o fallos identificados durante las pruebas del prototipo en cada módulo (Login, Portales, Dashboard). Fórmula: Número de defectos detectados por módulo & $\leq$ 3 defectos críticos por módulo & Por entrega de módulo \\
+\textbf{KPI-08 Cobertura de criterios de aceptación} & Indica el porcentaje de criterios de aceptación del WBS y Plan de Calidad que se cumplen en cada entregable. Fórmula: (Criterios cumplidos $\div$ Criterios totales) $\times$ 100 & $\geq$ 95\% & Por entregable \\
+\textbf{KPI-09 Satisfacción del equipo evaluador (usabilidad)} & Evalúa el nivel de claridad y navegación del prototipo mediante revisión interna del equipo antes de la entrega final. Fórmula: Promedio de calificación (escala 1--5) por módulo & $\geq$ 4.0 / 5.0 & Antes de cada entrega \\
+\textbf{KPI-10 Porcentaje de pruebas exitosas} & Mide la cantidad de pruebas completas realizadas de manera exitosa en el prototipo Front-End. Formula: (Pruebas aprobadas $\div$ total de pruebas) $\times$ 100 & $\geq$ 90\% & Por entrega \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Indicadores de riesgos}
+
+Los indicadores de riesgo son muy útiles, ya que monitorean el comportamiento de los 16 riesgos identificadores en el registro de riesgos a lo largo del proyecto.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Indicadores de riesgos}\label{tab:indicadores-riesgos}
+\begin{tabularx}{\textwidth}{p{4.5cm} Y p{3cm} p{2.5cm}}
+\toprule
+\textbf{KPI} & \textbf{Qué mide / Fórmula} & \textbf{Meta} & \textbf{Frecuencia} \\
+\midrule
+\textbf{KPI-11 Riesgos críticos abiertos} & Cuenta el número de riesgos clasificados como Crítico que permanecen en estado Abierto o En seguimiento. Fórmula: Número de riesgos críticos sin estrategia de mitigación aplicada & 0 al cierre de cada fase & Semanal \\
+\textbf{KPI-12 Riesgos mitigados vs. identificados} & Mide la cantidad de riesgos que han recibido una acción de respuesta efectiva sobre el total identificado. Fórmula: (Riesgos mitigados $\div$ Total de riesgos) $\times$ 100 & $\geq$ 80\% & Por fase \\
+\textbf{KPI-13 Tiempo de respuesta a riesgos} & Evalúa el tiempo desde el momento en el que un riesgo se clasifico como crítico, muy alto, alto, medio, bajo o muy bajo hasta el momento de su acción. Formula: Promedio de días desde identificación hasta acción & $\leq$ 3 días & Semanal \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Indicadores de productividad}
+
+Los indicadores de productividad miden la eficiencia con la que el equipo de 5 integrantes avanza en la entrega de los entregables del proyecto.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Indicadores de productividad}\label{tab:indicadores-productividad}
+\begin{tabularx}{\textwidth}{p{4.5cm} Y c c}
+\toprule
+\textbf{KPI} & \textbf{Qué mide / Fórmula} & \textbf{Meta} & \textbf{Frecuencia} \\
+\midrule
+\textbf{KPI-14 Entregables completados por semana} & Mide la velocidad de entrega de documentos y avances del prototipo en relación con lo planificado en el cronograma. Fórmula: Número de entregables o paquetes de trabajo completados $\div$ semana & $\geq$ 2 entregables / semana & Semanal \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Resumen de indicadores por categoría}
+
+La siguiente tabla consolida los 14 KPIs definidos, agrupados por categoría:
+
+\begin{table}[H]
+\centering
+\small
+\caption{Resumen de indicadores por categoría}\label{tab:resumen-indicadores}
+\begin{tabular}{l c l}
+\toprule
+\textbf{Categoría} & \textbf{Cantidad} & \textbf{Códigos} \\
+\midrule
+\textbf{Tiempo} & 3 & KPI-01, KPI-02, KPI-03 \\
+\textbf{Costo} & 3 & KPI-04, KPI-05, KPI-06 \\
+\textbf{Calidad} & 4 & KPI-07, KPI-08, KPI-09, KPI-10 \\
+\textbf{Riesgos} & 3 & KPI-11, KPI-12, KPI-13 \\
+\textbf{Productividad} & 1 & KPI-14 \\
+\midrule
+\textbf{TOTAL} & \textbf{14 indicadores} & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Conclusión}
+
+La definición exhaustiva de los 14 indicadores clave de desempeño expuestos en este documento constituye una herramienta de control fundamental para asegurar el éxito en la implementación de la Plataforma Universitaria Integrada, puesto que, al abarcar simultáneamente las dimensiones críticas de tiempo, costo, calidad, riesgos y productividad, estos proporcionan una visión verdaderamente integral y objetiva sobre la salud operativa del proyecto con el propósito primordial de prevenir desviaciones respecto a los valiosos recursos financieros o el exigente alcance previamente establecido por la dirección. 
+
+De igual manera, más allá de representar un mero seguimiento administrativo, la constante y minuciosa medición del progreso mediante metodologías estandarizadas sumamente eficientes tales como el Valor Ganado y el Índice de Desempeño del Cronograma garantiza plenamente que todo el arduo esfuerzo de los cinco integrantes del equipo de trabajo se traduzca de forma siempre medible en un avance técnico completamente real, mientras que al mismo tiempo el especial énfasis depositado en los criterios de calidad y la consecuente reducción drástica de defectos por cada módulo desarrollado asegura de forma indudable que la plataforma tecnológica final cumplirá exitosamente con todas las altas expectativas de accesibilidad y eficiencia que son esperadas por toda la gran comunidad universitaria. 
+
+Por consiguiente, resulta totalmente indispensable que el Project Manager someta la totalidad de estos indicadores a una muy rigurosa evaluación durante el transcurso natural de las reuniones de seguimiento semanales y también al término conclusivo de cada gran fase del proyecto, debido a que esta indispensable vigilancia proactiva no solamente facilitará enormemente la detección oportuna y temprana de importantes riesgos críticos operativos o severos sobrecostos financieros inesperados, sino que, de forma paralela y complementaria, permitirá afianzar permanentemente la toma de decisiones gerenciales profundamente informadas junto con la veloz aplicación de medidas y acciones correctivas que terminarán salvaguardando en su totalidad el cumplimiento íntegro y definitivo de los supremos objetivos estratégicos de la institución de educación superior.
+
+\end{document}
