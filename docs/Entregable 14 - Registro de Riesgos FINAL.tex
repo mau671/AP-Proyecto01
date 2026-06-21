@@ -312,7 +312,7 @@ El análisis detallado de cada riesgo contemplará los elementos que se enumeran
 
 \section{Escala de probabilidad e impacto}
 
-La evaluación de la probabilidad y el impacto en este registro se encuentra alineada con la matriz de probabilidad e impacto definida para la organización, en la cual se detalla la escala de referencia junto con la ubicación de las dieciséis amenazas identificadas. Por lo tanto, con el propósito de asegurar la consistencia entre los documentos del proyecto, este registro adopta de manera estricta los mismos valores de probabilidad, impacto, nivel de riesgo y clasificación acordados en dicho instrumento de análisis.
+La evaluación de la probabilidad y el impacto en este registro se encuentra alineada con la matriz de probabilidad e impacto definida para la organización, en la cual se detalla la escala de referencia junto con la ubicación de las trece amenazas identificadas. Por lo tanto, con el propósito de asegurar la consistencia entre los documentos del proyecto, este registro adopta de manera estricta los mismos valores de probabilidad, impacto, nivel de riesgo y clasificación acordados en dicho instrumento de análisis.
 
 \section{Estrategias de respuesta ante riesgos}
 
@@ -358,8 +358,8 @@ La consulta detallada de estos recursos propició la detección de amenazas asoc
 \begin{widepage}
 \section{Registro de riesgos del proyecto}
 {\tiny
-\setlength{\tabcolsep}{1pt}
-\begin{longtable}{L{0.9cm} L{1.5cm} L{2.1cm} L{2.8cm} L{2.5cm} L{1.8cm} L{1.3cm} L{0.9cm} L{1.8cm} L{2.3cm} L{1.4cm} L{2.9cm} L{1.0cm}}
+\setlength{\tabcolsep}{2pt}
+\begin{longtable}{L{0.9cm} L{1.9cm} L{2.1cm} L{2.4cm} L{2.3cm} L{1.8cm} L{1.2cm} L{0.9cm} L{1.7cm} L{2.2cm} L{1.4cm} L{2.6cm} L{1.0cm}}
 \caption{Registro de riesgos del proyecto}\label{tab-registro-riesgos}\\[-0.5em]
 \toprule
 \textbf{Código} & \textbf{Categoría} & \textbf{Riesgo} & \textbf{Causa} & \textbf{Impacto en el proyecto} & \textbf{Probabilidad} & \textbf{Impacto} & \textbf{Nivel} & \textbf{Clasificación} & \textbf{Responsable} & \textbf{Estrategia} & \textbf{Acción de respuesta} & \textbf{Estado} \\
@@ -371,17 +371,14 @@ La consulta detallada de estos recursos propició la detección de amenazas asoc
 \endhead
 R-01 & Cronograma & Restricción fuerte de tiempo & El proyecto debe entregarse según la fecha final establecida en el cronograma aprobado y contiene varios entregables documentales y técnicos & Atraso en documentos, reducción de calidad o entrega incompleta & 4 & 5 & 20 & Crítico & Tamara Robles Camacho & Mitigar & Dar seguimiento frecuente al cronograma, priorizar tareas críticas y redistribuir trabajo si una actividad se atrasa & Abierto \\
 R-02 & Alcance & Alcance creciente & Se pueden proponer funcionalidades fuera del alcance, como lógica de servidor, base de datos real o pagos reales & Aumento del trabajo, atraso en la interfaz y contradicción con la definición del alcance & 4 & 5 & 20 & Crítico & Tamara Robles Camacho e Isaac Jiménez Blanco & Evitar & Revisar toda nueva solicitud contra el alcance aprobado y aplicar control formal de cambios & Abierto \\
-R-03 & Documentación & Inconsistencias entre documentos & Los entregables están divididos entre varios integrantes y pueden tener diferencias en nombres, fechas, roles o presupuesto & Pérdida de coherencia del proyecto y observaciones en la evaluación final & 4 & 4 & 16 & Muy alto & Isaac Jiménez Blanco y Jorge Abarca Quiros & Mitigar & Revisar documentos contra una lista común de datos base, incluyendo el nombre del proyecto, roles, presupuesto, fecha final y alcance & Abierto \\
 R-04 & Desarrollo & Subestimación del esfuerzo de la interfaz & El prototipo incluye varios módulos, pantallas y navegación entre portales & El prototipo puede quedar incompleto o con navegación limitada & 3 & 4 & 12 & Alto & Mauricio González Prendas y Carlos Sainz Arce & Mitigar & Priorizar primero los módulos obligatorios y dejar mejoras visuales no esenciales para el final & Abierto \\
 R-05 & Recursos humanos & Disponibilidad limitada del equipo & El equipo es pequeño y cada integrante tiene varios entregables asignados & Sobrecarga de trabajo, atrasos y poca revisión entre compañeros & 4 & 4 & 16 & Muy alto & Tamara Robles Camacho & Mitigar & Coordinar revisiones cortas, definir prioridades y reasignar tareas cuando sea necesario & Abierto \\
 R-06 & Calidad & Errores críticos de navegación en el prototipo & Falta de pruebas manuales suficientes o cambios rápidos en pantallas & El usuario no podría entrar a módulos principales o continuar el flujo de navegación & 3 & 5 & 15 & Muy alto & Mauricio González Prendas y Carlos Sainz Arce & Mitigar & Ejecutar lista de verificación de navegación en inicio de sesión, panel de control y portales principales antes de la entrega & Abierto \\
 R-07 & Usabilidad & Baja usabilidad del prototipo & El prototipo puede tener pantallas completas pero poco claras para el usuario & Dificultad para entender el flujo de uso por parte de estudiantes, docentes o administrativos & 3 & 4 & 12 & Alto & Mauricio González Prendas y Carlos Sainz Arce & Mitigar & Revisar claridad de menús, botones, textos y distribución visual antes del cierre & Abierto \\
-R-08 & Herramientas & Problemas con Microsoft Project & Error al abrir el archivo, pérdida del .mpp o dificultad para exportar evidencias & Pérdida de evidencia del cronograma, ruta crítica, recursos o costos & 2 & 4 & 8 & Medio & Isaac Jiménez Blanco y Jorge Abarca Quiros & Mitigar & Mantener copia local del archivo, exportar PDFs de evidencia y respaldar el .mpp en GitHub & Abierto \\
 R-09 & Herramientas & Problemas con el repositorio o pérdida de versiones & Uso incorrecto del repositorio, archivos mal subidos o falta de entregas de código claras & Pérdida de trazabilidad del prototipo o documentos finales & 4 & 3 & 12 & Alto & Mauricio González Prendas y Carlos Sainz Arce & Mitigar & Usar nombres claros, descripciones precisas de cambios y respaldos locales de documentos y código & Abierto \\
 R-10 & Cambios & Cambios tardíos cerca de la entrega & Interesados o integrantes pueden solicitar ajustes cuando el proyecto ya está avanzado & Afectación del cronograma, calidad y revisión final & 4 & 3 & 12 & Alto & Tamara Robles Camacho, Isaac Jiménez Blanco y Jorge Abarca Quiros & Mitigar & Definir fecha límite para cambios importantes y evaluar toda solicitud mediante control de cambios & Abierto \\
 R-11 & Calidad documental & Falta de criterios claros de aceptación & Si los criterios no se revisan, el equipo puede considerar listo un módulo incompleto & Entregables aceptados internamente sin cumplir navegación, contenido mínimo o coherencia & 3 & 4 & 12 & Alto & Isaac Jiménez Blanco y Jorge Abarca Quiros & Mitigar & Usar los criterios del Plan de Calidad y revisar cada módulo contra el alcance aprobado & Abierto \\
 R-12 & Comunicación & Mala comunicación entre integrantes & Uso excesivo de mensajes informales sin registrar acuerdos importantes & Duplicidad de tareas, pérdida de decisiones o documentos incongruentes & 3 & 4 & 12 & Alto & Tamara Robles Camacho & Mitigar & Usar WhatsApp para avisos rápidos, pero documentar decisiones importantes en GitHub, correo o minuta & Abierto \\
-R-13 & Presupuesto & Inconsistencia en el presupuesto del proyecto & Diferentes documentos pueden usar montos distintos o no coincidir con el cronograma & Contradicción entre el caso de negocio, el cronograma y los entregables financieros & 2 & 4 & 8 & Medio & Isaac Jiménez Blanco, Tamara Robles Camacho y Jorge Abarca Quiros & Mitigar & Mantener el presupuesto total de ₡17,625,200 en todos los documentos que lo mencionen & Abierto \\
 R-14 & Interesados & Baja validación de interesados externos & Por tiempo limitado puede no consultarse a todos los interesados externos & El prototipo podría representar de forma incompleta algunos procesos docentes, financieros o administrativos & 3 & 4 & 12 & Alto & Tamara Robles Camacho & Aceptar y mitigar & Priorizar validaciones internas y consultar a los interesados externos solo cuando sea estrictamente necesario & Abierto \\
 R-15 & Alcance técnico & Expectativa de funcionalidades no incluidas & Puede asumirse que el sistema tendrá lógica de servidor, datos reales, autenticación o pagos reales & Confusión sobre lo que realmente será entregado & 3 & 3 & 9 & Medio & Isaac Jiménez Blanco y Jorge Abarca Quiros & Evitar & Repetir en documentos y revisiones que el entregable técnico es un prototipo de interfaz navegable con datos simulados & Abierto \\
 R-16 & Evidencia & Falta de evidencia final organizada & Los archivos pueden quedar dispersos entre WhatsApp, equipo local y repositorio & Dificultad para demostrar el cumplimiento de entregables y cronograma & 3 & 3 & 9 & Medio & Isaac Jiménez Blanco, Jorge Abarca Quiros, Mauricio González Prendas y Carlos Sainz Arce & Mitigar & Organizar documentos, PDFs, capturas, .mpp y código en GitHub con nombres claros & Abierto \\
@@ -404,9 +401,9 @@ A partir de la evaluación de criticidad realizada, el volumen de riesgos identi
 \textbf{Clasificación} & \textbf{Cantidad de riesgos} & \textbf{Códigos} \\
 \midrule
 Crítico & 2 & R-01, R-02 \\
-Muy alto & 3 & R-03, R-05, R-06 \\
+Muy alto & 2 & R-05, R-06 \\
 Alto & 7 & R-04, R-07, R-09, R-10, R-11, R-12, R-14 \\
-Medio & 4 & R-08, R-13, R-15, R-16 \\
+Medio & 2 & R-15, R-16 \\
 Bajo & 0 & Ninguno \\
 Muy bajo & 0 & Ninguno \\
 \bottomrule
