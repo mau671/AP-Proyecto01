@@ -1,0 +1,298 @@
+\documentclass[11pt,spanish]{article}
+
+% =========================================================
+% PLANTILLA BASE PARA INFORMES ACADÉMICOS / TÉCNICOS
+% =========================================================
+
+% --- Idioma y codificación ---
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{newunicodechar}
+\newunicodechar{₡}{\textcolonmonetary}
+
+% --- Márgenes / papel ---
+\usepackage[
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headsep=0.5cm,
+    footskip=0.8cm
+]{geometry}
+
+% --- Matemáticas ---
+\usepackage{amsmath}
+
+% --- Tablas, enlaces y elementos visuales ---
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes.geometric,arrows.meta,calc}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage[hidelinks]{hyperref}
+\usepackage{pdfpages}
+
+% --- Encabezado y pie de página ---
+\usepackage{fancyhdr}
+\setlength{\headheight}{14pt}
+\usepackage{lastpage}
+
+% --- Interlineado ---
+\linespread{1.2}
+\sloppy
+
+% =========================================================
+% DATOS DEL DOCUMENTO
+% =========================================================
+\newcommand{\Institucion}{Instituto Tecnológico de Costa Rica}
+\newcommand{\Campus}{Campus Tecnológico Central Cartago}
+\newcommand{\DocumentoTitulo}{Estructura de desglose del trabajo}
+\newcommand{\Curso}{Administración de proyectos}
+\newcommand{\Profesor}{Alicia Marcela Salazar Hernández}
+\newcommand{\FechaDocumento}{21 de junio de 2026}
+\newcommand{\PeriodoAcademico}{I Semestre}
+\newcommand{\AnioDocumento}{2026}
+\newcommand{\AutoresPortada}{%
+    \begin{tabular}{l@{\hspace{1.5cm}}r}
+        Mauricio González Prendas & 2024143009 \\
+        Isaac Jiménez Blanco & 2024202804 \\
+        Tamara Robles Camacho & 2024099342 \\
+    \end{tabular}%
+}
+\newcommand{\DocHeaderLeft}{}
+\newcommand{\DocHeaderRight}{Estructura de desglose del trabajo}
+\newcommand{\DocFooterRight}{Página~\thepage\ de~\pageref{LastPage}}
+
+% Metadatos PDF.
+\title{\DocumentoTitulo}
+\author{\AutoresPortada}
+\date{\FechaDocumento}
+
+% =========================================================
+% CONFIGURACIÓN DE TABLAS Y UTILIDADES
+% =========================================================
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.22}
+\setlength{\LTpre}{0.5em}
+\setlength{\LTpost}{0.5em}
+
+% Imagen segura: si el archivo no existe, muestra un recuadro de marcador.
+\newcommand{\SafeImage}[2][0.92\textwidth]{%
+    \IfFileExists{#2}{%
+        \includegraphics[width=#1]{#2}%
+    }{%
+        \fbox{%
+            \begin{minipage}[c][4cm][c]{#1}
+            \centering
+            Imagen pendiente:\\
+            \texttt{#2}
+            \end{minipage}%
+        }%
+    }%
+}
+
+% =========================================================
+% ENCABEZADO Y PIE
+% =========================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\DocHeaderLeft}
+\fancyhead[R]{\DocHeaderRight}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[R]{\DocFooterRight}
+
+% Estilo equivalente para páginas horizontales.
+\fancypagestyle{widefancy}{%
+    \fancyhf{}%
+    \fancyhead[L]{\DocHeaderLeft}%
+    \fancyhead[R]{\DocHeaderRight}%
+    \renewcommand{\headrulewidth}{0.4pt}%
+    \renewcommand{\footrulewidth}{0.4pt}%
+    \fancyfoot[R]{\DocFooterRight}%
+}
+
+% =========================================================
+% PÁGINAS HORIZONTALES PARA TABLAS ANCHAS
+% =========================================================
+\makeatletter
+\newcommand{\SyncPageBuilderDimensions}{%
+    \global\vsize=\textheight
+    \global\@colroom=\textheight
+    \global\@colht=\textheight
+}
+\makeatother
+
+\newenvironment{widepage}{%
+    \clearpage
+    \hypersetup{pageanchor=false}%
+    \paperwidth=297mm
+    \paperheight=95mm
+    \pdfpagewidth=297mm
+    \pdfpageheight=95mm
+    \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm}%
+    \setlength{\textwidth}{247mm}%
+    \setlength{\textheight}{45mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \pagestyle{widefancy}%
+}{%
+    \clearpage
+    \paperwidth=210mm
+    \paperheight=297mm
+    \pdfpagewidth=210mm
+    \pdfpageheight=297mm
+    \restoregeometry
+    \SyncPageBuilderDimensions
+    \hypersetup{pageanchor=true}%
+    \pagestyle{fancy}%
+}
+
+% =========================================================
+% PORTADA
+% =========================================================
+\newcommand{\MakeCover}{%
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+
+{\bfseries \huge \Institucion \par}
+\vspace{0.25cm}
+{\LARGE \Campus \par}
+
+\vfill
+
+{\huge \DocumentoTitulo \par}
+
+\vfill
+
+{\bfseries \LARGE Profesora \par}
+{\Large \Profesor \par}
+
+\vfill
+
+{\bfseries \LARGE Estudiantes \par}
+{\Large \AutoresPortada \par}
+
+\vfill
+
+{\bfseries\LARGE Fecha \par}
+{\Large \FechaDocumento \par}
+
+\vfill
+
+{\LARGE \PeriodoAcademico \par}
+{\LARGE \AnioDocumento \par}
+
+\end{titlepage}%
+}
+
+% =========================================================
+% DOCUMENTO
+% =========================================================
+\begin{document}
+\hypersetup{pageanchor=false}
+
+% =========================
+% Portada
+% =========================
+\MakeCover
+
+% =========================
+% Índice
+% =========================
+\pagenumbering{roman}
+\pagestyle{empty}
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+\pagestyle{fancy}
+
+% =========================
+% Contenido
+% =========================
+
+\section{Información general del documento}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{p{5cm} Y}
+\toprule
+\textbf{Nombre del proyecto} & Plataforma Universitaria Integrada \\
+\textbf{Organización} & Universidad Tecnológica La Mejor \\
+\textbf{Documento} & \DocumentoTitulo \\
+\textbf{Directora del proyecto} & Tamara Robles Camacho \\
+\textbf{Fecha} & \FechaDocumento \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Introducción}
+
+El presente documento contiene la Estructura de desglose del trabajo del proyecto Plataforma Universitaria Integrada. Esta estructura es una descomposición jerárquica orientada a los entregables que el equipo de proyecto ejecutará para cumplir los objetivos y crear los productos requeridos.
+
+La Estructura de desglose del trabajo permite definir el alcance total del proyecto dividiendo el trabajo en paquetes manejables y fácilmente asignables. Al tratarse de un prototipo Front-End navegable acompañado de un conjunto de documentos de gestión académica, esta estructura se organiza en grandes fases que coinciden con los grupos de procesos y el desarrollo técnico, finalizando con la integración y el cierre.
+
+\section{Diagrama de la estructura}
+
+A continuación, se presenta de manera gráfica la Estructura de desglose del trabajo. Debido al nivel de detalle y la extensión del diagrama, este se expone en formato de página horizontal en la página siguiente, utilizando una exportación vectorial desde la herramienta original de modelado para garantizar que todos los textos sean legibles.
+
+\begin{widepage}
+\begin{figure}[H]
+\centering
+\SafeImage[1\textwidth]{wbs_diagrama.pdf}
+\caption{Estructura de desglose del trabajo - Plataforma Universitaria Integrada}
+\label{fig:wbs}
+\end{figure}
+\end{widepage}
+
+\section{Diccionario de la estructura (Paquetes principales)}
+
+Para complementar el diagrama anterior y satisfacer el requerimiento de documentar criterios de aceptación, a continuación se describen los paquetes de trabajo más importantes del proyecto. Estos criterios garantizan que cada porción del trabajo alcance el estándar de calidad definido.
+
+\begin{table}[H]
+\centering
+\caption{Diccionario de la Estructura de desglose del trabajo y criterios de aceptación}
+\label{tab:wbs-diccionario}
+{\small
+\begin{tabularx}{\textwidth}{p{3.5cm} Y}
+\toprule
+\textbf{Paquete de Trabajo} & \textbf{Criterios de Aceptación} \\
+\midrule
+Documentación de Planificación & Los 17 documentos iniciales deben estar aprobados, contener la información mínima solicitada y utilizar formato uniforme en LaTeX. \\
+\midrule
+Portal Estudiantil & El módulo debe permitir navegación simulada de matrícula, consulta de notas y estados de cuenta, cumpliendo los principios de diseño UX aprobados. \\
+\midrule
+Portal Docente & El módulo debe mostrar pantallas funcionales visualmente para registrar asistencia y calificaciones, aunque sin persistencia de base de datos. \\
+\midrule
+Portal Financiero & El módulo debe evidenciar el flujo visual del pago de matrícula y cursos con simulaciones interactivas. \\
+\midrule
+Dashboard Ejecutivo & El módulo debe estar integrado al prototipo y también ser entregado de manera automatizada como un archivo Excel (Entregable 23). \\
+\midrule
+Integración y Pruebas & Todos los portales deben estar unidos bajo un menú de navegación claro. Debe evaluarse con usuarios simulados sin generar errores visuales graves. \\
+\midrule
+Documentación de Cierre & Los documentos de evaluación, recomendaciones e informe ejecutivo deben estar alineados con el cronograma y presupuesto final. \\
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+\section{Conclusión}
+
+La estructuración del alcance a través de la Estructura de desglose del trabajo garantiza que todo el esfuerzo del equipo está debidamente delimitado y justificado. Al organizar el trabajo en paquetes relacionados con la gestión (metodología PMI) y la ejecución técnica (desarrollo Front-End), el equipo logra tener una hoja de ruta clara que previene el alcance creciente y permite dar seguimiento oportuno al avance de los entregables individuales.
+
+\end{document}
