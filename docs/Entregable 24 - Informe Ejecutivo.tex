@@ -1,0 +1,725 @@
+
+\documentclass[11pt,spanish]{article}
+
+% =========================================================
+% PLANTILLA BASE PARA INFORMES ACADÉMICOS / TÉCNICOS
+% =========================================================
+
+% --- Idioma y codificación ---
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{newunicodechar}
+\newunicodechar{₡}{\textcolonmonetary}
+
+% --- Márgenes / papel ---
+\usepackage[
+    left=2.5cm,
+    right=2.5cm,
+    top=2.5cm,
+    bottom=2.5cm,
+    headsep=0.5cm,
+    footskip=0.8cm
+]{geometry}
+
+% --- Matemáticas ---
+\usepackage{amsmath}
+
+% --- Tablas, enlaces y elementos visuales ---
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes.geometric,arrows.meta,calc}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage[hidelinks]{hyperref}
+
+% --- Encabezado y pie de página ---
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+% --- Interlineado ---
+\linespread{1.2}
+\sloppy
+
+% =========================================================
+% DATOS DEL DOCUMENTO
+% =========================================================
+\newcommand{\Institucion}{Instituto Tecnológico de Costa Rica}
+\newcommand{\Campus}{Campus Tecnológico Central Cartago}
+\newcommand{\DocumentoTitulo}{Informe Ejecutivo}
+\newcommand{\DocumentoSubtitulo}{Plataforma Universitaria Integrada: Modernización y Centralización de Procesos Académicos y Administrativos}
+\newcommand{\Curso}{Administración de proyectos}
+\newcommand{\Profesor}{Alicia Marcela Salazar Hernández}
+\newcommand{\FechaDocumento}{21 de junio de 2026}
+\newcommand{\PeriodoAcademico}{I Semestre}
+\newcommand{\AnioDocumento}{2026}
+
+\newcommand{\AutoresPortada}{%
+    \begin{tabular}{l@{\hspace{1.5cm}}r}
+        Mauricio González Prendas & 2024143009\\
+        Isaac Jiménez Blanco & 2024202804\\
+        Tamara Robles Camacho & 2024099342
+    \end{tabular}%
+}
+
+% Datos que aparecen en el encabezado.
+\newcommand{\DocHeaderLeft}{}
+\newcommand{\DocHeaderRight}{Plan de Calidad}
+\newcommand{\DocFooterRight}{Página~\thepage\ de~\pageref{LastPage}}
+
+% Metadatos PDF.
+\title{\DocumentoTitulo}
+\author{\AutoresPortada}
+\date{\FechaDocumento}
+
+% =========================================================
+% CONFIGURACIÓN DE TABLAS Y UTILIDADES
+% =========================================================
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\renewcommand{\arraystretch}{1.22}
+\setlength{\LTpre}{0.5em}
+\setlength{\LTpost}{0.5em}
+
+% Subtítulos menores en bloque, no en línea.
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+  {1.25ex \@plus1ex \@minus.2ex}%
+  {0.6ex}%
+  {\normalfont\normalsize\bfseries}}
+\makeatother
+
+% Imagen segura: si el archivo no existe, muestra un recuadro de marcador.
+\newcommand{\SafeImage}[2][0.92\textwidth]{%
+    \IfFileExists{#2}{%
+        \includegraphics[width=#1]{#2}%
+    }{%
+        \fbox{%
+            \begin{minipage}[c][4cm][c]{#1}
+            \centering
+            Imagen pendiente:\\
+            \texttt{#2}
+            \end{minipage}%
+        }%
+    }%
+}
+
+% Figura reutilizable.
+\newcommand{\EvidenceFigure}[3]{%
+    \begin{figure}[H]
+    \centering
+    \SafeImage{#1}
+    \caption{#2}
+    \label{#3}
+    \end{figure}%
+}
+
+% =========================================================
+% ENCABEZADO Y PIE
+% =========================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\DocHeaderLeft}
+\fancyhead[R]{\DocHeaderRight}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[R]{\DocFooterRight}
+
+% Estilo equivalente para páginas horizontales.
+\fancypagestyle{widefancy}{%
+    \fancyhf{}%
+    \fancyhead[L]{\DocHeaderLeft}%
+    \fancyhead[R]{\DocHeaderRight}%
+    \renewcommand{\headrulewidth}{0.4pt}%
+    \renewcommand{\footrulewidth}{0.4pt}%
+    \fancyfoot[R]{\DocFooterRight}%
+}
+
+% =========================================================
+% PÁGINAS HORIZONTALES PARA TABLAS ANCHAS
+% =========================================================
+\makeatletter
+\newcommand{\SyncPageBuilderDimensions}{%
+    \global\vsize=\textheight
+    \global\@colroom=\textheight
+    \global\@colht=\textheight
+}
+\makeatother
+
+\newenvironment{widepage}{%
+    \clearpage
+    \hypersetup{pageanchor=false}%
+    \paperwidth=297mm
+    \paperheight=210mm
+    \pdfpagewidth=297mm
+    \pdfpageheight=210mm
+    \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm}%
+    \setlength{\textwidth}{243mm}%
+    \setlength{\textheight}{156mm}%
+    \setlength{\linewidth}{\textwidth}%
+    \setlength{\columnwidth}{\textwidth}%
+    \hsize=\textwidth
+    \setlength{\headwidth}{\textwidth}%
+    \SyncPageBuilderDimensions
+    \pagestyle{widefancy}%
+}{%
+    \clearpage
+    \paperwidth=210mm
+    \paperheight=297mm
+    \pdfpagewidth=210mm
+    \pdfpageheight=297mm
+    \restoregeometry
+    \SyncPageBuilderDimensions
+    \hypersetup{pageanchor=true}%
+    \pagestyle{fancy}%
+}
+
+% =========================================================
+% PORTADA
+% =========================================================
+\newcommand{\MakeCover}{%
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+
+{\bfseries \huge \Institucion \par}
+\vspace{0.25cm}
+{\LARGE \Campus \par}
+
+\vfill
+
+{\huge \DocumentoTitulo \par}
+
+
+\vfill
+
+{\bfseries \LARGE Profesora: \par}
+{\Large \Profesor \par}
+
+\vfill
+
+{\bfseries \LARGE Estudiantes: \par}
+{\Large \AutoresPortada \par}
+
+\vfill
+
+{\bfseries\LARGE Fecha: \par}
+{\Large \FechaDocumento \par}
+
+\vfill
+
+{\LARGE \PeriodoAcademico \par}
+{\LARGE \AnioDocumento \par}
+
+\end{titlepage}%
+}
+
+% =========================================================
+% DOCUMENTO
+% =========================================================
+\begin{document}
+\hypersetup{pageanchor=false}
+
+% =========================
+% Portada
+% =========================
+\MakeCover
+
+% =========================
+% Índice
+% =========================
+\pagenumbering{roman}
+\pagestyle{empty}
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+\pagestyle{fancy}
+
+% =========================
+% Contenido
+% =========================
+\section{Información general del documento}
+
+\begin{table}[H]
+\centering
+\begin{tabularx}{\textwidth}{p{5cm} Y}
+\toprule
+\textbf{Nombre del proyecto} & Plataforma Universitaria Integrada \\
+\textbf{Organización} & Universidad Tecnológica La Mejor \\
+\textbf{Documento} & \DocumentoTitulo \\
+\textbf{Directora del proyecto} & Tamara Robles Camacho \\
+\textbf{Fecha} & \FechaDocumento \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+
+
+\section{Resumen Ejecutivo}
+El proyecto Plataforma Universitaria Integrada fue desarrollado para la Universidad Tecnológica La Mejor con el objetivo de modernizar y centralizar sus procesos académicos, administrativos y financieros mediante un prototipo Front-End navegable. El proyecto se ejecutó bajo la metodología PMI a lo largo de cinco procesos (Inicio, Planificación, Ejecución, Monitoreo y Control, y Cierre), con una duración total planificada de 3 meses hábiles distribuidos entre el 8 de junio y el 9 de septiembre de 2026.\\
+El equipo del proyecto estuvo conformado por cinco integrantes: una Project Manager, dos analistas de negocio/documentadores y dos desarrolladores Front-End, quienes produjeron 25 entregables documentales bajo el marco del PMBOK y un prototipo funcional que cubre los módulos de Portal Estudiantil, Portal Docente, Portal Administrativo, Portal Financiero y Dashboard Ejecutivo.\\
+Durante la ejecución se gestionaron dos solicitudes de cambio formales, las cuales fueron evaluadas, aprobadas y ejecutadas internamente sin afectar el presupuesto total ni la fecha de cierre planificada al inicio del proyecto. El proyecto se considera exitoso en términos de alcance, calidad y control, cumpliendo con los criterios de éxito definidos en el Project Charter.
+
+
+\section{Objetivos del Proyecto vs. Resultados Obtenidos}
+En la siguiente tabla se compara los objetivos del proyecto contra los resultados obtenidos al cierre del proyecto:
+\begin{table}[H]
+\centering
+\caption{Objetivos del proyecto y resultados obtenidos}
+\label{tab:objetivos-resultados}
+{\small
+\begin{tabularx}{\textwidth}{p{6cm}Y}
+\toprule
+\textbf{Objetivo planteado} &
+\textbf{Resultado obtenido} \\
+\midrule
+
+Desarrollar un prototipo Front-End web navegable que represente los módulos principales de la Universidad Tecnológica La Mejor.
+&
+El prototipo es completamente navegable y se implementaron los cinco módulos principales.
+\\
+
+Centralizar visualmente los procesos académicos, administrativos y financieros dentro de una misma plataforma.
+&
+Los procesos fueron centralizados mediante una navegación integrada entre todos los módulos.
+\\
+
+Diseñar un Portal Estudiantil con inicio de sesión, perfil, matrícula, horarios, calificaciones, estado de cuenta e historial académico.
+&
+El Portal Estudiantil fue completado al 100\% y aprobado mediante pruebas de calidad y usabilidad.
+\\
+
+Diseñar un Portal Docente con gestión de cursos, registro de asistencia y calificaciones.
+&
+El Portal Docente fue completado al 100\% y validado mediante pruebas de calidad.
+\\
+
+Diseñar un Portal Administrativo con gestión de estudiantes, docentes, cursos y períodos académicos.
+&
+El Portal Administrativo fue completado al 100\% y superó las pruebas definidas.
+\\
+
+Diseñar un Portal Financiero con pagos de matrícula, pagos de cursos e historial de pagos.
+&
+El Portal Financiero fue desarrollado completamente y aprobado durante las pruebas.
+\\
+
+Diseñar un Dashboard Ejecutivo con indicadores académicos y financieros.
+&
+El Dashboard fue implementado con los indicadores definidos y aprobados.
+\\
+
+Aplicar los grupos de procesos del PMI durante el desarrollo del proyecto.
+&
+Los grupos de Inicio, Planificación, Ejecución, Monitoreo y Control y Cierre fueron completados exitosamente.
+\\
+
+Elaborar los entregables documentales requeridos por el proyecto.
+&
+Se completaron los 26 entregables documentales establecidos.
+\\
+
+Mantener el proyecto dentro del presupuesto aprobado de ₡17,625,200.
+&
+El presupuesto se mantuvo sin incremento mediante una reasignación interna de esfuerzo.
+\\
+
+Completar el proyecto dentro del plazo establecido.
+&
+El cronograma se cumplió dentro del periodo planificado.
+\\
+
+Gestionar formalmente las solicitudes de cambio.
+&
+Las solicitudes SC-01 y SC-02 fueron evaluadas, aprobadas y documentadas mediante el proceso de control de cambios.
+\\
+
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+\section{Desempeño en Tiempo y Costo}
+
+En la siguiente sección se evalúa el desarrollo del proyecto en términos de cronograma y costo, considerando hitos, fechas de cumplimiento y el estado de avance. Esto nos permite identificar posibles desviaciones y valorar la efectividad de la gestión implementada durante las diferentes fases del proyecto.
+
+\subsection{Cronograma}
+
+El proyecto se planificó con una duración total de 3 meses, distribuidos en las fases de Inicio (33 días), Planificación (20 días), Supervisión y control, Ejecución/Desarrollo Front-End (38 días en paralelo con Planificación) y Cierre (27 días), con fecha de inicio el 8 de junio y fecha de cierre el 9 de septiembre de 2026.\\
+El módulo de Project Charter aprobado se cumplió el 12 de junio, el de Alcance definido el 19 de junio, el de Cronograma aprobado el 3 de julio, el de Registro de Riesgos completado el 1 de julio y el de Prototipo Front-End completado el 29 de julio. El hito final de Entrega del proyecto se programó para el 9 de septiembre de 2026.
+
+
+\begin{table}[H]
+\centering
+\caption{Cumplimiento de hitos del proyecto}
+\label{tab:hitos}
+{\small
+\begin{tabularx}{\textwidth}{p{6cm}p{3cm}Y}
+\toprule
+\textbf{Hito} &
+\textbf{Fecha planificada} &
+\textbf{Estado} \\
+\midrule
+
+Project Charter aprobado &
+12 jun 2026 &
+Cumplido \\
+
+Alcance definido &
+19 jun 2026 &
+Cumplido \\
+
+Cronograma aprobado &
+3 jul 2026 &
+Cumplido \\
+
+Registro de riesgos completado &
+1 jul 2026 &
+Cumplido \\
+
+Prototipo Front-End completado &
+29 jul 2026 &
+Cumplido \\
+
+Cambios evaluados &
+8 jun 2026 &
+Cumplido \\
+
+Entrega final del proyecto &
+9 sep 2026 &
+Cumplido dentro del plazo \\
+
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+\subsection{Costo}
+
+El presupuesto total aprobado para el proyecto fue de ₡17,625,200, financiado mediante la estimación de mano de obra del equipo de cinco integrantes, software, hardware, servicios operativos y reserva de contingencia. Las dos solicitudes de cambio gestionadas durante la ejecución no generaron incremento en el presupuesto total, ya que el esfuerzo adicional del módulo de certificados académicos se compensó mediante el ajuste del alcance del Dashboard Ejecutivo del sistema.
+
+\begin{table}[H]
+\centering
+\caption{Desempeño del costo del proyecto}
+\label{tab:costo-proyecto}
+\begin{tabularx}{\textwidth}{p{8cm}Y}
+\toprule
+\textbf{Concepto} & \textbf{Valor} \\
+\midrule
+Presupuesto total aprobado (PV) & ₡17,625,200 \\
+Valor ganado al cierre (EV) & ₡17,625,200 \\
+Costo real al cierre (AC) & ₡17,279,608 \\
+Variación del costo (CV = EV - AC) & +₡345,592 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+El equipo logró completar el 100\% del alcance planificado con un gasto real (AC) de ₡17,279,608, lo cual representa un ahorro de ₡345,592 frente al presupuesto aprobado. Este resultado se atribuye al uso de herramientas gratuitas o de licencia comercial y a que las solicitudes de cambio SC-01 y SC-02 se gestionaron mediante reasignación interna de esfuerzo en lugar de recurrir a la reserva de contingencia.
+
+\section{Gestión de Solicitudes de Cambio}
+
+Durante la ejecución del proyecto se documentaron y gestionaron dos solicitudes de cambio formales, siguiendo el proceso de control de cambios establecido. Ambas solicitudes fueron evaluadas en conjunto, dado que la segunda funcionó como medida compensatoria de la primera.
+
+\begin{table}[H]
+\centering
+\caption{Solicitudes de cambio del proyecto}
+\label{tab:cambios}
+{\small
+\begin{tabularx}{\textwidth}{p{1.5cm}p{3cm}Yp{1.7cm}p{2cm}}
+\toprule
+\textbf{Código} &
+\textbf{Solicitante} &
+\textbf{Descripción} &
+\textbf{Prioridad} &
+\textbf{Decisión} \\
+\midrule
+
+SC-01 &
+Lic. Patricia Vargas Soto y Prof. Andrea Solís Zamora &
+Incorporar un módulo de solicitud de certificados académicos dentro del Portal Estudiantil.
+&
+Alta &
+Aprobada con condiciones
+\\
+
+SC-02 &
+Tamara Robles Camacho &
+Reducir el alcance del Dashboard Ejecutivo como medida compensatoria.
+&
+Media &
+Aprobada
+\\
+
+\bottomrule
+\end{tabularx}
+}
+\end{table}
+
+La solicitud SC-01 se aprobó con la condición de limitar su implementación a una representación visual navegable con datos simulados, sin conexión a base de datos ni generación real de documentos oficiales. La solicitud SC-02 permitió liberar el esfuerzo necesario para absorber el cambio anterior sin afectar el cronograma ni el presupuesto, simplificando el Dashboard Ejecutivo a únicamente los indicadores de estudiantes activos e ingresos por matrícula.\\
+El impacto neto de ambos cambios se considera controlado: se incrementó el valor del Portal Estudiantil para los usuarios finales, se mantuvo el presupuesto total sin alteraciones, se conservó la fecha de cierre planificada y se redujeron los riesgos R-04 (subestimación del esfuerzo de desarrollo) y R-10 (cambios tardíos cerca del cierre).
+
+
+\section{Riesgos Relevantes Durante la Ejecución}
+
+El proyecto identificó 16 riesgos en su fase de planificación, de los cuales 5 fueron clasificados como Críticos: restricción fuerte de tiempo (R-01), alcance creciente o scope creep (R-02), inconsistencias entre documentos (R-03), subestimación del esfuerzo del Front-End (R-04) y disponibilidad limitada del equipo (R-05).\\
+Durante la ejecución, los riesgos R-04 y R-10 se activaron parcialmente como consecuencia de la solicitud de cambio SC-01, pero fueron gestionados de forma efectiva mediante la aprobación compensatoria de SC-02, lo cual redujo su nivel de criticidad antes de que afectaran la entrega final del proyecto.
+
+
+\begin{table}[H]
+\centering
+\caption{Riesgos relevantes al cierre del proyecto}
+\label{tab:riesgos}
+\begin{tabularx}{\textwidth}{p{1.5cm}Yp{4cm}}
+\toprule
+\textbf{Código} &
+\textbf{Riesgo} &
+\textbf{Estado al cierre} \\
+\midrule
+
+R-01 &
+Restricción fuerte de tiempo del proyecto &
+Gestionado; cronograma mantenido
+\\
+
+R-02 &
+Alcance creciente (scope creep) &
+Controlado mediante SC-02
+\\
+
+R-04 &
+Subestimación del esfuerzo del Front-End &
+Mitigado mediante reasignación interna
+\\
+
+R-10 &
+Cambios tardíos cerca de la entrega &
+Reducido tras aprobación de SC-02
+\\
+
+\bottomrule
+\end{tabularx}
+\end{table}
+
+
+\section{Indicadores de Desempeño (KPIs)}
+
+Al cierre del proyecto se midieron los 14 indicadores definidos en el Plan de KPIs, distribuidos en las categorías de tiempo, costo, calidad, riesgos y productividad. Los resultados finales confirman que el proyecto cumplió o superó la totalidad de las metas establecidas.
+
+\subsection{Indicadores de Tiempo}
+
+La siguiente tabla resume el comportamiento de los indicadores asociados al
+cronograma.
+
+\begin{table}[H]
+\centering
+\caption{Indicadores de tiempo}
+\label{tab:kpi-tiempo}
+\begin{tabularx}{\textwidth}{Yp{3cm}p{2.5cm}p{2.5cm}}
+\toprule
+\textbf{KPI} &
+\textbf{Valor final} &
+\textbf{Meta} &
+\textbf{Estado} \\
+\midrule
+
+Cumplimiento del cronograma &
+95\% &
+$\geq$ 90\% &
+En meta
+\\
+
+Eficiencia de cronograma (SPI) &
+1.00 &
+$\geq$ 0.95 &
+En meta
+\\
+
+Variación del cronograma (SV) &
+0 días &
+$\geq$ 0 &
+En meta
+\\
+
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Indicadores de Costo}
+
+La siguiente tabla resume el comportamiento de los indicadores asociados al
+desempeño financiero del proyecto.
+
+\begin{table}[H]
+\centering
+\caption{Indicadores de costo}
+\label{tab:kpi-costo}
+\begin{tabularx}{\textwidth}{Yp{3cm}p{2.5cm}p{2.5cm}}
+\toprule
+\textbf{KPI} &
+\textbf{Valor final} &
+\textbf{Meta} &
+\textbf{Estado} \\
+\midrule
+
+Cumplimiento del presupuesto &
+92\% ejecutado &
+$\leq$ 100\% &
+En meta
+\\
+
+Eficiencia de costos (CPI) &
+1.02 &
+$\geq$ 1.0 &
+En meta
+\\
+
+Variación del costo (CV) &
++₡345,592 &
+$\geq$ 0 &
+En meta
+\\
+
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Indicadores de Calidad}
+
+La calidad del proyecto fue evaluada mediante indicadores relacionados con
+errores, pruebas y satisfacción del equipo.
+
+\begin{table}[H]
+\centering
+\caption{Indicadores de calidad}
+\label{tab:kpi-calidad}
+\begin{tabularx}{\textwidth}{Yp{3cm}p{2.5cm}p{2.5cm}}
+\toprule
+\textbf{KPI} &
+\textbf{Valor final} &
+\textbf{Meta} &
+\textbf{Estado} \\
+\midrule
+
+Defectos por módulo &
+0 errores reportados &
+$\leq$ 3 &
+En meta
+\\
+
+Cobertura de criterios de aceptación &
+100\% cumplidos &
+$\geq$ 95\% &
+En meta
+\\
+
+Pruebas exitosas (aprobación) &
+100\% &
+$\geq$ 90\% &
+En meta
+\\
+
+Satisfacción del equipo (escala 1-5) &
+4.5 &
+$\geq$ 4.0 &
+En meta
+\\
+
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Indicadores de Riesgos}
+
+La siguiente tabla presenta el comportamiento de los principales indicadores
+asociados a la gestión de riesgos.
+
+\begin{table}[H]
+\centering
+\caption{Indicadores de riesgos}
+\label{tab:kpi-riesgos}
+\begin{tabularx}{\textwidth}{Yp{3cm}p{2.5cm}p{2.5cm}}
+\toprule
+\textbf{KPI} &
+\textbf{Valor final} &
+\textbf{Meta} &
+\textbf{Estado} \\
+\midrule
+
+Riesgos críticos abiertos al cierre &
+0 &
+0 al cierre &
+En meta
+\\
+
+Tiempo promedio de respuesta ante riesgos &
+2 días &
+$\leq$ 3 días &
+En meta
+\\
+
+Riesgos mitigados sobre riesgos identificados &
+85\% &
+$\geq$ 80\% &
+En meta
+\\
+
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Indicadores de Productividad}
+
+El desempeño del equipo también fue medido mediante indicadores de
+productividad asociados al ritmo de entrega de productos y documentos.
+
+\begin{table}[H]
+\centering
+\caption{Indicadores de productividad}
+\label{tab:kpi-productividad}
+\begin{tabularx}{\textwidth}{Yp{3cm}p{2.5cm}p{2.5cm}}
+\toprule
+\textbf{KPI} &
+\textbf{Valor final} &
+\textbf{Meta} &
+\textbf{Estado} \\
+\midrule
+
+Entregables completados por semana &
+9.6 / semana &
+$\geq$ 2 / semana &
+En meta
+\\
+
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Los catorce indicadores definidos en el Plan de KPIs finalizaron dentro o por
+encima de las metas establecidas. Destacan los valores del SPI y del CPI,
+los cuales demuestran que el proyecto se ejecutó eficientemente tanto en
+tiempo como en costo.
+
+\section{Conclusiones y Recomendaciones}
+
+El proyecto \textit{Plataforma Universitaria Integrada} se considera exitoso al cierre de su ejecución. Se cumplieron los objetivos de alcance establecidos en el Project Charter, el presupuesto se mantuvo sin incremento en ₡17,625,200, el cronograma se completó dentro del periodo de tres meses planificado y las dos solicitudes de cambio surgidas durante la ejecución se implementaron de forma controlada sin comprometer la calidad del prototipo ni la fecha de entrega.\\
+El prototipo Front-End navegable entregado cubre los cinco módulos requeridos por la Universidad Tecnológica La Mejor (Portal Estudiantil, Portal Docente, Portal Administrativo, Portal Financiero y Dashboard Ejecutivo), incluyendo la funcionalidad adicional de solicitud de certificados académicos aprobada durante la ejecución, lo cual aumenta el valor percibido por los estudiantes sin afectar el proyecto.
+
+
+\section{Cierre del Proyecto}
+
+Con la aprobación de los entregables finales y la emisión del presente
+Informe Ejecutivo, se da por concluido el proyecto \textit{Plataforma
+Universitaria Integrada: Modernización y Centralización de Procesos
+Académicos y Administrativos}, cumpliendo satisfactoriamente con los
+objetivos de alcance, tiempo, costo y calidad establecidos durante la fase
+de planificación.
+
+
+\end{document}
