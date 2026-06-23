@@ -19,9 +19,9 @@ const quickLinks = [
 ] as const
 
 const academicData = [
-  { metric: "Tasa de retención", value: 92 },
-  { metric: "Promedio general", value: 84.5 },
-  { metric: "Cursos aprobados", value: 78 },
+  { metric: "Tasa de retención", value: 94 },
+  { metric: "Promedio general", value: 78 },
+  { metric: "Cursos aprobados", value: 62 },
 ]
 
 const academicConfig = {
@@ -79,7 +79,6 @@ export function AdminHome({ user }: { user: DemoUser }) {
             <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
               Bienvenido, {user.name}
             </h1>
-            <p className="text-muted-foreground mt-1">Dashboard ejecutivo institucional</p>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -94,6 +93,7 @@ export function AdminHome({ user }: { user: DemoUser }) {
                 <div className="mt-4 h-[80px]">
                   <ChartContainer config={{ estudiantes: interactiveConfig.estudiantes }} className="h-full w-full">
                     <LineChart data={interactiveData}>
+                      <YAxis domain={['dataMin', 'dataMax']} hide />
                       <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
                       <Line type="monotone" dataKey="estudiantes" stroke="var(--color-estudiantes)" strokeWidth={2} dot={false} />
                     </LineChart>
@@ -113,6 +113,7 @@ export function AdminHome({ user }: { user: DemoUser }) {
                 <div className="mt-4 h-[80px]">
                   <ChartContainer config={{ docentes: interactiveConfig.docentes }} className="h-full w-full">
                     <LineChart data={interactiveData}>
+                      <YAxis domain={['dataMin', 'dataMax']} hide />
                       <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
                       <Line type="monotone" dataKey="docentes" stroke="var(--color-docentes)" strokeWidth={2} dot={false} />
                     </LineChart>
@@ -132,6 +133,7 @@ export function AdminHome({ user }: { user: DemoUser }) {
                 <div className="mt-4 h-[80px]">
                   <ChartContainer config={{ cursos: interactiveConfig.cursos }} className="h-full w-full">
                     <LineChart data={interactiveData}>
+                      <YAxis domain={['dataMin', 'dataMax']} hide />
                       <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
                       <Line type="monotone" dataKey="cursos" stroke="var(--color-cursos)" strokeWidth={2} dot={false} />
                     </LineChart>
@@ -151,6 +153,7 @@ export function AdminHome({ user }: { user: DemoUser }) {
                 <div className="mt-4 h-[80px]">
                   <ChartContainer config={{ ingresos: interactiveConfig.ingresos }} className="h-full w-full">
                     <LineChart data={interactiveData}>
+                      <YAxis domain={['dataMin', 'dataMax']} hide />
                       <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
                       <Line type="monotone" dataKey="ingresos" stroke="var(--color-ingresos)" strokeWidth={2} dot={false} />
                     </LineChart>
@@ -166,7 +169,7 @@ export function AdminHome({ user }: { user: DemoUser }) {
               <CardDescription>2026: Semestre I</CardDescription>
             </CardHeader>
             <CardContent className="p-6 pt-0">
-              <ChartContainer config={academicConfig} className="h-[250px] w-full">
+              <ChartContainer config={academicConfig} className="h-[350px] w-full">
                 <BarChart
                   accessibilityLayer
                   data={academicData}

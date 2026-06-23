@@ -10,11 +10,13 @@ export const Route = createFileRoute('/management/periods')({
 })
 
 const periods = [
-  { id: '2026-S1', name: 'Primer Semestre 2026', startDate: '2026-02-15', endDate: '2026-06-30', status: 'Activo', enrolled: 1245 },
-  { id: '2025-S2', name: 'Segundo Semestre 2025', startDate: '2025-07-20', endDate: '2025-11-25', status: 'Cerrado', enrolled: 1180 },
-  { id: '2025-S1', name: 'Primer Semestre 2025', startDate: '2025-02-15', endDate: '2025-06-30', status: 'Cerrado', enrolled: 1100 },
-  { id: '2026-V1', name: 'Verano 2026', startDate: '2026-01-05', endDate: '2026-02-10', status: 'Cerrado', enrolled: 450 },
-  { id: '2026-S2', name: 'Segundo Semestre 2026', startDate: '2026-07-20', endDate: '2026-11-25', status: 'Planificación', enrolled: 0 },
+  { id: '2026-S1', name: 'Semestre I', type: 'Semestre', year: 2026, startDate: '2026-02-15', endDate: '2026-06-30', status: 'Activo', enrolled: 1245 },
+  { id: '2026-H1', name: 'CFH I', type: 'Centros Formación Humanística', year: 2026, startDate: '2026-02-15', endDate: '2026-06-30', status: 'Activo', enrolled: 300 },
+  { id: '2025-S2', name: 'Semestre II', type: 'Semestre', year: 2025, startDate: '2025-07-20', endDate: '2025-11-25', status: 'Cerrado', enrolled: 1180 },
+  { id: '2025-S1', name: 'Semestre I', type: 'Semestre', year: 2025, startDate: '2025-02-15', endDate: '2025-06-30', status: 'Cerrado', enrolled: 1100 },
+  { id: '2026-V1', name: 'Verano', type: 'Verano', year: 2026, startDate: '2026-01-05', endDate: '2026-02-10', status: 'Cerrado', enrolled: 450 },
+  { id: '2026-A1', name: 'Anual', type: 'Anual', year: 2026, startDate: '2026-02-15', endDate: '2026-11-25', status: 'Activo', enrolled: 150 },
+  { id: '2026-S2', name: 'Semestre II', type: 'Semestre', year: 2026, startDate: '2026-07-20', endDate: '2026-11-25', status: 'Planificación', enrolled: 0 },
 ]
 
 const columns = [
@@ -25,7 +27,15 @@ const columns = [
   },
   {
     accessorKey: 'name',
-    header: 'Nombre del período',
+    header: 'Nombre',
+  },
+  {
+    accessorKey: 'type',
+    header: 'Modalidad',
+  },
+  {
+    accessorKey: 'year',
+    header: 'Año',
   },
   {
     accessorKey: 'startDate',
