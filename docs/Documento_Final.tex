@@ -183,6 +183,7 @@
     \paperheight=210mm
     \pdfpagewidth=297mm
     \pdfpageheight=210mm
+    \special{papersize=\the\paperwidth,\the\paperheight}%
     \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm}%
     \setlength{\textwidth}{247mm}%
     \setlength{\textheight}{160mm}%
@@ -198,6 +199,7 @@
     \paperheight=297mm
     \pdfpagewidth=210mm
     \pdfpageheight=297mm
+    \special{papersize=\the\paperwidth,\the\paperheight}%
     \restoregeometry
     \SyncPageBuilderDimensions
     \hypersetup{pageanchor=true}%
@@ -211,6 +213,7 @@
     \paperheight=95mm
     \pdfpagewidth=297mm
     \pdfpageheight=95mm
+    \special{papersize=\the\paperwidth,\the\paperheight}%
     \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm}%
     \setlength{\textwidth}{247mm}%
     \setlength{\textheight}{45mm}%
@@ -226,6 +229,7 @@
     \paperheight=297mm
     \pdfpagewidth=210mm
     \pdfpageheight=297mm
+    \special{papersize=\the\paperwidth,\the\paperheight}%
     \restoregeometry
     \SyncPageBuilderDimensions
     \hypersetup{pageanchor=true}%
@@ -239,6 +243,7 @@
     \paperheight=145mm
     \pdfpagewidth=297mm
     \pdfpageheight=145mm
+    \special{papersize=\the\paperwidth,\the\paperheight}%
     \newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,headsep=0.5cm,footskip=0.8cm}%
     \setlength{\textwidth}{247mm}%
     \setlength{\textheight}{95mm}%
@@ -254,6 +259,7 @@
     \paperheight=297mm
     \pdfpagewidth=210mm
     \pdfpageheight=297mm
+    \special{papersize=\the\paperwidth,\the\paperheight}%
     \restoregeometry
     \SyncPageBuilderDimensions
     \hypersetup{pageanchor=true}%
@@ -439,6 +445,7 @@ La plataforma también generará grandes ventajas organizacionales de tipo no nu
 
 Para atender la problemática identificada, se evaluaron cuidadosamente tres alternativas estratégicas con distintos niveles de inversión, riesgo y beneficio, debido a que la primera alternativa fue mantener el proyecto a como lo están manejando actualmente, mientras que la segunda alternativa consistió en un sistema de software comercial que centraliza la gestión operativa de recursos en una única plataforma genérica, y finalmente, la tercera alternativa correspondió a un desarrollo totalmente a la medida donde se puede adaptar al cien por ciento todo el producto a las necesidades de la institución universitaria. Asimismo, a continuación se presenta el análisis comparativo completo
 
+
 \begin{widepage}
 {\small
 \setlength{\tabcolsep}{3pt}
@@ -465,6 +472,7 @@ Recomendación ejecutiva & No es viable operativamente a futuro & No es viable p
 \end{longtable}
 }
 \end{widepage}
+
 
 \subsubsection{Justificación de la alternativa seleccionada}
 
@@ -1078,6 +1086,7 @@ La escala de referencia para comprender mejor la tabla indica que la influencia 
 
 En la siguiente tabla se muestran las partes interesadas internas del proyecto.
 
+
 \begin{widepage}
 {\small
 \setlength{\tabcolsep}{3pt}
@@ -1102,9 +1111,12 @@ Jorge Abarca Quiros & Analista de negocio y documentador 2 & Asegurar, junto con
 }
 \end{widepage}
 
+
+
 \subsection{Partes interesadas externas del proyecto}
 
 En la siguiente tabla se mencionan las partes externas interesadas para este proyecto.
+
 
 \begin{widepage}
 {\small
@@ -1131,6 +1143,8 @@ Proveedor de alojamiento web & Proveedor externo & Ofrecer infraestructura confi
 \end{longtable}
 }
 \end{widepage}
+
+
 
 \newpage
 % --- Entregable 04 ---
@@ -1501,7 +1515,7 @@ A continuación, se presenta de manera gráfica la Estructura de desglose del tr
 \begin{shortwidepage}
 \begin{figure}[H]
 \centering
-\SafeImage[1\textwidth]{wbs_diagrama.pdf}
+\SafeImage[1\textwidth]{Entregable 05 - Estructura de desglose del trabajo.imgs.pdf}
 \caption{Estructura de desglose del trabajo - Plataforma Universitaria Integrada}
 \label{fig:wbs}
 \end{figure}
@@ -1542,73 +1556,9 @@ Documentación de cierre & Los documentos de esta fase deben estar alineados con
 % --- Entregable 06 ---
 \section{Cronograma del proyecto}
 
-\subsection{Información general del documento}
+El presente apartado aborda la planificación temporal de la \textit{Plataforma Universitaria Integrada}, detallando la distribución estratégica de las actividades a lo largo del ciclo de vida de la iniciativa. Esta estructuración es fundamental porque permite establecer un marco de trabajo ordenado donde se delimitan los plazos para el desarrollo técnico del prototipo interactivo y se definen con precisión las fechas clave para los procesos de validación por parte de la dirección. Mediante esta organización secuencial, el equipo de gestión garantiza que los recursos se utilicen de manera eficiente, optimizando la asignación de esfuerzos humanos y financieros para evitar cuellos de botella que puedan comprometer la entrega final. 
 
-\begin{table}[H]
-\centering
-\begin{tabularx}{\textwidth}{p{5cm} Y}
-\toprule
-\textbf{Nombre del proyecto} & Plataforma Universitaria Integrada \\
-\textbf{Organización} & Universidad Tecnológica La Mejor \\
-\textbf{Documento} & Cronograma del Proyecto \\
-\textbf{Directora del proyecto} & Tamara Robles Camacho \\
-\textbf{Herramienta utilizada} & Microsoft Project \\
-\textbf{Fecha de inicio planificada} & 8 de junio de 2026 \\
-\textbf{Fecha final planificada} & 9 de setiembre de 2026 \\
-\textbf{Presupuesto total} & ₡17,625,200 \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-\subsection{Introducción}
-
-El presente apartado corresponde al cronograma del proyecto Plataforma Universitaria Integrada, elaborado como parte de la planificación y control de la iniciativa desarrollada para la Universidad Tecnológica La Mejor. Este cronograma permite organizar de manera estructurada las actividades necesarias para completar los entregables de gestión, el prototipo de interfaz web navegable, las acciones de supervisión y control, y las actividades finales de cierre.
-
-El cronograma fue elaborado utilizando Microsoft Project, debido a que esta herramienta permite registrar tareas, subtareas, dependencias, duraciones, recursos, hitos, costos, responsables y ruta crítica. Por lo tanto, el documento no se limita a presentar una lista de fechas, sino que funciona como una herramienta de gestión para controlar el avance del proyecto, identificar tareas críticas y mantener coherencia entre alcance, tiempo, costo y recursos.
-
-El proyecto se planifica con inicio el 8 de junio de 2026 y cierre el 9 de setiembre de 2026, con una duración aproximada de tres meses. El presupuesto total del proyecto se mantiene en ₡17,625,200, distribuido entre las fases de inicio, planificación, ejecución, supervisión y control, cierre, y rubros adicionales de apoyo y contingencia.
-
-\subsection{Propósito del cronograma}
-
-El propósito del cronograma es establecer la secuencia de trabajo que debe seguir el equipo para completar el proyecto dentro del tiempo y presupuesto planificados. Además, permite visualizar qué actividades se ejecutan en paralelo, qué tareas dependen de otras, quiénes son los responsables asignados y cuáles actividades pueden afectar directamente la fecha final del proyecto.
-
-Este entregable se orienta al cumplimiento de los siguientes objetivos específicos.
-
-\begin{itemize}[leftmargin=*, label={\textbullet}]
-    \item Definir las tareas y subtareas necesarias para completar el proyecto.
-    \item Establecer duraciones, fechas de inicio y fechas de finalización.
-    \item Registrar dependencias y predecesoras entre actividades.
-    \item Asignar recursos humanos y recursos de costo.
-    \item Identificar responsables por actividad.
-    \item Marcar hitos relevantes para el control del avance.
-    \item Determinar la ruta crítica del proyecto.
-    \item Integrar costos por actividad y por fase.
-    \item Brindar una base para el monitoreo y control del proyecto.
-\end{itemize}
-
-\subsection{Verificación de cumplimiento del Entregable 6}
-
-El cronograma cumple con los elementos solicitados para el Entregable 6, ya que fue elaborado en Microsoft Project y contiene los componentes principales requeridos para una planificación formal del proyecto.
-
-\begin{table}[H]
-\centering
-\caption{Verificación de requisitos del Entregable 6}
-\begin{tabularx}{\textwidth}{p{4.3cm} Y}
-\toprule
-\textbf{Elemento solicitado} & \textbf{Evidencia dentro del cronograma} \\
-\midrule
-Tareas & Se muestran en la tabla del Diagrama de Gantt, donde cada fila representa una actividad del proyecto. \\
-Subtareas & Se reflejan mediante actividades agrupadas dentro de fases como Inicio, Planificación, Ejecución, Supervisión y control, Cierre y Rubros adicionales. \\
-Dependencias & Se presentan mediante la columna de predecesoras y se explican como relación lógica entre actividades. \\
-Duraciones & Se registran en la columna de duración para cada tarea y fase. \\
-Recursos & Se incluyen en la hoja de recursos y en las asignaciones por actividad. \\
-Hitos & Se identifican como tareas de duración cero, asociadas con aprobaciones y cierres parciales. \\
-Ruta crítica & Se define como la secuencia de actividades que controla la fecha final del proyecto. \\
-Responsables & Se indican por medio de los recursos asignados a cada tarea. \\
-Costos & Se muestran mediante los costos fijos y el costo acumulado por tarea y fase. \\
-\bottomrule
-\end{tabularx}
-\end{table}
+El cronograma oficial del proyecto fue elaborado íntegramente utilizando la herramienta Microsoft Project, cuya capacidad analítica permite enlazar dependencias lógicas complejas, calcular rutas críticas de manera automática y consolidar múltiples capas de información financiera y temporal en un solo repositorio. De esta manera, el plan de trabajo estructurado trasciende el formato de un simple calendario para convertirse en un instrumento de monitoreo y control dinámico que guía todas las fases de ejecución del prototipo web.
 
 \subsection{Configuración general del cronograma}
 
@@ -1635,9 +1585,9 @@ Calendario & Estándar \\
 
 \subsection{Evidencia visual del cronograma}
 
-La evidencia visual del Diagrama de Gantt no se incrusta dentro de este documento para evitar pérdida de legibilidad o distorsión en las páginas horizontales. El cronograma visual exportado desde Microsoft Project se encuentra disponible en el repositorio del proyecto con el nombre \texttt{cronograma.pdf}. Dicho archivo permite observar las barras del calendario, las dependencias, la distribución temporal de las fases y la ruta crítica señalada por Microsoft Project.
+Para garantizar la correcta legibilidad de la planificación temporal y sus componentes gráficos, a continuación se adjuntan las páginas que componen el cronograma general del proyecto, donde se pueden observar las barras del calendario, las dependencias entre las tareas, la distribución temporal de cada fase y la ruta crítica señalada por el software. Cabe destacar que el archivo nativo completamente interactivo y editable se encuentra disponible de manera adjunta bajo el nombre \textbf{Entregable 06 - Cronograma del Proyecto.mpp}, permitiendo así a los interesados revisar la configuración original y los datos consolidados directamente en Microsoft Project.
 
-De esta manera, esta sección explica la estructura y los componentes del Entregable 6, mientras que el archivo \texttt{cronograma.pdf} funciona como evidencia visual directa del cronograma generado desde la herramienta.
+\includepdf[pages=-, fitpaper=true]{Entregable 06 - Cronograma.imgs.pdf}
 
 \subsection{Estructura por fases}
 
@@ -1740,49 +1690,16 @@ El cronograma utiliza costos fijos por tarea. Esta decisión permite evitar una 
 
 El presupuesto total planificado es de ₡17,625,200. La fase de ejecución concentra el mayor costo debido a que incluye el desarrollo del prototipo Front-End navegable. Además, se considera una reserva para contingencias que funciona como margen económico ante imprevistos menores.
 
-\subsection{Relación con la materia}
 
-El cronograma se relaciona directamente con contenidos vistos en el curso de administración de proyectos, ya que integra planificación del tiempo, asignación de recursos, estimación de costos, control de hitos y monitoreo de actividades críticas.
+\begin{widepage}
+\subsection{Tabla del diagrama de Gantt}
+
+La vista tabular del diagrama de Gantt que se expone a continuación abarca desde la denominación de cada tarea hasta los costos asociados, estructurando la información en bloques de trabajo sucesivos para facilitar su lectura. De esta manera, cada segmento expone de forma consolidada métricas fundamentales para el control del proyecto, tales como la duración estimada, las fechas programadas, las dependencias predecesoras, la asignación de recursos y los costos fijos totales vinculados a cada actividad.
+
+
 
 \begin{table}[H]
 \centering
-\caption{Relación del cronograma con los temas vistos en clase}
-\begin{tabularx}{\textwidth}{p{4.2cm} Y}
-\toprule
-\textbf{Tema de la materia} & \textbf{Aplicación en el Entregable 6} \\
-\midrule
-WBS & La estructura de tareas se organiza por fases y paquetes de trabajo. \\
-Cronograma & Se definen tareas, duraciones, fechas de inicio y fin. \\
-Dependencias & Las predecesoras ordenan la secuencia lógica del proyecto. \\
-Recursos & Se asignan responsables humanos y recursos de costo. \\
-Costos & Se distribuye el presupuesto por actividad y fase. \\
-Hitos & Se marcan puntos clave de aprobación o cierre. \\
-Ruta crítica & Se identifica la secuencia que controla la fecha final. \\
-Línea base & Permite comparar lo planificado contra lo ejecutado. \\
-Monitoreo y control & El cronograma sirve para detectar atrasos, sobrecostos o desviaciones. \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-\subsection{Evidencias del entregable}
-
-Para respaldar el Entregable 6 se deben conservar el archivo original de Microsoft Project y las evidencias exportadas desde la herramienta. Las evidencias principales son el archivo \texttt{.mpp}, la vista general del Diagrama de Gantt, la ruta crítica, la hoja de recursos, la vista de costos y las estadísticas del proyecto.
-
-En el repositorio del proyecto, la evidencia visual principal del cronograma debe guardarse con el nombre \texttt{cronograma.pdf}, de forma que cualquier integrante pueda revisar la planificación completa sin depender únicamente del archivo editable de Microsoft Project.
-
-\subsection{Conclusión del Entregable 6}
-
-El cronograma del proyecto Plataforma Universitaria Integrada permite visualizar la planificación completa de la iniciativa. Su valor principal consiste en organizar las actividades, asignar responsables, controlar costos, mostrar dependencias y definir la ruta crítica. Por esta razón, el Entregable 6 funciona como una herramienta de gestión y no solamente como un calendario de trabajo.
-
-Asimismo, el cronograma sirve como base para el monitoreo y control del proyecto. Si durante la ejecución se presenta un atraso, una desviación de costo o un cambio importante, el equipo puede revisar su impacto dentro de Microsoft Project y tomar decisiones con mayor claridad. De esta manera, el cronograma contribuye a mantener el proyecto alineado con el alcance, el presupuesto, la calidad esperada y la fecha final planificada.
-
-\begin{widepage}
-\subsection{Tabla del Diagrama de Gantt}
-
-La siguiente tabla corresponde a la vista del Diagrama de Gantt desde la columna Nombre de tarea hasta la columna Costo. Para mejorar la lectura, la información se divide por bloques de trabajo. En conjunto, estas tablas muestran duración, fechas, predecesoras, recursos asignados, costo fijo y costo total.
-
-\subsubsection*{Inicio y planificación base}
-
 {\tiny
 \renewcommand{\arraystretch}{1.08}
 \begin{tabular}{L{4.2cm} L{1.35cm} L{1.75cm} L{1.75cm} L{1.35cm} L{6.1cm} L{1.55cm} L{1.55cm}}
@@ -1803,15 +1720,15 @@ Hito: Cronograma aprobado & 0 días & vie 7/3/26 & vie 7/3/26 & 10 & Isaac Jimé
 \bottomrule
 \end{tabular}
 }
+\caption{Inicio y planificación base}
+\end{table}
 
-\begin{center}
-\textit{Tabla 6.1. Vista tabular del Diagrama de Gantt: inicio y planificación base.}
-\end{center}
-\end{widepage}
 
-\begin{widepage}
-\subsubsection*{Tabla del Diagrama de Gantt: planificación complementaria}
 
+
+
+\begin{table}[H]
+\centering
 {\tiny
 \renewcommand{\arraystretch}{1.08}
 \begin{tabular}{L{4.2cm} L{1.35cm} L{1.75cm} L{1.75cm} L{1.35cm} L{6.1cm} L{1.55cm} L{1.55cm}}
@@ -1832,17 +1749,17 @@ Elaborar plan de adquisiciones & 3 días & mié 7/8/26 & vie 7/10/26 & 15 & Isaa
 \bottomrule
 \end{tabular}
 }
+\caption{Planificación complementaria}
+\end{table}
 
-\begin{center}
-\textit{Tabla 6.2. Vista tabular del Diagrama de Gantt: planificación complementaria.}
-\end{center}
-\end{widepage}
 
-\begin{widepage}
-\subsubsection*{Tabla del Diagrama de Gantt: ejecución del prototipo}
 
+
+
+\begin{table}[H]
+\centering
 {\tiny
-\renewcommand{\arraystretch}{1.08}
+\renewcommand{\arraystretch}{1.04}
 \begin{tabular}{L{4.2cm} L{1.35cm} L{1.75cm} L{1.75cm} L{1.35cm} L{6.1cm} L{1.55cm} L{1.55cm}}
 \toprule
 \textbf{Nombre de tarea} & \textbf{Duración} & \textbf{Comienzo} & \textbf{Fin} & \textbf{Predec.} & \textbf{Nombres de los recursos} & \textbf{Costo fijo} & \textbf{Costo} \\
@@ -1863,15 +1780,15 @@ Hito: Prototipo Front-End completado & 0 días & mié 8/26/26 & mié 8/26/26 & 3
 \bottomrule
 \end{tabular}
 }
+\caption{Ejecución del prototipo}
+\end{table}
 
-\begin{center}
-\textit{Tabla 6.3. Vista tabular del Diagrama de Gantt: ejecución del prototipo.}
-\end{center}
-\end{widepage}
 
-\begin{widepage}
-\subsubsection*{Tabla del Diagrama de Gantt: supervisión, cierre y rubros adicionales}
 
+
+
+\begin{table}[H]
+\centering
 {\tiny
 \renewcommand{\arraystretch}{1.04}
 \begin{tabular}{L{4.2cm} L{1.35cm} L{1.75cm} L{1.75cm} L{1.35cm} L{6.1cm} L{1.55cm} L{1.55cm}}
@@ -1900,19 +1817,18 @@ Reserva para contingencias & 1 día & lun 6/8/26 & lun 6/8/26 & & & ₡1,515,866
 \bottomrule
 \end{tabular}
 }
+\caption{Supervisión, cierre y rubros adicionales}
+\end{table}
 
-\begin{center}
-\textit{Tabla 6.4. Vista tabular del Diagrama de Gantt: supervisión, cierre y rubros adicionales.}
-\end{center}
-\end{widepage}
 
-\begin{widepage}
+
 \subsection{Hoja de recursos}
 
-La hoja de recursos muestra los recursos humanos, los recursos de costo y la forma en que se acumulan dentro del proyecto. Esta vista permite verificar que el cronograma incluye recursos de trabajo y recursos de costo, según lo requerido para el Entregable 6.
+La hoja de recursos muestra los recursos humanos, los recursos de costo y la forma en que se acumulan dentro del proyecto. Esta vista permite verificar que el cronograma incluye recursos de trabajo y recursos de costo.
 
-\subsubsection*{Hoja de recursos utilizada en Microsoft Project}
-
+\begin{table}[H]
+\centering
+\caption{Hoja de recursos utilizada en Microsoft Project}
 {\tiny
 \renewcommand{\arraystretch}{1.18}
 \setlength{\tabcolsep}{1.0pt}
@@ -1933,11 +1849,9 @@ Contingencia & Costo & & CONT & Reserva & & & & & Prorrateo & \\
 \bottomrule
 \end{tabular}
 }
-
-\begin{center}
-\textit{Tabla 6.5. Hoja de recursos utilizada en Microsoft Project.}
-\end{center}
+\end{table}
 \end{widepage}
+
 
 \newpage
 % --- Entregable 07 ---
@@ -1951,6 +1865,7 @@ Asimismo, esta sección define la Matriz RACI del proyecto Plataforma Universita
 
 En la siguiente tabla se muestran los roles del equipo junto con su responsabilidad principal y los entregables asignados, de esta manera se clarifica la distribución del trabajo.
 
+\begin{widepage}
 \begin{table}[H]
 \centering
 \caption{Equipo del proyecto}
@@ -1973,6 +1888,9 @@ Director de TI & Ing. Carlos Brenes Mora & Revisión técnica y viabilidad de la
 \end{tabularx}
 }
 \end{table}
+\end{widepage}
+
+
 
 \subsection{Convención RACI}
 
@@ -2006,6 +1924,7 @@ Ejecuta la tarea directamente & Responsable final y toma decisiones & Asesora y 
 \subsection{Matriz de responsabilidades}
 
 A continuación se muestra la matriz completa de responsabilidades organizada por fase del proyecto y actividad principal con la asignación RACI para cada miembro del equipo e interesados clave debido a que es el núcleo del proyecto.
+
 
 \begin{widepage}
 {\scriptsize
@@ -2056,6 +1975,8 @@ Cierre & Documentar reflexiones y recomendaciones & A & R & R & R & R & I & I & 
 \end{longtable}
 }
 \end{widepage}
+
+
 
 \subsection{Análisis de carga por rol}
 
@@ -2225,19 +2146,19 @@ En el tercer nivel se encuentra el equipo ejecutor, en consecuencia los analista
 
 Los stakeholders externos aparecen como apoyo de validación, por lo tanto estos actores no ejecutan directamente el proyecto, pero pueden aportar información importante sobre procesos administrativos, técnicos, docentes, financieros y estudiantiles, ya que su participación ayuda a que el prototipo represente mejor las necesidades de la Universidad Tecnológica La Mejor.
 
-\subsection{Relación entre roles y entregables}
+\subsection{Responsabilidades principales por rol}
 
-La siguiente tabla muestra cómo se relacionan los roles del organigrama con los entregables principales del proyecto, de esta manera se define la responsabilidad de cada parte.
+La siguiente tabla muestra cómo se relacionan los roles del organigrama con los componentes clave del proyecto, de esta manera se define la responsabilidad de cada parte.
 
 \begin{table}[H]
 \centering
 \small
-\caption{Relación entre roles y entregables}\label{tab:roles-entregables}
+\caption{Responsabilidades principales por rol}\label{tab:roles-entregables}
 \setlength{\tabcolsep}{5pt}
 \renewcommand{\arraystretch}{1.25}
 \begin{tabularx}{\textwidth}{p{4.3cm} Y}
 \toprule
-\textbf{Rol} & \textbf{Entregables o actividades relacionadas} \\
+\textbf{Rol} & \textbf{Componentes o actividades relacionadas} \\
 \midrule
 Patrocinador & Aprobación del acta de constitución del proyecto, revisión de avances importantes y validación de cierre \\
 Directora del proyecto & Seguimiento del cronograma, coordinación del equipo, control de cambios y comunicación \\
@@ -2260,6 +2181,7 @@ El equipo del proyecto está conformado por cinco integrantes principales con de
 \subsubsection{Equipo del proyecto}
 
 En la siguiente tabla se muestran los roles de cada uno de los integrantes junto con su dedicación en el proyecto y las horas estimadas:
+
 
 \begin{widepage}
 {\small
@@ -2286,6 +2208,7 @@ Director de TI & Ing. Carlos Brenes Mora & 10\% & 30 hrs & Planificación / Ejec
 \end{longtable}
 }
 \end{widepage}
+
 
 \subsubsection{Roles y responsabilidades clave}
 
@@ -2347,6 +2270,7 @@ Dado que el equipo es conformado por estudiantes universitarios con conocimiento
 
 A continuación, se detallan todas las herramientas de software, servicios en la nube y equipos de hardware requeridos para el desarrollo del proyecto.
 
+
 \begin{widepage}
 {\small
 \setlength{\tabcolsep}{3pt}
@@ -2375,6 +2299,7 @@ Conexión a Internet & Necesaria para reuniones virtuales y despliegue & Servici
 \end{longtable}
 }
 \end{widepage}
+
 
 \subsubsection{Justificación de herramientas seleccionadas}
 
@@ -2587,6 +2512,7 @@ Reserva para contingencias (10 \%) &  &  &  & \textbf{₡1.515.867} \\*
 \end{longtable}
 }
 \end{widepage}
+
 
 \subsection{Reserva para contingencias}
 
@@ -3357,6 +3283,7 @@ Para evitar confusión y mantener trazabilidad, el equipo aplicará las siguient
 
 La siguiente matriz define qué información se comunicará, quién será responsable, a quién se dirigirá, con qué frecuencia, por qué canal y con qué nivel de prioridad.
 
+
 \begin{widepage}
 {\scriptsize
 \setlength{\tabcolsep}{2.4pt}
@@ -3390,6 +3317,7 @@ Entrega final del proyecto & Directora del proyecto & Patrocinador, equipo y pro
 \end{longtable}
 }
 \end{widepage}
+
 
 \subsection{Comunicación según prioridad}
 
@@ -3578,6 +3506,7 @@ El propósito fundamental de este plan comprende el diseño estructurado y la re
 
 La gestión de riesgos representa una responsabilidad compartida por todo el equipo interno y se han asignado roles debidamente diferenciados según el grado de injerencia técnica o administrativa evaluada.
 
+
 \begin{widepage}
 {\footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -3605,9 +3534,11 @@ Desarrollador de interfaz y QA (Carlos Sainz Arce) & Efectúa de manera cooperat
 }
 \end{widepage}
 
+
 \subsection{Ciclo de gestión de riesgos (PMBOK)}
 
 El proyecto aplica e integra el ciclo de gestión de riesgos establecido y validado metodológicamente por el PMBOK y adapta minuciosamente sus respectivos principios fundamentales a la escala específica del entorno considerando las proporciones del desarrollo de la plataforma universitaria integradora.
+
 
 \begin{widepage}
 {\footnotesize
@@ -3636,6 +3567,7 @@ El proyecto aplica e integra el ciclo de gestión de riesgos establecido y valid
 \end{longtable}
 }
 \end{widepage}
+
 
 \subsection{Metodología de identificación de riesgos}
 
@@ -3693,6 +3625,7 @@ El equipo técnico utiliza firmemente y de modo estandarizado un modelo cualitat
 
 La respectiva matriz o tabla referenciada o ilustrada expone íntegramente las variables estipuladas con las respectivas ponderaciones operativas correspondientes y detalladas desde la baja calificación numerada refiriéndose al uno estructurando o detallando gradualmente una numeración ascendente alcanzando e incluyendo progresivamente documentando hasta la cúspide límite referenciada numéricamente y topada o respectando el respectivo puntaje limitante de un límite numeral de cinco estableciendo de este modo logrando con exactitud y fiabilidad identificar estandarizadamente a niveles precisos estipulando e incrustando metódicamente la esperada respectiva o certera probabilidad de toda respectiva ocurrencia analizada e identificada.
 
+
 \begin{widepage}
 {\footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -3720,9 +3653,11 @@ La respectiva matriz o tabla referenciada o ilustrada expone íntegramente las v
 }
 \end{widepage}
 
+
 \subsubsection{Escala de impacto}
 
 La tabla mostrada a continuación describe la escala e ilustra el grado concerniente de un modo u otro referenciando del uno hacia la calificación límite e integralmente delimitada del cinco donde se describe explícitamente a las referidas alteraciones e indica operativamente a la grave respectiva y consecuente e inminente e ineludible y perjudicial y respectiva y documentada o referida o respectiva comprobada posible o grave respectiva afectación operativa que puede acaecer u ocasionalmente a un nivel inmerso y relativo y consecuente a la inminente y a que la vulnerabilidad referida abarcando e indicando y referenciada en cada respectivo e importante respectivo rango abarcado referenciado estipulando o abarcando e indicando el referido y cada respectivo rango y a que cada específico nivel respectivo al que cada nivel evidenciado o un referenciado referido estipulado inmersamente referido nivel puede verdaderamente logísticamente desencadenando desastres y abarcando o evidenciando la posibilidad respectiva logrando u originando llegar indudablemente operativamente llegando a referenciando o referenciada a lograr verdaderamente o abarcando o evidenciando estipulando e incrustando el daño abarcando referenciando u orientando el nivel de desestabilización que se referencie logrando a provocar y abarcando logrando o llegando a referenciando a referir y referenciando englobando al que llegue a estipular operativamente en la base estructurada de este referenciado u referido proyecto.
+
 
 \begin{widepage}
 {\footnotesize
@@ -3750,6 +3685,8 @@ La tabla mostrada a continuación describe la escala e ilustra el grado concerni
 \end{longtable}
 }
 \end{widepage}
+
+
 
 \subsection{Fórmula del nivel de riesgo}
 
@@ -3793,6 +3730,7 @@ El valor asignado a cada riesgo posee un significado que dicta las acciones a im
 
 Para cada riesgo identificado el equipo debe evaluar el problema y tiene la responsabilidad de seleccionar alguna de estas cuatro alternativas con directrices de prevención correctivas documentadas puntualmente a continuación.
 
+
 \begin{widepage}
 {\footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -3819,6 +3757,7 @@ Para cada riesgo identificado el equipo debe evaluar el problema y tiene la resp
 }
 \end{widepage}
 
+
 \subsection{Elementos del registro de riesgos}
 
 La documentación de cada riesgo alojado en el registro de riesgos debe estructurarse contemplando los trece elementos constitutivos descritos a continuación.
@@ -3842,6 +3781,7 @@ La documentación de cada riesgo alojado en el registro de riesgos debe estructu
 \subsubsection{Estados del riesgo}
 
 Todos los riesgos documentados e identificados formalmente operan bajo una clasificación dinámica de cuatro posibles estados cuyo propósito facilita la medición continua de su seguimiento activo o la consolidación de su solución.
+
 
 \begin{widepage}
 {\footnotesize
@@ -3868,6 +3808,7 @@ Todos los riesgos documentados e identificados formalmente operan bajo una clasi
 \end{longtable}
 }
 \end{widepage}
+
 
 \subsection{Monitoreo, control y actualización}
 
@@ -4007,6 +3948,7 @@ La identificación de las amenazas se llevó a cabo mediante una revisión exhau
 
 La consulta detallada de estos recursos propició la detección de amenazas asociadas con los plazos de entrega, el alcance acordado, la calidad de los productos, la coherencia de la documentación, los canales de comunicación, el funcionamiento de las herramientas y la coordinación técnica del desarrollo.
 
+
 \begin{widepage}
 \subsection{Registro de riesgos del proyecto}
 {\tiny
@@ -4040,6 +3982,8 @@ R-16 & Evidencia & Falta de evidencia final organizada & Los archivos pueden que
 \end{longtable}
 }
 \end{widepage}
+
+
 
 \subsection{Resumen de riesgos por nivel}
 
@@ -4565,7 +4509,229 @@ La siguiente tabla consolida los 14 KPIs definidos, agrupados por categoría:
 % --- Entregable 18 ---
 \section{Desarrollo de la interfaz}
 
-[Espacio reservado para la incorporación de información e imágenes del prototipo correspondientes a esta sección, el cual es responsabilidad de otros miembros del equipo].
+La presente sección documenta el prototipo funcional desarrollado para la plataforma universitaria, el cual integra los principales procesos académicos, administrativos y financieros de la institución en una experiencia de usuario fluida y moderna.
+
+Cabe mencionar que la interfaz cuenta con adaptabilidad visual, por lo cual la primera vista (el panel principal del estudiante) se exhibe tanto en modo oscuro como en modo claro. Para el resto de las pantallas, se utiliza exclusivamente el modo claro para mantener la consistencia en el formato del documento.
+
+\subsection{Arquitectura y consideraciones técnicas}
+
+Para la construcción del prototipo funcional se optó por una arquitectura basada en Single Page Application (SPA), la cual garantiza transiciones rápidas y sin recargas de página, mejorando drásticamente la experiencia del usuario. A nivel de tecnologías, el proyecto fue desarrollado utilizando el framework React en su versión 19 y Vite como herramienta de construcción principal, empleando TypeScript para asegurar un tipado estricto que reduce la probabilidad de errores durante la integración de datos simulados, junto a TanStack Router para manejar la navegación interna.
+
+En cuanto al diseño visual, la interfaz se implementó utilizando Tailwind CSS en conjunto con la biblioteca de componentes prefabricados de shadcn/ui, lo que permitió un desarrollo ágil y altamente personalizado, facilitando la creación de un sistema de diseño consistente con soporte nativo para el modo claro y oscuro. Para la disposición de los elementos y la estructura de navegación, el equipo tomó una fuerte inspiración en plataformas consolidadas del entorno universitario, particularmente el TEC Digital, pero aplicando principios modernos de usabilidad e interactividad para resolver los problemas comunes de saturación visual.
+
+\subsection{Portal estudiantil}
+
+El portal estudiantil constituye el punto de acceso central mediante el cual los alumnos pueden tanto visualizar su información académica como navegar hacia las diferentes herramientas de la universidad. Durante su diseño, se dio prioridad a mostrar únicamente los indicadores clave con el fin de evitar sobrecargar al usuario de información innecesaria, aunque a futuro este panel podría enriquecerse mediante la incorporación de widgets personalizables que brinden mayor flexibilidad.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/01_student_home_dark.png}
+    \caption{Panel principal del estudiante (modo oscuro).}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/01_student_home_light.png}
+    \caption{Panel principal del estudiante (modo claro).}
+\end{figure}
+
+\subsubsection{Perfil e historial académico}
+
+En esta sección, el estudiante puede gestionar la configuración de su cuenta y consultar un registro histórico consolidado de sus calificaciones pasadas, así como un resumen de sus promedios.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/02_student_profile.png}
+    \caption{Perfil del estudiante y configuración de cuenta.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/19b_student_academic_history.png}
+    \caption{Registro del historial académico y consolidado de promedios dentro del perfil.}
+\end{figure}
+
+\subsubsection{Matrícula de cursos}
+
+Este apartado permite a los estudiantes seleccionar los cursos disponibles para el período activo y formalizar su inscripción académica de manera intuitiva a través de un flujo estructurado paso a paso, integrando un resumen en tiempo real de los créditos matriculados para agilizar la toma de decisiones sin necesidad de salir de la pantalla.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/03_student_enrollment.png}
+    \caption{Proceso de matrícula y selección de cursos.}
+\end{figure}
+
+\subsubsection{Consulta de horarios}
+
+A través de esta vista, los alumnos pueden visualizar de forma interactiva la distribución semanal de sus clases y compromisos académicos, apostando por un diseño de calendario limpio que permite identificar fácilmente la carga lectiva para que en futuras actualizaciones se ofrezca sincronización bidireccional con calendarios externos en la nube y alertas integradas en la plataforma.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/04_student_schedule.png}
+    \caption{Horario de clases interactivo.}
+\end{figure}
+
+\subsection{Portal financiero}
+
+El portal financiero centraliza el estado de cuenta del estudiante facilitando la revisión de deudas y la gestión de transacciones, con el fin de brindar una interfaz que ofrezca total transparencia sobre los diferentes rubros y conceptos cobrados por la institución.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/05_student_finance_account.png}
+    \caption{Estado de cuenta general.}
+\end{figure}
+
+\subsubsection{Pagos de matrícula e historial}
+
+Esta sección permite ejecutar el pago de obligaciones pendientes y consultar el archivo histórico de transacciones realizadas, dejando abierta la posibilidad de integrar de forma directa pasarelas de pago externas que faculten la cancelación de rubros en tiempo real junto con el envío de comprobantes o recordatorios automáticos por correo electrónico.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/06_student_finance_payment.png}
+    \caption{Módulo para realizar pagos pendientes.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/07_student_finance_history.png}
+    \caption{Historial de pagos completados.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/08_student_finance_other_charges.png}
+    \caption{Sección de otros cobros y cargos administrativos.}
+\end{figure}
+
+\subsubsection{Aulas virtuales y consulta de calificaciones}
+
+Cada curso matriculado cuenta con un entorno virtual propio donde el estudiante puede interactuar con el material didáctico, revisar el calendario específico y consultar las calificaciones detalladas asignadas por el profesor.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/09_student_course_home.png}
+    \caption{Página principal del curso desde la vista del estudiante.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/10_student_course_calendar.png}
+    \caption{Calendario específico del curso.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/11_student_course_documents.png}
+    \caption{Repositorio de documentos y materiales.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/19a_student_course_evaluations.png}
+    \caption{Vista de calificaciones detalladas por curso para el perfil de estudiante.}
+\end{figure}
+
+En cuanto a la vista del estudiante para la asistencia, se buscó evitar el diseño de una página estática tradicional, por lo que se aprovechó la misma disposición visual de la interfaz del docente para integrar un editor de apuntes que faculta a cada alumno a guardar notas de la clase directamente en la plataforma, abriendo la posibilidad futura de compartir estas anotaciones con los compañeros de grupo e incluso integrar inteligencia artificial para recibir sugerencias de redacción.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/12_student_course_attendance.png}
+    \caption{Registro de asistencia interactivo con toma de apuntes.}
+\end{figure}
+
+\subsection{Portal docente}
+
+El portal docente proporciona las herramientas necesarias para la administración de las aulas, el registro de asistencia y la creación de diferentes tipos de evaluaciones para dar un seguimiento adecuado al progreso de los estudiantes durante todo el ciclo lectivo.
+
+\subsubsection{Gestión de cursos}
+
+El panel de control del docente ofrece un acceso rápido a todos los cursos impartidos durante el ciclo actual, permitiendo gestionar el contenido y las configuraciones de cada aula virtual de manera ágil y centralizada.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/13_teacher_home.png}
+    \caption{Panel de control del docente con los cursos impartidos.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/15_teacher_course_home.png}
+    \caption{Página principal del curso desde la perspectiva del profesor.}
+\end{figure}
+
+\subsubsection{Registro de asistencia}
+
+En la pestaña de asistencia, la vista del docente cuenta con un selector de clase en la zona izquierda y un gestor interactivo en la derecha que permite registrar rápidamente la presencia de cada estudiante, una funcionalidad que podría expandirse posteriormente para soportar múltiples lecciones dentro de una misma sesión junto a un registro específico de llegadas tardías.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/20_teacher_course_attendance.png}
+    \caption{Registro y control de asistencia por parte del docente.}
+\end{figure}
+
+\subsubsection{Registro de calificaciones y evaluaciones}
+
+Esta subsección dota a los instructores de mecanismos integrales para diseñar instrumentos de evaluación, asignar puntajes y revisar entregas de los estudiantes, preparando el terreno para implementar funcionalidades más avanzadas como rúbricas de calificación interactivas o soporte para la revisión entre pares.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/16_teacher_course_eval_new_group.png}
+    \caption{Creador de evaluaciones grupales e individuales.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/17_teacher_course_gaap_new.png}
+    \caption{Formulario para creación de evaluaciones de tipo guía de aprendizaje autónomo.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/18_teacher_course_gaap_review.png}
+    \caption{Pantalla de revisión de entregas y respuestas de evaluaciones.}
+\end{figure}
+
+\subsection{Portal administrativo}
+
+El panel de administración está concebido para que el personal autorizado gestione integralmente los catálogos de usuarios y toda la estructura académica de la universidad, lo que en el futuro podría agilizarse aún más mediante la incorporación de mecanismos para la importación masiva de datos desde hojas de cálculo y la inclusión de una bitácora de auditoría detallada.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/21_admin_home.png}
+    \caption{Panel principal de administración de la plataforma.}
+\end{figure}
+
+\subsubsection{Gestión de estudiantes y docentes}
+
+Mediante el desarrollo de interfaces de mantenimiento robustas, se garantiza la integridad de los registros al momento de incorporar y modificar perfiles del cuerpo estudiantil y docente.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/22_admin_management_students.png}
+    \caption{Gestión y directorio general de estudiantes.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/23_admin_management_teachers.png}
+    \caption{Mantenimiento y directorio del personal docente.}
+\end{figure}
+
+\subsubsection{Gestión de cursos y períodos académicos}
+
+Estas pantallas permiten estructurar la oferta académica, definiendo los ciclos lectivos y los cursos habilitados en cada uno de ellos para la correcta operación del sistema durante la matrícula.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/24_admin_management_courses.png}
+    \caption{Gestión del catálogo general de cursos.}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Entregable 18/25_admin_management_periods.png}
+    \caption{Administración de los periodos académicos institucionales.}
+\end{figure}
 
 \newpage
 % --- Entregable 19 ---
@@ -4742,9 +4908,7 @@ Toda solicitud aprobada debe dejar evidencia clara. Para cambios de bajo impacto
 
 Los canales autorizados para comunicar cambios son GitHub, correo electrónico, documentos PDF, minutas de reunión y mensajes de coordinación cuando estos se usen solo como aviso. La mensajería instantánea no será suficiente para aprobar cambios importantes, aunque sí puede utilizarse para informar rápidamente que una solicitud debe ser revisada.
 
-\subsection{Relación con otros documentos}
 
-El proceso de control de cambios se relaciona con la definición del alcance, cronograma, plan de calidad, plan de comunicaciones, registro de riesgos, matriz de probabilidad e impacto, solicitudes de cambio y evaluación de cambios. Si un cambio modifica alguno de estos elementos, el documento correspondiente debe actualizarse para mantener la coherencia general del proyecto.
 
 \newpage
 % --- Entregable 20 ---
@@ -5017,31 +5181,44 @@ La comunicación de la decisión se realizará al equipo interno mediante el can
 
 \newpage
 % --- Entregable 24 ---
-\section{Informe Ejecutivo}
+% --- Entregable 23 ---
+\section{Panel ejecutivo}
 
-\subsection{Información del proyecto}
+El Panel ejecutivo ha sido meticulosamente diseñado para proporcionar una vista consolidada e interactiva del desempeño del proyecto \textit{Plataforma Universitaria Integrada} a lo largo de todo su ciclo de vida, operando como una herramienta analítica integral que permite visualizar de forma centralizada los principales indicadores clave de desempeño (KPIs) con el fin de facilitar la toma de decisiones estratégicas por parte de la dirección y el patrocinador.
 
-\begin{table}[H]
+Para lograr este objetivo, el documento se encuentra estructurado en diversas hojas temáticas que abordan los aspectos más críticos de la gestión —tales como el avance general, el cumplimiento riguroso del cronograma, el estado detallado del presupuesto y el monitoreo continuo de los riesgos—; adicionalmente, es importante destacar que el archivo original, el cual es completamente interactivo y funcional, ha sido puesto a disposición de los interesados bajo el nombre \textbf{Entregable 23 - Dashboard ejecutivo.xlsx}, y a continuación se exponen las capturas de pantalla que documentan las vistas principales de este panel.
+
+\begin{figure}[H]
 \centering
-\begin{tabularx}{\textwidth}{p{5cm} Y}
-\toprule
-\textbf{Nombre del proyecto} & Plataforma Universitaria Integrada \\
-\textbf{Organización} & Universidad Tecnológica La Mejor \\
-\textbf{Dirigido a} & Dr. Roberto Mora Fallas,Sponsor / Rector \\
-\textbf{Directora del proyecto} & Tamara Robles Camacho \\
-\textbf{Período del proyecto} & 8 de junio – 12 de agosto, 2026 (33 días hábiles / 3 meses) \\
-\textbf{Presupuesto total aprobado} & ₡17,625,200 \\
-\textbf{Versión} & 1.0  |  Junio 2026 \\
-\bottomrule
-\end{tabularx}
-\end{table}
+\includegraphics[width=0.95\textwidth]{Entregable 23 - Dashboard ejecutivo/01.png}
+\caption{Dashboard principal y resumen de KPIs}
+\end{figure}
 
-\subsection{Resumen Ejecutivo}
-El proyecto Plataforma Universitaria Integrada fue desarrollado para la Universidad Tecnológica La Mejor con el objetivo de modernizar y centralizar sus procesos académicos, administrativos y financieros mediante un prototipo Front-End navegable. El proyecto se ejecutó bajo la metodología PMI a lo largo de cinco procesos (Inicio, Planificación, Ejecución, Monitoreo y Control, y Cierre), con una duración total planificada de 3 meses hábiles distribuidos entre el 8 de junio y el 9 de septiembre de 2026.\\
-El equipo del proyecto estuvo conformado por cinco integrantes: una Project Manager, dos analistas de negocio/documentadores y dos desarrolladores Front-End, quienes produjeron 25 entregables documentales bajo el marco del PMBOK y un prototipo funcional que cubre los módulos de Portal Estudiantil, Portal Docente, Portal Administrativo, Portal Financiero y Dashboard Ejecutivo.\\
-Durante la ejecución se gestionaron dos solicitudes de cambio formales, las cuales fueron evaluadas, aprobadas y ejecutadas internamente sin afectar el presupuesto total ni la fecha de cierre planificada al inicio del proyecto. El proyecto se considera exitoso en términos de alcance, calidad y control, cumpliendo con los criterios de éxito definidos en el Project Charter.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{Entregable 23 - Dashboard ejecutivo/02.png}
+\caption{Desglose y desempeño del presupuesto}
+\end{figure}
 
-\subsection{Objetivos del Proyecto vs. Resultados Obtenidos}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{Entregable 23 - Dashboard ejecutivo/03.png}
+\caption{Cronograma general y control de hitos}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{Entregable 23 - Dashboard ejecutivo/04.png}
+\caption{Monitoreo integral y matriz de riesgos}
+\end{figure}
+
+\newpage
+% --- Entregable 24 ---
+\section{Informe ejecutivo}
+
+El presente documento constituye el informe ejecutivo del proyecto Plataforma Universitaria Integrada, el cual fue diseñado con el propósito principal de consolidar y presentar los resultados finales alcanzados tras la finalización del proyecto.
+
+\subsection{Objetivos del proyecto vs. resultados obtenidos}
 En la siguiente tabla se compara los objetivos del proyecto contra los resultados obtenidos al cierre del proyecto:
 \begin{table}[H]
 \centering
@@ -5119,7 +5296,7 @@ Las solicitudes SC-01 y SC-02 fueron evaluadas, aprobadas y documentadas mediant
 }
 \end{table}
 
-\subsection{Desempeño en Tiempo y Costo}
+\subsection{Desempeño en tiempo y costo}
 
 En la siguiente sección se evalúa el desarrollo del proyecto en términos de cronograma y costo, considerando hitos, fechas de cumplimiento y el estado de avance. Esto nos permite identificar posibles desviaciones y valorar la efectividad de la gestión implementada durante las diferentes fases del proyecto.
 
@@ -5196,7 +5373,7 @@ Variación del costo (CV = EV - AC) & +₡345,592 \\
 
 El equipo logró completar el 100\% del alcance planificado con un gasto real (AC) de ₡17,279,608, lo cual representa un ahorro de ₡345,592 frente al presupuesto aprobado. Este resultado se atribuye al uso de herramientas gratuitas o de licencia comercial y a que las solicitudes de cambio SC-01 y SC-02 se gestionaron mediante reasignación interna de esfuerzo en lugar de recurrir a la reserva de contingencia.
 
-\subsection{Gestión de Solicitudes de Cambio}
+\subsection{Gestión de solicitudes de cambio}
 
 Durante la ejecución del proyecto se documentaron y gestionaron dos solicitudes de cambio formales, siguiendo el proceso de control de cambios establecido. Ambas solicitudes fueron evaluadas en conjunto, dado que la segunda funcionó como medida compensatoria de la primera.
 
@@ -5239,7 +5416,7 @@ La solicitud SC-01 se aprobó con la condición de limitar su implementación a 
 El impacto neto de ambos cambios se considera controlado: se incrementó el valor del Portal Estudiantil para los usuarios finales, se mantuvo el presupuesto total sin alteraciones, se conservó la fecha de cierre planificada y se redujeron los riesgos R-04 (subestimación del esfuerzo de desarrollo) y R-10 (cambios tardíos cerca del cierre).
 
 
-\subsection{Riesgos Relevantes Durante la Ejecución}
+\subsection{Riesgos relevantes durante la ejecución}
 
 El proyecto identificó 16 riesgos en su fase de planificación, de los cuales 5 fueron clasificados como Críticos: restricción fuerte de tiempo (R-01), alcance creciente o scope creep (R-02), inconsistencias entre documentos (R-03), subestimación del esfuerzo del Front-End (R-04) y disponibilidad limitada del equipo (R-05).\\
 Durante la ejecución, los riesgos R-04 y R-10 se activaron parcialmente como consecuencia de la solicitud de cambio SC-01, pero fueron gestionados de forma efectiva mediante la aprobación compensatoria de SC-02, lo cual redujo su nivel de criticidad antes de que afectaran la entrega final del proyecto.
@@ -5280,11 +5457,11 @@ Reducido tras aprobación de SC-02
 \end{tabularx}
 \end{table}
 
-\subsection{Indicadores de Desempeño (KPIs)}
+\subsection{Indicadores de desempeño (KPIs)}
 
 Al cierre del proyecto se midieron los 14 indicadores definidos en el Plan de KPIs, distribuidos en las categorías de tiempo, costo, calidad, riesgos y productividad. Los resultados finales confirman que el proyecto cumplió o superó la totalidad de las metas establecidas.
 
-\subsubsection{Indicadores de Tiempo}
+\subsubsection{Indicadores de tiempo}
 
 La siguiente tabla resume el comportamiento de los indicadores asociados al
 cronograma.
@@ -5323,7 +5500,7 @@ En meta
 \end{tabularx}
 \end{table}
 
-\subsubsection{Indicadores de Costo}
+\subsubsection{Indicadores de costo}
 
 La siguiente tabla resume el comportamiento de los indicadores asociados al
 desempeño financiero del proyecto.
@@ -5362,7 +5539,7 @@ En meta
 \end{tabularx}
 \end{table}
 
-\subsubsection{Indicadores de Calidad}
+\subsubsection{Indicadores de calidad}
 
 La calidad del proyecto fue evaluada mediante indicadores relacionados con
 errores, pruebas y satisfacción del equipo.
@@ -5407,7 +5584,7 @@ En meta
 \end{tabularx}
 \end{table}
 
-\subsubsection{Indicadores de Riesgos}
+\subsubsection{Indicadores de riesgos}
 
 La siguiente tabla presenta el comportamiento de los principales indicadores
 asociados a la gestión de riesgos.
@@ -5446,7 +5623,7 @@ En meta
 \end{tabularx}
 \end{table}
 
-\subsubsection{Indicadores de Productividad}
+\subsubsection{Indicadores de productividad}
 
 El desempeño del equipo también fue medido mediante indicadores de
 productividad asociados al ritmo de entrega de productos y documentos.
@@ -5478,80 +5655,7 @@ encima de las metas establecidas. Destacan los valores del SPI y del CPI,
 los cuales demuestran que el proyecto se ejecutó eficientemente tanto en
 tiempo como en costo.
 
-\subsection{Conclusiones y Recomendaciones}
-
-El proyecto \textit{Plataforma Universitaria Integrada} se considera exitoso al cierre de su ejecución. Se cumplieron los objetivos de alcance establecidos en el Project Charter, el presupuesto se mantuvo sin incremento en ₡17,625,200, el cronograma se completó dentro del periodo de tres meses planificado y las dos solicitudes de cambio surgidas durante la ejecución se implementaron de forma controlada sin comprometer la calidad del prototipo ni la fecha de entrega.\\
-El prototipo Front-End navegable entregado cubre los cinco módulos requeridos por la Universidad Tecnológica La Mejor (Portal Estudiantil, Portal Docente, Portal Administrativo, Portal Financiero y Dashboard Ejecutivo), incluyendo la funcionalidad adicional de solicitud de certificados académicos aprobada durante la ejecución, lo cual aumenta el valor percibido por los estudiantes sin afectar el proyecto.
-
-
-
-
-
-
-
-
-\newpage
-% --- Entregable 25 ---
 \section{Acta de cierre}
-
-\subsection{Información del proyecto}
-
-\begin{table}[H]
-\centering
-\begin{tabularx}{\textwidth}{p{5cm} Y}
-\toprule
-\textbf{Nombre del proyecto} & Plataforma Universitaria Integrada \\
-\textbf{Patrocinador} & Dr. Roberto Mora Fallas \\
-\textbf{Directora del proyecto} & Tamara Robles Camacho \\
-\textbf{Fecha de inicio} & 8 de junio de 2026 \\
-\textbf{Fecha de cierre} & 23 de junio de 2026 \\
-\textbf{Presupuesto asignado} & ₡17,625,200 \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-\subsection{Resumen de ejecución del proyecto}
-
-La ejecución del proyecto logró cumplir con los objetivos principales establecidos en el inicio debido a que el equipo completó el desarrollo del prototipo Front-End navegable y generó toda la documentación de gestión requerida por el estándar evaluado. De esta manera se entregó una solución visual que incluye el inicio de sesión y los portales estudiantil docente administrativo y financiero con los ajustes realizados durante el control de cambios. Por lo tanto el desempeño general del equipo permitió abarcar las expectativas de los stakeholders ya que se aplicaron adecuadamente los procesos de planificación y ejecución en un margen de tiempo sumamente reducido.
-
-\begin{longtable}{L{2cm} L{9cm} L{3cm}}
-\caption{Estado de los entregables del proyecto}\label{tab:estado-entregables}\\[-0.5em]
-\toprule
-\textbf{Código} & \textbf{Nombre del entregable} & \textbf{Estado} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Código} & \textbf{Nombre del entregable} & \textbf{Estado} \\
-\midrule
-\endhead
-E-01 & Business Case & Completado \\
-E-02 & Project Charter & Completado \\
-E-03 & Registro de Stakeholders & Completado \\
-E-04 & Definición del Alcance & Completado \\
-E-05 & WBS del proyecto & Completado \\
-E-06 & Cronograma en Microsoft Project & Completado \\
-E-07 & Matriz RACI & Completado \\
-E-08 & Organigrama del Proyecto & Completado \\
-E-09 & Plan de Recursos & Completado \\
-E-10 & Estimación de Costos & Completado \\
-E-11 & Plan de Calidad & Completado \\
-E-12 & Plan de Comunicaciones & Completado \\
-E-13 & Matriz de probabilidad e impacto & Completado \\
-E-14 & Registro de Riesgos & Completado \\
-E-15 & Plan de Adquisiciones & Completado \\
-E-16 & KPIs del proyecto & Completado \\
-E-17 & Proceso de control de cambios & Completado \\
-E-18 & Prototipo Front-End navegable & Completado \\
-E-19 & Plantilla de Solicitud de Cambio & Completado \\
-E-20 & Solicitud de Cambio 1 & Completado \\
-E-21 & Solicitud de Cambio 2 & Completado \\
-E-22 & Evaluación de Cambios & Completado \\
-E-23 & Dashboard ejecutivo del proyecto & Completado \\
-E-24 & Informe ejecutivo & Completado \\
-E-25 & Acta de Cierre & Completado \\
-E-26 & Reflexiones y Recomendaciones & Completado \\
-\bottomrule
-\end{longtable}
 
 \subsection{Verificación del alcance}
 
@@ -5607,6 +5711,7 @@ Dr. Roberto Mora Fallas & Jorge Abarca Quiros & Carlos Sainz Arce \\
 \bottomrule
 \end{tabularx}
 \end{table}
+
 
 \newpage
 % --- Entregable 26 ---
